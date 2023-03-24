@@ -24,3 +24,12 @@ Afin de se faire la main sur l'utilisation de l'offre, jetez un oeil à nos [tut
 Vous pouvez consulter la [documentation](description-plateforme.md) de la plateforme DSO, son architecture et les services proposés
 
 Vous êtes prêt à embarquer ? Déployez votre premier projet en suivant notre [guide pas à pas](getting-started.md)
+
+Un accompagnement projet par les équipes Service team on boarding est possible voir les modalités [ici](accompagnement.md)
+
+## Notre roadmap
+TODO
+
+## Mise en production
+
+une fois votre application en production, Cloud π native vous aide à gérer [l'exploitation quotidienne de vos applications(exploitation.md)
