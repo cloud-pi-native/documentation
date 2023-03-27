@@ -6,7 +6,7 @@ Cette section regroupe les questions fréquentes de nos clients
 
 ### Comment puis-je déployer une image personnalisée
 
-Toutes les images déployées sur l'offre Cloud π Native doit :
+Toutes les images déployées sur l'offre Cloud π Native doivent :
   - Etre construite par l'offre
   - Faire partie des repo publics autorisés (FIXME : préciser les repos)
 
@@ -36,6 +36,10 @@ CMD [ "command_to_execute"]
 ```
 
 ### Puis-je pousser un binaire non construit par l'offre DSO ?
+
+Non, toutes les images et librairies utilisées sur l'offre Cloud π Native doivent être construites par la chaine DSO ou être disponibles sur les repos publics.
+
+Il n'est pas possible d'uploader un binaire directement sur le gestionnaire d'artefacts (Nexus) en dehors de la chaine de construction DSO.
 
 ### Quelles sont les contraintes génériques d'Openshift par rapport à Kubernetes
   - Images rootless
@@ -79,9 +83,9 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: postgres-backup
-  namespace: keycloak-system
+  namespace: my-namespace
 spec:
-  schedule: "0 6 * * *"
+  schedule: "0 6 * * *" #Tous les jours à 6h00 du matin
   [..]
   jobTemplate:
     spec:
