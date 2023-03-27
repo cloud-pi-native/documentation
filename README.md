@@ -52,12 +52,14 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
   - Etape 1 : Vérification des prérequis [prérequis](prerequisites.md) sur Docker, Kubernetes, Openshift et les bonnes pratiques de l'offre
   - Etape 2 : Vérification de la compatibilité de son application avec le modèle Cloud Native Application et adaptations éventuelles
   - Etape 3 : Prise de connaissance via une série de tutoriels [tutoriels](tutorials.md) afin de faire ses premiers pas avec l'offre
-  - Etape 4 : Embarquement [Embarquement](getting-started.md) de l'application sur l'offre
+  - Etape 4 : [Embarquement](getting-started.md) de l'application sur l'offre
   - Etape 5 : Félicitation ! Vous êtes maintenant un utilisateur de la plateforme Cloud π Native et votre application peut passer en production via les principes d'[exploitation](exploitation.md) de l'offre.
 
 
 A tout moment, vous pouvez consulter la [documentation détaillée](description-plateforme.md) de la plateforme Cloud π Native, son architecture et les services proposés
 
+Enfin notre [FAQ](faq.md) permet de lister les questions fréquentes de nos clients.
+ 
 ## Notre roadmap
 
 L'offre Cloud π Native est en cours de construction. Notre [feuille de route](roadmap.md) est accessible permettant de donner de la visibilité sur les prochaines fonctionnalités. 
