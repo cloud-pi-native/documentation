@@ -35,6 +35,8 @@ L'offre Cloud π Native permet *in fine* de déployer des applications. Le volet
 Voir le détail précis de l'offre [d'exploitation ](exploitation.md)
 
 
+
+
 ### SLA de l'offre
 
 TODO
@@ -49,7 +51,7 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
 
 ![parcours_apprentissage](img/parcours_apprentissage.png)
 
-  - Etape 1 : Vérification des prérequis [prérequis](prerequisites.md) sur Docker, Kubernetes, Openshift et les bonnes pratiques de l'offre
+  - Etape 1 : Vérification des [prérequis](prerequisites.md) et [bonnes pratiques](bonnes-pratiques.md) sur Docker, Kubernetes, Openshift et les bonnes pratiques de l'offre
   - Etape 2 : Vérification de la compatibilité de son application avec le modèle Cloud Native Application et adaptations éventuelles
   - Etape 3 : Prise de connaissance via une série de tutoriels [tutoriels](tutorials.md) afin de faire ses premiers pas avec l'offre
   - Etape 4 : [Embarquement](getting-started.md) de l'application sur l'offre
