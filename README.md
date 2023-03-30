@@ -4,7 +4,7 @@
 
 ## L'offre
 
-### Présentation
+### Présentation (WIP)
 
 Avec l’adoption de la doctrine « Cloud au centre », le Gouvernement Français fait du Cloud un prérequis pour tout nouveau projet numérique au sein de l’État ou refonte substantielle de l’architecture applicative existante.
 
@@ -18,17 +18,34 @@ L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-
 
   - [Gestionnaire de sources](produits/gitlab.md) applicatives
   - Outil de gestion de la [qualité](produits/sonarqube.md) statique du code (SAST) et dynamique (DAST)
-  - Orchestrateur de [construction](produits/gitlab.md) d'artefacts
+  - Orchestrateur de [construction](produits/gitlab.md) d'artefacts (Intégration continue)
   - [Entrepot d'artefacts](produits/artefacts.md) et d'images Docker
   - Gestionnaire de [secrets](produits/vault.md) des chaines IC/DC
-  - [Déploiement automatisée](produits/gitops.md) des images Docker sur les infrastructures du ministère ou à l'extérieur du ministère en suivant les principes GitOps
-  - [Observabilité et exploitation](exploitation.md) applications déployées : accès aux logs, métriques techniques et applicatives, procédures standard d'exploitation
+  - Outil de [déploiement automatisé](produits/gitops.md) des images Docker sur les infrastructures du ministère ou à l'extérieur du ministère en suivant les principes GitOps (Déploiement continue)
+  - Hébergement des [environnements](gestion-environnements.md) applicatifs de l'intégration à la production
+  - Mise à disposition d'outil d'[observabilité et exploitabilité](exploitation.md) des applications déployées sur l'offre : accès aux logs, métriques techniques et applicatives, procédures standard d'exploitation
 
-### SLA de l'offre
+### SLA de l'offre (WIP)
 
-TODO
+L'offre Cloud π Native peut se séparer en plusieurs grands services ayant des contraintes de SLA différentes :
 
-## Accompagnement 
+  - Outils de construction applicative (Intégration continue) permettant de construire un package applicatif à partir des sources
+  - Outils de déploiement (Déploiement continue) permettant de déployer / mettre à jour une application sur les différents environnements de l'offre
+  - Les applications qui sont déployées sur l'offre. Chacune de ses applications peuvent également avoir un niveau de criticité différent (par exemple l'environnement de production a un besoin de SLA plus fort que l'environnement de recette)
+
+| Service      | DIMA*       |        PDMA**
+| ------------ | ----------- | -------- |
+| Construction | 8 heures | 24h (backup nocturne quotidien) |
+| Déploiement  | 8 heures | 24h (backup nocturne quotidien) |
+| Run des applications | 6 heures | 24h (backup nocturne quotidien). Possibilité d'ajouter un backup applicatif plus fréquent (voir notre [FAQ](faq.md)) |
+
+
+*DIMA : Durée d'interruption maximale autorisée (en heures ouvrés)
+
+**PDMA : Perte de données maximale admissible (en heures ouvrés)
+
+
+## Accompagnement  (WIP)
 
 Un volet [accompagnement](accompagnement.md) des projets directement par les équipes de l'offre Cloud π Native permet d'utiliser l'offre dans des conditions optimale. Cet accompagnement fait partie du parcours technique d'embarquement sur l'offre Cloud π Native. 
 
@@ -38,20 +55,24 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
 
 ![parcours_apprentissage](img/parcours_apprentissage.png)
 
-  - Etape 1 : Vérification des [prérequis](prerequisites.md) sur Docker, Kubernetes, Openshift et les et [bonnes pratiques](bonnes-pratiques.md)  Cloud π Native
-  - Etape 2 : Vérification de la compatibilité de son application avec le modèle Cloud Native Application et adaptations éventuelles. Les équipes Cloud π Native [accompagnent](accompagnement.md) les équipes projets sur cette étape afin d'apporter conseils et qualification des architectures et maturité technique des équipes. 
-  - Etape 3 : Prise de connaissance via une série de tutoriels [tutoriels](tutorials.md) afin de faire ses premiers pas avec l'offre
+  - Etape 1 : [Matrice de compétences](matrice-compétences.md) des technologies à connaitre pour utiliser l'offre Cloud π Native 
+  - Etape 2 : Vérification de l'éligibilité de son application avec le modèle Cloud Native Application [prérequis](prerequisites.md) technique liés à l'offre. Les équipes Cloud π Native [accompagnent](accompagnement.md) les équipes projets sur cette étape afin d'apporter conseils et qualification des architectures et maturité technique des équipes. 
+  - Etape 3 : Prise de connaissance des [bonnes pratiques](bonnes-pratiques.md) et expérimentation avec une série de tutoriels [tutoriels](tutorials.md) afin de faire ses premiers pas avec l'offre
   - Etape 4 : [Embarquement](getting-started.md) de l'application sur l'offre
-  - Etape 5 : Félicitation ! Vous êtes maintenant un utilisateur de la plateforme Cloud π Native et votre application peut passer en production via les principes d'[exploitation](exploitation.md) de l'offre.
+  - Etape 5 : Félicitation ! Vous êtes maintenant un utilisateur de la plateforme Cloud π Native et votre application peut passer en production via les principes d'[exploitation et observabilité](exploitation.md) de vos projets.
 
 
 A tout moment, vous pouvez consulter la [documentation détaillée](description-plateforme.md) de la plateforme Cloud π Native, son architecture et les services proposés
 
 Enfin notre [FAQ](faq.md) permet de lister les questions fréquentes de nos clients.
  
-## Notre roadmap
+## Notre roadmap (WIP)
 
-L'offre Cloud π Native est en cours de construction. Notre [feuille de route](roadmap.md) est accessible permettant de donner de la visibilité sur les prochaines fonctionnalités. 
+L'offre Cloud π Native est en cours de construction. Notre [feuille de route détaillée](roadmap.md) est accessible permettant de donner de la visibilité sur les prochaines fonctionnalités. 
+
+Voici les grandes fonctionnalités prévus dans les prochaines semaines :
+ - Gestion des secrets applicatifs
+ - TODO
 
 ## Contact
 
