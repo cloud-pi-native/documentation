@@ -55,10 +55,11 @@ L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code
 Les ressources doivent comporter des labels permettant de les identifier. les labels pourraient etre decomposés de la facon suivante : 
 
 ``` Yaml 
-App : " CCAF "
+App : " Projet "
 Env : " dev, preprod, prod "
 Tier : " frontend, backend, db, cache " 
 Criticality : " High, Medium, Low "
+Component : "N ginx, Apache, Pg, MariaDB, RabbitMQ "
 ```
 
 ## Images TAG
@@ -85,7 +86,7 @@ Exemple :
 ```
 Service : env-app-svc
 Deployment : env-app-dep
-STS : env-app-sts
+Statefulset : env-app-sts
 ConfigMap : env-app-cm
 ```
 
@@ -135,7 +136,8 @@ Le scaling est très important afin de répondre aux besoins en termes d'affluen
 
 ## QOS 
 
-Il est important de définir les consommations de chaque POD (prévisionnelles), Savoir si il serait intéressant que certains disposent d’une "request" égal a la "limit" afin d’assurer une réservation des ressources.
+Il est important de définir les consommations de chaque POD (prévisionnelles), Savoir si il serait intéressant que certains disposent d’une "request" égal a la "limit" afin d’assurer une réservation des ressources. (Guaranteed Class)
+L'utilisation du "Burstable" n'est pas pas une bonne pratique. il est vraiment necessaire d'avoir une "limit"
 
 Exemple : 
 
