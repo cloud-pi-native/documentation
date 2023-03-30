@@ -4,7 +4,7 @@
 
 Une application Cloud Native doit respecter au maximum les [Twelve-Factor](https://12factor.net/fr/)
 
-#### Obligatoire
+### Obligatoire
 
 1. Base de code
    
