@@ -2,6 +2,18 @@ Retour à [l'accueil](README.md)
 
 # Prérequis
 
+## Critère d'éligibilité Cloud π Native
+
+Voici des critère permettant de déterminer si votre  application est éligible à l'offre Cloud π Native. L'équipe projet Cloud π Native vous accompagne sur cette étape afin de trouver les solutions d'adaptation de vos application:
+  - Les applications doivent être délivrée sous forme de containers et donc sur une suche d'OS Linux. Les applications nécessitant un OS Windows ne sont pas éligibles à l'offre.
+  - Les applications doivent être **sans état** et partir  du principe qu'un composant applicatif (pod) peut être détruit à tout moment. Le stockage persistent de données est portée **principalement** par les bases de données. En cas de maintient de session applicative, un déport vers un composant de type Redis est nécessaire.
+  - La configuration de l'application se fait par son environnement (principalement par des variables d'environnements). Seuls ces éléments change entre deux environnements : il s'agit de la même image déployée avec un configuration différente (par de reconstruction pour passer d'un environnement à un autre) 
+  - Les images déployée doivent être **rootless**
+  - Le FileSystem des images doit être en lecture seule
+  - Afin d'accéder aux composants externes à l'application déployée sur Cloud π Native, par exemple des API, des demandes d'ouvertures de flux doivent être explicitement réalisée (voir la procédure TODO) 
+  - Vérifier les contraintes de nom DNS : les applications doivent-elles obligatoirement être en *.gouv.fr ou *.interieur.gouv.fr ?
+  - Exigences au sens CCT
+
 ## Prérequis orga
 
 - Avoir un compte dans le SSO de Cloud π Native (à demander à l'équipe DSO).
