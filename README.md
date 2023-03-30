@@ -38,7 +38,7 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
 
 ![parcours_apprentissage](img/parcours_apprentissage.png)
 
-  - Etape 1 : Vérification des [prérequis](prerequisites.md) et [bonnes pratiques](bonnes-pratiques.md) sur Docker, Kubernetes, Openshift et les bonnes pratiques de l'offre
+  - Etape 1 : Vérification des [prérequis](prerequisites.md) sur Docker, Kubernetes, Openshift et les et [bonnes pratiques](bonnes-pratiques.md)  Cloud π Native
   - Etape 2 : Vérification de la compatibilité de son application avec le modèle Cloud Native Application et adaptations éventuelles. Les équipes Cloud π Native [accompagnent](accompagnement.md) les équipes projets sur cette étape afin d'apporter conseils et qualification des architectures et maturité technique des équipes. 
   - Etape 3 : Prise de connaissance via une série de tutoriels [tutoriels](tutorials.md) afin de faire ses premiers pas avec l'offre
   - Etape 4 : [Embarquement](getting-started.md) de l'application sur l'offre
