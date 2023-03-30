@@ -4,32 +4,67 @@
 
 ## L'offre
 
+### Présentation
+
+Avec l’adoption de la doctrine « Cloud au centre », le Gouvernement Français fait du Cloud un prérequis pour tout nouveau projet numérique au sein de l’État ou refonte substantielle de l’architecture applicative existante.
+
+>Objectif : accélérer la transformation numérique au bénéfice des usagers et dans le strict respect de la cybersécurité et de la protection des données des citoyens et des entreprises.
+
+L'offre Cloud π Native, offre les services d'une plateforme DevSecOps complète afin de suivre le cycle de vie complet de son projet.
+
+### Services proposés
+
+L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-Mer est une offre PaaS basée sur [Cloud π](https://www.numerique.gouv.fr/services/cloud/cloud-interne/) sur les infrastructures du ministère de l'intérieur offrant des fonctionnalités DevSecOps à savoir :
+
+  - Gestionnaire de sources applicatives
+  - Outil de gestion de la qualité statique du code (SAST) et dynamique (DAST)
+  - Orchestrateur de construction d'artefacts
+  - Entrepot d'artefacts et d'images Docker
+  - Gestionnaire de secrets des chaines IC/DC
+  - Déploiement automatisée des images Docker sur les infrastructures du ministère ou à l'extérieur du ministère
+  - Observabilité applications déployées.
+
+### Exploitation et observabilité
+
+L'offre Cloud π Native permet *in fine* de déployer des applications. Le volet observabilité et exploitabilité est présent dans l'offre et regroupe les éléments tels que :
+  - Accès aux logs applicatives
+  - Accès aux métriques de consommation de ressources des applications
+  - Ajout de métriques d'observabilité
+  - Procédures standards pour les opérations usuelles comme la sauvegarde et restauration, PRA, chargement des données.
+
+Voir le détail précis de l'offre [d'exploitation ](exploitation.md)
+
+
+### SLA de l'offre
+
 TODO
 
-L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-Mer et à visée interministérielle a pour but d'améliorer la qualité applicative tout en améliorant les capacités de déploiement au sein de l'administration.
+## Accompagnement 
 
-Cette offre s'appuie sur le [Cloud π](https://www.numerique.gouv.fr/services/cloud/cloud-interne/) pour le déploiement des applications dans un cluster OpenShift ainsi que sur une plateforme de déploiement offrant un catalogue de services pour suivre le cycle de vie complet de son projet.
+Un volet [accompagnement](accompagnement.md) des projets directement par les équipes de l'offre Cloud π Native permet d'utiliser l'offre dans des conditions optimale. Cet accompagnement fait partie du parcours technique d'embarquement sur l'offre Cloud π Native. 
+
+## Parcours technique
+
+Un parcours technique d'apprentissage permettant de valider les prérequis et d'intégrer les bonnes pratiques permet à nos clients d'appréhender l'offre Cloud π Native. 
+
+![parcours_apprentissage](img/parcours_apprentissage.png)
+
+  - Etape 1 : Vérification des prérequis [prérequis](prerequisites.md) sur Docker, Kubernetes, Openshift et les bonnes pratiques de l'offre
+  - Etape 2 : Vérification de la compatibilité de son application avec le modèle Cloud Native Application et adaptations éventuelles
+  - Etape 3 : Prise de connaissance via une série de tutoriels [tutoriels](tutorials.md) afin de faire ses premiers pas avec l'offre
+  - Etape 4 : [Embarquement](getting-started.md) de l'application sur l'offre
+  - Etape 5 : Félicitation ! Vous êtes maintenant un utilisateur de la plateforme Cloud π Native et votre application peut passer en production via les principes d'[exploitation](exploitation.md) de l'offre.
+
+
+A tout moment, vous pouvez consulter la [documentation détaillée](description-plateforme.md) de la plateforme Cloud π Native, son architecture et les services proposés
+
+Enfin notre [FAQ](faq.md) permet de lister les questions fréquentes de nos clients.
+ 
+## Notre roadmap
+
+L'offre Cloud π Native est en cours de construction. Notre [feuille de route](roadmap.md) est accessible permettant de donner de la visibilité sur les prochaines fonctionnalités. 
 
 ## Contact
 
 Pour toute information ou demande pour rejoindre la betatest, veuillez nous contacter à l'adresse suivante : <cloudpinative-relations@interieur.gouv.fr>.
 Si vous faites déjà parti des beta testeurs et que vous souhaitez poser des questions ou avoir de l'accompagnement, veuillez nous contacter directement via le serveur Mattermost prévu à cet effet (si vous n'avez pas été ajouté au serveur Mattermost, veuillez contacter l'adresse mail précédente).
-
-## Pour commencer ...
-
-Avant de commencer à utiliser l'offre Cloud π native, vérifiez que vous êtes compatible avec les [prérequis](prerequisites.md) techniques et organisationnels.
-
-Afin de se faire la main sur l'utilisation de l'offre, jetez un oeil à nos [tutoriels](tutorials.md).
-
-Vous pouvez consulter la [documentation](description-plateforme.md) de la plateforme DSO, son architecture et les services proposés
-
-Vous êtes prêt à embarquer ? Déployez votre premier projet en suivant notre [guide pas à pas](getting-started.md)
-
-Un accompagnement projet par les équipes Service team on boarding est possible voir les modalités [ici](accompagnement.md)
-
-## Notre roadmap
-TODO
-
-## Mise en production
-
-une fois votre application en production, Cloud π native vous aide à gérer [l'exploitation quotidienne de vos applications(exploitation.md)
