@@ -59,7 +59,7 @@ App : " Projet "
 Env : " dev, preprod, prod "
 Tier : " frontend, backend, db, cache " 
 Criticality : " High, Medium, Low "
-Component : "N ginx, Apache, Pg, MariaDB, RabbitMQ "
+Component : " Nginx, Apache, Pg, MariaDB, RabbitMQ "
 ```
 
 ## Images TAG
