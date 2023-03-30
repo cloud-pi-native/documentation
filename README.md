@@ -16,26 +16,13 @@ L'offre Cloud π Native, offre les services d'une plateforme DevSecOps complète
 
 L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-Mer est une offre PaaS basée sur [Cloud π](https://www.numerique.gouv.fr/services/cloud/cloud-interne/) sur les infrastructures du ministère de l'intérieur offrant des fonctionnalités DevSecOps à savoir :
 
-  - Gestionnaire de sources applicatives
-  - Outil de gestion de la qualité statique du code (SAST) et dynamique (DAST)
-  - Orchestrateur de construction d'artefacts
-  - Entrepot d'artefacts et d'images Docker
-  - Gestionnaire de secrets des chaines IC/DC
-  - Déploiement automatisée des images Docker sur les infrastructures du ministère ou à l'extérieur du ministère
-  - Observabilité applications déployées.
-
-### Exploitation et observabilité
-
-L'offre Cloud π Native permet *in fine* de déployer des applications. Le volet observabilité et exploitabilité est présent dans l'offre et regroupe les éléments tels que :
-  - Accès aux logs applicatives
-  - Accès aux métriques de consommation de ressources des applications
-  - Ajout de métriques d'observabilité
-  - Procédures standards pour les opérations usuelles comme la sauvegarde et restauration, PRA, chargement des données.
-
-Voir le détail précis de l'offre [d'exploitation ](exploitation.md)
-
-
-
+  - [Gestionnaire de sources](produits/gitlab.md) applicatives
+  - Outil de gestion de la [qualité](produits/sonarqube.md) statique du code (SAST) et dynamique (DAST)
+  - Orchestrateur de [construction](produits/gitlab.md) d'artefacts
+  - [Entrepot d'artefacts](artefacts.md) et d'images Docker
+  - Gestionnaire de [secrets](produits/vault.md) des chaines IC/DC
+  - [Déploiement automatisée](produits/gitops.md) des images Docker sur les infrastructures du ministère ou à l'extérieur du ministère en suivant les principes GitOps
+  - [Observabilité et exploitation](exploitation.md) applications déployées : accès aux logs, métriques techniques et applicatives, procédures standard d'exploitation
 
 ### SLA de l'offre
 
@@ -52,7 +39,7 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
 ![parcours_apprentissage](img/parcours_apprentissage.png)
 
   - Etape 1 : Vérification des [prérequis](prerequisites.md) et [bonnes pratiques](bonnes-pratiques.md) sur Docker, Kubernetes, Openshift et les bonnes pratiques de l'offre
-  - Etape 2 : Vérification de la compatibilité de son application avec le modèle Cloud Native Application et adaptations éventuelles
+  - Etape 2 : Vérification de la compatibilité de son application avec le modèle Cloud Native Application et adaptations éventuelles. Les équipes Cloud π Native [accompagnent](accompagnement.md) les équipes projets sur cette étape afin d'apporter conseils et qualification des architectures et maturité technique des équipes. 
   - Etape 3 : Prise de connaissance via une série de tutoriels [tutoriels](tutorials.md) afin de faire ses premiers pas avec l'offre
   - Etape 4 : [Embarquement](getting-started.md) de l'application sur l'offre
   - Etape 5 : Félicitation ! Vous êtes maintenant un utilisateur de la plateforme Cloud π Native et votre application peut passer en production via les principes d'[exploitation](exploitation.md) de l'offre.
