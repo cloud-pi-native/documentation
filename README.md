@@ -33,14 +33,15 @@ L'offre Cloud π Native peut se séparer en plusieurs grands services ayant des 
   - Outils de déploiement (Déploiement continue) permettant de déployer / mettre à jour une application sur les différents environnements de l'offre
   - Les applications qui sont déployées sur l'offre. Chacune de ses applications peuvent également avoir un niveau de criticité différent (par exemple l'environnement de production a un besoin de SLA plus fort que l'environnement de recette)
 
-| Service | DIMA* | PDMA**
-| --- | --- | --- |
+| Service      | DIMA*       |        PDMA**
+| ------------ | ----------- | -------- |
 | Construction | 8 heures | 24h (backup nocturne quotidien) |
-| Déploiement | 8 heures | 24h (backup nocturne quotidien) |
+| Déploiement  | 8 heures | 24h (backup nocturne quotidien) |
 | Run des applications | 6 heures | 24h (backup nocturne quotidien). Possibilité d'ajouter un backup applicatif plus fréquent (voir notre [FAQ](faq.md)) |
 
 
 *DIMA : Durée d'interruption maximale autorisée (en heures ouvrés)
+
 **PDMA : Perte de données maximale admissible (en heures ouvrés)
 
 
