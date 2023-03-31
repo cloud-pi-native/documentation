@@ -93,10 +93,12 @@ ConfigMap : env-app-cm
 ## Secrets 
 
 Les secrets comportent toutes les informations sensibles. Les différents types de secrets peuvent etre :
+
 - Passwords
 - Certificats 
 - Usernames 
 - Tokens 
+
 Toutes les secrets devront etre contenus dans un Vault qui sera mis a disposition pour l'ensemble des projets. Les objets contenus dans le Vault sont séparés par projets (NS). 
  
 ## Liveness et Readiness
@@ -162,6 +164,7 @@ Exemple d'image base Lightway : Alpine
 Les "Network policies" sont sur openshift par défaut en "Deny ALL", il faudra donc définir les flux entrants et sortants sur les namespaces. 
 
 ReverseProxy-->Networkpolicies-->Pods (Ingress)
+
 Pods-->Networkpolicies-->Proxy (Egress)
 
 ```Yaml
