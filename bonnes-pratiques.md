@@ -55,11 +55,11 @@ L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code
 Les ressources doivent comporter des labels permettant de les identifier. les labels pourraient etre decomposés de la facon suivante : 
 
 ``` Yaml 
-App : " Projet "
+App : " nomduprojet "
 Env : " dev, preprod, prod "
 Tier : " frontend, backend, db, cache " 
-Criticality : " High, Medium, Low "
-Component : " Nginx, Apache, Pg, MariaDB, RabbitMQ "
+Criticality : " high, medium, low "
+Component : " nginx, apache, postgres, mariadb, rabbitmq "
 ```
 
 ## Images TAG
@@ -137,7 +137,7 @@ Le scaling est très important afin de répondre aux besoins en termes d'affluen
 ## QOS 
 
 Il est important de définir les consommations de chaque POD (prévisionnelles), Savoir si il serait intéressant que certains disposent d’une "request" égal a la "limit" afin d’assurer une réservation des ressources. (Guaranteed Class)
-L'utilisation du "Burstable" n'est pas pas une bonne pratique. il est vraiment necessaire d'avoir une "limit"
+L'utilisation du "Burstable" n'est pas pas une bonne pratique. il est vraiment necessaire d'avoir une "limit".
 
 Exemple : 
 
@@ -148,5 +148,35 @@ Exemple :
       requests:
         memory: "200Mi"
         cpu: "700m"
+```
+
+## Image Size
+
+Il est très important de construire des images les plus légères possibles, c'est a dire utiliser uniquement les paquets nécéssaires au bon fonctionnement de l'application ainsi que la meilleure image de base. 
+C'est un gros vecteur de sécurité, de charge stockage et réseau.
+
+Exemple d'image base Lightway : Alpine
+
+## Network policies
+
+Les "Network policies" sont sur openshift par défaut en "Deny ALL", il faudra donc définir les flux entrants et sortants sur les namespaces. 
+
+ReverseProxy-->Networkpolicies-->Pods (Ingress)
+Pods-->Networkpolicies-->Proxy (Egress)
+
+```Yaml
+
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: web-allow-external
+spec:
+  podSelector:
+    matchLabels:
+      Tier: Frontend 
+  ingress:
+  - ports:
+    - port: 80
+
 ```
 
