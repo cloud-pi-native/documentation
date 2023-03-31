@@ -64,7 +64,7 @@ Component : " nginx, apache, postgres, mariadb, rabbitmq "
 
 ## Images TAG
 
-Les images poussées dans le registry devront etre unique et identifiés via un Sha ou Short-Sha qui pourrait etre lié au commit Git. Grace a cela une gestion des releases et un rollback sera possible.
+Les images poussées dans le registry devront etre unique et identifiés via un Sha ou Short-Sha qui pourrait etre lié au commit Git. Grace a cela une gestion des releases et un rollback seront possibles.
 
 Exemple de valeur pour le Tag de l'image : 
 
@@ -134,12 +134,12 @@ Users --HTTPS-> ReverseProxy --HTTPS-> Router Openshift --HTTP-> Container   (Us
 
 ## HPA (Horizontal Pod Autoscaling)
 
-Le scaling est très important afin de répondre aux besoins en termes d'affluence. il est aujourd'hui un atout majeur pour avoir une application qui soit le plus disponible possible avec des performances élevées. Pour cela il est donc possible de définir des triggers afin d'upscale l'applicatif (CPU,Métriques Applicatives).
+Le scaling est très important afin de répondre aux besoins en termes d'affluence. il est aujourd'hui un atout majeur pour avoir une application qui soit le plus disponible possible avec des performances élevées. Pour cela il est donc possible de définir des triggers afin d'upscale l'applicatif (CPU, RAM, Métriques Applicatives).
 
 ## QOS 
 
 Il est important de définir les consommations de chaque POD (prévisionnelles), Savoir si il serait intéressant que certains disposent d’une "request" égal a la "limit" afin d’assurer une réservation des ressources. (Guaranteed Class)
-L'utilisation du "Burstable" n'est pas pas une bonne pratique. il est vraiment necessaire d'avoir une "limit".
+L'utilisation du "Burstable" n'est pas pas une bonne pratique. il est vraiment necessaire d'avoir une "limit" même si celle-ci n'est pas équivalente a la "request".
 
 Exemple : 
 
@@ -161,7 +161,7 @@ Exemple d'image base Lightway : Alpine
 
 ## Network policies
 
-Les "Network policies" sont sur openshift par défaut en "Deny ALL", il faudra donc définir les flux entrants et sortants sur les namespaces. 
+Les "Network policies" sont sur openshift par défaut en "Deny ALL", il faut donc définir les flux entrants et sortants sur les namespaces. 
 
 ReverseProxy-->Networkpolicies-->Pods (Ingress)
 
