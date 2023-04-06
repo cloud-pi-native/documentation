@@ -7,14 +7,16 @@ Une application Cloud Native doit respecter au maximum les [Twelve-Factor](https
 ### Obligatoire
 
 1. Base de code
+
+    Le code de l'application et de déploiement doit etre versionné dans un repo de source de type Git (Public/Privée) accessible depuis internet.
    
 2. Dépendances
     
-    __TOUTES__ dépendances necessaires à la constuction de l'application (Libraries,Images, ...) doivent faire parti des repo standard (Maven,Composer,Node) ou reconstruite par l'offre et déposée dans le gestionnaire d'artefact de celle-ci
+    __TOUTES__ dépendances necessaires à la constuction de l'application (Libraries,Images, ...) doivent faire parti des repo standard (Maven,Composer,Node, ...) ou reconstruite par l'offre et déposée dans le gestionnaire d'artefact de celle-ci.
 
 3. Configuration / Service Externe
 
-    __TOUTES__ la configuration applicative pouvant être amenée a être modifié (Service Externe,Port,...) doit pouvoir être injecté par des variables d'environnement au runtime.
+    __TOUTES__ la configuration applicative pouvant être amenée a être modifié (Service Externe,Port, ...) doit pouvoir être injecté par des variables d'environnement au runtime ou via un fichier de configuration dynamique via une ConfigMap
 
 4. Port
 
@@ -28,7 +30,7 @@ Une application Cloud Native doit respecter au maximum les [Twelve-Factor](https
 
 6. Processus
 
-    Les applications doivent être __STATELESS__, si des données de session/cache doivent être utilisé par l'application alors elles doivent faire l'object d'un service externe prévus à cette effet (Redis, ...)
+    Les applications doivent être __STATELESS__, si des données de session/cache doivent être utilisé et partagé par l'application alors elles doivent faire l'objet d'un service externe prévus à cet effet (Redis, ...)
    
 7. Processus d’administration
 
