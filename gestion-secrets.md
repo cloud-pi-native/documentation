@@ -1,15 +1,17 @@
 # Gestion des secrets sur DSO
 
-La gestion des secrets est en cours de mise ne oeuvre. Le déploiement applicatif suit le principe gitOps et donc de "pousser" l'ensemble des déploiements et charts helm sur un repository GIT. Le problème est de pousser un secret kubernetes et qui se retrouve donc accessible.
+> La gestion des secrets est en cours de mise en oeuvre sur la forge DSO.
 
-Une première solution de mise en oeuvre avec [SOPS](https://github.com/mozilla/sops) est proposée. Ainsi, sur ce principe le secret est toujours poussé sur un repo git mais chiffré par une clé asymétrique.
+Le déploiement applicatif suit le principe gitOps et donc de "pousser" l'ensemble des manifestes et charts helm sur un repository GIT. Cependant, ce principe ne peut s'appliquer aux secrets afin de ne pas divulger le contenu d'un secret dans l'historique du repository.
+
+Une première solution de mise en oeuvre avec [SOPS](https://github.com/mozilla/sops) est proposée. Ainsi, sur ce principe le secret est toujours poussé sur un repo git mais chiffré par une clé asymétrique dont la clé privée n'est connue que du Cluster Openshift et la clé publique accessible à tous les projets.
 
 Pour cela des paires de clés au format age ont été générées sur les différents clusters dont voici les clés publiques:
  * Cluster 4-7 : age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm
  * Cluster 4-8 : TO BE DONE
  * Cluster 4-5 : TO BE DONE
 
-Afin de chiffrer un secret, il faut commencer par créer un secret de type SopsSecret par exemple :
+Afin de chiffrer un secret, il faut commencer par créer un objet kubernetes de type SopsSecret par exemple :
 ```yaml
 apiVersion: isindir.github.com/v1alpha3
 kind: SopsSecret
@@ -35,23 +37,15 @@ spec:
         .dockerconfigjson: '{"auths":{"index.docker.io":{"username":"user","password":"pass","email":"toto@example.com","auth":"dXNlcjpwYXNz"}}}'
 ```
 
-> Chaque élément du template donnera lieu à un secret dans kube une fois le secret décrypté 
-Le secret secret-exemple sera crée avec les données suivantes
-```yaml
-data:
-  data-name0: ZGF0YS12YWx1ZTA=
-  data-name1: ZGF0YS12YWx1ZTE=
-```
+Ce fichier **ne doit pas** être commité et envoyé sur un repo git et rester uniquement en local. Seul la version chiffrée peut être envoyée sur le repo GIT.
 
-Ce fichier **ne doit pas** être commité et envoyé sur un repo git et rester en local.
-
-Ensuite, il faut chiffrer ce fichier via SOPS avec la clé publique correspondant à l'environnement. Par exemple sur l'environnement 4 7 :
+Il convient donc de chiffrer ce fichier via SOPS avec la clé publique correspondant à l'environnement. Par exemple sur l'environnement 4 7 :
 
 ```bash
 sops -e --age age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm6ekqemjhn3 --encrypted-suffix Templates secret.sops.yaml > secret.sops.enc.yaml
 ```
 
-Le fichier chiffré doit conserver l'extension .yaml
+Attention, le fichier chiffré doit conserver l'extension .yaml
 
 Le contenu du fichier devient alors :
 
@@ -102,6 +96,26 @@ sops:
 
 Ce fichier peut être commité et envoyé sur un repo git car le contenu est chiffré.
 
+> A noter que chaque élément du secretTemplates donnera lieu à un objet Secret dans kubernetes une fois le secret déchiffrée lors du déploiement. 
+Ainsi, dans l'exemple, le secret secret-exemple sera crée avec les données suivantes
+```yaml
+data:
+  data-name0: ZGF0YS12YWx1ZTA=
+  data-name1: ZGF0YS12YWx1ZTE=
+```
+Le secret peut alors être utilisé directement par les POD de façon classique, par exemple :
 
+```yaml
+    spec:
+      containers:
+        - name: myContainer
+          image: myImage:MyTag
+          env:
+            - name: My_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: secret-exemple
+                  key: data-name0
+```
 
 
