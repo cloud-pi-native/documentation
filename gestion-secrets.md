@@ -9,27 +9,38 @@ Pour cela des paires de clés au format age ont été générées sur les diffé
  * Cluster 4-8 : TO BE DONE
  * Cluster 4-5 : TO BE DONE
 
-Afin de chiffrer un secret, il faut commencer par créer un secret par exemple :
+Afin de chiffrer un secret, il faut commencer par créer un secret de type SopsSecret par exemple :
 ```yaml
-apiVersion: v1
-kind: Secret
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
 metadata:
-  name: mysecret
-type: Opaque
-data:
-  username: YWRtaW4=
-  password: MWYyZDFlMmU2N2Rm
+  name: mysecret-sops
+spec:
+  secretTemplates:
+    - name: secret-exemple
+      labels:
+        label1: label1-value1
+      annotations:
+        key1: key1-value
+      stringData:
+        data-name0: data-value0
+      data:
+        data-name1: data-value1
+    - name: token-exemple
+      stringData:
+        token: supersecrettoken
+    - name: docker-login
+      type: "kubernetes.io/dockerconfigjson"
+      stringData:
+        .dockerconfigjson: '{"auths":{"index.docker.io":{"username":"user","password":"pass","email":"toto@example.com","auth":"dXNlcjpwYXNz"}}}'
 ```
 
-> Les valeurs d'un objet secret dans kubernetes sont stockés au format base64 :  
-  * YWRtaW4= : admin
-  * MWYyZDFlMmU2N2Rm : 1f2d1e2e67df
-
-Ces valeurs peuvent se décoder très facilement :
-
-```bash
-$ echo "MWYyZDFlMmU2N2Rm" | base64 -d
-1f2d1e2e67df
+> Chaque élément du template donnera lieu à un secret dans kube une fois le secret décrypté 
+Le secret secret-exemple sera crée avec les données suivantes
+```yaml
+data:
+  data-name0: ZGF0YS12YWx1ZTA=
+  data-name1: ZGF0YS12YWx1ZTE=
 ```
 
 Ce fichier **ne doit pas** être commité et envoyé sur un repo git et rester en local.
@@ -37,7 +48,7 @@ Ce fichier **ne doit pas** être commité et envoyé sur un repo git et rester e
 Ensuite, il faut chiffrer ce fichier via SOPS avec la clé publique correspondant à l'environnement. Par exemple sur l'environnement 4 7 :
 
 ```bash
-sops --encrypt --age age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm secret.sops.yaml > secret.sops.yaml
+sops -e --age age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm6ekqemjhn3 --encrypted-suffix Templates secret.sops.yaml > secret.sops.enc.yaml
 ```
 
 Le fichier chiffré doit conserver l'extension .yaml
@@ -45,14 +56,28 @@ Le fichier chiffré doit conserver l'extension .yaml
 Le contenu du fichier devient alors :
 
 ```yaml
-apiVersion: ENC[AES256_GCM,data:6jk=,iv:lv9mcOt+B2j5MdAj4otkM/i/n0zWu6LuLJ8dvX0JKT4=,tag:iIqB+o+g2sAj6zOA+4lN4A==,type:str]
-kind: ENC[AES256_GCM,data:Tizrk3DL,iv:T3NHIidEvQOAd/TURdg0i2IITQvVk6uk0cWczk6GVho=,tag:/RgSCxBL08fRqMXDLetRew==,type:str]
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
 metadata:
-    name: ENC[AES256_GCM,data:ced2MXWLpvs=,iv:uIb7G7soczd13mXUL0ETwrto8n02zTYLUcW3oErotVA=,tag:r1RBTJSlksyCeftH3mH60w==,type:str]
-type: ENC[AES256_GCM,data:NmecC9UM,iv:qFpB66dQ2gxh6aJFG3eVwXASDoFiiohFRloi2PY+hiE=,tag:Vy5u36J9u4ZBSGETgEYYaw==,type:str]
-data:
-    username: ENC[AES256_GCM,data:OXGYgoGcidA=,iv:iFpRqLoY9SsXKUg1X+12UYYSKFWLRnApTkmzYb+EwZE=,tag:IsHcZiuuPntBxs1L/FNCiw==,type:str]
-    password: ENC[AES256_GCM,data:5LB1rQMM2TZO55+g4reriA==,iv:76S+SDT4oqeN4Kv/NvrLMCQJL9d0xq2itSSiXVh1O1w=,tag:P2OKKZzfIDW2DS7PLo3qWw==,type:str]
+    name: mysecret-sops
+spec:
+    secretTemplates:
+        - name: ENC[AES256_GCM,data:GCTwnqz3qLWBltXkI1E=,iv:6s/89KUaymATUyyiavb1JQdndbvBY5XrBwdqg7Zp7nM=,tag:LcEyQU0/UvYWt7YCyGiFpw==,type:str]
+          labels:
+            label1: ENC[AES256_GCM,data:YKnixwbNsFPccmx7Kw==,iv:TQNNfHyvcJaXTnuNAi7iq/HHGpjtIN3SInxds1aWJpM=,tag:LCHNCjIQ8lrKRzlHIflYRA==,type:str]
+          annotations:
+            key1: ENC[AES256_GCM,data:IrcoTdCj0sS+tA==,iv:W5ccDu7jna7fP/ZfQ6cYaQX/uqU9PjKJ83PgJpHR9b0=,tag:4UDYI4WHXgipY8wXZu/NhA==,type:str]
+          stringData:
+            data-name0: ENC[AES256_GCM,data:t431CrKunuDACSw=,iv:pou2IIpBl6LeKloCC1yGzHA8Vkt/0Jo0nu8M4e+8XW0=,tag:kkuw1HXkSCS9f5K73MBEgw==,type:str]
+          data:
+            data-name1: ENC[AES256_GCM,data:p7ffMnDqVKj8Vog=,iv:KI07DuHBarC4du/sqrLus4o9s7o5knu/wu3W8ssO4e8=,tag:TgKXwVJJGEI9H5jWM5Ca4A==,type:str]
+        - name: ENC[AES256_GCM,data:isdJvbWonL593lfI4w==,iv:bpHG0fsIXWcmJ3fCDebKXeFGWNrHfHRWTQ86e+Dgruw=,tag:HmgDZLLssR+roPBSsSrizw==,type:str]
+          stringData:
+            token: ENC[AES256_GCM,data:QYXc7S8EHkSblo7RDW9Ovw==,iv:9lJcVQ5EJR+LYVFX/0OUJ+uZqQx0kiL2Kze8OJ3fu0M=,tag:QDpVKlSS1jj+OnWzpfCW2Q==,type:str]
+        - name: ENC[AES256_GCM,data:pHr2cwiFjGsIBZj+,iv:x1TkramaD0peRJe95n+r+ye5IWeeE630C0LwbVWJ154=,tag:7TiqbtURY7fn+9r2V7PlDA==,type:str]
+          type: ENC[AES256_GCM,data:8ZBm++dOCx4xlmPW4bZagHMVua5gj7v7GVkEtBRX,iv:Y8HYgfO8Ae9SY3WYF/BYhKY9n6KESwQEHMNUPZfQd9o=,tag:LqlUy6FLcYAtYEa8qtx5NQ==,type:str]
+          stringData:
+            .dockerconfigjson: ENC[AES256_GCM,data:1TmIvfP95WReEpGqF2/ukxkvyFVdYbO3gda+oAtNZqwRZw749qvU8koYsi012s1/yhutll5v3ldqUYtr4sNuVS7TFVy2/qZ+ryiBaI8qUxt+kOx85eyfp36pJolwQtdQPNanRTLLkV4mf1JzSYOG6WAokkQ=,iv:X1jzTyp+CzTIowxH6gl2cIInk892cuO9/5JUkuCJdqI=,tag:DbtJe3pRo8TMrBO/gt4BDw==,type:str]
 sops:
     kms: []
     gcp_kms: []
@@ -62,37 +87,20 @@ sops:
         - recipient: age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm6ekqemjhn3
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBhYXFOTHAyOEFVV0pWUE1p
-            YXBUSzZRTVhnY1lLN1phZHFRR1pxU3Nya0EwClZOLzBseWxWdmpwc01INlFRamxL
-            SzFNT1pmakZTVDVOMEdrU0lHVGdNZTgKLS0tIFJxT1RVd04vOTFMaEh4SktSblYx
-            SzZzUndqN0xuMnhqeUdNcHVMcWdYYUEKRjJDAHmJVOfdgIKmxGkD1RvUJ88tYOKC
-            w9FZSbAFfggbv1K7td8bkv+7EdV4QgmnN6P2XdGkQDus2bDdkYSo7A==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTZFJGdkRzeVJFdDVUVjVS
+            SmU0ekE0aGplVzhxZm5UTklzZnA3QlIwRzNNCjJha21CU0VEZkt3SHB0THlVZ1ZM
+            VnlBSEZpbmJZVnlyY1VCTjdXZEtOR2cKLS0tIHBhRkprelpsQTJZWGphYUtRSlhJ
+            ZnpFSDNYT0M3K294VmlBVitmN09nUlUKI+THCBdEkTnAElA3b0z4r8Nx1KcW7gks
+            H5xJwqzzNn5C+UMy+v+Qn2hzg07juISBTDVcLtBDggVrZOAsh8kTMQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2023-04-17T15:45:02Z"
-    mac: ENC[AES256_GCM,data:TCTJnB56twm94iacmQaEFohteHF9vbRwbrW83HJZc01kd8WRPl6m3Ci1j14hjsgrOWYA6ZCs+LMTANc6IAdpNUzdL1FUQQgrRQFQnOR7ZhKRtzDk5j39r/fYQnMAoqNlIvT2rdBy+iKQAn+Kr4zNv8c2NASLUVZFYQ1GaXKFSCQ=,iv:sHzN0JlrNna7nQwCDijntbSxS9A007iZn4AcW7Mb5hk=,tag:3zCCJPi8nt+R8+k66b6pEQ==,type:str]
+    lastmodified: "2023-04-18T15:02:34Z"
+    mac: ENC[AES256_GCM,data:Cpl1/GWn2LQivSo0qNTGyDxqCxm79DnomIpf1uDsoIuA5qqsluCUja0RLkEOm/fUD+UKzL8Muaqjo8+fbuKOvr4nfqaeARACPz377tdPEH55DHyg8Czv00OsxdHZ8C9BGeeSZr3YHDqQEKqQpK1zs7rBz/2adqD1SXrOFu+aiuQ=,iv:w+4DAXVAvD7IvDCBMTF+NfMRctp0dEWl+QsRJPsrd70=,tag:fWa0Sz3TlCQ2lIkVe6zE4Q==,type:str]
     pgp: []
-    unencrypted_suffix: _unencrypted
+    encrypted_suffix: Templates
     version: 3.7.3
 ```
 
 Ce fichier peut être commité et envoyé sur un repo git car le contenu est chiffré.
-
-Il est nécessaire ensuite de créer un fichier afin de préciser :
-
-```yaml
-apiVersion: viaduct.ai/v1
-kind: ksops
-metadata:
-  name: example-secret-generator
-files:
-  - ./secret.sops.yaml
-```
-Enfin dans le fichier kustomization, il faut préciser le générateur ci-dessus :
-
-```yaml
-generators:
-  - ./secret-generator.yaml
-```
 
 
 
