@@ -4,10 +4,10 @@ La gestion des secrets est en cours de mise ne oeuvre. Le déploiement applicati
 
 Une première solution de mise en oeuvre avec [SOPS](https://github.com/mozilla/sops) est proposée. Ainsi, sur ce principe le secret est toujours poussé sur un repo git mais chiffré par une clé asymétrique.
 
-Pour cela des paires de clés au format age ont été générées sur les différents clusters :
- * Cluster 4 7 : age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm
- * Cluster 4 8 : TO BE DONE
- * Cluster 4 5 : TO BE DONE
+Pour cela des paires de clés au format age ont été générées sur les différents clusters dont voici les clés publiques:
+ * Cluster 4-7 : age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm
+ * Cluster 4-8 : TO BE DONE
+ * Cluster 4-5 : TO BE DONE
 
 Afin de chiffrer un secret, il faut commencer par créer un secret par exemple :
 ```yaml
