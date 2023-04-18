@@ -12,6 +12,17 @@ Avec l’adoption de la doctrine « Cloud au centre », le Gouvernement Françai
 
 L'offre Cloud π Native, offre les services d'une plateforme DevSecOps complète afin de suivre le cycle de vie complet de son projet.
 
+[vision](img/vision.png)
+
+La philosophie de l'offre est de laisser les équipes de développement travailler sans contrainte avec leur socle logiciel d'intégration et de déploiement (carré en haut à gauche). une fois que le projet est suffisament prêt, il est possible de l'intégrer sur l'offre Cloud π Native par :
+  - Recopie des repository de code et de déploiement
+  - Construction des artefacts sur l'offre Cloud π Native
+  - Aanalyse de qualité et de sécurité
+  - Construction des images Dockers
+Enfin,  déploiement sur différentes cibles possibles :
+ - Offres kubernetes managés gérés par l'équipe client chez un Cloud Service Provider disposant d'un service kubernetes managé
+ - Offre Openshift sur les environnements diffusion restreinte ou non 
+
 ### Services proposés
 
 L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-Mer est une offre PaaS basée sur [Cloud π](https://www.numerique.gouv.fr/services/cloud/cloud-interne/) sur les infrastructures du ministère de l'intérieur offrant des fonctionnalités DevSecOps à savoir :
@@ -21,6 +32,7 @@ L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-
   - Orchestrateur de [construction](produits/gitlab.md) d'artefacts (Intégration continue)
   - [Entrepot d'artefacts](produits/artefacts.md) et d'images Docker
   - Gestionnaire de [secrets](produits/vault.md) des chaines IC/DC
+  - Gestion des [secrets applicatifs](gestion-secrets.md)
   - Outil de [déploiement automatisé](produits/gitops.md) des images Docker sur les infrastructures du ministère ou à l'extérieur du ministère en suivant les principes GitOps (Déploiement continue)
   - Hébergement des [environnements](gestion-environnements.md) applicatifs de l'intégration à la production
   - Mise à disposition d'outil d'[observabilité et exploitabilité](exploitation.md) des applications déployées sur l'offre : accès aux logs, métriques techniques et applicatives, procédures standard d'exploitation
@@ -47,9 +59,11 @@ L'offre Cloud π Native peut se séparer en plusieurs grands services ayant des 
 
 ## Accompagnement  (WIP)
 
-Un volet [accompagnement](accompagnement.md) des projets directement par les équipes de l'offre Cloud π Native permet d'utiliser l'offre dans des conditions optimale. Cet accompagnement fait partie du parcours technique d'embarquement sur l'offre Cloud π Native. 
+Un volet [accompagnement](accompagnement.md) des projets directement par les équipes de l'offre Cloud π Native permet d'utiliser l'offre dans des conditions optimale. Cet accompagnement fait partie du parcours technique d'embarquement sur l'offre Cloud π Native.
 
-## Parcours technique
+> L'équipe d'accompagnement permet aux projets respectant les [prérequis](prerequisites.md) d'embarquer sur l'offre Cloud π Native de façon sereine et optimale.
+
+## Parcours techniques
 
 Un parcours technique d'apprentissage permettant de valider les prérequis et d'intégrer les bonnes pratiques permet à nos clients d'appréhender l'offre Cloud π Native. 
 
