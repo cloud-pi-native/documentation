@@ -22,10 +22,18 @@ Les repos externes, utilisés en dev., sont synchronisés par la pipeline gitlab
 
 Une fois le projet applicatif synchronisé une pipeline gitlab-ci est lancé afin de construire le projet applicatif sur l'offre Cloud π Native.
 
-## Chaine de construction Gitlab-ci
+Deux types de repos sont pris en comptes par l'offre Cloud π Native :
+ - Repo applicatifs
+ - Repo d'infra.
 
-### Principe
+### Repos applicatifs et chaine de construction Gitlab-ci 
+
+Les repos applicatifs contienent du code applicatifs et génères des images à déployer sur Openshift.
+
 Les projets présents sur l'offre π Native sont paramétrés pour exécuter une pipeline gitlab-ci depuis le fichier .gitlab-ci-dso.yml présent à la racine du projet. Ce fichier doit être créé en amont depuis le repo externe. L'offre Cloud π Native propose des templates de ces fichiers pour la construction de projets de différents langages (Java, nodejs, python, etc.) accessible lors de la création des projets depuis la Console DSO. Ces templates sont directement paramétrés pour utiliser des variables prédéfinies liés au projet courant. Cependant, ils sont donnés à titre d'exemple et doivent être adaptés aux besoins réels des projets.
+
+Les projets applicatifs sont analysés et construits et les images Docker générés sont analysées et déposées sur un repos Quay prêtes à être déployées.
+
 
 ### Variables prédéfinies gitlab-ci DSO
 
@@ -42,8 +50,11 @@ Un certains nombres de variables pré-définies, en plus des variables standards
  - VAULT_AUTH_ROLE : PATH dans l'URL d'accès à VAULT pour la récupération des roles depuis les appels de Gitlab
  - VAULT_SERVER_URL : URL d'accès à l'instance Vault (gestionnaire de secrets)
  
+### Repos d'infra
 
+Les repos d'infras contienent les manifests de déploiement des images issues de la construction des repos applicatifs.
 
+Ces repos ne sont pas contruits mais sont utilisées par ArgoCD afin de déployer l'infrastructure applictive sur Openshift. Ces repos peuvent être au format Kustomize ou HELM et déploiement l'applicatif sur un namespace dédiée au projet et automatiquement créé par la console DSO.
 
 ## Schéma de fonctionnement
 Le schéma ci-dessous présente le fonctionnement général : 
