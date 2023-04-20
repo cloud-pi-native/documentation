@@ -10,7 +10,7 @@ Voici des critère permettant de déterminer si votre  application est éligible
   - La configuration de l'application se fait par son environnement (principalement par des variables d'environnements). Seuls ces éléments changent entre deux environnements : il s'agit de la même image déployée avec un configuration différente (pas de reconstruction pour passer d'un environnement à un autre)
   - Les applications doivent pouvoir être construite sur l'offre Cloud π Native, ce qui sous entend que l'ensemble des dépendance est soit accessible sur des repos publics (maven central, npm, composer, etc.) soit être reconstruit sur la plateforme. Il n'est pas possible de charger une dépendance sous la forme de binaire qui ne serait pas reconstruit sur l'offre Cloud π Native.
   - Les images déployées doivent être **rootless**
-  - Les ports exposés par les applicatifs doivent être < à 1024
+  - Les ports exposés par les applicatifs doivent être > à 1024
   - Les logs doivent être envoyés sur la sortie standard
   - Le FileSystem des images doit être en lecture seule
   - Afin d'accéder aux composants externes de l'application, par exemple des API sur Internet, des demandes d'ouvertures de flux doivent être explicitement réalisées (voir la procédure TODO)
