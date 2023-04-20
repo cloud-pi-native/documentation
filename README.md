@@ -37,6 +37,10 @@ L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-
   - Hébergement des [environnements](gestion-environnements.md) applicatifs de l'intégration à la production
   - Mise à disposition d'outil d'[observabilité et exploitabilité](exploitation.md) des applications déployées sur l'offre : accès aux logs, métriques techniques et applicatives, procédures standard d'exploitation
 
+L'architecture générale de l'offre Cloud π Native est la suivante :
+
+[](img/architecture.png)
+
 ### SLA de l'offre (WIP)
 
 L'offre Cloud π Native peut se séparer en plusieurs grands services ayant des contraintes de SLA différentes :

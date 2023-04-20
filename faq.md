@@ -4,7 +4,10 @@ Cette section regroupe les questions fréquentes de nos clients
 
 ## Construction
 
-### Comment puis-je déployer une image personnalisée
+### Comment puis-je lancer la pipeline de synchronisation de mes repos depuis mes repos externes ?
+
+
+### Comment puis-je déployer une image personnalisée ?
 
 Toutes les images déployées sur l'offre Cloud π Native doivent :
   - Etre construite par l'offre
@@ -41,18 +44,18 @@ Non, toutes les images et librairies utilisées sur l'offre Cloud π Native doiv
 
 Il n'est pas possible d'uploader un binaire directement sur le gestionnaire d'artefacts (Nexus) en dehors de la chaine de construction DSO.
 
-### Quelles sont les contraintes génériques d'Openshift par rapport à Kubernetes
+### Quelles sont les contraintes génériques d'Openshift par rapport à Kubernetes ?
   - Images rootless
   - Filesystem en lecture seule
   - Port d'écoute > 1024
 
 ## Déploiement
 
-### Comment déployer une base postgreSQL via manifests 
+### Comment déployer une base postgreSQL via manifests ?
 
 Le fichier manifest suivant présente le déploiement d'un service [PostgreSQL](examples/postgres.yaml) à partir d'une image bitnami. Il peut servir de base pour un déploiement manuel d'une instance PostgreSQL. Pour un déploiement plus complexe, par exemple avec une gestion du clustering, il est préférable d'utiliser un déploiement par chart Helm pour par opérateur.
 
-### Comment déployer une base postgreSQL via un chart Helm
+### Comment déployer une base postgreSQL via un chart Helm ?
 
 L'utilisation de chart Helm est une autre solution pour déployer une base de données PostgreSQL pour son application. Helm permet de déclarer des dépendances vers d'autres charts Helm existants. Ainsi, il est possible de packager son application sous la forme d'un chart Helm et de déclarer une dépendances vers un chart de base de données postgreSQL.
 
@@ -68,7 +71,7 @@ la configuration de chart Helm se fait
 
 Un exemple complet est présent sur le tutoriel de déploiement [dso-tuto-java-helm](https://github.com/dnum-mi/dso-tuto-java-helm.git)
 
-### Comment déployer une base postgreSQL via un opérateur
+### Comment déployer une base postgreSQL via un opérateur ?
 
 ## Exploitation
 
@@ -149,6 +152,6 @@ spec:
               emptyDir: {}
 ```
 
-### Comment puis-je accéder aux logs de mon application
+### Comment puis-je accéder aux logs de mon application ?
 
-### Comment puis-je accéder aux métriques de mon application
+### Comment puis-je accéder aux métriques de mon application ?
