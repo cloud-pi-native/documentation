@@ -118,4 +118,69 @@ Le secret peut alors être utilisé directement par les POD de façon classique,
                   key: data-name0
 ```
 
+## Chiffrement partiel
 
+Il est aussi possible de chiffrer **partiellement** le SoapSecret si celui-ci contient des données plus ou moins sensibles si dans le fichier suivant on veut chiffrer que la clé password
+
+```yaml
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
+metadata:
+  name: mysecret-sops
+spec:
+  secretTemplates:
+    - name: exemple
+      data:
+        password: secret
+        clearValue: data-clear
+```
+
+Il sera possible de définir une **encrypted_regex** qui défini le regex pattern des clés que l'on souhaite chiffrer, dans le fichier de configuration **.sops.yaml** à la racine du projet.
+
+```yaml
+creation_rules:
+  - path_regex: .*newsecret.sops.yaml.*
+    encrypted_regex: "^.*password.*$"
+    age: age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm6ekqemjhn3
+```
+
+Je chiffre mon secret
+
+```bash
+sops -e newsecret.sops.yaml > newsecret.sops.enc.yaml
+```
+
+Le fichier de sorti aura le format suivant, on peut voir que seul la clé **password** a été chiffrée
+
+```yaml
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
+metadata:
+    name: mysecret-sops
+spec:
+    secretTemplates:
+        - name: exemple
+          data:
+            password: ENC[AES256_GCM,data:0yl7pmw7,iv:EH29fOotz0gKKEGesOO2v7fwM8FPtBgpBpZQllnP9K0=,tag:GQVbRh6rhYCdquk2wOInzw==,type:str]
+            clearValue: data-clear
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm6ekqemjhn3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZU3d0Z2N6QytuaHZWTXBm
+            QlRlV2RCM2ZKZW1DZ0lLT0xQdjUxKzVGYlRrCnMrT0hINTdBYkZaMDZzYlVHci9w
+            TGRHcUIzcEZqZGdsYVdxcERGdE9xRmsKLS0tIGdBL0NSNDdRYVVHRFU2WUQxS1Fw
+            SG5sa1ZJRUNjOWY5QURpcHZrWDI2SjAKO8hY5sVJ4wixFzN+Q7QB8MEheizsmKrB
+            m5JPbGUHmC15/HzSb0o8UFGXoi2MeDMie8hMu+A8uqVIhiBUrga3FA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2023-04-20T14:31:45Z"
+    mac: ENC[AES256_GCM,data:17CYI5VKgxnc5Ae9dY/cwBu0d2hFKC+xdN5Y5vIIqdvXF6IOQKPQRwdNSXaLIjFWo9Xk+NP0nzAFbqyrIAR7hgGg5uWE0dAaWQw6NKgWvDIBWPU/Et2JuuBlbmny3cO//geij3XiODDAXxUg19XIDol0+f1Q5IPgPrtghKs6YC4=,iv:4YnMWSD23xRwNIiiAXMTM44ORq03J5dBNKkn9yE7bXw=,tag:Q+3SfVPTJjp777qlOwEEBg==,type:str]
+    pgp: []
+    encrypted_regex: ^.*password.*$
+    version: 3.7.3
+```
