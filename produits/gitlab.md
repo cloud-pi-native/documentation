@@ -47,6 +47,7 @@ Un certains nombres de variables pré-définies, en plus des variables standards
 
 ## Schéma de fonctionnement
 Le schéma ci-dessous présente le fonctionnement général : 
-(../img/gitab.png)
+
+![gitlab-général](../img/gitlab.png)
 
 

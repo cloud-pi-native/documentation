@@ -12,7 +12,7 @@ Avec l’adoption de la doctrine « Cloud au centre », le Gouvernement Françai
 
 L'offre Cloud π Native, offre les services d'une plateforme DevSecOps complète afin de suivre le cycle de vie complet de son projet.
 
-[vision](img/vision.png)
+![vision](img/vision.png)
 
 La philosophie de l'offre est de laisser les équipes de développement travailler sans contrainte avec leur socle logiciel d'intégration et de déploiement (carré en haut à gauche). une fois que le projet est suffisament prêt, il est possible de l'intégrer sur l'offre Cloud π Native par :
   - Recopie des repository de code et de déploiement
@@ -49,11 +49,11 @@ L'offre Cloud π Native peut se séparer en plusieurs grands services ayant des 
   - Outils de déploiement (Déploiement continue) permettant de déployer / mettre à jour une application sur les différents environnements de l'offre
   - Les applications qui sont déployées sur l'offre. Chacune de ses applications peuvent également avoir un niveau de criticité différent (par exemple l'environnement de production a un besoin de SLA plus fort que l'environnement de recette)
 
-| Service      | DIMA*       |        PDMA**
-| ------------ | ----------- | -------- |
-| Construction | 8 heures | 24h (backup nocturne quotidien) |
-| Déploiement  | 8 heures | 24h (backup nocturne quotidien) |
-| Run des applications | 6 heures | 24h (backup nocturne quotidien). Possibilité d'ajouter un backup applicatif plus fréquent (voir notre [FAQ](faq.md)) |
+| Service        | DIMA*           |        PDMA**
+| -------------- | --------------- | ------------------------ |
+| Construction   | 8 heures        | 24h (backup nocturne quotidien) |
+| Déploiement    | 8 heures        | 24h (backup nocturne quotidien) |
+| Run des applications           | 6 heures | 24h (backup nocturne quotidien). Possibilité d'ajouter un backup applicatif plus fréquent (voir notre [FAQ](faq.md)) |
 
 
 *DIMA : Durée d'interruption maximale autorisée (en heures ouvrés)
@@ -73,7 +73,7 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
 
 ![parcours_apprentissage](img/parcours_apprentissage.png)
 
-  - Etape 1 : [Matrice de compétences](matrice-compétences.md) des technologies à connaitre pour utiliser l'offre Cloud π Native 
+  - Etape 1 : [Matrice de compétences](matrice-competences.md) des technologies à connaitre pour utiliser l'offre Cloud π Native 
   - Etape 2 : Vérification de l'éligibilité de son application avec le modèle Cloud Native Application [prérequis](prerequisites.md) technique liés à l'offre. Les équipes Cloud π Native [accompagnent](accompagnement.md) les équipes projets sur cette étape afin d'apporter conseils et qualification des architectures et maturité technique des équipes. 
   - Etape 3 : Prise de connaissance des [bonnes pratiques](bonnes-pratiques.md) et expérimentation avec une série de tutoriels [tutoriels](tutorials.md) afin de faire ses premiers pas avec l'offre
   - Etape 4 : [Embarquement](getting-started.md) de l'application sur l'offre
