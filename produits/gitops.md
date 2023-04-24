@@ -33,4 +33,9 @@ Ainsi, suivant le principe GitOps et afin de déployer une application ou la red
  - Modification du repo d'infra afin de mettre en cohérence le tag de l'image à déployer
  - Synchronisation du repo externe d'infra
 
+Il est possible d'automatiser ces différentes tâches comme suit :
+  - Utiliser l'identifiant de commit court (CI_COMMIT_SHORT_SHA) du repo applicatif comme tag d'image à construire 
+  - Lors de la construction sur les repos externe, déclencher une étape permettant de modifier la référence de l'image à déployer sur le repo d'infra externe (kustomize ou helm values) avec l'identifiant du commit ci-dessus.
+  - Utiliser des triggers depuis le repo de code applicaitf externe (github Action, gitlab-ci, etc.) pour déclencher la synchronisation des repos vers gitlab-ci de la forge DSO.
+
 > Attention ! Si le tag de l'image n'est pas modifié, aucune modification du repo d'infra n'est effectué et ArgoCD n'aura pas de modification à appliquer et les pods ne seront pas redéployés.
