@@ -53,7 +53,7 @@ L'offre Cloud π Native peut se séparer en plusieurs grands services ayant des 
 | -------------- | --------------- | ------------------------ |
 | Construction   | 8 heures        | 24h (backup nocturne quotidien) |
 | Déploiement    | 8 heures        | 24h (backup nocturne quotidien) |
-| Run des applications           | 6 heures | 24h (backup nocturne quotidien). Possibilité d'ajouter un backup applicatif plus fréquent (voir notre [FAQ](faq.md)) |
+| Run des applications       | 6 heures | 24h (backup nocturne quotidien). Possibilité d'ajouter un backup applicatif plus fréquent (voir notre [FAQ](faq.md)) |
 
 
 *DIMA : Durée d'interruption maximale autorisée (en heures ouvrés)
