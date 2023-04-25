@@ -57,12 +57,15 @@ L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code
 Les ressources doivent comporter des labels permettant de les identifier. les labels pourraient etre decomposés de la facon suivante : 
 
 ``` Yaml 
-App : " nomduprojet "
-Env : " dev, preprod, prod "
-Tier : " frontend, backend, db, cache " 
-Criticality : " high, medium, low "
-Component : " nginx, apache, postgres, mariadb, rabbitmq "
+App : " "
+Env : " "
+Tier : " " 
+Criticality : " "
+Component : " "
 ```
+Tous les labels disponibles sont dans la liste suivante :
+
+
 
 ## Images TAG
 
