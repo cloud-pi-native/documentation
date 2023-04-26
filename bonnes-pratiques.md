@@ -63,9 +63,10 @@ Tier : " "
 Criticality : " "
 Component : " "
 ```
+
 Tous les labels disponibles sont dans la liste suivante :
 
-
+https://github.com/dnum-mi/dso-documentation/blob/master/labels-list.md
 
 ## Images TAG
 
@@ -89,10 +90,14 @@ Coté exploitation, cela facilite grandement la gestion.
 Exemple :
 
 ```
-Service : env-app-svc
-Deployment : env-app-dep
-Statefulset : env-app-sts
-ConfigMap : env-app-cm
+Service : env-ms-svc
+Deployment : env-ms-dep
+Statefulset : env-ms-sts
+ConfigMap : env-ms-cm
+Secret : env-secret
+CronJob : env-name-cj
+Route : env-route
+PVC : env-name-pvc
 ```
 
 ## Secrets 
@@ -181,10 +186,9 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      Tier: Frontend 
+      Tier: frontend 
   ingress:
   - ports:
     - port: 80
-
 ```
 
