@@ -28,33 +28,33 @@ Criticality :
 Component: 
 
  1. web:
-   - nginx
-   - apache
-   - caddy
-   - tomcat
+    - nginx
+    - apache
+    - caddy
+    - tomcat
 
  2. defaults:
-   - python
-   - node
-   - openjdk
-   - golang
-   - php
-   - ruby
-   - perl
-   - drupal
-   - java
-   - 
+    - python
+    - node
+    - openjdk
+    - golang
+    - php
+    - ruby
+    - perl
+    - drupal
+    - java
+    - 
 
 
  2. database: 
-   - postgres
-   - mariadb
-   - mysql
-   - mongo
-   - cassandra
-   - cockroach
-   - influx
-   - etcd
+    - postgres
+    - mariadb
+    - mysql
+    - mongo
+    - cassandra
+    - cockroach
+    - influx
+    - etcd
 
  3. caching:
     - varnish
