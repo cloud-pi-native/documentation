@@ -1,23 +1,29 @@
 Env:
 
-1.
-2.
-3.
-4.
+ 1.
+ 2.
+ 3.
+ 4.
+
+ ---
 
 Tier:
 
-1. frontend
-2. backend
-3. db
-4. cache
-5. auth
+ 1. frontend
+ 2. backend
+ 3. db
+ 4. cache
+ 5. auth
+
+ ---
 
 Criticality :
 
-1. High
-2. Medium
-3. Low
+ 1. High
+ 2. Medium
+ 3. Low
+
+ ---
 
 Component: 
 
@@ -27,7 +33,7 @@ Component:
    - caddy
    - tomcat
 
- 2. framework:
+ 2. defaults:
    - python
    - node
    - openjdk
@@ -47,8 +53,8 @@ Component:
    - mongo
    - cassandra
    - cockroach
-   - sql
    - influx
+   - etcd
 
  3. caching:
     - varnish
@@ -56,8 +62,10 @@ Component:
     - memcached
 
  4. broker:
-    
-
+    - rabbitmq
+    - kafka
+    - apachemq
+    - kubemq
 
  5. others:
     - busybox
