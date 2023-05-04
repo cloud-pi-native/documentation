@@ -23,7 +23,8 @@ Les urls de repositories seront toujours constuites de la même façon **\${NEXU
 
 ## Repos d'images : Harbor
 
-Harbor est la registry d'image utilisé pour déposer les images en amonts des différents clusters, celui-ci sera préconfiguré dans les templates Gitlab CI et utilisable via 
+Harbor est la registry d'image utilisé pour stocker, gérer et distribuer les images de conteneurs Docker des différents clusters, ainsi que de les scanner pour détecter les vulnérabilités de sécurité.
+Celui-ci sera préconfiguré dans les templates Gitlab CI et utilisable via l'exemple suivant :
 
 ```yaml
 build_docker_back:
@@ -36,4 +37,6 @@ build_docker_back:
     - .kaniko:build
 ```
 
-Il sera aussi accessible au utilisateur afin de pouvoir vérifier les scans de sécurité
+*Les images pusher par la CI seront signées afin de garantir leur origine et harbor n'autorisera uniquement l'utilisation d'image signée*
+
+Il sera aussi accessible au utilisateur afin de pouvoir vérifier les scans de sécurité au fil du temsp de son image.

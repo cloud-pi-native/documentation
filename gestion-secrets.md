@@ -27,7 +27,7 @@ spec:
       stringData:
         data-name0: data-value0
       data:
-        data-name1: data-value1
+        data-name1: ZGF0YS12YWx1ZTE=
     - name: token-exemple
       stringData:
         token: supersecrettoken
@@ -131,8 +131,8 @@ spec:
   secretTemplates:
     - name: exemple
       data:
-        password: secret
-        clearValue: data-clear
+        password: c2VjcmV0
+        clearValue: ZGF0YS1jbGVhcg==
 ```
 
 Il sera possible de définir une **encrypted_regex** qui défini le regex pattern des clés que l'on souhaite chiffrer, dans le fichier de configuration **.sops.yaml** à la racine du projet.
@@ -162,7 +162,7 @@ spec:
         - name: exemple
           data:
             password: ENC[AES256_GCM,data:0yl7pmw7,iv:EH29fOotz0gKKEGesOO2v7fwM8FPtBgpBpZQllnP9K0=,tag:GQVbRh6rhYCdquk2wOInzw==,type:str]
-            clearValue: data-clear
+            clearValue: ZGF0YS1jbGVhcg==
 sops:
     kms: []
     gcp_kms: []
