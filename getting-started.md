@@ -79,7 +79,7 @@ Remplir le formulaire de synchronisation des dépôts:
 
 Dans le cas d'un dépôt de code applicatif, générer les fichiers de *gitlab-ci* en cliquant sur le bouton *Fichiers de Gitlab CI*. Le fichier `.gitlab-ci-dso.yml` est à placer à la racine de votre dépôt externe et les `includes` (les autres fichiers `.yml`) sont à placer dans un dossier `includes/` à la racine de votre dépôt externe. Ces fichiers seront utilisés par le Gitlab de Cloud π Native pour effectuer les divers tests, scans et déploiements du projet.
 
-<img src="img/tuto/3tuto-depots-ajouter-gitlab-ci.png)" alt="Gitlab-CI" width="75%" title="Gitlab-CI">
+<img src="img/tuto/3tuto-depots-ajouter-gitlab-ci.png" alt="Gitlab-CI" width="75%" title="Gitlab-CI">
 
 Cliquer enfin sur le bouton `Ajouter le dépôt`.
 
