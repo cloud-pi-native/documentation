@@ -31,20 +31,22 @@ La création d'un projet va lancer le provisionnement des différents services d
 
 Ainsi, depuis le menu Mes projets, le nouveau projet est présenté en cours de construction :
 
-![projet en cours de construction](img/tuto/2tuto-creer-projet.png)
+<img src="img/tuto/2tuto-creer-projet.png" alt="projet en cours de construction" width="75%" title="projet en cours de construction">
+
 
 A la fin du processus de création, l'icone du projet est modifiée comme suit et devient un lien cliquable :
 
-![projet créé](img/tuto/2tuto-creer-projet-termine.png)
+<img src="img/tuto/2tuto-creer-projet-termine.png" alt="projet terminé" width="75%" title="projet terminé">
+
 
 Au clic sur le projet, on arrive sur la liste des services associés :
-![projet créé](img/tuto/2tuto-acces-services.png)
+<img src="img/tuto/2tuto-acces-services.png" alt="Accès au services" width="75%" title="Accès au services">
 
 Chaque icone permet d'accéder directement aux services de l'offre Cloud π Native directement sur le contexte du projet.
 
 Une entrée dans le menu gauche permet également de voir l'état des services :
 
-![projet créé](img/tuto/etat-services.png)
+<img src="img/tuto/etat-services.png" alt="Etat des services" width="75%" title="Etat des services">
 
 ### Gérer les membres
 
