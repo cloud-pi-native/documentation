@@ -1,6 +1,14 @@
 Retour à [l'accueil](README.md)
 # Tutoriels
 
+## Prise en main de la console
+
+L'offre Cloud π Native est constitué d'un ensemble de services : gestionnaire de sources, outil de construction, gestion de la qaulité et de la sécurité, etc. ces outils interagissent entre eux. Une console permet de piloter l'ensemble de ces outils et est le point d'accès unique pour les clients de l'offre.
+
+L'accès à la console sur l'environnment de pré-production est <https://console.apps.ocp4-8.infocepo.com/>
+
+Le détail de la manipulation de la console est détaillée sur la page [getting started](./getting-started.md)
+
 ## Déployer une application stateless
 
 Tutoriel de déploiement d'un serveur web servant une page html statique.

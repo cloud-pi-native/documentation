@@ -1,56 +1,100 @@
 Retour à [l'accueil](README.md)
 # Getting Started
 
-## Créer un projet
+la prise en main de l'offre Cloud π Native se fait par la console 
 
-Pour commencer à utiliser la plateforme Cloud π Native, il est tout d'abord nécessaire de créer un projet, le projet ici a une composante métier et pourra être composé de différentes briques applicatives.
+## Etape 1 - Accès à la console
 
-Pour créer un projet :
+Une fois sur la console, il faut se connecter en cliquant en haut à droite sur le bouton se connecter :
+![se connecter](../img/tuto/1tuto-connexion.png)
 
-1. [Se connecter](/login) à l'aide de vos identifiants SSO Cloud π Native.
+La création de compte se fait en contactant l'équipe DSO ou en envoyant un mail à l'adresse générique du projet <cloudpinative-relations@interieur.gouv.fr>.
 
-2. Remplir le formulaire de création de projet.
-    - Dans le menu latéral, section `Mes Projets`.
-    - Cliquer sur le bouton `Créer un nouveau projet`.
+## Etape 2 - Mes projets
+
+Une fois connecté sur la console, le menu gauche s'enrichi avec une entrée "Mes Projets" contenant la liste de ses projets.
+![mes projets](../img/tuto/2tuto-mes-projets.png)
+
+Un projet au sens console DSO est un projet applicatif regroupant potentiellement plusieurs composants applicatifs. Un projet est lié à 1 à N dépots de code. Un projet correspondra à un namespace au sens kubernetes / openshift
+
+Cliquez sur le bouton **+ Créer un projet** afin d'ajouter un nouveau projet :
+![créer projets](../img/tuto/2tuto-commander-projet.png)
+
+Sur cet écran il est nécessaire de renseigner :
+ - Nom de l'organisation : correspondant à l'entité administratif de rattachement. A terme, cette liste sera supprimé pour récupérer l'information directement depuis le référentiel utilisateurs.
+ - Nom du projet :  Ce nom servira à créer un groupe dans gitlab de l'offre Cloud π Native et sera une composante du namesapce OpenShift créé.
+
+Valider la saisie en cliquant sur **Commander mon espace projet**
 
 La création d'un projet va lancer le provisionnement des différents services de la plateforme (Gitlab, Vault, Nexus, Quay, Sonarqube, ArgoCD), ce qui signifie principalement la création d'un groupe pour le projet dans chacuns des outils, l'association de droits sur ces groupes, la génération de secrets pour l'automatisation, etc...
 > Cette opération demande d'attendre jusqu'à quelques minutes.
 
+Ainsi, depuis le menu Mes projets, le nouveau projet est présenté en cours de construction :
 
-## Gérer les membres
+![projet en cours de construction](../img/tuto/2tuto-creer-projet.png)
+
+A la fin du processus de création, l'icone du projet est modifiée comme suit et devient un lien cliquable :
+
+![projet créé](../img/tuto/2tuto-creer-projet-termine.png)
+
+Au clic sur le projet, on arrive sur la liste des services associés :
+![projet créé](../img/tuto/2tuto-acces-services.png)
+
+Chaque icone permet d'accéder directement aux services de l'offre Cloud π Native directement sur le contexte du projet.
+
+Une entrée dans le menu gauche permet également de voir l'état des services :
+
+![projet créé](../img/tuto/etat-services.png)
+
+### Gérer les membres
 
 :construction: *Disponible prochainement* :construction: 
 
-## Gérer les environnements
+### Gérer les environnements
 
 :construction: *Disponible prochainement* :construction: 
 
-## Gérer les dépôts de code
+## Etape 3 - Ajouter un dépôt synchronisé
 
-### Ajouter un dépôt
+Une fois que le projet est créé sur la console, il convient d'ajouter des dépôts synchronisés.
 
-Afin que votre code externe soit récupéré par la plateforme pour les divers scans, construction et déploiement, il faut créer un dépôt sur le Gitlab interne et y lier votre dépôt externe.
+En effet, en phase de développement, les équipes projets sont autonomes et travaillent avec leurs outils sans contraintes apportées par l'offre Cloud π Native. La synchronisation des dépôts est le processus qui permet de *copier* les dépôts externes stockés sur github, gitab.com, bitbucket, etc. vers le repo de code de l'offre Cloud π Native. la seule contrainte est que le repo externe soit accessible depuis Internet. Ce repo peut être public ou privé. Pour plus d'information, voir la page dédiée au [repo de code](produits/gitlab.md)
 
-Pour créer un dépôt :
+Cliquez sur le menu gauche **Dépôts synchronisés**
+![depots synchronisés](../img/tuto/3tuto-depots.png)
 
-1. [Se connecter](/login) à l'aide de vos identifiants SSO Cloud π Native.
+Puis sur le bouton **+ Ajouter un nouveau dépôt**
 
-2. Remplir le formulaire de synchronisation des dépôts.
-    - Dans le menu latéral, section `Projets > Mes projets`.
-    - Sélectionner un projet courant.
-    - Dans le menu latéral, section `Projets > Dépôts synchronisés`.
-    - Dans le cas d'un dépôt de code applicatif, générer les fichiers de *gitlab-ci* à l'aide du formulaire dans la console. Le fichier `.gitlab-ci-dso.yml` est à placer à la racine de votre dépôt externe et les `includes` (les autres fichiers `.yml`) sont à placer dans un dossier `includes/` à la racine de votre dépôt externe. Ces fichiers seront utilisés par le Gitlab de Cloud π Native pour effectuer les divers tests, scans et déploiements du projet.
-    - Cliquer sur le bouton `Ajouter un nouveau dépôt`.
+![depots synchronisés](../img/tuto/3tuto-depots-ajouter.png)
+
+Remplir le formulaire de synchronisation des dépôts:
+  - Choisir un nom
+  - Saisir l'URL du repo git distant. Dans le cas d'un repo privé cocher la case et préciser les credentials d'accès
+  - Deux types de repo peuvent être ajouté : 
+    - Un repo applicatif : contenant du code applicatif et qui sera construit afin de créer des images Docker à déployer sur l'infrastructure cible.
+    - Un repo d'infra : contenant les manifests de déploiement ou chart HELM contenant *l'infrastructure as code* du projet à déployer
+
+
+Dans le cas d'un dépôt de code applicatif, générer les fichiers de *gitlab-ci* en cliquant sur le bouton *Fichiers de Gitlab CI*. Le fichier `.gitlab-ci-dso.yml` est à placer à la racine de votre dépôt externe et les `includes` (les autres fichiers `.yml`) sont à placer dans un dossier `includes/` à la racine de votre dépôt externe. Ces fichiers seront utilisés par le Gitlab de Cloud π Native pour effectuer les divers tests, scans et déploiements du projet.
+
+![depots synchronisés](../img/tuto/3tuto-depots-ajouter-gitlab-ci.png)  
+
+Cliquer enfin sur le bouton `Ajouter le dépôt`.
 
 Lorsqu'un dépôt est créé dans la console en tant que `dépôt d'infrastructure`, la plateforme créé automatiquement l'application [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) associée qui permettra le déploiement.
 
-> Des exemples de dépôts sont disponibles dans la sections [tutoriels](/doc/tutorials).
+
+Une fois que le dépôt est correctement ajouté, il apparait avec une icône indiquant son statut :
+
+![depots synchronisés](../img/tuto/3tuto-depots-ajouter-ok.png)
 
 > Cette opération demande d'attendre jusqu'à quelques minutes.
 
-### Paramétrer la synchronisation
+> Des exemples de dépôts sont disponibles dans la sections [tutoriels](/doc/tutorials).
 
-Une fois le dépôt interne à la plateforme créé et lié à un dépôt externe, il sera important de paramétrer la synchronisation entre le dépôt source et son clône.
+## Etape 4 : Paramétrer la synchronisation
+
+Une fois le dépôt interne à la plateforme créé et lié à un dépôt externe, il sera important de paramétrer la synchronisation entre le dépôt source et son clône. La création déclenche une première synchronisation. Il convient maintenant de configurer comment se repo sera synchronisé dans le temps.
 
 Pour paramétrer la synchronisation d'un dépôt :
 

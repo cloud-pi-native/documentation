@@ -11,7 +11,7 @@ Cette section regroupe les questions fréquentes de nos clients
 
 Toutes les images déployées sur l'offre Cloud π Native doivent :
   - Etre construite par l'offre
-  - Faire partie des repo publics autorisés (FIXME : préciser les repos)
+  - Faire partie des repo publics autorisés par exemple Bitnami (règle non encore mise en place)
 
 Afin de construire une image personnalisée, il est nécessaire de créer un Dockerfile dans son repo de sources applicative et d'intégrer la construction de cette image dans l'étape de construction de l'application.
 
@@ -38,16 +38,18 @@ RUN apk upgrade --update-cache --available
 CMD [ "command_to_execute"]
 ```
 
-### Puis-je pousser un binaire non construit par l'offre DSO ?
+### Puis-je pousser directement un binaire non construit par l'offre DSO ?
 
-Non, toutes les images et librairies utilisées sur l'offre Cloud π Native doivent être construites par la chaine DSO ou être disponibles sur les repos publics.
+Toutes les images et librairies utilisées sur l'offre Cloud π Native doivent être construites par la chaine DSO ou être disponibles sur les repos publics dont l'auteur est reconnu et autorisé (par exemple bitnami).
 
 Il n'est pas possible d'uploader un binaire directement sur le gestionnaire d'artefacts (Nexus) en dehors de la chaine de construction DSO.
 
+Ainsi, il est possible d'utiliser une image non construite sur DSO, par exemple, bitnami/postgresql, en revanche il est interdit d'utiliser my-nickname/postgresql ni de faire un docker push d'une image construite sur son poste.
+
 ### Quelles sont les contraintes génériques d'Openshift par rapport à Kubernetes ?
-  - Images rootless
-  - Filesystem en lecture seule
-  - Port d'écoute > 1024
+  - Les images doivent être rootless
+  - Le root filesystem des images doit être en lecture seule à l'exception et seul les répertoire /tmp et /var/tmp sont en écriture 
+  - Les ports d'écoute des PODs doivent être supérieurs à 1024
 
 ## Déploiement
 
