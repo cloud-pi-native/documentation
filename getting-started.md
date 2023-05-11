@@ -6,19 +6,19 @@ la prise en main de l'offre Cloud π Native se fait par la console
 ## Etape 1 - Accès à la console
 
 Une fois sur la console, il faut se connecter en cliquant en haut à droite sur le bouton se connecter :
-![se connecter](../img/tuto/1tuto-connexion.png)
+![se connecter](img/tuto/1tuto-connexion.png)
 
 La création de compte se fait en contactant l'équipe DSO ou en envoyant un mail à l'adresse générique du projet <cloudpinative-relations@interieur.gouv.fr>.
 
 ## Etape 2 - Mes projets
 
 Une fois connecté sur la console, le menu gauche s'enrichi avec une entrée "Mes Projets" contenant la liste de ses projets.
-![mes projets](../img/tuto/2tuto-mes-projets.png)
+![mes projets](img/tuto/2tuto-mes-projets.png)
 
 Un projet au sens console DSO est un projet applicatif regroupant potentiellement plusieurs composants applicatifs. Un projet est lié à 1 à N dépots de code. Un projet correspondra à un namespace au sens kubernetes / openshift
 
 Cliquez sur le bouton **+ Créer un projet** afin d'ajouter un nouveau projet :
-![créer projets](../img/tuto/2tuto-commander-projet.png)
+![créer projets](img/tuto/2tuto-commander-projet.png)
 
 Sur cet écran il est nécessaire de renseigner :
  - Nom de l'organisation : correspondant à l'entité administratif de rattachement. A terme, cette liste sera supprimé pour récupérer l'information directement depuis le référentiel utilisateurs.
@@ -31,20 +31,20 @@ La création d'un projet va lancer le provisionnement des différents services d
 
 Ainsi, depuis le menu Mes projets, le nouveau projet est présenté en cours de construction :
 
-![projet en cours de construction](../img/tuto/2tuto-creer-projet.png)
+![projet en cours de construction](img/tuto/2tuto-creer-projet.png)
 
 A la fin du processus de création, l'icone du projet est modifiée comme suit et devient un lien cliquable :
 
-![projet créé](../img/tuto/2tuto-creer-projet-termine.png)
+![projet créé](img/tuto/2tuto-creer-projet-termine.png)
 
 Au clic sur le projet, on arrive sur la liste des services associés :
-![projet créé](../img/tuto/2tuto-acces-services.png)
+![projet créé](img/tuto/2tuto-acces-services.png)
 
 Chaque icone permet d'accéder directement aux services de l'offre Cloud π Native directement sur le contexte du projet.
 
 Une entrée dans le menu gauche permet également de voir l'état des services :
 
-![projet créé](../img/tuto/etat-services.png)
+![projet créé](img/tuto/etat-services.png)
 
 ### Gérer les membres
 
@@ -61,11 +61,11 @@ Une fois que le projet est créé sur la console, il convient d'ajouter des dép
 En effet, en phase de développement, les équipes projets sont autonomes et travaillent avec leurs outils sans contraintes apportées par l'offre Cloud π Native. La synchronisation des dépôts est le processus qui permet de *copier* les dépôts externes stockés sur github, gitab.com, bitbucket, etc. vers le repo de code de l'offre Cloud π Native. la seule contrainte est que le repo externe soit accessible depuis Internet. Ce repo peut être public ou privé. Pour plus d'information, voir la page dédiée au [repo de code](produits/gitlab.md)
 
 Cliquez sur le menu gauche **Dépôts synchronisés**
-![depots synchronisés](../img/tuto/3tuto-depots.png)
+![depots synchronisés](img/tuto/3tuto-depots.png)
 
 Puis sur le bouton **+ Ajouter un nouveau dépôt**
 
-![depots synchronisés](../img/tuto/3tuto-depots-ajouter.png)
+![depots synchronisés](img/tuto/3tuto-depots-ajouter.png)
 
 Remplir le formulaire de synchronisation des dépôts:
   - Choisir un nom
@@ -77,7 +77,7 @@ Remplir le formulaire de synchronisation des dépôts:
 
 Dans le cas d'un dépôt de code applicatif, générer les fichiers de *gitlab-ci* en cliquant sur le bouton *Fichiers de Gitlab CI*. Le fichier `.gitlab-ci-dso.yml` est à placer à la racine de votre dépôt externe et les `includes` (les autres fichiers `.yml`) sont à placer dans un dossier `includes/` à la racine de votre dépôt externe. Ces fichiers seront utilisés par le Gitlab de Cloud π Native pour effectuer les divers tests, scans et déploiements du projet.
 
-![depots synchronisés](../img/tuto/3tuto-depots-ajouter-gitlab-ci.png)  
+![depots synchronisés](img/tuto/3tuto-depots-ajouter-gitlab-ci.png)  
 
 Cliquer enfin sur le bouton `Ajouter le dépôt`.
 
@@ -86,7 +86,7 @@ Lorsqu'un dépôt est créé dans la console en tant que `dépôt d'infrastructu
 
 Une fois que le dépôt est correctement ajouté, il apparait avec une icône indiquant son statut :
 
-![depots synchronisés](../img/tuto/3tuto-depots-ajouter-ok.png)
+![depots synchronisés](img/tuto/3tuto-depots-ajouter-ok.png)
 
 > Cette opération demande d'attendre jusqu'à quelques minutes.
 
