@@ -63,11 +63,11 @@ Une fois que le projet est créé sur la console, il convient d'ajouter des dép
 En effet, en phase de développement, les équipes projets sont autonomes et travaillent avec leurs outils sans contraintes apportées par l'offre Cloud π Native. La synchronisation des dépôts est le processus qui permet de *copier* les dépôts externes stockés sur github, gitab.com, bitbucket, etc. vers le repo de code de l'offre Cloud π Native. la seule contrainte est que le repo externe soit accessible depuis Internet. Ce repo peut être public ou privé. Pour plus d'information, voir la page dédiée au [repo de code](produits/gitlab.md)
 
 Cliquez sur le menu gauche **Dépôts synchronisés**
-![depots synchronisés](img/tuto/3tuto-depots.png)
+<img src="img/tuto/3tuto-depots.png" alt="Dépôts synchronisés" width="75%" title="Dépôts synchronisés">
 
 Puis sur le bouton **+ Ajouter un nouveau dépôt**
 
-![depots synchronisés](img/tuto/3tuto-depots-ajouter.png)
+<img src="img/tuto/3tuto-depots-ajouter.png" alt="Dépôts synchronisés" width="75%" title="Dépôts synchronisés">
 
 Remplir le formulaire de synchronisation des dépôts:
   - Choisir un nom
@@ -79,7 +79,7 @@ Remplir le formulaire de synchronisation des dépôts:
 
 Dans le cas d'un dépôt de code applicatif, générer les fichiers de *gitlab-ci* en cliquant sur le bouton *Fichiers de Gitlab CI*. Le fichier `.gitlab-ci-dso.yml` est à placer à la racine de votre dépôt externe et les `includes` (les autres fichiers `.yml`) sont à placer dans un dossier `includes/` à la racine de votre dépôt externe. Ces fichiers seront utilisés par le Gitlab de Cloud π Native pour effectuer les divers tests, scans et déploiements du projet.
 
-![depots synchronisés](img/tuto/3tuto-depots-ajouter-gitlab-ci.png)  
+<img src="img/tuto/3tuto-depots-ajouter-gitlab-ci.png)" alt="Gitlab-CI" width="75%" title="Gitlab-CI">
 
 Cliquer enfin sur le bouton `Ajouter le dépôt`.
 
@@ -88,7 +88,7 @@ Lorsqu'un dépôt est créé dans la console en tant que `dépôt d'infrastructu
 
 Une fois que le dépôt est correctement ajouté, il apparait avec une icône indiquant son statut :
 
-![depots synchronisés](img/tuto/3tuto-depots-ajouter-ok.png)
+<img src="img/tuto/3tuto-depots-ajouter-ok.png)" alt="depots synchronisés ok" width="75%" title="depots synchronisés ok">
 
 > Cette opération demande d'attendre jusqu'à quelques minutes.
 
