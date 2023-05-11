@@ -92,7 +92,7 @@ Une fois que le dépôt est correctement ajouté, il apparait avec une icône in
 
 > Cette opération demande d'attendre jusqu'à quelques minutes.
 
-> Des exemples de dépôts sont disponibles dans la sections [tutoriels](/doc/tutorials).
+> Des exemples de dépôts sont disponibles dans la sections [tutoriels](tutorials.md).
 
 ## Etape 4 : Paramétrer la synchronisation
 
