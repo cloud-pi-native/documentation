@@ -18,7 +18,7 @@ Une fois connecté sur la console, le menu gauche s'enrichi avec une entrée "Me
 Un projet au sens console DSO est un projet applicatif regroupant potentiellement plusieurs composants applicatifs. Un projet est lié à 1 à N dépots de code. Un projet correspondra à un namespace au sens kubernetes / openshift
 
 Cliquez sur le bouton **+ Créer un projet** afin d'ajouter un nouveau projet :
-![créer projets](img/tuto/2tuto-commander-projet.png)
+<img src="img/tuto/2tuto-commander-projet.png" alt="créer projets" width="50%" title="créer projets">
 
 Sur cet écran il est nécessaire de renseigner :
  - Nom de l'organisation : correspondant à l'entité administratif de rattachement. A terme, cette liste sera supprimé pour récupérer l'information directement depuis le référentiel utilisateurs.
