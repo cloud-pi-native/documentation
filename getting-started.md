@@ -36,7 +36,7 @@ Ainsi, depuis le menu Mes projets, le nouveau projet est présenté en cours de 
 
 A la fin du processus de création, l'icone du projet est modifiée comme suit et devient un lien cliquable :
 
-<img src="img/tuto/2tuto-creer-projet-termine.png" alt="projet terminé" width="75%" title="projet terminé">
+<img src="img/tuto/2tuto-creer-projet-termine.png" alt="projet terminé" width="25%" title="projet terminé">
 
 
 Au clic sur le projet, on arrive sur la liste des services associés :
