@@ -14,7 +14,7 @@ La création de compte se fait en contactant l'équipe DSO ou en envoyant un mai
 
 Une fois connecté sur la console, le menu gauche s'enrichi avec une entrée "Mes Projets" contenant la liste de ses projets.
 ![mes projets](img/tuto/2tuto-mes-projets.png)
-<img src="/tuto/2tuto-mes-projets.png" alt="mes projets" width="50px" title="mes projets">
+<img src="img/tuto/2tuto-mes-projets.png" alt="mes projets" width="50px" title="mes projets">
 
 Un projet au sens console DSO est un projet applicatif regroupant potentiellement plusieurs composants applicatifs. Un projet est lié à 1 à N dépots de code. Un projet correspondra à un namespace au sens kubernetes / openshift
 
