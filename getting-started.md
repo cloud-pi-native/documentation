@@ -68,7 +68,6 @@ Puis sur le bouton **+ Ajouter un nouveau dépôt**
 
 <img src="img/tuto/3tuto-depots.png" alt="Dépôts synchronisés" width="25%" title="Dépôts synchronisés">
 
-<img src="img/tuto/3tuto-depots-ajouter.png" alt="Dépôts synchronisés" width="75%" title="Dépôts synchronisés">
 
 Remplir le formulaire de synchronisation des dépôts:
   - Choisir un nom
@@ -76,6 +75,8 @@ Remplir le formulaire de synchronisation des dépôts:
   - Deux types de repo peuvent être ajouté : 
     - Un repo applicatif : contenant du code applicatif et qui sera construit afin de créer des images Docker à déployer sur l'infrastructure cible.
     - Un repo d'infra : contenant les manifests de déploiement ou chart HELM contenant *l'infrastructure as code* du projet à déployer
+
+<img src="img/tuto/3tuto-depots-ajouter.png" alt="Dépôts synchronisés" width="75%" title="Dépôts synchronisés">
 
 
 Dans le cas d'un dépôt de code applicatif, générer les fichiers de *gitlab-ci* en cliquant sur le bouton *Fichiers de Gitlab CI*. Le fichier `.gitlab-ci-dso.yml` est à placer à la racine de votre dépôt externe et les `includes` (les autres fichiers `.yml`) sont à placer dans un dossier `includes/` à la racine de votre dépôt externe. Ces fichiers seront utilisés par le Gitlab de Cloud π Native pour effectuer les divers tests, scans et déploiements du projet.
