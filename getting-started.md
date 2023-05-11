@@ -88,7 +88,7 @@ Lorsqu'un dépôt est créé dans la console en tant que `dépôt d'infrastructu
 
 Une fois que le dépôt est correctement ajouté, il apparait avec une icône indiquant son statut :
 
-<img src="img/tuto/3tuto-depots-ajouter-ok.png" alt="depots synchronisés ok" width="75%" title="depots synchronisés ok">
+<img src="img/tuto/3tuto-depots-ajouter-ok.png" alt="depots synchronisés ok" width="25%" title="depots synchronisés ok">
 
 > Cette opération demande d'attendre jusqu'à quelques minutes.
 
