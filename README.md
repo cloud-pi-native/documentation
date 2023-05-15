@@ -96,3 +96,8 @@ Voici les grandes fonctionnalités prévus dans les prochaines semaines :
 
 Pour toute information ou demande pour rejoindre la betatest, veuillez nous contacter à l'adresse suivante : <cloudpinative-relations@interieur.gouv.fr>.
 Si vous faites déjà parti des beta testeurs et que vous souhaitez poser des questions ou avoir de l'accompagnement, veuillez nous contacter directement via le serveur Mattermost prévu à cet effet (si vous n'avez pas été ajouté au serveur Mattermost, veuillez contacter l'adresse mail précédente).
+
+## Contribuer
+
+L'offre Cloud π Native s'améliore grâce aux retours de nos utilisateurs, n'hésitez pas à contribuer, notamment en nous faisant des retours sur la documentation. Le détail pour contribuer est [ici](CONTRIBUTING.md)
+
