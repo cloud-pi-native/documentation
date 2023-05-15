@@ -96,6 +96,32 @@ Une fois que le dépôt est correctement ajouté, il apparait avec une icône in
 
 > Des exemples de dépôts sont disponibles dans la sections [tutoriels](tutorials.md).
 
+
+### Cas des repos d'infra
+
+La création de repo d'infra déclenche la création d'une application dans ArgoCD afin de déployer l'application. Ainsi, une fois qu'un repo d'infra est synchronisé, il convient de se rendre sur le service ArgoCD depuis la liste des services :
+
+<img src="img/tuto/4argocd.png" alt="ArgoCD" width="75%" title="ArgoCD">
+
+Cliquez sur le projet nouvellement créé (il est possible filtrer dans le cas où plusieurs projets sont créé pour le projet)
+
+Il est possible que le projet ne soit pas correctement déployé, dans ce cas, allez dans le menu en haut et cliquez sur App detail :
+
+<img src="img/tuto/4argocd-menus.png" alt="ArgoCD-menus" width="75%" title="ArgoCD-menus">
+
+Sur l'écran qui s'affiche, cliquez sur le bouton *EDIT* et adaptez les valeurs renseignées par defaut par la console
+
+<img src="img/tuto/4argocd-app-details.png" alt="ArgoCD-app-details" width="75%" title="ArgoCD application details">
+
+Notamment :
+  - TARGET REVISION : correspond à la branche du repo d'infra à déployer, par defaut il point sur HEAD
+  - Dans le cas d'un déploiement de type HELM, modifier le PATH point pointer vers la racine en mettant un point dans le champs : . ou préciser le répertoire correspondant à la racine du chart
+  - Dans l'onglet *PARAMETERS*, il est possible de surcharger certaines valeurs du fichier values (mais il est préférable de modifier le fichier values directement) 
+
+Finir la saisie en cliquant sur le bouton *SAVE*
+
+Le déploiement se fait automatiquement par ArgoCD, mais il est possible de forcer la synchronisation avec le repo sur gitlab Cloud π Native en cliquant sur le bouton *SYNC* et forcer le rafraichissement des objets créés en cliquant sur le bouton *REFRESH*
+
 ## Etape 4 : Paramétrer la synchronisation
 
 Une fois le dépôt interne à la plateforme créé et lié à un dépôt externe, il sera important de paramétrer la synchronisation entre le dépôt source et son clône. La création déclenche une première synchronisation. Il convient maintenant de configurer comment se repo sera synchronisé dans le temps.
