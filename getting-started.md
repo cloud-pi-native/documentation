@@ -107,20 +107,27 @@ Cliquez sur le projet nouvellement créé (il est possible filtrer dans le cas o
 
 Il est possible que le projet ne soit pas correctement déployé, dans ce cas, allez dans le menu en haut et cliquez sur App detail :
 
-<img src="img/tuto/4argocd-menus.png" alt="ArgoCD-menus" width="75%" title="ArgoCD-menus">
+<img src="img/tuto/4argocd-menus-bouton.png" alt="ArgoCD-menus" width="75%" title="ArgoCD-menus">
 
 Sur l'écran qui s'affiche, cliquez sur le bouton *EDIT* et adaptez les valeurs renseignées par defaut par la console
 
 <img src="img/tuto/4argocd-app-details.png" alt="ArgoCD-app-details" width="75%" title="ArgoCD application details">
 
 Notamment :
-  - TARGET REVISION : correspond à la branche du repo d'infra à déployer, par defaut il point sur HEAD
-  - Dans le cas d'un déploiement de type HELM, modifier le PATH point pointer vers la racine en mettant un point dans le champs : . ou préciser le répertoire correspondant à la racine du chart
+  - TARGET REVISION : correspond à la branche du repo d'infra à déployer, par defaut il point sur HEAD (master). A adapter si le repo utilise une branche
+  - PATH qui est positionné à base par defaut et qui correspond à un déploiement de type fichiers de manifests ou kustmize. Dans le cas d'un déploiement de type HELM, modifier le PATH point pointer vers la racine en mettant un point dans le champs : . ou préciser le répertoire correspondant à la racine du chart
   - Dans l'onglet *PARAMETERS*, il est possible de surcharger certaines valeurs du fichier values (mais il est préférable de modifier le fichier values directement) 
 
 Finir la saisie en cliquant sur le bouton *SAVE*
 
-Le déploiement se fait automatiquement par ArgoCD, mais il est possible de forcer la synchronisation avec le repo sur gitlab Cloud π Native en cliquant sur le bouton *SYNC* et forcer le rafraichissement des objets créés en cliquant sur le bouton *REFRESH*
+Le déploiement se fait automatiquement par ArgoCD, mais il est possible de forcer la synchronisation avec le repo sur gitlab Cloud π Native en cliquant sur les boutons :
+  - *REFRESH* pour forcer la synchronisation depuis le repo gitlab de l'offre Cloud π Native
+  - *SYNC* pour forcer le rafraichissement entre l'état défini par git et l'état réel des objets créés par ArgoCD.
+
+Une fois le déploiement correctement effectué le status de l'application ArgoCD doit correspondre à :
+
+<img src="img/tuto/4argocd-menus.png" alt="ArgoCD-menus" width="75%" title="ArgoCD-menus">
+
 
 ## Etape 4 : Paramétrer la synchronisation
 
