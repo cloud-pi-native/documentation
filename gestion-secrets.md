@@ -8,7 +8,7 @@ Une première solution de mise en oeuvre avec [SOPS](https://github.com/mozilla/
 
 Pour cela des paires de clés au format age ont été générées sur les différents clusters dont voici les clés publiques:
  * Cluster 4-7 : age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm
- * Cluster 4-8 : TO BE DONE
+ * Cluster 4-8 : age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
  * Cluster 4-5 : TO BE DONE
 
 Afin de chiffrer un secret, il faut commencer par créer un objet kubernetes de type SopsSecret par exemple :
