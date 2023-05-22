@@ -27,8 +27,8 @@ Lorsque que l'équipe projet est prête avec un première base de code fonctionn
 
 La séquence d'accès typique est la suivante  :
 
-  - Effectuer une demande d'accès au service via le formulaire suivant : <https://www.demarches-simplifiees.fr/commencer/cloud-pi-native>, nécessite un correspondant référent étatique.
-  - Après acceptation du dossier (acceptation des cgus et conditions financières), enrollement du projet dans la console Cloud pi Native, qui instancie pour le projet les ressources nécessaires (gitlab, vault, registry, etc...) dans la chaine secondaire, cf. plus bas;
+  - Effectuer une demande d'accès au service via le formulaire suivant : <https://www.demarches-simplifiees.fr/commencer/cloud-pi-native> par un correspondant étatique ayant la compétence pour accepter les conditions CGU et fournir les données d'imputation budgétaire (UO).
+  - Après acceptation du dossier, l'enrollement du projet est effectuté dans la console Cloud pi Native, et l'équipe projet est en charge d'instancier les ressources nécessaires (gitlab, vault, registry, etc...) dans la chaine secondaire, cf. plus bas ;
   - Recopie des repository de code et de déploiement;
   - Mise en place du pipeline "DevSecOps" au sein de la chaine secondaire. L'application reste maitre de son pipeline et de sa surveillance;
   - Mise en place du/des namespaces dans le cluster cible ainsi des secrets nécessaire au fonctionnement et du provisionning gitops de l'application (argoCD);
