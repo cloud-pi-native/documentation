@@ -21,7 +21,7 @@ La chaine secondaire est également en charge de mesurer la qualité du code et 
 
 L'usage de standards industriels largement distribués tel que kubernetes et Gitops et la sécabilité de l'offre, permettent un transfert facilité depuis et vers d'autres solutions d'hébergement kubernetes tel que les Clouds Publics.
 
-Le cadre interministériel d'utilisaton de l'offre et le cadre de norme ainsi que le cadre de norme est disponible à l'emplacement suivant : <https://github.com/dnum-mi/CCT-Cloud-Native>
+Le cadre interministériel d'utilisaton de l'offre est disponible à l'emplacement suivant : <https://github.com/dnum-mi/CCT-Cloud-Native>
 
 Lorsque que l'équipe projet est prête avec un première base de code fonctionnelle, il est possible de l'intégrer sur l'offre Cloud π Native.
 
