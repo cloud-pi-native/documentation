@@ -154,6 +154,21 @@ spec:
               emptyDir: {}
 ```
 
+### Comment tester mon container en lecture seul ?
+
+Afin de simuler la contraite de lecture seul d'openshift sur le container, il est possible de lancer le container en mode **read_only** via la commande docker suivantes:
+```
+docker run — read-only [image-name]
+```
+
+ou via docker compose avec le yaml suivant :
+```
+version: "3.9"
+services:
+  example:
+    image: [image-name]
+    read_only: true
+```
 ### Comment puis-je accéder aux logs de mon application ?
 
 ### Comment puis-je accéder aux métriques de mon application ?
