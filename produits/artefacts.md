@@ -1,4 +1,4 @@
-# Artefects 
+# Artefacts 
 
 ## Nexus
 
