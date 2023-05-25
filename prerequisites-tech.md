@@ -2,13 +2,13 @@ Retour à [l'accueil](README.md)
 
 # Prérequis
 
-## Critère d'éligibilité Cloud π Native
+## Critères d'éligibilité Cloud π Native
 
-Voici des critère permettant de déterminer si votre  application est éligible à l'offre Cloud π Native. L'équipe projet Cloud π Native vous accompagne sur cette étape afin de trouver les solutions d'adaptation de vos application:
-  - Les applications doivent être délivrée sous forme de containers et donc sur une suche d'OS Linux. Les applications nécessitant un OS Windows ne sont pas éligibles à l'offre.
-  - Les applications doivent être **sans état** et partir  du principe qu'un composant applicatif (pod) peut être détruit à tout moment. Le stockage persistent de données est portée **principalement** par les bases de données. En cas de maintient de session applicative, un déport vers un composant de type Redis est nécessaire.
-  - La configuration de l'application se fait par son environnement (principalement par des variables d'environnements). Seuls ces éléments change entre deux environnements : il s'agit de la même image déployée avec un configuration différente (par de reconstruction pour passer d'un environnement à un autre) 
-  - Les images déployée doivent être **rootless**
+Voici des critères permettant de déterminer si votre application est éligible à l'offre Cloud π Native. L'équipe projet Cloud π Native vous accompagne sur cette étape afin de trouver les solutions d'adaptation de vos application:
+  - Les applications doivent être délivrées sous forme de containers et donc sur une suche d'OS Linux. Les applications nécessitant un OS Windows ne sont pas éligibles à l'offre.
+  - Les applications doivent être **sans état** (`stateless`) et partir  du principe qu'un composant applicatif (`pod`) peut être détruit à tout moment. Le stockage persistant de données est porté **principalement** par les bases de données. En cas de maintien de session applicative, un déport vers un composant de type Redis est nécessaire.
+  - La configuration de l'application se fait par son environnement (principalement par des variables d'environnements). Seuls ces éléments changent entre deux environnements : il s'agit de la même image déployée avec un configuration différente (par de reconstruction pour passer d'un environnement à un autre) 
+  - Les images déployées doivent être **rootless**
   - Le FileSystem des images doit être en lecture seule
   - Afin d'accéder aux composants externes à l'application déployée sur Cloud π Native, par exemple des API, des demandes d'ouvertures de flux doivent être explicitement réalisée (voir la procédure TODO) 
   - Vérifier les contraintes de nom DNS : les applications doivent-elles obligatoirement être en *.gouv.fr ou *.interieur.gouv.fr ?
@@ -32,19 +32,19 @@ Une application Cloud Native doit respecter au maximum les [Twelve-Factor](https
 
 1. Base de code
 
-    Le code de l'application et de déploiement doit etre versionné dans un repo de source de type Git (Public/Privée) accessible depuis internet.
+    Le code de l'application et de déploiement doit etre versionné dans un repo de source de type Git (Public/Privé) accessible depuis internet.
    
 2. Dépendances
     
-    __TOUTES__ dépendances necessaires à la constuction de l'application (Libraries,Images, ...) doivent faire parti des repo standard (Maven,Composer,Node, ...) ou reconstruite par l'offre et déposée dans le gestionnaire d'artefact de celle-ci.
+    __TOUTES__ les dépendances necessaires à la constuction de l'application (Libraries,Images, ...) doivent faire partie des repos standard (Maven,Composer,Node, ...) ou reconstruite par l'offre et déposée dans le gestionnaire d'artefact de celle-ci.
 
 3. Configuration / Service Externe
 
-    __TOUTES__ la configuration applicative pouvant être amenée a être modifié (Service Externe,Port, ...) doit pouvoir être injecté par des variables d'environnement au runtime ou via un fichier de configuration dynamique via une ConfigMap
+    __TOUTE__ la configuration applicative pouvant être amenée a être modifiée (Service Externe,Port, ...) doit pouvoir être injectée par des variables d'environnement au runtime ou via un fichier de configuration dynamique via une ConfigMap
 
 4. Port
 
-    Afin de respecter les préconisation de sécurité d'[Openshift](https://docs.openshift.com/container-platform/4.12/openshift_images/create-images.html), les applications déployées doivent écouter sur des ports > 1024
+    Afin de respecter les préconisations de sécurité d'[Openshift](https://docs.openshift.com/container-platform/4.12/openshift_images/create-images.html), les applications déployées doivent écouter sur des ports > 1024
 
 5. Logs
     
@@ -54,25 +54,25 @@ Une application Cloud Native doit respecter au maximum les [Twelve-Factor](https
 
 6. Processus
 
-    Les applications doivent être __STATELESS__, si des données de session/cache doivent être utilisé et partagé par l'application alors elles doivent faire l'objet d'un service externe prévus à cet effet (Redis, ...)
+    Les applications doivent être __STATELESS__, si des données de session/cache doivent être utilisées et partagées par l'application alors elles doivent faire l'objet d'un service externe prévus à cet effet (Redis, ...)
    
 7. Processus d’administration
 
-    Les opérations d'administrations doivent être faites via des initContainer (Init/Migration bdd, ...) ou des CronJob (Backup bdd, ...) [FAQ](/faq)
+    Les opérations d'administrations doivent être faites via des `initContainer` (Init/Migration bdd, ...) ou des `CronJob` (Backup bdd, ...) [FAQ](/faq)
 
-### Architectures
+### Architecture
 
 L'application déployée doit être conteneurisée (sous la forme de un ou plusieurs conteneurs).
   - Les __Dockerfiles__ doivent être dans le dépôt pour permettre à la chaine de reconstruire l'application.
-  - Les images de bases des __Dockerfiles__ doivent être accessibles publiquement ou reconstuire par l'offre
+  - Les images de bases des __Dockerfiles__ doivent être accessibles publiquement ou reconstuites par l'offre
   - Les images doivent être __rootless__, l'utilisateur qui lance le processus au sein du conteneur ne doit pas être `root` (cf. [liens utiles](/doc/utils) pour en apprendre plus sur le concept de __rootless__ et les spécificités d'Openshift).
   - L'utilisateur lançant le processus dans le conteneur doit avoir les droits adéquats en lecture / écriture sur le système de fichiers si l'application doit manipuler ce dernier.
   - Des sondes de ["Readiness"/"Liveness"](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) doivent être implémentées
   - Des ["Limits/Requests"](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) doivent etre mise en place
 
-### Déployement
+### Déploiement
 
-L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code__, pour ce faire 2 solution s'offrent aux utilisateurs.
+L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code__, pour ce faire 2 solutions s'offrent aux utilisateurs.
  - Utiliser des manifestes [kubernetes](https://kubernetes.io/) avec Kustomize pour variabliser vos manifestes (cf. [tutoriels](/doc/tutorials))
  - Utiliser des charts [helm](https://helm.sh/) (cf. [tutoriels](/doc/tutorials) pour avoir des exemples de fichiers).
 
