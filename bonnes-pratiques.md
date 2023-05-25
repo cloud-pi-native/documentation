@@ -24,7 +24,7 @@ Une application Cloud Native doit respecter au maximum les [Twelve-Factor](https
 
 5. Logs
     
-    L'application __NE DOIT PAS__ écrire dans un fichier de logs spécifique mais écrire l'ensemble de ces logs dans la sortie standards (stdout) au format GELF.
+    L'application __NE DOIT PAS__ écrire dans un fichier de logs spécifique mais écrire l'ensemble de ces logs dans la sortie standards (stdout) au format GELF ou à defaut JSON.
     
     Ceux-ci seront accessible via l'offre de supervision [FAQ](/faq)
 
