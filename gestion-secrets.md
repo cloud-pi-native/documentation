@@ -7,8 +7,8 @@ Le déploiement applicatif suit le principe gitOps et donc de "pousser" l'ensemb
 Une première solution de mise en oeuvre avec [SOPS](https://github.com/mozilla/sops) est proposée. Ainsi, sur ce principe le secret est toujours poussé sur un repo git mais chiffré par une clé asymétrique dont la clé privée n'est connue que du Cluster Openshift et la clé publique accessible à tous les projets.
 
 Pour cela des paires de clés au format age ont été générées sur les différents clusters dont voici les clés publiques:
- * Cluster 4-7 : age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm
- * Cluster 4-8 : TO BE DONE
+ * Cluster 4-7 : age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
+ * Cluster 4-8 : age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
  * Cluster 4-5 : TO BE DONE
 
 Afin de chiffrer un secret, il faut commencer par créer un objet kubernetes de type SopsSecret par exemple :
@@ -42,7 +42,7 @@ Ce fichier **ne doit pas** être commité et envoyé sur un repo git et rester u
 Il convient donc de chiffrer ce fichier via SOPS avec la clé publique correspondant à l'environnement. Par exemple sur l'environnement 4 7 :
 
 ```bash
-sops -e --age age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm6ekqemjhn3 --encrypted-suffix Templates secret.sops.yaml > secret.sops.enc.yaml
+sops -e --age age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n --encrypted-suffix Templates secret.sops.yaml > secret.sops.enc.yaml
 ```
 
 Attention, le fichier chiffré doit conserver l'extension .yaml
@@ -78,7 +78,7 @@ sops:
     azure_kv: []
     hc_vault: []
     age:
-        - recipient: age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm6ekqemjhn3
+        - recipient: age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
             YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTZFJGdkRzeVJFdDVUVjVS
@@ -141,7 +141,7 @@ Il sera possible de définir une **encrypted_regex** qui défini le regex patter
 creation_rules:
   - path_regex: .*newsecret.sops.yaml.*
     encrypted_regex: "^.*password.*$"
-    age: age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm6ekqemjhn3
+    age: age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
 ```
 
 Je chiffre mon secret
@@ -169,7 +169,7 @@ sops:
     azure_kv: []
     hc_vault: []
     age:
-        - recipient: age1v34shlqv52vggpp54e3fn93rna2wek84s40lkv6wlzjun5xm6ekqemjhn3
+        - recipient: age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
             YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZU3d0Z2N6QytuaHZWTXBm
