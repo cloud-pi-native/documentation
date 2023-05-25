@@ -17,28 +17,28 @@ La philosophie de l'offre est de créer une chaine collaborative étendue entre 
  - un socle d'intégration à la main des développeurs, appellée chaine primaire.
  - un service côté infrastructure étatique effectuant la recompilation du code et l'automatisation des déploiement, appellée chaine secondaire. 
  
-La chaine secondaire est également en charge de mesurer la qualité du code et la conduite d'audit automatisés à chaque build/déploiement contribuant à l'homologation en continue de l'application.
+La chaine secondaire est également en charge de mesurer la qualité du code et la conduite d'audits automatisés à chaque build/déploiement contribuant à l'homologation en continu de l'application.
 
-L'usage de standards industriels largement distribués tel que kubernetes et Gitops et la sécabilité de l'offre, permettent un transfert facilité depuis et vers d'autres solutions d'hébergement kubernetes tel que les Clouds Publics.
+L'usage de standards industriels largement distribués tel que kubernetes et Gitops et la sécabilité de l'offre, permettent un transfert facilité depuis et vers d'autres solutions d'hébergement kubernetes telles que les Clouds Publics.
 
 Le cadre interministériel d'utilisaton de l'offre est disponible à l'emplacement suivant : <https://github.com/dnum-mi/CCT-Cloud-Native>
 
 Lorsque que l'équipe projet est prête avec un première base de code fonctionnelle, il est possible de l'intégrer sur l'offre Cloud π Native.
 
-La séquence d'accès typique est la suivante  :
+La séquence d'accès typique est la suivante :
 
   - Effectuer une demande d'accès au service via le formulaire suivant : <https://www.demarches-simplifiees.fr/commencer/cloud-pi-native> par un correspondant étatique ayant la compétence pour accepter les conditions CGU et fournir les données d'imputation budgétaire (UO).
   - Après acceptation du dossier, l'enrollement du projet est effectuté dans la console Cloud pi Native, et l'équipe projet est en charge d'instancier les ressources nécessaires (gitlab, vault, registry, etc...) dans la chaine secondaire et de configurer son projet  ;
   - Recopie des repository de code et de déploiement;
-  - Mise en place du pipeline "DevSecOps" au sein de la chaine secondaire. L'application reste maitre de son pipeline et de sa surveillance;
-  - Mise en place du/des namespaces dans le cluster cible ainsi des secrets nécessaire au fonctionnement et du provisionning gitops de l'application (argoCD);
+  - Mise en place du pipeline "DevSecOps" au sein de la chaine secondaire. L'application reste maître de son pipeline et de sa surveillance;
+  - Mise en place du/des namespaces dans le cluster cible ainsi des secrets nécessaires au fonctionnement et du provisionning gitops de l'application (argoCD);
   - Provisionning des ressources d'infrastructure additionnelles ( certificats, ouverture de fluxs, bucket S3, etc...). Cette étape nécessite l'intervention des équipes d'infrastructure Miom ( ou de l'hébergeur choisis) & du ministère cible. (automatisation progressive en cours)
   - Construction des artefacts sur l'offre Cloud π Native;
   - Analyse de qualité et de la sécurité;
   - Construction des images de conteneurs;
   - Provisionning de l'application dans le cluster (l'application est tirée via GitOps).
 
-Enfin, déploiement s'effecture sur différentes cibles d'hébergement  possibles :
+Enfin, le déploiement s'effectue sur différentes cibles d'hébergement possibles :
 
  - Un socle kubernetes/Openshift jusqu'au niveau DR sur les environnements du ministère;
  - Un cluster kubernetes directement gérés par l'équipe client par exemple chez un Cloud Service Provider.
@@ -72,7 +72,7 @@ L'offre Cloud π Native s'appuie sur l'hébergement Cloud du ministère. Les gra
   - Le Cloud pour assurer le fonctionnement et la sécurisation de l'offre DevSecOps secondaire ( et le fonctionnement en production des application )
   - Outils de construction applicative (Intégration continue) permettant de construire un package applicatif à partir des sources
   - Outils de déploiement (Déploiement continue) permettant de déployer / mettre à jour une application sur les différents environnements de l'offre
-  - Les applications qui sont déployées sur l'offre. Chacune de ses applications peuvent également avoir un niveau de criticité différent (par exemple l'environnement de production a un besoin de SLA plus fort que l'environnement de recette)
+  - Les applications qui sont déployées sur l'offre. Chacune de ces applications peut également avoir un niveau de criticité différent (par exemple l'environnement de production a un besoin de SLA plus fort que l'environnement de recette)
 
 | Service        | DIMA*           |        PDMA**
 | -------------- | --------------- | ------------------------ |
@@ -82,22 +82,22 @@ L'offre Cloud π Native s'appuie sur l'hébergement Cloud du ministère. Les gra
 *DIMA : Durée d'interruption maximale autorisée (en heures ouvrés)
 **PDMA : Perte de données maximale admissible (en heures ouvrés)
 
-Note : le SLA du cloud PI pour le fonctionnement en production des applications est de 99,9%, pour plus de détail en détail, se référer aux CGU de l'offre d'hébergement Cloud PI.
+Note : le SLA du cloud PI pour le fonctionnement en production des applications est de 99,9%, pour plus de détail, se référer aux CGU de l'offre d'hébergement Cloud PI.
 
-## Accompagnement  (WIP)
+## Accompagnement (WIP)
 
-Un volet [accompagnement](accompagnement.md) intial des projets directement par les équipes de l'offre Cloud π Native permet d'utiliser l'offre dans des conditions optimale. Cet accompagnement fait partie du parcours technique d'embarquement sur l'offre Cloud π Native.
+Un volet [accompagnement](accompagnement.md) intial des projets directement par les équipes de l'offre Cloud π Native permet d'utiliser l'offre dans des conditions optimales. Cet accompagnement fait partie du parcours technique d'embarquement sur l'offre Cloud π Native.
 
 Elle s'articule dans une offre à 3 niveaux :
  - Démarche autonome ( kit d'autoformation, tutoriels, etc... )
  - Démarche d'accompagnement à l'initialisation ( "Service Team" )
 - Formation et certification d'acteurs externes ( offre en cours d'élaboration )
 
-Les ressources d'accompagnement étant limité, l'embarquement est conditionnées à des prérequis techniques et ou organisationnel  [prérequis](prerequisites.md) d'embarquer sur l'offre Cloud π Native de façon sereine et optimale.
+Les ressources d'accompagnement étant limitées, l'embarquement est conditionné à des prérequis techniques et ou organisationnels [prérequis](prerequisites.md) pour embarquer sur l'offre Cloud π Native de façon sereine et optimale.
 
-Typiquement l'équipe doit être dans un parcours de monter en compétence à l'agilité et à la conteneurisation/kubernetes.
+Typiquement l'équipe doit être dans un parcours de montée en compétence à l'agilité et à la conteneurisation/kubernetes.
 
-## Parcours techniques
+## Parcours technique
 
 Un parcours technique d'apprentissage permettant de valider les prérequis et d'intégrer les bonnes pratiques permet à nos clients d'appréhender l'offre Cloud π Native. 
 
