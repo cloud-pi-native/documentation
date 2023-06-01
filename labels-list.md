@@ -45,7 +45,6 @@ Component:
     - java
     - 
 
-
  2. database: 
     - postgres
     - mariadb
