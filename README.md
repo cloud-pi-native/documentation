@@ -97,7 +97,7 @@ Les ressources d'accompagnement étant limitées, l'embarquement est conditionn�
 
 Typiquement l'équipe doit être dans un parcours de montée en compétence à l'agilité et à la conteneurisation/kubernetes.
 
-## Parcours technique
+## Embarquement technique
 
 Un parcours technique d'apprentissage permettant de valider les prérequis et d'intégrer les bonnes pratiques permet à nos clients d'appréhender l'offre Cloud π Native. 
 
