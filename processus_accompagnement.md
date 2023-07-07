@@ -2,17 +2,28 @@
 
 ## Introduction
 
-La service team accompagne les projets à embarquer sur l'offre Cloud π native. Cet accompagnement a pour philosophie d'aider les projets mais de ne pas faire à leur place. En effet, une fois que les projets sont déployés sur l'offre Cloud π native, l'exploitation, le MCO/MCS reste de la responsabilité du projet qui doit comprendre l'esprit de la plateforme, les technologies sous jacentes et les paradigmes de déploiement.
+La service team accompagne les projets à embarquer sur l'offre Cloud π native. Cet accompagnement a pour philosophie d'__aider les projets mais de ne pas faire à leur place__. En effet, une fois que les projets sont déployés sur l'offre Cloud π native, l'exploitation, le MCO/MCS reste de la responsabilité du projet qui doit comprendre l'esprit de la plateforme, les technologies sous jacentes et les paradigmes de déploiement.
 
 L'accompagnement se fait sur 2 environnements :
  * Clusters hors ministère de l'intérieur, hébergés sur OVH permettant de tester la solution
  * Cluster Cloud π native sur les infrastructures du ministère de l'intérieur
+
+
+> Ajouter un schéma chronologique de l'accompagnement
+
+reunion -> reunion -> accompagnement -> ovh -> Cloud π native
+
+
+> Ajouter accompagnement après déploiement
 
 ## Prérequis techniques
 
 Avant d'utiliser l'offre Cloud π native, il est nécessaire : 
  * De suivre le processus d'accompagnement [haut niveau](https://github.com/dnum-mi/dso-formation)
  * De vérifier les [prerequis techniques](./prerequisites-tech.md)
+
+## Prérequis techniques
+
 
 En plus de ces prérequis, les éléments suivants sont à fournir par le projet :
  * Dossier d'architecture ou à minima schéma d'architecture technique : nombre de composants, technologies, maturité sur les technologies DSO, notamment docker / kubernetes / openshift / déploiement ArgoCD (gitops), backend de stockage (postgres, S3, etc.)
@@ -24,7 +35,9 @@ En plus de ces prérequis, les éléments suivants sont à fournir par le projet
    * Internes MI 
    * Sur Internet
  * Exposition de l'application (Internet/Intranet/RIE/DR/NP)
- * Nom de domaine et certificats à fournir
+ * Nombre d'environnements prévus
+ * Nom de domaine et certificats à fournir par environnement
+ * Estimation des ressources nécessaires CPU/RAM
  * Calendrier du projet et échéances importantes et état d'avancement du projet (déjà en production, nouvelle application, etc.)
 
 
