@@ -76,6 +76,33 @@ L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code
  - Utiliser des manifestes [kubernetes](https://kubernetes.io/) avec Kustomize pour variabliser vos manifestes (cf. [tutoriels](/doc/tutorials))
  - Utiliser des charts [helm](https://helm.sh/) (cf. [tutoriels](/doc/tutorials) pour avoir des exemples de fichiers).
 
+## Règles Kyverno appliqué au Clusters
+| Kyverno Rules | ValidationFailure Action (Dev, preprod) | ValidationFailure Action (Prod) | Important Information | description |
+| ------------- | --------------------------------------- | ------------------------------- | --------------------- | ----------- |
+| add-velero-label |     |     |     | Ajoute une étiquette sur le namespace pour être sauvegardé par Velero |
+| add-netpol-allowsame-ns |     |     |     | Autorise le pod à communiquer dans le même namespace |
+| add-netpol-deny |     |     |     | Refuse toute communication entrante vers les pods dans un namespace |
+| add-netpol-ingress |     |     |     | Autorise la communication entrante depuis le namespace openshift-ingress vers tous les pods dans un nouveau namespace créé |
+| add-netpol-logging |     |     |     | Autorise la communication entrante depuis le namespace openshift-logging vers tous les pods dans un nouveau namespace créé |
+| add-quota | AUDIT | ENFORCE | CPU: request/limit = 4 , Mem request/limit = 16Gi | Cette règle garantit que chaque namespace a un quota de ressources défini pour éviter une utilisation excessive des ressources du cluster |
+| add-ttl |     |     |     | Ajoute un time to live (TTL) aux JOB dans le cluster, ce qui les conduit à être automatiquement nettoyés après une certaine période de temps |
+| check-labels | AUDIT | ENFORCE | Labels requis : app, env, tier | Cette règle garantit que toutes les ressources ont les étiquettes nécessaires appliquées aux pod |
+| cm-no-credentials | AUDIT | ENFORCE | data non autorisée : password, passwd, secret_key | Empêche le stockage des informations d'identification dans les ConfigMaps, ce qui est une mauvaise pratique d'un point de vue sécurité |
+| disallow-exec | ENFORCE | ENFORCE |     | Empêche l'utilisation de la commande "exec" sur le namespace openshift-etcd pour des raisons de sécurité |
+| disallow-latest | AUDIT | ENFORCE |     | Les Pods n'utilisent pas la balise 'latest' pour leurs images, encourageant l'utilisation de balises versionnées spécifiques |
+| disallow-hostpath | ENFORCE | ENFORCE |     | Empêche l'utilisation des volumes hostPath, qui peuvent être un risque de sécurité s'ils ne sont pas correctement contrôlés |
+| disallow-selfprovisionning | ENFORCE | ENFORCE |     | Empêche la liaison au rôle de self-provisionners pour un contrôle strict de la création de projet OpenShift |
+| etcd | ENFORCE | ENFORCE |     | Assure que le chiffrement est activé pour etcd dans les clusters OpenShift |
+| limit-size-pvc | AUDIT | ENFORCE | pvc < 1Ti | Limite la taille des revendications de volume persistant (PVC) pour éviter l'utilisation excessive des ressources de stockage |
+| need-containers-ressources | AUDIT | ENFORCE | limits.memory, limits.cpu, request.memory et request.cp | Assure que les demandes de ressources et les limites sont définies pour tous les Pods, pour assurer une utilisation équitable des ressources |
+| restrict-image-registry | AUDIT | ENFORCE | registres autorisés : docker.io/, harbor.io/, registry.redhat.io/, quay.io/, bitnami/, ghcr.io/ | Restreint les registres d'images à partir desquels les conteneurs peuvent tirer des images, comme mesure de sécurité pour assurer l'utilisation d'images de confiance uniquement |
+| restrict-nodeport | AUDIT | ENFORCE |     | Restreint l'utilisation des services NodePort, qui peuvent exposer des services à l'extérieur du cluster et représenter un risque de sécurité potentiel |
+| need-liveness-readiness | AUDIT | ENFORCE |     | Assure que tous les conteneurs ont l'un des trois : sondes de Liveness, Readiness ou de Startup probes, pour s'assurer qu'ils signalent correctement leur statut à Openshift |
+
+Explication de la differences entre ENFORCE et AUDIT : 
+- Enforce : Kyverno bloquera l'action (par exemple, la création, la mise à jour ou la suppression d'une ressource) si la politique n'est pas respectée. Cela garantit que toutes les ressources du cluster respectent les politiques mise en place.
+
+- Audit: Une action d'Audit ne bloquera pas une action si la politique n'est pas respectée, mais elle enregistrera l'infraction dans les résultats d'audit de Kyverno. C'est utile pour observer les infractions aux politiques sans bloquer les actions, ce qui peut être particulièrement utile dans les environnements de développement ou de test.
 
 ## Liens utiles 
 
