@@ -52,10 +52,6 @@ Une entrée dans le menu gauche permet également de voir l'état des services :
 
 :construction: *Disponible prochainement* :construction: 
 
-### Gérer les environnements
-
-:construction: *Disponible prochainement* :construction: 
-
 ## Etape 3 - Ajouter un dépôt synchronisé
 
 Une fois que le projet est créé sur la console, il convient d'ajouter des dépôts synchronisés.
@@ -97,23 +93,77 @@ Une fois que le dépôt est correctement ajouté, il apparait avec une icône in
 > Des exemples de dépôts sont disponibles dans la sections [tutoriels](tutorials.md).
 
 
-### Cas des repos d'infra
+### Gérer les environnements
 
-La création de repo d'infra déclenche la création d'une application dans ArgoCD afin de déployer l'application. Ainsi, une fois qu'un repo d'infra est synchronisé, il convient de se rendre sur le service ArgoCD depuis la liste des services :
+Une fois les repos d'infra ajoutés, il sera possible d'ajouter un environnement en cliquant sur `Environments du projet` puis `Ajouter un nouvel environnement`
+
+<img src="img/tuto/3tuto-environnement.png" alt="ArgoCD" width="75%" title="environnement">
+
+Selectionner ensuite l'environnement et le cluster ou vous souhaitez le déployer puis sur `Ajouter l'environnement`
+
+
+:warning: La création de repo d'infra et la déclaration d'un environnement déclenche la création d'une application dans ArgoCD et d'un namespace dédié afin de déployer l'application. 
+
+Des informations seront précréer dans ce namespace notamment l'imagePullSecrets qui sera a utilisé pour votre projet.
+
+**L'IMAGEPULLSECRETS SERA A RENSEIGNRER DANS LES TEMPLATES DE DEPLOYEMENT DE VOS IMAGES** :warning:
+
+Exemple:
+
+```yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monimage-backend
+  labels:
+    app: monimage-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monimage-backend
+  template:
+    metadata:
+      labels:
+        app: monimage-backend
+        Tier: backend
+        Criticality: Low
+        Component: java
+    spec:
+      imagePullSecrets:
+        - name: registry-pull-secret
+      containers:
+        - name: monimage-backend
+          image: harbor.apps.c6.numerique-interieur.com/mi-monprojet/monimage-backend:v2
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 8080 
+```
+
+Ainsi, une fois qu'un repo d'infra est synchronisé, il convient de se rendre sur le service ArgoCD depuis la liste des services :
 
 <img src="img/tuto/4argocd.png" alt="ArgoCD" width="75%" title="ArgoCD">
 
 Cliquez sur le projet nouvellement créé (il est possible filtrer dans le cas où plusieurs projets sont créé pour le projet)
 
-Il est possible que le projet ne soit pas correctement déployé, dans ce cas, allez dans le menu en haut et cliquez sur App detail :
+Afin de finaliser le déployement du projet, allez dans le menu en haut et cliquez sur App detail :
 
 <img src="img/tuto/4argocd-menus-bouton.png" alt="ArgoCD-menus" width="75%" title="ArgoCD-menus">
 
-Sur l'écran qui s'affiche, cliquez sur le bouton *EDIT* et adaptez les valeurs renseignées par defaut par la console
+Sur l'écran qui s'affiche, cliquez sur le bouton *EDIT* et adaptez les valeurs renseignées par defaut par la console et selectionner le cluster de déployement.
 
 <img src="img/tuto/4argocd-app-details.png" alt="ArgoCD-app-details" width="75%" title="ArgoCD application details">
 
 Notamment :
+  - CLUSTER : correspond au cluster sur lequel l'application doit être déployée, cela dépends des informations saisie lors de l'étape de [gérer les environnements](#gérer-les-environnements).
   - TARGET REVISION : correspond à la branche du repo d'infra à déployer, par defaut il point sur HEAD (master). A adapter si le repo utilise une branche
   - PATH qui est positionné à base par defaut et qui correspond à un déploiement de type fichiers de manifests ou kustmize. Dans le cas d'un déploiement de type HELM, modifier le PATH point pointer vers la racine en mettant un point dans le champs : . ou préciser le répertoire correspondant à la racine du chart
   - Dans l'onglet *PARAMETERS*, il est possible de surcharger certaines valeurs du fichier values (mais il est préférable de modifier le fichier values directement) 
@@ -135,7 +185,7 @@ Une fois le dépôt interne à la plateforme créé et lié à un dépôt extern
 
 Pour paramétrer la synchronisation d'un dépôt :
 
-- Un dépôt nommé `<nom_de_votre_project>/<nom_de_votre_project>-mirror` a été créé dans le groupe Gitlab du projet. Dans ce dernier se trouve un script `script-mirror.sh` à copier dans votre dépôt externe.
+<!-- - Un dépôt nommé `<nom_de_votre_project>/<nom_de_votre_project>-mirror` a été créé dans le groupe Gitlab du projet. Dans ce dernier se trouve un script `script-mirror.sh` à copier dans votre dépôt externe.
   > Ce script a pour but de demander à la plateforme de synchroniser le dépôt en effectuant un appel api (avec authentification auprès de l'api gateway).
   > Il faut donc lancer ce script dans la CI/CD du dépôt source selon les évènements sur lesquels on souhaite déclencher une synchronisation (ex: lors d'un push sur la branche main).
 
@@ -182,4 +232,55 @@ Pour paramétrer la synchronisation d'un dépôt :
 
 - Répéter cette opération pour tous les dépôts y compris pour le ou les dépôts d'infrasctructure as code.
 
-La synchronisation est maintenant en place et chaque appel API effectué avec le script `script-mirror.sh` entrainera le déclenchement de la chaine DevSecOps.
+La synchronisation est maintenant en place et chaque appel API effectué avec le script `script-mirror.sh` entrainera le déclenchement de la chaine DevSecOps. -->
+
+- Un dépôt nommé `<nom_de_votre_project>/mirror` a été créé dans le groupe Gitlab du projet. Dans ce dernier se trouve un script `mirror.sh` à copier dans votre dépôt externe.
+  > Ce script a pour but de demander à la plateforme de synchroniser le dépôt en effectuant un appel api (avec authentification un trigger_token).
+  > Il faut donc lancer ce script dans la CI/CD du dépôt source selon les évènements sur lesquels on souhaite déclencher une synchronisation (ex: lors d'un push sur la branche main).
+
+- Dans le Gitlab de la plateforme, récupérer dans le dépôt `<nom_de_votre_project>/mirror` le token `GITLAB_TRIGGER_TOKEN` (`Settings > CI/CD > Pipeline triggers`, au besoin en créer un).
+
+- Ajouter les variables d'environnements suivantes dans les __*secrets*__ de la CI/CD externe avec les valeurs fournies par l'équipe DSO ou précédemment récupérées (ces secrets seront utilisés par le script `mirror.sh`)
+
+  | Nom de variable      | Description                                                                  |
+  | -------------------- | ---------------------------------------------------------------------------- |
+  | API_URL              | Url de GITLAB                                                                |
+  | BRANCH_TO_SYNC       | Branche ou tag a synchroniser                                                |
+  | GITLAB_MIRROR_PROJECT_ID      | ID du projet mirror dans gitlab                                     |
+  | REPOSITORY_NAME      | Nom du repo a synchronisé dans le Gitlab DSO                                 |
+  | GITLAB_TRIGGER_TOKEN | Token de déclenchement du pipeline de synchronisation dans le GitLab interne |
+
+- Ajouter dans la CI/CD l'exécution de ce script pour déclencher la synchronisation automatiquement.
+  
+  *Exemple avec Github (synchro lors d'un push sur la branche main du dépôt source) :*
+
+  ```yaml
+  # Dans un fichier .github/workflows/script-mirror.yaml
+  name: Repo sync with Cloud π Native
+
+  on:
+    push:
+      branches:
+        - "main"
+    workflow_dispatch:
+
+  jobs:
+    mirror:
+      name: Sync repo with Cloud π Native
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checks-out repository
+          uses: actions/checkout@v3
+        - name: Send a sync request to DSO api
+          run: |
+            sh ./path/to/mirror.sh \
+              -a ${{ secrets.API_URL }} \
+              -g ${{ secrets.GITLAB_TRIGGER_TOKEN }} \
+              -b ${{ secrets.BRANCH_TO_SYNC }} \
+              -r ${{ secrets.REPOSITORY_NAME }} \
+              -i ${{ secrets.GITLAB_MIRROR_PROJECT_ID }}
+  ```
+
+- Répéter cette opération pour tous les dépôts en changeant le **REPOSITORY_NAME** y compris pour le ou les dépôts d'infrasctructure as code.
+
+La synchronisation est maintenant en place et chaque appel API effectué avec le script `mirror.sh` entrainera le déclenchement de la chaine DevSecOps.

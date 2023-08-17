@@ -32,12 +32,24 @@ Celui-ci est préconfiguré dans les templates Gitlab CI et utilisable via l'exe
 build_docker_back:
   variables:
     WORKING_DIR: 'server'
-    IMAGE_NAME: 'candilibv2-devops'
-    DOCKERFILE: 'Dockerfile-devops'
+    IMAGE_NAMES: 'candilibv2-devops'
+    DOCKERFILE: 'server/Dockerfile-devops'
+    TAG: $CI_COMMIT_BRANCH
   stage: build-docker
   extends:
-    - .kaniko:build
+    - .kaniko:simple-build-push
 ```
+
+Il sera possible de définir différentes variables pour définir le TAG de l'image son nom et le path du Dockerfile:
+ - IMAGE_NAMES: Nom de l'image qui sera push dans Harbor
+ - DOCKERFILE: Chemin relatif depuis la racine du projet vers le Dockerfile
+ - TAG: Tag de l'image par default le nom de la branche sera utilisé, il est possible d'utiliser d'autres valeurs disponible dans [Gitlab](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html) comme le $CI_COMMIT_SHORT_SHA ou des valeurs personnaliées.
+
+Les images seronts pushées sur l'url prédéfini de harbor ayant le format suivant :
+
+`<REGISTRY_URL>/<ORGANISATION>-<PROJECT_NAME>/<IMAGE_NAME>/<TAG>`
+
+Exemple: `harbor.apps.c6.numerique-interieur.com/mi-monprojet/monimage-backend:v2`
 
 > *Les images pushées par la CI seront signées afin de garantir leur origine et harbor autorisera uniquement l'utilisation d'image signée*
 
