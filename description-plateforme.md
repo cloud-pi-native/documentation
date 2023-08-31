@@ -12,7 +12,7 @@ Ces appels API permettent de déclencher auprès de DSO une demande de 'pull' du
 - Effectuer une analyse de la qualité du code source à l'aide d'un [Sonarqube](https://www.sonarqube.org/) hébergé par la plateforme.
 - Construire les images de conteneur de l'application.
 - Scanner les images et le code source à l'aide de [Trivy](https://aquasecurity.github.io/trivy).
-- Stocker ces images dans un [Quay](https://quay.io/) hébergé par la plateforme.
+- Stocker ces images dans un [Harbor](https://goharbor.io/) hébergé par la plateforme.
 
 Une fois l'application construite et les images de cette dernière stockées dans la registry de la plateforme, le déploiement pourra être effectué selon le modèle gitops à l'aide de [ArgoCD](https://argo-cd.readthedocs.io/en/stable/).
 
@@ -30,10 +30,11 @@ Liste des services de la plateforme :
 | --------- | ----------------------------------------- | ----------- |
 | Gitlab    | Hébergement de code et pipeline CI/CD     | Oui         |
 | Vault     | Hébergement de secrets                    | Oui         |
-| Quay      | Hébergement d'image de conteneur          | Oui         |
+| Harbor    | Hébergement d'image de conteneur          | Oui         |
 | Nexus     | Hébergement d'artefacts                   | Oui [1]     |
 | Sonarqube | Analyse de qualité de code                | Oui         |
 | Argocd    | Outil de déploiement automatique (GitOps) | Oui         |
+| Trivy     | Outil d'analyse de sécurité des images    | Oui         |
 
 [1] : *Instanciation au niveau du projet obligatoire mais utilisation selon le besoin.*
 
