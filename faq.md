@@ -51,6 +51,32 @@ Ainsi, il est possible d'utiliser une image non construite sur DSO, par exemple,
   - Le root filesystem des images doit être en lecture seule à l'exception et seul les répertoire /tmp et /var/tmp sont en écriture 
   - Les ports d'écoute des PODs doivent être supérieurs à 1024
 
+### J'ai une erreur de récupération des dépendances Java via Maven à cause d'un problème de certificat SSL:
+
+Cette erreur apparait lors des appels internes au cluster qui ne reconnait pas les certificats présentés: 
+
+Message d'erreur :
+```
+proxy: ProxyInfo{host='192.168.16.89', userName='null', port=3128, type='http', nonProxyHosts='null'} @ line 82, column 25: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target -> [Help 2]
+```
+Solution :
+Ajouter dans le fichier .gitlab-ci.dso.yml la variable MAVEN_CLI_OPTS pour ignorer les erreurs de certificats
+
+```
+package-app:
+  variables:
+    BUILD_IMAGE_NAME: maven:3.8-openjdk-17
+    WORKING_DIR: "."
+    ARTEFACT_DIR: "target"
+    MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+    MAVEN_CLI_OPTS: " -Dmaven.wagon.http.ssl.insecure=true "
+    MVN_CONFIG_FILE: $MVN_CONFIG
+  stage: package-app
+  extends:
+    - .java:build
+```
+
+
 ## Déploiement
 
 ### Comment déployer une base postgreSQL via manifests ?
