@@ -7,10 +7,10 @@ Le déploiement applicatif suit le principe gitOps et donc de "pousser" l'ensemb
 Une première solution de mise en oeuvre avec [SOPS](https://github.com/mozilla/sops) est proposée. Ainsi, sur ce principe le secret est toujours poussé sur un repo git mais chiffré par une clé asymétrique dont la clé privée n'est connue que du Cluster Openshift et la clé publique accessible à tous les projets.
 
 Pour cela des paires de clés au format age ont été générées sur les différents clusters dont voici les clés publiques:
- * Cluster 4-4 : age1g867s7tcftkgkdraz3ezs8xk5c39x6l4thhekhp9s63qxz0m7cgs5kan9a
- * Cluster 4-7 : age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
- * Cluster 4-8 : age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
- * Cluster 4-5 : TO BE DONE
+ * Cluster c4 (application clientes): age1g867s7tcftkgkdraz3ezs8xk5c39x6l4thhekhp9s63qxz0m7cgs5kan9a
+ * Cluster 4-7 (tests internes DSO) : age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
+ * Cluster 4-8 : OBSOLETE(age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n)
+ * Cluster 4-5 : OBSOLETE
 
 Afin de chiffrer un secret, il faut commencer par créer un objet kubernetes de type SopsSecret par exemple :
 ```yaml
