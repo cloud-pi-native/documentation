@@ -44,21 +44,21 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres@sha256:d6809f4833ca6caf11a4969a7f41420d3e5fcf26b8c9ca4253c34d5a5fa377cc # Sets Image
+          image: bitnami/postgresql:14.9.0
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432  # Exposes container port
           env:
-            - name: PGDATA
-              value: /var/lib/postgresql/data/pgdata
             - name: "POSTGRES_USER"
               value: "demo_user"
             - name: "POSTGRES_PASSWORD"
               value: "My$ecrETPAss0rd*"
             - name: POSTGRES_DB
               value: demo
+            - name: POSTGRESQL_DATABASE
+              value: demo
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
+            - mountPath: /bitnami/postgresql
               name: postgredb
           resources:
             limits:
