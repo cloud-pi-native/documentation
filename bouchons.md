@@ -67,23 +67,19 @@ smtp:
       smtp: 1025
 
   ingress:
-    enabled: false
+    enabled: true
     # ingressClassName: nginx
     annotations: {}
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     labels: {}
-    hosts:
-      - host: mailhog.example.com
-        paths:
-          - path: "/"
-            pathType: Prefix
+    host: mailhog.example.com
 
   auth:
-    enabled: false
+    enabled: true
     existingSecret: ""
     fileName: auth.txt
-    fileContents: ""
+    fileContents: "Ym9iOiQyYSQwNCRRN1VwdmQvWUlwck5DcExsUHpFQ2VlRnZrVlI1RVhKbG1uZjZ4S050ZHlXSnJoeW1hNUhlaQ==" # format user:password (où password est bcrypted) le tout en base64
 
   # JSON file defining outgoing SMTP servers
   outgoingSMTP:
