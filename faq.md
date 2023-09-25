@@ -4,6 +4,13 @@ Cette section regroupe les questions fréquentes de nos clients
 
 ## Construction
 
+### Comment simuler les services proposés par l'infrastructure du MI sur les environnements OVH (S3, Passage2, SMTP, etc.) ?
+
+Des bouchons sont proposés afin de simuler un serveur SMTP, création d'un bucket S3, passage2, etc.
+
+La description de l'utilisation de ces bouchons est détaillée [ici](bouchons.md)
+
+
 ### Comment puis-je lancer la pipeline de synchronisation de mes repos depuis mes repos externes ?
 
 
