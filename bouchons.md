@@ -28,6 +28,8 @@ Puis aller sur l'onglet PARAMETERS:
 
 Cliquez en haut à droite sur le bouton EDIT et adapter le paramétrage en fonction de ses besoins. Voir le détail dans la description des bouchons dans les chapitres suivants.
 
+Le chart helm sur github contient un fichier *values.yaml* contenant l'ensemble des valeurs paramétrables et un second fichier *custom-values.yaml* contenant uniquement les valeurs importantes comme l'activation du S3 et du SMTP. Une fois le projet importé via la console, il est possible, en tant que projet de modifier le fichier custom-values.yaml directement depuis le gitlab DSO et éviter de modifier les paramètres depuis ArgoCD. Dans ce cas, il faut déclarer le fichier custom-values.yaml dans les paramètres ArgoCD.
+
 ## Description des bouchons
 
 ### Serveur SMTP
@@ -43,7 +45,7 @@ smtp:
   # Référence vers l'image mailhog sur docker.io
   image:
     repository: docker.io/mailhog/mailhog
-    tag: "latest"
+    tag: "v1.0.1"
     pullPolicy: IfNotPresent
 
   nameOverride: ""
@@ -73,7 +75,7 @@ smtp:
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     labels: {}
-    host: mailhog.example.com
+#    hostOverride: mailhog.example.com
 
   auth:
     enabled: true
@@ -107,7 +109,12 @@ smtp:
 
   podAnnotations: {}
 
-  podLabels: {}
+  podLabels:
+    app: bouchon-smtp
+    env: ovh
+    tier: bouchon
+    criticality: low
+    component: smtp
 
   extraEnv: []
 
