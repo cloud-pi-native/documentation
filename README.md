@@ -112,7 +112,7 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
 
 A tout moment, vous pouvez consulter la [documentation détaillée](description-plateforme.md) de la plateforme Cloud π Native, son architecture et les services proposés
 
-Enfin notre [FAQ](faq.md) permet de lister les questions fréquentes de nos clients.
+Enfin notre [FAQ](faq.md) permet de lister les questions fréquentes de nos clients, et des exemples pour réaliser des bouchons (S3, SMTP, ...)
  
 ## Notre roadmap (WIP)
 
