@@ -4,9 +4,9 @@ Cette section regroupe les questions fréquentes de nos clients
 
 ## Construction
 
-### Comment simuler les services proposés par l'infrastructure du MI sur les environnements OVH (S3, Passage2, SMTP, etc.) ?
+### Comment simuler les services S3, SSO, SMTP, etc sur les environnements OVH ?
 
-Des bouchons sont proposés afin de simuler un serveur SMTP, création d'un bucket S3, passage2, etc.
+Des bouchons sont proposés afin de simuler un serveur SMTP, création d'un bucket S3, SSO, etc.
 
 La description de l'utilisation de ces bouchons est détaillée [ici](bouchons.md)
 
