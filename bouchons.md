@@ -1,4 +1,4 @@
-# Bouchons sur les environnements hors MI
+# Bouchons
 
 Un chart Helm a été créé afin de permettre aux projets clients de l'offre Cloud Pi Native de simuler ou remplacer les éléments fournis par l'infrastructure du MI à savoir :
  - Un serveur SMTP pour les envois de mails
