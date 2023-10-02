@@ -177,4 +177,55 @@ Pour utiliser ces variables sur un pod, il faut injecter cette configuration com
 
 ### Passage2
 
-Passage2 est le système SSO du ministère de l'intérieur. TODO
+Le chart permet d'activer un bouchon Passage2 permettant de simulé le mécanisme d'authentification SSO du ministère de l'intérieur.
+
+Le mécanisme du bouchon d'authentification repose sur un **Reverse proxy** authentifiant et d'un keycloak en SAML ajoutant au requete entrante des headers contenant les roles/groups de l'utilisateur authentifié.
+
+**Le reverse proxy authentificant devra intercepter l'ensemble des requetes necessitant une authentifiation**
+
+Le chart permet d'ajouter les composants nécessaire à la mise en place de ce bouchon.
+
+```
+passage2:
+  # Active ou non le bouchon
+  enabled: true
+  reverseproxy:
+    # Url de l'ingress du reverse proxy authentifiant
+    hostname: mellon.example.com
+    proxy:
+      #Valeur des headers ajouté par MELLON
+      headers: |-
+
+        #Ajout de header Mellon-NameID avec le nom de l'utilisateur connecté
+        RequestHeader set Mellon-NameID %{MELLON_NAME_ID}e
+        Header set Mellon-NameID %{MELLON_NAME_ID}e
+
+        #Ajout de header Mellon-Groups avec les groupes de l'utilisateur connecté
+        RequestHeader set Mellon-Groups %{MELLON_groups}e
+        Header set Mellon-Groups %{MELLON_groups}e
+
+        #Ajout de header Mellon-Role avec les roles de l'utilisateur connecté
+        RequestHeader set Mellon-Role %{MELLON_Role}e
+        Header set Mellon-Role %{MELLON_Role}e
+
+      rules: |-
+        # Exemple de redirection vers différents services applicatifs base sur le suffix, il est possible d'utiliser les différentes directive apache
+        ProxyPassMatch    "^/(.*)" "http://whoami-svc:8080/$1"
+        ProxyPassReverse  "^/(.*)" "http://whoami-svc:8080/$1"
+        # il est possible d'avoir plusieur service de redirection
+        ProxyPass /my-service2 "http://whoami3-svc:80"
+        ProxyPassReverse /my-service2 "http://whoami3-svc:80"
+
+  mockpassage2:
+    # Url d'accès au keycloak pour la gestion des utilisateurs/droits
+    hostname: passage2.example.com
+    # Login du user admin
+    adminLogin: admin
+    # Password du user admin
+    adminPassword: OZJFejfrejijIZJijfeij
+```
+
+Il faudra configuré le RPA pour renvoyer vers vos service applicatifs en modifiant le bloc **rules** afin que celui-ci rajoute les headers.
+Une fois les composants déployé, l'authentification se fera par keycloak, un compte utilisateur d'exemple est crée test/test, avec aucun roles ou groupes.
+
+Dans le cas ou l'utilisateur possède plusieurs roles/groupes ceux-ci seront sépéraré par une **,**
