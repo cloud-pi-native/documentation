@@ -41,7 +41,7 @@ Ce fichier **ne doit pas** être commité et envoyé sur un repo git et rester u
 Il convient donc de chiffrer ce fichier via SOPS avec la clé publique correspondant à l'environnement. Par exemple sur l'environnement 4 7 :
 
 ```bash
-sops -e --age age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n --encrypted-suffix Templates secret.sops.yaml > secret.sops.enc.yaml
+sops -e --age age1g867s7tcftkgkdraz3ezs8xk5c39x6l4thhekhp9s63qxz0m7cgs5kan9a --encrypted-suffix Templates secret.sops.yaml > secret.sops.enc.yaml
 ```
 
 Attention, le fichier chiffré doit conserver l'extension .yaml
@@ -77,7 +77,7 @@ sops:
     azure_kv: []
     hc_vault: []
     age:
-        - recipient: age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
+        - recipient: age1g867s7tcftkgkdraz3ezs8xk5c39x6l4thhekhp9s63qxz0m7cgs5kan9a
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
             YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTZFJGdkRzeVJFdDVUVjVS
@@ -140,7 +140,7 @@ Il sera possible de définir une **encrypted_regex** qui défini le regex patter
 creation_rules:
   - path_regex: .*newsecret.sops.yaml.*
     encrypted_regex: "^.*password.*$"
-    age: age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
+    age: age1g867s7tcftkgkdraz3ezs8xk5c39x6l4thhekhp9s63qxz0m7cgs5kan9a
 ```
 
 Je chiffre mon secret
@@ -168,7 +168,7 @@ sops:
     azure_kv: []
     hc_vault: []
     age:
-        - recipient: age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
+        - recipient: age1g867s7tcftkgkdraz3ezs8xk5c39x6l4thhekhp9s63qxz0m7cgs5kan9a
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
             YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZU3d0Z2N6QytuaHZWTXBm
