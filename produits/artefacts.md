@@ -21,7 +21,7 @@ Pour l'utilisation d'autres types gestionnaire de projet ou langages qui ne sera
  - NEXUS_PASSWORD
  - NEXUS_USERNAME
 
-Les urls de repositories seront toujours constuites de la même façon **\${NEXUS_HOST_URL}/${PROJECT_PATH}-XXX**
+Les urls de repositories seront toujours constuites de la même façon **\${NEXUS_HOST_URL}/repository/${PROJECT_PATH}-XXX**
 
 ## Repos d'images : Harbor
 
