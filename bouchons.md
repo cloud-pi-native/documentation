@@ -3,7 +3,7 @@
 Un chart Helm a été créé afin de permettre aux projets clients de l'offre Cloud Pi Native de simuler ou remplacer les éléments fournis par l'infrastructure du MI à savoir :
  - Un serveur SMTP pour les envois de mails
  - La création d'un bucket S3
- - Le SSO *Passage2* (à venir)
+ - Le SSO *Passage2*
 
 Le chart Helm est disponible sur le [repo github public](https://github.com/cloud-pi-native/helm-projects-mocks)  
 
