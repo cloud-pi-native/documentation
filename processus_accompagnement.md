@@ -20,7 +20,7 @@ reunion -> reunion -> accompagnement -> ovh -> Cloud π native
 
 Avant d'utiliser l'offre Cloud π native, il est nécessaire : 
  * De suivre le processus d'accompagnement [haut niveau](https://github.com/dnum-mi/dso-formation)
- * De vérifier les [prerequis techniques](./prerequisites-tech.md)
+ * De vérifier les [prerequis techniques](./prerequisites.md)
 
 ## Prérequis techniques
 
