@@ -23,6 +23,6 @@ Pour une meilleure fluidité des échanges, nous avons également mis en place u
 
 Le processus d'embarquement classique d'un projet est présenté ci-dessous :
 
-![processus embarquement](/img/processus_embarquement.png)
+![processus embarquement](/img/onboarding-process.png)
 
 > A chaque étape, la vérification des prérequis est un point d'étape *obligatoire* permettant de valider la compatibilité du projet avec l'offre DSO.
