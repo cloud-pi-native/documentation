@@ -1,0 +1,15 @@
+{
+  "name": "@cloud-pi-native/docs",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vitepress build docs",
+    "dev": "vitepress dev docs --port 8081",
+    "docker:build": "docker build --tag cloud-pi-native/documentation --target prod .",
+    "docker:run": "docker run --publish 8081:8080 --rm cloud-pi-native/documentation",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "1.0.0-rc.24"
+  }
+}

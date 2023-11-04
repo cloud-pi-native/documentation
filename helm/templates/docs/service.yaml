@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "template.docs.fullname" . }}
+  labels:
+    {{- include "template.docs.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.docs.service.type }}
+  ports:
+    - port: {{ .Values.docs.service.port }}
+      targetPort: {{ .Values.docs.container.port }}
+      protocol: TCP
+  selector:
+    {{- include "template.docs.selectorLabels" . | nindent 4 }}
