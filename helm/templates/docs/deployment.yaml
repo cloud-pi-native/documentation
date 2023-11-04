@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "template.docs.fullname" . }}
+  labels:
+    {{- include "template.docs.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.docs.autoscaling.enabled }}
+  replicas: {{ .Values.docs.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "template.docs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.docs.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "template.docs.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "template.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.docs.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.docs.securityContext | nindent 12 }}
+          image: "{{ .Values.docs.image.repository }}:{{ .Values.docs.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.docs.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.docs.container.port }}
+              protocol: TCP
+          {{- if or .Values.docs.container.env .Values.docs.container.secrets }}
+          envFrom:
+          {{- if .Values.docs.container.env }}
+          - configMapRef:
+              name: {{ include "template.docs.fullname" . }}
+          {{- end }}
+          {{- if .Values.docs.container.secrets }}
+          - secretRef:
+              name: {{ include "template.docs.fullname" . }}
+          {{- end }}
+          {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.docs.container.port }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.docs.container.port }}
+          resources:
+            {{- toYaml .Values.docs.resources | nindent 12 }}
+      {{- with .Values.docs.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.docs.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.docs.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

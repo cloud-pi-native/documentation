@@ -1,0 +1,18 @@
+apiVersion: v2
+name: dso-doc
+description: A Helm chart to deploy ...
+type: application
+keywords: []
+home: https://github.com/cloud-pi-native/documentation
+sources:
+  - https://github.com/cloud-pi-native/documentation
+dependencies: []
+maintainers:
+  - name: this-is-tobi
+    email: this-is-tobi@proton.me
+    url: https://github.com/this-is-tobi
+# icon: A URL to an SVG or PNG image to be used as an icon (optional).
+deprecated: false
+annotations: {}
+version: 1.0.0
+appVersion: "6.0.0"  # x-release-please-version

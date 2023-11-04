@@ -1,0 +1,81 @@
+[
+  {
+    "text": "Présentation",
+    "items": [
+      {
+        "text": "Introduction",
+        "link": "/presentation/platform-description"
+      },
+      {
+        "text": "Prérequis",
+        "link": "/presentation/prerequisites"
+      },
+      {
+        "text": "Matrice de compétences",
+        "link": "/presentation/skills-matrix"
+      },
+      {
+        "text": "Processus d'accompagnement",
+        "link": "/presentation/support-process"
+      },
+      {
+        "text": "Accompagnement",
+        "link": "/presentation/support"
+      },
+      {
+        "text": "Feuille de route",
+        "link": "/presentation/roadmap"
+      },
+      {
+        "text": "Glossaire",
+        "link": "/presentation/glossary"
+      }
+    ]
+  },
+  {
+    "text": "Guide",
+    "items": [
+      {
+        "text": "Démarrer",
+        "link": "/guide/get-started"
+      },
+      {
+        "text": "Gestion des environnements",
+        "link": "/guide/environments-management"
+      },
+      {
+        "text": "Gestion des secrets",
+        "link": "/guide/secrets-management"
+      },
+      {
+        "text": "Bouchons",
+        "link": "/guide/mocks"
+      },
+      {
+        "text": "Labels kubernetes",
+        "link": "/guide/labels-list"
+      },
+      {
+        "text": "Bonnes pratiques",
+        "link": "/guide/best-practices"
+      },
+      {
+        "text": "Tutoriels",
+        "link": "/guide/tutorials"
+      },
+      {
+        "text": "F.A.Q",
+        "link": "/guide/faq"
+      }
+    ]
+  },
+  {
+    "text": "Contribution",
+    "items": [
+      {
+        "text": "Guide de contribution",
+        "link": "/contribution/contribute"
+      }
+    ]
+  }
+]
