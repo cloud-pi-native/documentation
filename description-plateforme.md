@@ -42,7 +42,7 @@ Liste des services de la plateforme :
 
 ### Vault
 
-### Quay
+### Harbor
 
 ### Nexus
 
