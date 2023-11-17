@@ -4,14 +4,14 @@
 
 Une application Cloud Native doit respecter au maximum les [Twelve-Factor](https://12factor.net/fr/)
 
-### Obligatoire
+En plus des recommandations précédentes, il est impératif de respecter les règles suivantes :
 
 1. Base de code
 
     Le code de l'application et de déploiement doit etre versionné dans un repo de source de type Git (Public/Privée) accessible depuis internet.
-   
+
 2. Dépendances
-    
+
     __TOUTES__ dépendances necessaires à la constuction de l'application (Libraries,Images, ...) doivent faire parti des repo standard (Maven,Composer,Node, ...) ou reconstruite par l'offre et déposée dans le gestionnaire d'artefact de celle-ci.
 
 3. Configuration / Service Externe
@@ -23,18 +23,18 @@ Une application Cloud Native doit respecter au maximum les [Twelve-Factor](https
     Afin de respecter les préconisation de sécurité d'[Openshift](https://docs.openshift.com/container-platform/4.12/openshift_images/create-images.html), les applications déployées doivent écouter sur des ports > 1024
 
 5. Logs
-    
+
     L'application __NE DOIT PAS__ écrire dans un fichier de logs spécifique mais écrire l'ensemble de ces logs dans la sortie standards (stdout) au format GELF ou à defaut JSON.
-    
-    Ceux-ci seront accessible via l'offre de supervision [FAQ](/guide/faq)
+
+    Ceux-ci seront accessible via l'offre de supervision [FAQ](/agreement/faq)
 
 6. Processus
 
     Les applications doivent être __STATELESS__, si des données de session/cache doivent être utilisé et partagé par l'application alors elles doivent faire l'objet d'un service externe prévus à cet effet (Redis, ...)
-   
+
 7. Processus d’administration
 
-    Les opérations d'administrations doivent être faites via des initContainer (Init/Migration bdd, ...) ou des CronJob (Backup bdd, ...) [FAQ](/guide/faq)
+    Les opérations d'administrations doivent être faites via des initContainer (Init/Migration bdd, ...) ou des CronJob (Backup bdd, ...) [FAQ](/agreement/faq)
 
 ## Architectures
 
@@ -46,7 +46,7 @@ L'application déployée doit être conteneurisée (sous la forme de un ou plusi
   - Des sondes de "Readiness"/"Liveness" doivent être implémenté.
   - Des limits/requests doivent etre mise en place.
 
-## Déployement
+## Déploiement
 
 L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code__, pour ce faire 2 solution s'offrent aux utilisateurs.
  - Utiliser des manifestes [kubernetes](https://kubernetes.io/) avec Kustomize pour variabliser vos manifestes (cf. [tutoriels](/guide/tutorials))
@@ -64,11 +64,9 @@ Criticality : " "
 Component : " "
 ```
 
-Tous les labels disponibles sont dans la liste suivante :
+Tous les labels disponibles [ici](/agreement/labels-list).
 
-https://github.com/dnum-mi/dso-documentation/blob/master/labels-list
-
-## Images TAG
+## Tag d'images
 
 Les images poussées dans le registry devront etre unique et identifiés via un Sha ou Short-Sha qui pourrait etre lié au commit Git. Grace a cela une gestion des releases et un rollback seront possibles.
 
@@ -81,7 +79,7 @@ CI_COMMIT_TAG
 CI_JOB_ID
 ```
 
-## Naming Policy
+## Politiques de nommage
 
 Les noms de toutes les ressources Openshift ne doivent jamais etre trop longs, il est donc conseillé de choisir des noms courts. 
 il se pourrait que des ressources ne soient pas déployées si le nom est trop long. 
@@ -113,23 +111,23 @@ Toutes les secrets devront etre contenus dans un Vault qui sera mis a dispositio
  
 ## Liveness et Readiness
 
-il est très important de mettre en place ces checks afin de vérifier l'etat des pods, le plus efficace étant de faire des checks de l'application.
+Il est très important de mettre en place ces checks afin de vérifier l'etat des pods, le plus efficace étant de faire des checks de l'application.
 Cela peut-etre une fonctionnalité de l'application, une page d'un site web, une entrée en base de donnée, etc.
 
 ``` Yaml
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 80
-            httpHeaders:
-          initialDelaySeconds: 3
-          periodSeconds: 3
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 80
-          initialDelaySeconds: 3
-          periodSeconds: 3
+livenessProbe:
+  httpGet:
+    path: /
+    port: 80
+    httpHeaders:
+  initialDelaySeconds: 3
+  periodSeconds: 3
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 80
+  initialDelaySeconds: 3
+  periodSeconds: 3
 ```
 
 ## SSL 
@@ -154,22 +152,22 @@ L'utilisation du "Burstable" n'est pas pas une bonne pratique. il est vraiment n
 Exemple : 
 
 ```Yaml 
-      limits:
-        memory: "200Mi"
-        cpu: "700m"
-      requests:
-        memory: "200Mi"
-        cpu: "700m"
+limits:
+  memory: "200Mi"
+  cpu: "700m"
+requests:
+  memory: "200Mi"
+  cpu: "700m"
 ```
 
-## Image Size
+## Taille des images
 
 Il est très important de construire des images les plus légères possibles, c'est a dire utiliser uniquement les paquets nécéssaires au bon fonctionnement de l'application ainsi que la meilleure image de base. 
 C'est un gros vecteur de sécurité, de charge stockage et réseau.
 
 Exemple d'image base Lightway : Alpine
 
-## Network policies
+## Politiques réseau
 
 Les "Network policies" sont sur openshift par défaut en "Deny ALL", il faut donc définir les flux entrants et sortants sur les namespaces. 
 

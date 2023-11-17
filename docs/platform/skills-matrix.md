@@ -1,6 +1,6 @@
 # Matrice de compétences
 
-Cette page liste les technologies nécessaires à maitriser avant d'utiliser l'offre Cloud π Native.
+Cette page liste les technologies nécessaires à maitriser avant d'utiliser la plateforme Cloud π Native.
 
 ## Compétences
 
@@ -9,7 +9,7 @@ Cette page liste les technologies nécessaires à maitriser avant d'utiliser l'o
 | Conteneurisation | **Obligatoire** Connaitre les principes de construction et de lancement d'images Docker                          |
 | Kubernetes       | **Obligatoire** Connaître et comprendre les principes et objets principaux de k8s et les manifest de déploiement |
 | Gitlab-CI        | **Obligatoire** Connaître les pipelines de déploiements gitlab-ci                                                |
-| Kubernetes/Helm  | **Conseillé** Savoir utiliser et créer un chart HELM                                                             |
+| Helm             | **Conseillé** Savoir utiliser et créer un chart HELM                                                             |
 | GitOps           | **Obligatoire** Comprendre les principes de déploiement GitOps                                                   |
 | Openshift        | **Conseillé** Comprendre les différences avec kubernetes                                                         |
 | GitOps/ArgoCD    | **Conseillé** Connaitre l'utilisation d'ArgoCD                                                                   |

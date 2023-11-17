@@ -14,7 +14,7 @@ Dans la suite de cette page :
 
 > la copie des repos externes vers le gitlab interne est piloté par le Gitlab interne. Le flux de synchronisation *part* de l'instance gitlab interne.
 
- ## Import d'un repos externe depuis la Console DSO
+## Import d'un repos externe depuis la Console DSO
 
 La déclaration de repos externes à synchroniser se fait depuis la Console Cloud π Native, après avoir créé un projet. Les opérations suivantes sont réalisées par la Console DSO:
  - Création d'un groupe Gitlab : <NOM_ORGANISATION>/<NOM_PROJET> sur le gitlab interne;
@@ -22,7 +22,7 @@ La déclaration de repos externes à synchroniser se fait depuis la Console Clou
  - Création d'un repo vide correspondant au repo distant dans le groupe ci-dessus;
  - Création d'un repo "mirror" avec les informations de synchrnonisation permettant, de réaliser un mirroir du repo GIT externe de dev. vers le repo interne créé ci-dessus.
 
-Les repos externes, sont synchronisés par la pipeline gitlab-ci du projet *mirror* correspondant. Le déclenchement de cette synchronisation est réalisé par un appel à un API Management ( voir la page de [FAQ](/guide/faq) )
+Les repos externes, sont synchronisés par la pipeline gitlab-ci du projet *mirror* correspondant. Le déclenchement de cette synchronisation est réalisé par un appel à un API Management ( voir la page de [FAQ](/agreement/faq) )
 
 Une fois le projet applicatif synchronisé une pipeline gitlab-ci est lancé afin de construire le projet applicatif sur l'offre Cloud π Native.
 

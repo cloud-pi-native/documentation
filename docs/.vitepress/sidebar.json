@@ -1,39 +1,93 @@
 [
   {
-    "text": "Présentation",
+    "text": "La plateforme",
+    "collapsed": true,
     "items": [
       {
         "text": "Introduction",
-        "link": "/presentation/platform-description"
+        "link": "/platform/introduction"
       },
       {
-        "text": "Prérequis",
-        "link": "/presentation/prerequisites"
+        "text": "Compatibilité",
+        "link": "/platform/compatibility"
       },
       {
         "text": "Matrice de compétences",
-        "link": "/presentation/skills-matrix"
-      },
-      {
-        "text": "Processus d'accompagnement",
-        "link": "/presentation/support-process"
-      },
-      {
-        "text": "Accompagnement",
-        "link": "/presentation/support"
+        "link": "/platform/skills-matrix"
       },
       {
         "text": "Feuille de route",
-        "link": "/presentation/roadmap"
+        "link": "/platform/roadmap"
       },
       {
         "text": "Glossaire",
-        "link": "/presentation/glossary"
+        "link": "/platform/glossary"
       }
     ]
   },
   {
-    "text": "Guide",
+    "text": "Les services",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Gestion des sources",
+        "link": "/services/gitlab"
+      },
+      {
+        "text": "Gestion des artefacts",
+        "link": "/services/artefacts"
+      },
+      {
+        "text": "Analyse qualité",
+        "link": "/services/sonarqube"
+      },
+      {
+        "text": "Gestion des secrets",
+        "link": "/services/vault"
+      },
+      {
+        "text": "Gestion du déploiement",
+        "link": "/services/gitops"
+      }
+    ]
+  },
+  {
+    "text": "Convention de services",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Introduction",
+        "link": "/agreement/introduction"
+      },
+      {
+        "text": "Accompagnement",
+        "link": "/agreement/support"
+      },
+      {
+        "text": "Exploitation",
+        "link": "/agreement/exploitation"
+      },
+      {
+        "text": "Bouchons",
+        "link": "/agreement/mocks"
+      },
+      {
+        "text": "Règles kyverno",
+        "link": "/agreement/kyverno"
+      },
+      {
+        "text": "Labels kubernetes",
+        "link": "/agreement/labels-list"
+      },
+      {
+        "text": "F.A.Q",
+        "link": "/agreement/faq"
+      }
+    ]
+  },
+  {
+    "text": "Guide d'utilisation",
+    "collapsed": true,
     "items": [
       {
         "text": "Démarrer",
@@ -48,29 +102,56 @@
         "link": "/guide/secrets-management"
       },
       {
-        "text": "Bouchons",
-        "link": "/guide/mocks"
-      },
-      {
-        "text": "Labels kubernetes",
-        "link": "/guide/labels-list"
-      },
-      {
         "text": "Bonnes pratiques",
         "link": "/guide/best-practices"
       },
       {
         "text": "Tutoriels",
         "link": "/guide/tutorials"
+      }
+    ]
+  },
+  {
+    "text": "Guide d'installation",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Introduction",
+        "link": "/installation/introduction"
       },
       {
-        "text": "F.A.Q",
-        "link": "/guide/faq"
+        "text": "Prérequis",
+        "link": "/installation/prerequisites"
+      },
+      {
+        "text": "Configuration",
+        "link": "/installation/configuration"
+      },
+      {
+        "text": "Installation",
+        "link": "/installation/installation"
+      },
+      {
+        "text": "Secrets",
+        "link": "/installation/secrets"
+      },
+      {
+        "text": "Debug",
+        "link": "/installation/debug"
+      },
+      {
+        "text": "Désinstallation",
+        "link": "/installation/uninstallation"
+      },
+      {
+        "text": "Gel des versions",
+        "link": "/installation/versions"
       }
     ]
   },
   {
     "text": "Contribution",
+    "collapsed": true,
     "items": [
       {
         "text": "Guide de contribution",
