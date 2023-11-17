@@ -1,6 +1,6 @@
 # Foire aux questions
 
-Cette section regroupe les questions fréquentes de nos clients
+Cette section regroupe les questions fréquentes de nos clients.
 
 ## Construction
 
@@ -8,7 +8,7 @@ Cette section regroupe les questions fréquentes de nos clients
 
 Des bouchons sont proposés afin de simuler un serveur SMTP, création d'un bucket S3, SSO, etc.
 
-La description de l'utilisation de ces bouchons est détaillée [ici](/guide/mocks)
+La description de l'utilisation de ces bouchons est détaillée [ici](/agreement/mocks)
 
 
 ### Comment puis-je lancer la pipeline de synchronisation de mes repos depuis mes repos externes ?
@@ -30,7 +30,7 @@ Sur argocd, dans App Details:
 
 ### Comment puis-je déployer une image personnalisée ?
 
-Toutes les images déployées sur l'offre Cloud π Native doivent :
+Toutes les images déployées sur la plateforme Cloud π Native doivent :
   - Etre construite par l'offre
   - Faire partie des repo publics autorisés par exemple Bitnami (règle non encore mise en place)
 
@@ -59,18 +59,19 @@ RUN apk upgrade --update-cache --available
 CMD [ "command_to_execute"]
 ```
 
-### Puis-je pousser directement un binaire non construit par l'offre DSO ?
+### Puis-je pousser directement un binaire non construit par l'offre Cloud π Native ?
 
-Toutes les images et librairies utilisées sur l'offre Cloud π Native doivent être construites par la chaine DSO ou être disponibles sur les repos publics dont l'auteur est reconnu et autorisé (par exemple bitnami).
+Toutes les images et librairies utilisées sur la plateforme doivent être construites par la chaine DSO ou être disponibles sur les repos publics dont l'auteur est reconnu et autorisé (par exemple bitnami).
 
 Il n'est pas possible d'uploader un binaire directement sur le gestionnaire d'artefacts (Nexus) en dehors de la chaine de construction DSO.
 
 Ainsi, il est possible d'utiliser une image non construite sur DSO, par exemple, bitnami/postgresql, en revanche il est interdit d'utiliser my-nickname/postgresql ni de faire un docker push d'une image construite sur son poste.
 
 ### Quelles sont les contraintes génériques d'Openshift par rapport à Kubernetes ?
-  - Les images doivent être rootless
-  - Le root filesystem des images doit être en lecture seule à l'exception et seul les répertoire /tmp et /var/tmp sont en écriture 
-  - Les ports d'écoute des PODs doivent être supérieurs à 1024
+
+- Les images doivent être rootless
+- Le root filesystem des images doit être en lecture seule à l'exception et seul les répertoire /tmp et /var/tmp sont en écriture 
+- Les ports d'écoute des PODs doivent être supérieurs à 1024
 
 ### J'ai une erreur de récupération des dépendances Java via Maven à cause d'un problème de certificat SSL:
 
@@ -118,7 +119,7 @@ dependencies:
 
 la configuration de chart Helm se fait 
 
-Un exemple complet est présent sur le tutoriel de déploiement [dso-tuto-java-helm](https://github.com/dnum-mi/dso-tuto-java-helm.git)
+Un exemple complet est présent sur le tutoriel de déploiement [dso-tuto-java-helm](https://github.com/cloud-pi-native/tuto-java-infra-helm.git)
 
 ### Comment déployer une base postgreSQL via un opérateur ?
 

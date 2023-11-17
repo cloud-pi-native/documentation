@@ -10,7 +10,7 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo-marianne-gouvernement.png',
     nav: [
-      { text: 'Home', link: '/' },
+      { text: 'Accueil', link: '/' },
     ],
     outline: [2, 3],
     sidebar,

@@ -1,13 +1,13 @@
-# Getting Started
+# Démarrer
 
-la prise en main de l'offre Cloud π Native se fait par la console 
+La prise en main de la plateforme Cloud π Native se fait par la console.
 
 ## Etape 1 - Accès à la console
 
 Une fois sur la console, il faut se connecter en cliquant en haut à droite sur le bouton se connecter :
 ![se connecter](/img/tuto/1tuto-connexion.png)
 
-La création de compte se fait en contactant l'équipe DSO ou en envoyant un mail à l'adresse générique du projet <cloudpinative-relations@interieur.gouv.fr>.
+> **La** création des comptes utilisateurs est opérée par les administrateurs de la plateforme via l'interface administrateur de Keycloak.
 
 ## Etape 2 - Mes projets
 
@@ -20,8 +20,8 @@ Cliquez sur le bouton **+ Créer un projet** afin d'ajouter un nouveau projet :
 <img src="/img/tuto/2tuto-commander-projet.png" alt="créer projets" width="75%" title="créer projets">
 
 Sur cet écran il est nécessaire de renseigner :
- - Nom de l'organisation : correspondant à l'entité administratif de rattachement. A terme, cette liste sera supprimé pour récupérer l'information directement depuis le référentiel utilisateurs.
- - Nom du projet :  Ce nom servira à créer un groupe dans gitlab de l'offre Cloud π Native et sera une composante du namesapce OpenShift créé.
+  - Nom de l'organisation : correspondant à l'entité administratif de rattachement. A terme, cette liste sera supprimé pour récupérer l'information directement depuis le référentiel utilisateurs.
+  - Nom du projet :  Ce nom servira à créer un groupe dans gitlab de la plateforme Cloud π Native et sera une composante du namesapce OpenShift créé.
 
 Valider la saisie en cliquant sur **Commander mon espace projet**
 
@@ -41,7 +41,7 @@ A la fin du processus de création, l'icone du projet est modifiée comme suit e
 Au clic sur le projet, on arrive sur la liste des services associés :
 <img src="/img/tuto/2tuto-acces-services.png" alt="Accès au services" width="75%" title="Accès au services">
 
-Chaque icone permet d'accéder directement aux services de l'offre Cloud π Native directement sur le contexte du projet.
+Chaque icone permet d'accéder directement aux services de la plateforme directement sur le contexte du projet.
 
 Une entrée dans le menu gauche permet également de voir l'état des services :
 
@@ -55,7 +55,7 @@ Une entrée dans le menu gauche permet également de voir l'état des services :
 
 Une fois que le projet est créé sur la console, il convient d'ajouter des dépôts synchronisés.
 
-En effet, en phase de développement, les équipes projets sont autonomes et travaillent avec leurs outils sans contraintes apportées par l'offre Cloud π Native. La synchronisation des dépôts est le processus qui permet de *copier* les dépôts externes stockés sur github, gitab.com, bitbucket, etc. vers le repo de code de l'offre Cloud π Native. la seule contrainte est que le repo externe soit accessible depuis Internet. Ce repo peut être public ou privé. Pour plus d'information, voir la page dédiée au [repo de code](/services/gitlab)
+En effet, en phase de développement, les équipes projets sont autonomes et travaillent avec leurs outils sans contraintes apportées par la plateforme Cloud π Native. La synchronisation des dépôts est le processus qui permet de *copier* les dépôts externes stockés sur github, gitab.com, bitbucket, etc. vers le repo de code de la plateforme Cloud π Native. la seule contrainte est que le repo externe soit accessible depuis Internet. Ce repo peut être public ou privé. Pour plus d'information, voir la page dédiée au [repo de code](/services/gitlab)
 
 Cliquez sur le menu gauche **Dépôts synchronisés**
 
@@ -170,7 +170,7 @@ Notamment :
 Finir la saisie en cliquant sur le bouton *SAVE*
 
 Le déploiement se fait automatiquement par ArgoCD, mais il est possible de forcer la synchronisation avec le repo sur gitlab Cloud π Native en cliquant sur les boutons :
-  - *REFRESH* pour forcer la synchronisation depuis le repo gitlab de l'offre Cloud π Native
+  - *REFRESH* pour forcer la synchronisation depuis le repo gitlab de la plateforme Cloud π Native
   - *SYNC* pour forcer le rafraichissement entre l'état défini par git et l'état réel des objets créés par ArgoCD.
 
 Une fois le déploiement correctement effectué le status de l'application ArgoCD doit correspondre à :

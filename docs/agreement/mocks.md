@@ -5,7 +5,7 @@ Un chart Helm a été créé afin de permettre aux projets clients de l'offre Cl
  - La création d'un bucket S3
  - Le SSO *Passage2*
 
-Le chart Helm est disponible sur le [repo github public](https://github.com/cloud-pi-native/helm-projects-mocks)  
+Le chart Helm est disponible sur le [repo github public](https://github.com/cloud-pi-native/helm-projects-mocks).
 
 ## Utilisation
 

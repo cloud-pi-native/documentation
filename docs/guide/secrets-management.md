@@ -1,14 +1,14 @@
-# Gestion des secrets sur DSO
+# Gestion des secrets
 
-> La gestion des secrets est en cours de mise en oeuvre sur la forge DSO.
+> La gestion des secrets est en cours de mise en oeuvre sur la plateforme.
 
 Le déploiement applicatif suit le principe gitOps et donc de "pousser" l'ensemble des manifestes et charts helm sur un repository GIT. Cependant, ce principe ne peut s'appliquer aux secrets afin de ne pas divulger le contenu d'un secret dans l'historique du repository.
 
 Une première solution de mise en oeuvre avec [SOPS](https://github.com/mozilla/sops) est proposée. Ainsi, sur ce principe le secret est toujours poussé sur un repo git mais chiffré par une clé asymétrique dont la clé privée n'est connue que du Cluster Openshift et la clé publique accessible à tous les projets.
 
-Pour cela des paires de clés au format age ont été générées sur les différents clusters dont voici les clés publiques:
- * Cluster c4 (applications clientes - environnement OVH via la Console Cloud PI): age1g867s7tcftkgkdraz3ezs8xk5c39x6l4thhekhp9s63qxz0m7cgs5kan9a
- * Cluster 4-7 (tests internes DSO) : age1q0zku56p802ul44uhzc24ngvehfurq72p0pcu9gegezn40ukmc7qlpq56n
+Pour cela des paires de clés au format age ont été générées sur les différents clusters, les clés publiques ont été déposées par les admins dans le dépôt `documentation-dso-projets-interne` du Gitlab de la plateforme.
+
+Exportez la variable `AGE_KEY` avec la valeur du cluster souhaité, exemple :
 
 ```bash
 export AGE_KEY=age1g867s7tcftkgkdraz3ezs8xk5c39x6l4thhekhp9s63qxz0m7cgs5kan9a
@@ -42,7 +42,7 @@ spec:
 
 Ce fichier **ne doit pas** être commité et envoyé sur un repo git et rester uniquement en local. Seul la version chiffrée peut être envoyée sur le repo GIT.
 
-Il convient donc de chiffrer ce fichier via SOPS avec la clé publique correspondant à l'environnement. Par exemple sur l'environnement 4 7 :
+Il convient donc de chiffrer ce fichier via SOPS avec la clé publique correspondant à l'environnement. Par exemple :
 
 ```bash
 sops -e --age $AGE_KEY --encrypted-suffix Templates secret.sops.yaml > secret.sops.enc.yaml

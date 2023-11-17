@@ -2,6 +2,8 @@
 
 :warning: __*La plateforme est en cours de construction et des évolutions fréquentes sont à prévoir.*__ :warning:
 
+Ce dépôt est construit et déployé à l'adresse : https://cloud-pi-native.fr
+
 ## L'offre
 
 ### Présentation 
@@ -59,11 +61,11 @@ L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-
   - Gestion des [secrets applicatifs](docs/guide/secrets-management.md)
   - Outil de [déploiement automatisé](docs/services/gitops.md) des images Docker sur les infrastructures du ministère ou à l'extérieur du ministère en suivant les principes GitOps (Déploiement continue)
   - Hébergement des [environnements](docs/guide/environments-management.md) applicatifs de l'intégration à la production
-  - Mise à disposition d'outil d'[observabilité et exploitabilité](docs/presentation/exploitation.md) des applications déployées sur l'offre : accès aux logs, métriques techniques et applicatives, procédures standard d'exploitation
+  - Mise à disposition d'outil d'[observabilité et exploitabilité](docs/agreement/exploitation.md) des applications déployées sur l'offre : accès aux logs, métriques techniques et applicatives, procédures standard d'exploitation
 
 L'architecture générale de l'offre Cloud π Native est la suivante :
 
-[](docs/public/img/architecture.png)
+![](docs/public/img/architecture.png)
 
 ### SLA associés à l'offre Chaine DevSecOps secondaire 
 
@@ -86,14 +88,14 @@ Note : le SLA du cloud PI pour le fonctionnement en production des applications 
 
 ## Accompagnement (WIP)
 
-Un volet [accompagnement](docs/presentation/support.md) intial des projets directement par les équipes de l'offre Cloud π Native permet d'utiliser l'offre dans des conditions optimales. Cet accompagnement fait partie du parcours technique d'embarquement sur l'offre Cloud π Native.
+Un volet [accompagnement](docs/agreement/support.md) intial des projets directement par les équipes de l'offre Cloud π Native permet d'utiliser l'offre dans des conditions optimales. Cet accompagnement fait partie du parcours technique d'embarquement sur l'offre Cloud π Native.
 
 Elle s'articule dans une offre à 3 niveaux :
  - Démarche autonome ( kit d'autoformation, tutoriels, etc... )
  - Démarche d'accompagnement à l'initialisation ( "Service Team" )
 - Formation et certification d'acteurs externes ( offre en cours d'élaboration )
 
-Les ressources d'accompagnement étant limitées, l'embarquement est conditionné à des prérequis techniques et ou organisationnels [prérequis](docs/presentation/prerequisites.md) pour embarquer sur l'offre Cloud π Native de façon sereine et optimale.
+Les ressources d'accompagnement étant limitées, l'embarquement est conditionné à des prérequis techniques et ou organisationnels [prérequis](docs/platform/compatibility.md) pour embarquer sur l'offre Cloud π Native de façon sereine et optimale.
 
 Typiquement l'équipe doit être dans un parcours de montée en compétence à l'agilité et à la conteneurisation/kubernetes.
 
@@ -103,20 +105,20 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
 
 ![parcours_apprentissage](docs/public/img/learning-process.png)
 
-  - Etape 1 : [Matrice de compétences](docs/presentation/skills-matrix.md) des technologies à connaitre pour utiliser l'offre Cloud π Native 
-  - Etape 2 : Vérification de l'éligibilité de son application avec le modèle Cloud Native Application [prérequis](docs/presentation/prerequisites.md) technique liés à l'offre. Les équipes Cloud π Native [accompagnent](docs/presentation/support.md) les équipes projets sur cette étape afin d'apporter conseils et qualification des architectures et maturité technique des équipes. 
+  - Etape 1 : [Matrice de compétences](docs/platform/skills-matrix.md) des technologies à connaitre pour utiliser l'offre Cloud π Native 
+  - Etape 2 : Vérification de l'éligibilité de son application avec le modèle Cloud Native Application [prérequis](docs/platform/compatibility.md) technique liés à l'offre. Les équipes Cloud π Native [accompagnent](docs/agreement/support.md) les équipes projets sur cette étape afin d'apporter conseils et qualification des architectures et maturité technique des équipes. 
   - Etape 3 : Prise de connaissance des [bonnes pratiques](docs/guilde/best-practices.md) et expérimentation avec une série de tutoriels [tutoriels](docs/guide/tutorials.md) afin de faire ses premiers pas avec l'offre
   - Etape 4 : [Embarquement](docs/guide/get-started.md) de l'application sur l'offre
-  - Etape 5 : Félicitation ! Vous êtes maintenant un utilisateur de la plateforme Cloud π Native et votre application peut passer en production via les principes d'[exploitation et observabilité](docs/presentation/exploitation.md) de vos projets.
+  - Etape 5 : Félicitation ! Vous êtes maintenant un utilisateur de la plateforme Cloud π Native et votre application peut passer en production via les principes d'[exploitation et observabilité](docs/agreement/exploitation.md) de vos projets.
 
 
-A tout moment, vous pouvez consulter la [documentation détaillée](docs/presentation/platform-description.md) de la plateforme Cloud π Native, son architecture et les services proposés
+A tout moment, vous pouvez consulter la [documentation détaillée](docs/platform/introduction.md) de la plateforme Cloud π Native, son architecture et les services proposés
 
-Enfin notre [FAQ](docs/guide/faq.md) permet de lister les questions fréquentes de nos clients, et des exemples pour réaliser des bouchons (S3, SMTP, ...)
+Enfin notre [FAQ](docs/agreement/faq.md) permet de lister les questions fréquentes de nos clients, et des exemples pour réaliser des bouchons (S3, SMTP, ...)
  
 ## Notre roadmap (WIP)
 
-L'offre Cloud π Native est en cours de construction incrémentale. Notre [feuille de route détaillée](docs/presentation/roadmap.md) est accessible permettant de donner de la visibilité sur les prochaines fonctionnalités. 
+L'offre Cloud π Native est en cours de construction incrémentale. Notre [feuille de route détaillée](docs/platform/roadmap.md) est accessible permettant de donner de la visibilité sur les prochaines fonctionnalités. 
 
 Voici les grandes fonctionnalités prévus dans les prochaines semaines :
  - Réduction de la quantité de code / manifest à produire;
@@ -133,3 +135,25 @@ Si vous souhaitez devenir primo accédant, beta testeurs ou avez des questions, 
 
 L'offre Cloud π Native s'améliore grâce aux retours de nos utilisateurs, n'hésitez pas à contribuer, notamment en nous faisant des retours sur la documentation. Le détail pour contribuer est [ici](CONTRIBUTING.md)
 
+### Contribuer à la documentation
+
+Le dépôt est construit avec [vitepress](https://vitepress.dev) à l'aide de fichiers markdown positionné dans le dossier [docs](./docs/).
+Les assets (images, fichiers additionnels, etc...) sont positionnés dans le dossier [public](./docs/public/).
+
+Structure du dépôt :
+
+```sh
+./docs
+├── contribution/
+├── guide/
+├── installation/
+├── platform/
+├── public
+│   ├── examples/
+│   ├── img/
+│   ├── favicon.ico
+│   └── logo-marianne-gouvernement.png
+├── agreement/
+├── services/
+└── index.md
+```
