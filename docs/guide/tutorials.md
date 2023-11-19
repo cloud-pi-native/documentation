@@ -1,11 +1,5 @@
 # Tutoriels
 
-## Prise en main de la console
-
-La plateforme Cloud π Native est constitué d'un ensemble de services : gestionnaire de sources, outil de construction, gestion de la qaulité et de la sécurité, etc. ces outils interagissent entre eux. Une console permet de piloter l'ensemble de ces outils et est le point d'accès unique pour les clients de l'offre.
-
-Le détail de la manipulation de la console est détaillée sur la page [démarré](/guide/get-started)
-
 ## Déployer une application stateless
 
 Tutoriel de déploiement d'un serveur web servant une page html statique.
