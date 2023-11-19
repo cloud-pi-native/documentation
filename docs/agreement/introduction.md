@@ -21,51 +21,30 @@ Le cadre interministériel d'utilisaton de l'offre est disponible à l'emplaceme
 Dés que les [prérequis](https://cloud-pi-native.fr/agreement/support.html) sont présents, la souscription à l'offre Cloud π Native est possible en suivant les étapes suivantes:
 
   - Effectuer une demande d'accès au service via le formulaire suivant : <https://www.demarches-simplifiees.fr/commencer/cloud-pi-native>. 
-  - Après acceptation du dossier, l'enrollement du projet est effectuté dans la console Cloud pi Native, et l'équipe projet est en charge d'instancier les ressources nécessaires (gitlab, vault, registry, etc...) dans la chaine secondaire et de configurer son projet  ;
-  - Recopie des repository de code et de déploiement;
-  - Mise en place du pipeline "DevSecOps" au sein de la chaine secondaire. L'application reste maître de son pipeline et de sa surveillance;
-  - Mise en place du/des namespaces dans le cluster cible ainsi des secrets nécessaires au fonctionnement et du provisionning gitops de l'application (argoCD);
-  - Provisionning des ressources d'infrastructure additionnelles ( certificats, ouverture de fluxs, bucket S3, etc...). Cette étape nécessite l'intervention des équipes d'infrastructure Miom ( ou de l'hébergeur choisis) & du ministère cible. (automatisation progressive en cours)
-  - Construction des artefacts sur l'offre Cloud π Native;
-  - Analyse de qualité et de la sécurité;
-  - Construction des images de conteneurs;
-  - Provisionning de l'application dans le cluster (l'application est tirée via GitOps).
+  - Après acceptation du dossier, l'équipe [Accompagnement](https://cloud-pi-native.fr/agreement/introduction.html#accompagnement) prendera contact avec vous pour la phase d'accpagnement.
 
 Enfin, le déploiement s'effectue sur différentes cibles d'hébergement possibles :
 
- - Un socle kubernetes/Openshift jusqu'au niveau DR sur les environnements du ministère;
- - Un cluster kubernetes directement gérés par l'équipe client par exemple chez un Cloud Service Provider.
-
-**Vision d'ensemble de l'offre :**
+**Vision d'ensemble de l'offre de service:**
 
 ![vision](/img/global-vision.png)
 
-## Les services proposés
+Comme mentionné dans le schèma, l'offre de service comprend si vous le souhaitez l'infrastructure hébergeant vos applicatifs. 
+Cette infrastrcture peut être:
+ - Un socle kubernetes/Openshift mutualisé dans la zone "Non Protégé" (NP) du ministère de l'intérieur. 
+ - Un socle kubernetes/Openshift dédié dans la zone "Non Protégé" (NP) ou la zone "Diffusion Restreinet (DR)du ministère de l'intérieur. 
+ - Un socle kubernetes directement gérés par l'équipe projet.
 
-L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-Mer est une offre PaaS basée sur [Cloud π](https://www.numerique.gouv.fr/services/cloud/cloud-interne/) sur les infrastructures du ministère de l'intérieur offrant des fonctionnalités DevSecOps à savoir :
-
-  - [Gestionnaire de sources](/services/gitlab) applicatives
-  - Outil de gestion de la [qualité](/services/sonarqube) statique du code (SAST) et dynamique (DAST)
-  - Orchestrateur de [construction](/services/gitlab) d'artefacts (Intégration continue)
-  - [Entrepot d'artefacts](/services/artefacts) et d'images Docker
-  - Gestionnaire de [secrets](/services/vault) des chaines IC/DC
-  - Gestion des [secrets applicatifs](/guide/secrets-management)
-  - Outil de [déploiement automatisé](/services/gitops) des images Docker sur les infrastructures du ministère ou à l'extérieur du ministère en suivant les principes GitOps (Déploiement continue)
-  - Hébergement des [environnements](/guide/environments-management) applicatifs de l'intégration à la production
-  - Mise à disposition d'outil d'[observabilité et exploitabilité](/agreement/exploitation) des applications déployées sur l'offre : accès aux logs, métriques techniques et applicatives, procédures standard d'exploitation
-
-L'architecture générale de l'offre Cloud π Native est la suivante :
-
-![architecture](/img/architecture.png)
+Le choix de la cible est cas par cas et fait lors des premières phases d'échange. 
 
 ## Accompagnement
 
-Un volet [accompagnement](/agreement/support) intial des projets directement par les équipes de l'offre Cloud π Native permet d'utiliser l'offre dans des conditions optimales. Cet accompagnement fait partie du parcours technique d'embarquement sur l'offre Cloud π Native.
-
-Elle s'articule dans une offre à 3 niveaux :
- - Démarche autonome ( kit d'autoformation, tutoriels, etc... )
- - Démarche d'accompagnement à l'initialisation ( "Service Team" )
-- Formation et certification d'acteurs externes ( offre en cours d'élaboration )
+Comme metionné plus haut, à la souscription de l'offre Cloud π Native, une équipe accompagnement sera le vis-à-vis du projet et assurera: 
+- Un [accompagnement](/agreement/support) rapproché aux projets pour que l'utilisation de l'offre se réalise dans des conditions optimales.
+- Le parcours technique d'embarquement sur l'offre Cloud π Native qui s'articule à trois niveaux: 
+   * Démarche autonome ( kit d'autoformation, tutoriels, etc... )
+   * Démarche d'accompagnement à l'initialisation ( "Service Team" )
+   * Formation et certification d'acteurs externes ( offre en cours d'élaboration )
 
 Les ressources d'accompagnement étant limitées, l'embarquement est conditionné à des prérequis techniques et ou organisationnels [prérequis](/platform/compatibility) pour embarquer sur l'offre Cloud π Native de façon sereine et optimale.
 
@@ -90,5 +69,5 @@ Enfin notre [FAQ](/agreement/faq) permet de lister les questions fréquentes de 
 
 ## Contact
 
-Pour toute information ou demande pour rejoindre la betatest, veuillez nous contacter à l'adresse suivante : <cloudpinative-relations@interieur.gouv.fr>.
+Pour toute information ou demande, veuillez nous contacter à l'adresse suivante : <cloudpinative-relations@interieur.gouv.fr>. Nous vous recontacterons au plus vite dés la réception du mail.  
 Si vous faites déjà parti des beta testeurs et que vous souhaitez poser des questions ou avoir de l'accompagnement, veuillez nous contacter directement via le serveur Mattermost prévu à cet effet (si vous n'avez pas été ajouté au serveur Mattermost, veuillez contacter l'adresse mail précédente).
