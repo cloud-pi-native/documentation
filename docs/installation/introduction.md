@@ -1,11 +1,12 @@
 # Introduction
+Le dépot de la plateforme Cloud π Native est sur GitHub: https://github.com/cloud-pi-native/socle
+Son installation s'effectue d'une manière automatisée avec **Ansible**
 
-L'installation de la plateforme Cloud π Native s'effectue de manière automatisée avec **Ansible** et le dépôt https://github.com/cloud-pi-native/socle.
+Les services déployés seront les suivants :
 
-Les éléments déployés seront les suivants :
-
-| Outil                       | Site officiel                                                                  |
+| Service                       | Site officiel                                                                |
 | --------------------------- | ------------------------------------------------------------------------------ |
+| Console Cloud π Native      | <https://cloud-pi-native.fr/guide/get-started.html>                            |
 | Argo CD                     | <https://argo-cd.readthedocs.io>                                               |
 | Cert-manager                | <https://cert-manager.io>                                                      |
 | Console Cloud π Native      | <https://github.com/cloud-pi-native/console>                                   |
@@ -21,6 +22,6 @@ Les éléments déployés seront les suivants :
 | SOPS                        | <https://github.com/isindir/sops-secrets-operator>                             |
 | HashiCorp Vault             | <https://www.vaultproject.io>                                                  |
 
-Certains outils peuvent prendre un peu de temps pour s'installer, par exemple Keycloak ou GitLab.
+L'installation de certains services peuvent prendre un peu de temps, par exemple Keycloak ou GitLab.
 
-Vous pouvez trouver la version des outils installés dans le fichier [versions](https://github.com/cloud-pi-native/socle/blob/main/versions.md)
+Vous trouvez les versions de l'ensemble des outils de la plateforme Cloud π Native installés [ici](https://github.com/cloud-pi-native/socle/blob/main/versions.md)
