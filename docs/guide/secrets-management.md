@@ -1,12 +1,10 @@
 # Gestion des secrets
 
-> La gestion des secrets est en cours de mise en oeuvre sur la plateforme.
-
 Le déploiement applicatif suit le principe gitOps et donc de "pousser" l'ensemble des manifestes et charts helm sur un repository GIT. Cependant, ce principe ne peut s'appliquer aux secrets afin de ne pas divulger le contenu d'un secret dans l'historique du repository.
 
-Une première solution de mise en oeuvre avec [SOPS](https://github.com/mozilla/sops) est proposée. Ainsi, sur ce principe le secret est toujours poussé sur un repo git mais chiffré par une clé asymétrique dont la clé privée n'est connue que du Cluster Openshift et la clé publique accessible à tous les projets.
+La solution que nous proposons aujourd'hui est [SOPS](https://github.com/mozilla/sops). Avec SOPS, vos secrets applicatifs sont poussés chiffrés sur vos dépôts git. Une clé asymétrique est utilisée dont la clé privée n'est connue que du cluster Kubernetes hébergeant votre application et la clé publique accessible à tous les projets.
 
-Pour cela des paires de clés au format age ont été générées sur les différents clusters, les clés publiques ont été déposées par les admins dans le dépôt `documentation-dso-projets-interne` du Gitlab de la plateforme.
+Dans le cas ou vous choisissez l'offre de services de la plateforme SecNumCloud MIOM pour déployer vos applicatifs dans les clusters kubernetes gérés par les équipes Cloud π Native, des paires de clés au format age ont été générées sur les différents clusters et les clés publiques ont été déposées par les admins dans le dépôt `documentation-dso-projets-interne` du Gitlab de la plateforme.
 
 Exportez la variable `AGE_KEY` avec la valeur du cluster souhaité, exemple :
 
@@ -40,7 +38,7 @@ spec:
         .dockerconfigjson: '{"auths":{"index.docker.io":{"username":"user","password":"pass","email":"toto@example.com","auth":"dXNlcjpwYXNz"}}}'
 ```
 
-Ce fichier **ne doit pas** être commité et envoyé sur un repo git et rester uniquement en local. Seul la version chiffrée peut être envoyée sur le repo GIT.
+Ce fichier **ne doit pas** être commité et envoyé sur un dépôt Git et rester uniquement en local. Seul la version chiffrée peut être envoyée sur le dépôt Git.
 
 Il convient donc de chiffrer ce fichier via SOPS avec la clé publique correspondant à l'environnement. Par exemple :
 
@@ -97,7 +95,7 @@ sops:
     version: 3.7.3
 ```
 
-Ce fichier peut être commité et envoyé sur un repo git car le contenu est chiffré.
+Ce fichier peut être commité et envoyé sur un dépôt git car le contenu est chiffré.
 
 > A noter que chaque élément du secretTemplates donnera lieu à un objet Secret dans kubernetes une fois le secret déchiffrée lors du déploiement. 
 Ainsi, dans l'exemple, le secret secret-exemple sera crée avec les données suivantes
