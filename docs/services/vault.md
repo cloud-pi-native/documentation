@@ -2,13 +2,15 @@
 
 ## Présentation
 
-Les secrets de la chaine de construction sont gérés par un coffre [Hashicorp Vault](https://www.vaultproject.io/). Pour l'instant seuls les secrets de la chaine CI/CD sont gérés dans cet espace et les clients (utilisateurs de l'offre Cloud π Native) n'ont pas accès à ce coffre. La gestion des secrets applicatif est traité [ici](/guide/secrets-management).
+Pour la gestion de l'ensemble des secrets, l'usine logcielle de l'offre Cloud π Native vous propose le service de gestion de secrets **Vault** en version communautaire.
+
+Les secrets des services de l'usine logicielle de l'offre Cloud π Native sont gérés par un coffre [Hashicorp Vault](https://www.vaultproject.io/). Pour l'instant seuls les secrets de la chaine CI/CD sont gérés dans cet espace et les clients (utilisateurs de l'offre Cloud π Native) n'ont pas accès à ce coffre. La gestion des secrets applicatif est traité [ici](/guide/secrets-management).
 
 Ainsi, les secrets gérés dans hashicorp Vault concernent, pour l'instant, les besoins internes de la plateforme à savoir les token et credentials d'accès aux différents outils depuis gitlab-ci (SonaQube, Nexus, etc.)
 
 ## Organisation du Vault
 
-Les secrets de la chaine DevOps sont stockés sur Vault sur un engine kv v2 (clé / valeur). Ces secrets sont traités de façon hiérarchique dans une arborescence : 
+Les secrets de la chaine DevSecOps sont stockés sur Vault sur un engine kv v2 (clé / valeur). Ces secrets sont traités de façon hiérarchique dans une arborescence : 
 
   - /
     - projects/
