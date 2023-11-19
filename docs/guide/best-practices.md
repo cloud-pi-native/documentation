@@ -2,45 +2,47 @@
 
 ## Applicatifs
 
-Une application Cloud Native doit respecter au maximum les [Twelve-Factor](https://12factor.net/fr/)
+Une application Cloud π Native doit respecter les [Twelve-Factor](https://12factor.net/fr/)
 
-En plus des recommandations précédentes, il est impératif de respecter les règles suivantes :
+D'autres bonnes pratiques à réspecter impérantivement: 
 
 1. Base de code
 
-    Le code de l'application et de déploiement doit etre versionné dans un repo de source de type Git (Public/Privée) accessible depuis internet.
+    Le code de l'application et de déploiement doit etre **versionné** dans un dépôt de source de type **Git** (Public/Privée) **accessible depuis internet**.
 
 2. Dépendances
 
-    __TOUTES__ dépendances necessaires à la constuction de l'application (Libraries,Images, ...) doivent faire parti des repo standard (Maven,Composer,Node, ...) ou reconstruite par l'offre et déposée dans le gestionnaire d'artefact de celle-ci.
+    __TOUTES__ dépendances necessaires à la constuction de l'application (Libraries,Images, ...) doivent prévenir des dépôts de librairies connus telsque Maven, Coposer et Node. Il est aussi possible de construire les dépendences par l'offre Cloud π Native et les déposer dans son gestionnaire d'artefact.
 
 3. Configuration / Service Externe
 
-    __TOUTES__ la configuration applicative pouvant être amenée a être modifié (Service Externe,Port, ...) doit pouvoir être injecté par des variables d'environnement au runtime ou via un fichier de configuration dynamique via une ConfigMap
+    __TOUTES__ la configuration applicative pouvant être amenée a être modifié, par exemple la configuration entre deux environnements applicatifs est la plus part du temps différente. Elle doit donc être injectée par des variables d'environnement au runtime ou via un fichier de configuration dynamique via une ConfigMap
 
 4. Port
 
-    Afin de respecter les préconisation de sécurité d'[Openshift](https://docs.openshift.com/container-platform/4.12/openshift_images/create-images.html), les applications déployées doivent écouter sur des ports > 1024
-
-5. Logs
+    Afin de respecter les préconisation de sécurité, les applications déployées doivent écouter sur des ports > 1024.
+   
+6. Logs
 
     L'application __NE DOIT PAS__ écrire dans un fichier de logs spécifique mais écrire l'ensemble de ces logs dans la sortie standards (stdout) au format GELF ou à defaut JSON.
 
-    Ceux-ci seront accessible via l'offre de supervision [FAQ](/agreement/faq)
+    Les logs seront accessibles plus facilement de cette manière depuis les outils de supervisions.
 
-6. Processus
+7. Processus
 
-    Les applications doivent être __STATELESS__, si des données de session/cache doivent être utilisé et partagé par l'application alors elles doivent faire l'objet d'un service externe prévus à cet effet (Redis, ...)
+    Les applications doivent être __STATELESS__, si des données de session/cache doivent être utilisé et partagé par l'application alors elles doivent faire l'objet d'un service externe prévus à cet effet telsque Redis.
 
-7. Processus d’administration
+8. Processus d’administration
 
     Les opérations d'administrations doivent être faites via des initContainer (Init/Migration bdd, ...) ou des CronJob (Backup bdd, ...) [FAQ](/agreement/faq)
 
+L'ensemble de ces bonnes pratiques sont détaillés dans la documentation OpenShift [ici](https://docs.openshift.com/container-platform/4.12/openshift_images/create-images.html)
+
 ## Architectures
 
-L'application déployée doit être conteneurisée (sous la forme de un ou plusieurs conteneurs).
+L'application déployée doit être conteneurisée (sous la forme d'un ou plusieurs conteneurs).
   - Les __Dockerfiles__ doivent être dans le dépôt pour permettre à la chaine de reconstruire l'application.
-  - Les images de bases des __Dockerfiles__ doivent être accessibles publiquement ou reconstuire par l'offre.
+  - Les images de bases des __Dockerfiles__ doivent être accessibles publiquement ou reconstuire par l'offre Cloud π Native .
   - Les images doivent être __rootless__, l'utilisateur qui lance le processus au sein du conteneur ne doit pas être `root`.
   - L'utilisateur lançant le processus dans le conteneur doit avoir les droits adéquats en lecture / écriture sur le système de fichiers si l'application doit manipuler ce dernier.
   - Des sondes de "Readiness"/"Liveness" doivent être implémenté.
@@ -48,9 +50,10 @@ L'application déployée doit être conteneurisée (sous la forme de un ou plusi
 
 ## Déploiement
 
-L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code__, pour ce faire 2 solution s'offrent aux utilisateurs.
+L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code__:
  - Utiliser des manifestes [kubernetes](https://kubernetes.io/) avec Kustomize pour variabliser vos manifestes (cf. [tutoriels](/guide/tutorials))
  - Utiliser des charts [helm](https://helm.sh/) (cf. [tutoriels](/guide/tutorials) pour avoir des exemples de fichiers).
+ - Utiliser [Kustomize](https://kustomize.io/) 
 
 ## Labels
 
@@ -111,7 +114,7 @@ Toutes les secrets devront etre contenus dans un Vault qui sera mis a dispositio
  
 ## Liveness et Readiness
 
-Il est très important de mettre en place ces checks afin de vérifier l'etat des pods, le plus efficace étant de faire des checks de l'application.
+Il est très important de mettre en place ces checks afin de vérifier l'etat de vos applications. Ceci est nécessaire pour assurer la haute disponibilité et la résilience de vos applications. 
 Cela peut-etre une fonctionnalité de l'application, une page d'un site web, une entrée en base de donnée, etc.
 
 ``` Yaml
@@ -132,13 +135,13 @@ readinessProbe:
 
 ## SSL 
 
-Afin d'optimiser un flux sécurisé,il est necessaire que cela soit de bout en bout. 
+Afin d'optimiser un flux sécurisé,il est préférable que cela soit de bout en bout. 
 
 Exemple du schéma de distribution de la requete. 
 
-Users --HTTPS-> ReverseProxy --HTTPS-> Router Openshift --HTTPS-> Container   (Best Case)
+Users --HTTPS-> ReverseProxy --HTTPS-> Ingress Kubernetes --HTTPS-> Container   (Best Case)
 
-Users --HTTPS-> ReverseProxy --HTTPS-> Router Openshift --HTTP-> Container   (Usual Case)
+Users --HTTPS-> ReverseProxy --HTTPS-> Ingress Kubernetes --HTTP-> Container   (Usual Case)
 
 ## HPA (Horizontal Pod Autoscaling)
 
@@ -169,7 +172,7 @@ Exemple d'image base Lightway : Alpine
 
 ## Politiques réseau
 
-Les "Network policies" sont sur openshift par défaut en "Deny ALL", il faut donc définir les flux entrants et sortants sur les namespaces. 
+Les "Network policies" sont par défaut en "Deny ALL". Il est donc à vous de déifnir les flux entrants et sortants sur les namespaces de vos projets. 
 
 ReverseProxy-->Networkpolicies-->Pods (Ingress)
 
