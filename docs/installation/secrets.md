@@ -1,6 +1,6 @@
 # Récupération des secrets
 
-Au moment de leur initialisation, certains outils stockent des secrets qui ne sont en principe plus disponibles ultérieurement.
+Au moment de leur initialisation, certains outils stoquent des secrets qui ne sont en principe plus disponibles ultérieurement.
 
 **Attention !** Pour garantir l'[idempotence](https://fr.wikipedia.org/wiki/Idempotence), ces secrets sont stockés dans plusieurs ressources du cluster. Supprimer ces ressources **indique à Ansible qu'il doit réinitialiser les composants associés**.
 
