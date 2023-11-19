@@ -1,6 +1,6 @@
 # Convention de services
 
-La Direction de la Transformation Numérique du Ministère de l'Intérieur et des Outre-mer propose une offre de services autours de deux instances de la plateforme *(OVH SecNumCloud / Cloud π)* à destination des administrations ou des entreprises de services numériques travaillant pour leur compte. 
+La Direction de la Transformation Numérique du Ministère de l'Intérieur et des Outre-mer propose une offre de services autours de deux instances de la plateforme *(OVH SecNumCloud / Cloud π)* à destination des *administrations* ou des *entreprises de services numériques* travaillant pour leur compte. 
 
 > __:warning: Attention, les seuls bénéficiaires de cette offre managée sont les administrations ou leurs ESN partenaires__.
 
@@ -12,23 +12,15 @@ Avec l’adoption de la doctrine « Cloud au centre », le Gouvernement Françai
 
 **Objectif** : accélérer la transformation numérique au bénéfice des usagers et dans le strict respect de la cybersécurité et de la protection des données des citoyens et des entreprises.
 
-L'offre interministérielle Cloud π Native, offre les services d'une plateforme DevSecOps complète afin de suivre le cycle de vie complet de son projet.
+L'offre *interministérielle* Cloud π Native, offre les services d'une plateforme *DevSecOps* complète afin de suivre le cycle de vie complet de son projet.
 
-La philosophie de l'offre est de créer une chaine collaborative étendue entre l'équipe de développement et l'hébergement, qui s'appuient sur :
- - un socle d'intégration à la main des développeurs, appellée chaine primaire.
- - un service côté infrastructure étatique effectuant la recompilation du code et l'automatisation des déploiement, appellée chaine secondaire. 
- 
-La chaine secondaire est également en charge de mesurer la qualité du code et la conduite d'audits automatisés à chaque build/déploiement contribuant à l'homologation en continu de l'application.
-
-L'usage de standards industriels largement distribués tel que kubernetes et Gitops et la sécabilité de l'offre, permettent un transfert facilité depuis et vers d'autres solutions d'hébergement kubernetes telles que les Clouds Publics.
+Vous trouvez le détail de cette offre [ici](https://cloud-pi-native.fr/platform/introduction.html)
 
 Le cadre interministériel d'utilisaton de l'offre est disponible à l'emplacement suivant : <https://github.com/cloud-pi-native/cct-cloud-native>
 
-Lorsque que l'équipe projet est prête avec un première base de code fonctionnelle, il est possible de l'intégrer sur l'offre Cloud π Native.
+Dés que les [prérequis](https://cloud-pi-native.fr/agreement/support.html) sont présents, la souscription à l'offre Cloud π Native est possible en suivant les étapes suivantes:
 
-La séquence d'accès typique est la suivante :
-
-  - Effectuer une demande d'accès au service via le formulaire suivant : <https://www.demarches-simplifiees.fr/commencer/cloud-pi-native> par un correspondant étatique ayant la compétence pour accepter les conditions CGU et fournir les données d'imputation budgétaire (UO).
+  - Effectuer une demande d'accès au service via le formulaire suivant : <https://www.demarches-simplifiees.fr/commencer/cloud-pi-native>. 
   - Après acceptation du dossier, l'enrollement du projet est effectuté dans la console Cloud pi Native, et l'équipe projet est en charge d'instancier les ressources nécessaires (gitlab, vault, registry, etc...) dans la chaine secondaire et de configurer son projet  ;
   - Recopie des repository de code et de déploiement;
   - Mise en place du pipeline "DevSecOps" au sein de la chaine secondaire. L'application reste maître de son pipeline et de sa surveillance;
