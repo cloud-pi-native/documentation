@@ -2,7 +2,7 @@
 Le dépot de la plateforme Cloud π Native est sur GitHub: https://github.com/cloud-pi-native/socle
 Son installation s'effectue d'une manière automatisée avec **Ansible**
 
-Les services déployés seront les suivants :
+La dernière release de la plateforme Cloud π Native effectuera l'installation des services suivants :
 
 | Service                       | Site officiel                                                                |
 | --------------------------- | ------------------------------------------------------------------------------ |
