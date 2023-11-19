@@ -1,16 +1,17 @@
 # Outil d'analyse qualimétrie
 
 ## Présentation
-L'outil d'analyse de la qualité du code static de l'offre Cloud π Native est SonarQube. Il permet de vérifier la qualité du code lors des différentes étapes du processus de développement, de la construction à la livraison.
+
+Pour l'analyse statique (bonnes pratiques et sécurité) de vos code sources applicatifs et infrastructures, l'usine logcielle de l'offre Cloud π Native vous propose le service de qualimétrie continu de code **SonarQube** en version communautaire.
 
 Des *Quality gates* sont positionnées afin de garantir que le code construit respecte les normes de sécurité et de qualité.
 
-Les variables d'environnement suivantes sont disponibles depuis Gitlab lors des étapes de build et permettant de contacter sonar :
+Les variables d'environnement suivantes sont disponibles depuis Gitlab lors des étapes de construction et permettant de contacter sonar :
 
 - SONAR_HOST_URL
 - SONAR_TOKEN
 
-Celui-ci est préconfiguré pour quelques outils (npm, mvn, ...) et disponible dans les templates Gitlab CI et utilisable via l'exemple suivant :
+SonarQube est préconfiguré pour certains outils telsque npm et Maven, présents dans les templates [Gitlab](https://cloud-pi-native.fr/services/gitlab.html) et utilisable via l'exemple suivant :
 
 ```yaml
 test_front:
