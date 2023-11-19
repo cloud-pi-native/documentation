@@ -13,7 +13,7 @@ La plateforme est constituée de:
 - Une usine de logicielle sécurisée et interconnectée composant l'offre de services DevSecOps. Cette offre de services est **Open Source**. 
 - Une [console](https://github.com/cloud-pi-native/console) Web **Open Source** consommant ses services afin de construire et déployer vos ressources applicatifs (projets, membres, environnements, etc). Il est aussi possible d'enregistrer des services custom gràce à son architecture à plugins. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projet (Par le gestionnaire des plugins).
 
-Le rajout d'un nouveau plugin est détaillé [ici]()
+Le rajout d'un nouveau plugin est détaillé [ici](https://github.com/cloud-pi-native/console)
 
 ## Architecture fonctionnelle de la plateforme
 
