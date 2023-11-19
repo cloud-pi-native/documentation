@@ -6,9 +6,12 @@ Les plateformes PaaS peuvent s'exécuter dans le cloud ou sur site. En ce qui co
 
 ## Description de la plateforme
 
-Cloud π Native est une plateforme de services à destination des équipes DevOps et une [console](https://github.com/cloud-pi-native/console) permettant de consommer ses services pour la construction et le déploiement des ressources applicatifs (projets, membres, environnements, etc).
+La plateforme qui s'appelle "Cloud π Native" est composée d'une **plateforme de services** à destination des équipes DevSecOps et hébergée au sein d'un **cloud souverain**. 
+La plateforme est constituée de: 
 
-Pour pouvoir enregistrer des services custom, une architecture à plugins est utilisée pour la console. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projet (Par le gestionnaire des plugins).
+- Cluster d'orchestrateur de conteneur qui est Kubernetes
+- Une usine de logicielle sécurisée et interconnectée composant l'offre de services DevSecOps. Cette offre de services est **Open Source**. Une 
+- une [console](https://github.com/cloud-pi-native/console) Web **Open Source** consommant ses services afin de construire et déployer vos ressources applicatifs (projets, membres, environnements, etc). Il est aussi possible d'enregistrer des services custom gràce à son architecture à plugins. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projet (Par le gestionnaire des plugins).
 
 Le rajout d'un nouveau plugin est détaillé [ici]()
 
@@ -32,19 +35,18 @@ Liste des services de la plateforme :
 
 [1] : *Instanciation au niveau du projet obligatoire mais utilisation selon le besoin.*
 
-## Ambitiom
+## Ambition
 
-L'ambition de cette plateforme est de proposer aux équipes projet une offre de services large, compléte permettant de réaliser la construction et le déploiement de vos applications en assurant les standards de qualité et sécurité. 
+L'ambition de cette plateforme est de proposer aux équipes projets une offre de services large, complète déployée au sein d'un cloud souverain et permettant d'automatiser la construction et le déploiement de vos projets en assurant les standards de qualité et sécurité. 
 
-Pour pouvoir manipuler les services de cette plateforme, la première étape consister à synchroniser le code applicatif depuis un repo externe . 
-
+Pour pouvoir manipuler les services de cette plateforme, la première étape consister à synchroniser le code applicatif depuis un repo externe accéssible depuis la plateforme. 
 
 La chaine de CI/CD sur le Gitlab de la plateforme permet:
 
-- Lancer les jeux de tests applicatif (unitaires, de bout en bout, ...).
-- Effectuer une analyse de la qualité du code source à l'aide du service [Sonarqube](https://www.sonarqube.org/).
-- Construire les images de conteneur de l'application dans la CI/CD du service [Gitlab](https://about.gitlab.com/).
-- Scanner les images et le code source à l'aide de [Trivy](https://aquasecurity.github.io/trivy).
-- Stocker ces images dans un [Harbor](https://goharbor.io/) hébergé par la plateforme.
+- Lancer vos jeux de tests applicatif (unitaires, de bout en bout, ...).
+- Effectuer une analyse de la qualité de votre code source à l'aide du service [Sonarqube](https://www.sonarqube.org/).
+- Construire vos images de conteneur de l'application dans la CI/CD du service [Gitlab](https://about.gitlab.com/).
+- Scanner vos images et le code source à l'aide de [Trivy](https://aquasecurity.github.io/trivy).
+- Stocker vos images dans un registry de conteneurs dans la plateforme: [Harbor](https://goharbor.io/).
 
-Une fois l'application construite et les images de cette dernière stockées dans la registry de la plateforme, le déploiement sur un cluster kubernetes pourra être effectué selon le modèle gitops à l'aide de [ArgoCD](https://argo-cd.readthedocs.io/en/stable/).
+Une fois l'application construite et les images de cette dernière stockées dans la registry de la plateforme, le déploiement sur un cluster kubernetes pourra être effectué selon le modèle gitops à l'aide du service [ArgoCD](https://argo-cd.readthedocs.io/en/stable/).
