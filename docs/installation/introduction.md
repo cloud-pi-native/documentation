@@ -23,4 +23,4 @@ Les éléments déployés seront les suivants :
 
 Certains outils peuvent prendre un peu de temps pour s'installer, par exemple Keycloak ou GitLab.
 
-Vous pouvez trouver la version des outils installés dans le fichier [versions](https://github.com/cloud-pi-native/socle/tree/main/versions).
+Vous pouvez trouver la version des outils installés dans le fichier [versions](https://github.com/cloud-pi-native/socle/blob/main/versions.md)
