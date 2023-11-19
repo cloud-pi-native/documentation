@@ -2,16 +2,13 @@
 
 ## Introduction
 
-La service team accompagne les projets à embarquer sur l'offre Cloud π native. Cet accompagnement a pour philosophie d'__aider les projets mais de ne pas faire à leur place__. En effet, une fois que les projets sont déployés sur l'offre Cloud π native, l'exploitation, le MCO/MCS reste de la responsabilité du projet qui doit comprendre l'esprit de la plateforme, les technologies sous jacentes et les paradigmes de déploiement.
+La service team est l'équipe qui vous accompagne à embarquer sur l'offre Cloud π native. Cet accompagnement a pour objectif d'__aider les projets, les faire monter en compétences mais de ne pas faire à leur place__. En effet, une fois que les projets sont déployés sur l'offre Cloud π native, l'exploitation, le MCO/MCS reste de la responsabilité du projet qui doit comprendre l'esprit de la plateforme, les technologies sous jacentes et les paradigmes de déploiement. L'offre Cloud π native favorise le modéle DevSecOps ** You Build it, You Run it **
 
-L'accompagnement se fait sur 2 environnements :
-- Clusters hors ministère de l'intérieur, hébergés sur OVH permettant de tester la solution
+L'accompagnement technique se fera sur 2 plateformes :
+
+- Plateforme OVH; plateforme non lié aux réseaux interministères et a pour objectif de fournir aux projets un accès plus rapide à la console et aux services Cloud π native. Ainsi les projets peuvent anticiper en effectuat leurs premiers tests.
+  
 - Cluster Cloud π native sur les infrastructures du ministère de l'intérieur
-
-
-> Ajouter un schéma chronologique de l'accompagnement
-
-reunion -> reunion -> accompagnement -> ovh -> Cloud π native
 
 
 > Ajouter accompagnement après déploiement
