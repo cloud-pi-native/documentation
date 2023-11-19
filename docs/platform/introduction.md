@@ -6,9 +6,11 @@ Les plateformes PaaS peuvent s'exécuter dans le cloud ou sur site. En ce qui co
 
 ## Description de la plateforme
 
-Cloud π Native est une plateforme de services à destination des équipes DevOps, une [console](https://github.com/cloud-pi-native/console) pilote la création des ressources dans ces différents services en utilisant les notions de projets, membres, environnements etc...
+Cloud π Native est une plateforme de services à destination des équipes DevOps et une [console](https://github.com/cloud-pi-native/console) permettant de consommer ses services pour la construction et le déploiement des ressources applicatifs (projets, membres, environnements, etc).
 
-La console a été développée avec une architecture de plugins permettant l'ajout de services pilotés par cette dernière. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...) pour que le manager de plugins puisse lui envoyer les informations de l'action utilisateur.
+Pour pouvoir enregistrer des services custom, une architecture à plugins est utilisée pour la console. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projet (Par le gestionnaire des plugins).
+
+Le rajout d'un nouveau plugin est détaillé [ici]()
 
 ## Architecture fonctionnelle de la plateforme
 
@@ -30,11 +32,14 @@ Liste des services de la plateforme :
 
 [1] : *Instanciation au niveau du projet obligatoire mais utilisation selon le besoin.*
 
-## Philosophie
+## Ambitiom
 
-La philosophie ici est de laisser les développeurs travailler sur leurs dépôts de code source habituels *(dépôts externes)* en effectuant des synchronisations du code source vers un Gitlab hébergé par la plateforme *(dépôts internes)*.
-Les synchronisations sont déclenchées par des appels API effectués dans les CI/CD côté développeurs (dépôts externes).
-Ces appels API permettent de déclencher auprès de CPN une demande de `pull` du dépôt qui entrainera le déclenchement d'une autre chaine de CI/CD sur le Gitlab de la plateforme. Cette dernière sera en charge de :
+L'ambition de cette plateforme est de proposer aux équipes projet une offre de services large, compléte permettant de réaliser la construction et le déploiement de vos applications en assurant les standards de qualité et sécurité. 
+
+Pour pouvoir manipuler les services de cette plateforme, la première étape consister à synchroniser le code applicatif depuis un repo externe . 
+
+
+La chaine de CI/CD sur le Gitlab de la plateforme permet:
 
 - Lancer les jeux de tests applicatif (unitaires, de bout en bout, ...).
 - Effectuer une analyse de la qualité du code source à l'aide du service [Sonarqube](https://www.sonarqube.org/).
