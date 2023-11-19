@@ -14,29 +14,24 @@ Une fois sur la console, il faut se connecter en cliquant en haut à droite sur 
 Une fois connecté sur la console, le menu gauche s'enrichi avec une entrée "Mes Projets" contenant la liste de ses projets.
 <img src="/img/tuto/2tuto-mes-projets.png" alt="mes projets" width="200px" title="mes projets">
 
-Un projet au sens console DSO est un projet applicatif regroupant potentiellement plusieurs composants applicatifs. Un projet est lié à 1 à N dépots de code. Un projet correspondra à un namespace au sens kubernetes / openshift
+Un projet est un espace virtuelle (Namespace pour kubernetes) pour une seule application et c'est rattaché à un ou plusieurs dépôts de code.
 
 Cliquez sur le bouton **+ Créer un projet** afin d'ajouter un nouveau projet :
 <img src="/img/tuto/2tuto-commander-projet.png" alt="créer projets" width="75%" title="créer projets">
 
 Sur cet écran il est nécessaire de renseigner :
-  - Nom de l'organisation : correspondant à l'entité administratif de rattachement. A terme, cette liste sera supprimé pour récupérer l'information directement depuis le référentiel utilisateurs.
-  - Nom du projet :  Ce nom servira à créer un groupe dans gitlab de la plateforme Cloud π Native et sera une composante du namesapce OpenShift créé.
+  - Nom de l'organisation : correspondant à l'entité administratif de rattachement.
+  - Nom du projet :  Ce nom servira à créer un groupe dans gitlab de la plateforme Cloud π Native et sera une composante du namesapce Kubernetes créé.
 
 Valider la saisie en cliquant sur **Commander mon espace projet**
 
-La création d'un projet va lancer le provisionnement des différents services de la plateforme (Gitlab, Vault, Nexus, Harbor, Sonarqube, ArgoCD), ce qui signifie principalement la création d'un groupe pour le projet dans chacuns des outils, l'association de droits sur ces groupes, la génération de secrets pour l'automatisation, etc...
-> Cette opération demande d'attendre jusqu'à quelques minutes.
-
-Ainsi, depuis le menu Mes projets, le nouveau projet est présenté en cours de construction :
+La création d'un projet va lancer le provisionnement des différents [services](https://cloud-pi-native.fr/platform/introduction.html#services-core-proposes-par-la-plateforme), ce qui signifie principalement la configuration de ces outils avec un éspace dédié pour le projet, son cloisonnement avec les autres projets et l'authentification des utilisateurs projet dans ces outils. Cette opération pourra prendre quelques minutes et le nouveau projet est présenté en cours de construction :
 
 <img src="/img/tuto/2tuto-creer-projet.png" alt="projet en cours de construction" width="75%" title="projet en cours de construction">
-
 
 A la fin du processus de création, l'icone du projet est modifiée comme suit et devient un lien cliquable :
 
 <img src="/img/tuto/2tuto-creer-projet-termine.png" alt="projet terminé" width="25%" title="projet terminé">
-
 
 Au clic sur le projet, on arrive sur la liste des services associés :
 <img src="/img/tuto/2tuto-acces-services.png" alt="Accès au services" width="75%" title="Accès au services">
@@ -94,14 +89,13 @@ Une fois que le dépôt est correctement ajouté, il apparait avec une icône in
 
 ### Gérer les environnements
 
-Une fois les repos d'infra ajoutés, il sera possible d'ajouter un environnement en cliquant sur `Environments du projet` puis `Ajouter un nouvel environnement`
+Une fois les dépôts d'infrastructure sont ajoutés, il sera possible d'ajouter un environnement en cliquant sur `Environments du projet` puis `Ajouter un nouvel environnement`
 
 <img src="/img/tuto/3tuto-environnement.png" alt="ArgoCD" width="75%" title="environnement">
 
 Selectionner ensuite l'environnement et le cluster ou vous souhaitez le déployer puis sur `Ajouter l'environnement`
 
-
-:warning: La création de repo d'infra et la déclaration d'un environnement déclenche la création d'une application dans ArgoCD et d'un namespace dédié afin de déployer l'application. 
+:warning: La création de dépôt d'infrastructure et la déclaration d'un environnement déclenche la création d'une application dans ArgoCD et d'un namespace dédié afin de déployer l'application. 
 
 Des informations seront précréer dans ce namespace notamment l'imagePullSecrets qui sera a utilisé pour votre projet.
 
@@ -147,13 +141,13 @@ spec:
             - containerPort: 8080 
 ```
 
-Ainsi, une fois qu'un repo d'infra est synchronisé, il convient de se rendre sur le service ArgoCD depuis la liste des services :
+Une fois qu'un dépôt d'infrastructure est synchronisé, il convient de se rendre sur le service ArgoCD depuis la liste des services :
 
 <img src="/img/tuto/4argocd.png" alt="ArgoCD" width="75%" title="ArgoCD">
 
-Cliquez sur le projet nouvellement créé (il est possible filtrer dans le cas où plusieurs projets sont créé pour le projet)
+Cliquez sur le projet nouvellement créé afin de finaliser son configuration: modification du dépôt d'infrastructure par défaut, ou le cluster de déploiement applicative. 
 
-Afin de finaliser le déployement du projet, allez dans le menu en haut et cliquez sur App detail :
+Allez dans le menu en haut et cliquez sur App detail :
 
 <img src="/img/tuto/4argocd-menus-bouton.png" alt="ArgoCD-menus" width="75%" title="ArgoCD-menus">
 
@@ -173,14 +167,14 @@ Le déploiement se fait automatiquement par ArgoCD, mais il est possible de forc
   - *REFRESH* pour forcer la synchronisation depuis le repo gitlab de la plateforme Cloud π Native
   - *SYNC* pour forcer le rafraichissement entre l'état défini par git et l'état réel des objets créés par ArgoCD.
 
-Une fois le déploiement correctement effectué le status de l'application ArgoCD doit correspondre à :
+Une fois le déploiement est correctement effectué le status de l'application ArgoCD doit correspondre à :
 
 <img src="/img/tuto/4argocd-menus.png" alt="ArgoCD-menus" width="75%" title="ArgoCD-menus">
 
 
 ## Etape 4 : Paramétrer la synchronisation
 
-Une fois le dépôt interne à la plateforme créé et lié à un dépôt externe, il sera important de paramétrer la synchronisation entre le dépôt source et son clône. La création déclenche une première synchronisation. Il convient maintenant de configurer comment se repo sera synchronisé dans le temps.
+Une fois le dépôt interne à la plateforme créé et lié à un dépôt externe, il sera important de paramétrer la synchronisation entre le dépôt source et son clône. La création déclenche une première synchronisation. Il convient maintenant de configurer comment ce dépôt sera synchronisé dans le temps.
 
 Pour paramétrer la synchronisation d'un dépôt :
 
