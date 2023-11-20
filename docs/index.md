@@ -29,13 +29,19 @@ hero:
 features:
   - title: La plateforme
     details: Présentation de Cloud Pi Native, de sa philosophie, de son architecture, ...
+    link: /platform/introduction
   - title: Les services
     details: Présentation des services de la plateforme Cloud Pi Native, de leurs rôles, ...
+    link: /services/gitlab
   - title: Convention de services
     details: Convention de services à destinations des administrations ou leurs partenaires numériques
+    link: /agreement/introduction
   - title: Guide d'utilisation
     details: Guide d'utilisation de la console et de la plateforme, tutoriels, bonnes pratiques, ...
+    link: /guide/get-started
   - title: Guide d'installation
     details: Guide d'installation de la solution pour un hébergement self hosted
+    link: /installation/introduction
   - title: Guide de contribution
     details: Guide de contribution à la plateforme open source
+    link: /contribution/contribute
