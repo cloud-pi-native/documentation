@@ -37,3 +37,7 @@ jobs:
           target: prod
           platforms: linux/amd64,linux/arm64
           push: true
+
+      - name: Sync dso
+        run: |
+          curl -X POST --fail -F token=${{ secrets.GITLAB_TRIGGER_TOKEN }} -F ref=main -F "variables[GIT_BRANCH_DEPLOY]=${{ github.ref_name }}" -F variables[PROJECT_NAME]=doc ${{secrets.URL_MIRROR}}
