@@ -6,13 +6,10 @@ hero:
   tagline: Ministère de l'Intérieur et des Outre-mer
   actions:
     - theme: brand
-      text: La plateforme
+      text: Le produit Hexaforge
       link: /platform/introduction
     - theme: brand
-      text: Les services
-      link: /services/gitlab
-    - theme: brand
-      text: Convention de services
+      text: L'offre Cloud Pi Native
       link: /agreement/introduction
     - theme: brand
       text: Guide d'utilisation
@@ -27,13 +24,10 @@ hero:
       text: View on GitHub
       link: https://github.com/cloud-pi-native
 features:
-  - title: La plateforme
-    details: Présentation de Cloud Pi Native, de sa philosophie, de son architecture, ...
+  - title: Le produit Hexaforge
+    details: Présentation d'Hexaforge projet opensource, de sa philosophie, de son architecture, ...
     link: /platform/introduction
-  - title: Les services
-    details: Présentation des services de la plateforme Cloud Pi Native, de leurs rôles, ...
-    link: /services/gitlab
-  - title: Convention de services
+  - title: L'offre Cloud Pi Native
     details: Convention de services à destinations des administrations ou leurs partenaires numériques
     link: /agreement/introduction
   - title: Guide d'utilisation
