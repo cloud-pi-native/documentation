@@ -1,6 +1,6 @@
 [
   {
-    "text": "La plateforme",
+    "text": "Le produit Hexaforge",
     "collapsed": true,
     "items": [
       {
@@ -16,6 +16,32 @@
         "link": "/platform/skills-matrix"
       },
       {
+        "text": "Les services",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "Gestion des sources",
+            "link": "/services/gitlab"
+          },
+          {
+            "text": "Gestion des artefacts",
+            "link": "/services/artefacts"
+          },
+          {
+            "text": "Analyse qualité",
+            "link": "/services/sonarqube"
+          },
+          {
+            "text": "Gestion des secrets",
+            "link": "/services/vault"
+          },
+          {
+            "text": "Gestion du déploiement",
+            "link": "/services/gitops"
+          }
+        ]
+      },
+      {
         "text": "Feuille de route",
         "link": "/platform/roadmap"
       },
@@ -26,33 +52,7 @@
     ]
   },
   {
-    "text": "Les services",
-    "collapsed": true,
-    "items": [
-      {
-        "text": "Gestion des sources",
-        "link": "/services/gitlab"
-      },
-      {
-        "text": "Gestion des artefacts",
-        "link": "/services/artefacts"
-      },
-      {
-        "text": "Analyse qualité",
-        "link": "/services/sonarqube"
-      },
-      {
-        "text": "Gestion des secrets",
-        "link": "/services/vault"
-      },
-      {
-        "text": "Gestion du déploiement",
-        "link": "/services/gitops"
-      }
-    ]
-  },
-  {
-    "text": "Convention de services",
+    "text": "L'offre Cloud Pi Native",
     "collapsed": true,
     "items": [
       {

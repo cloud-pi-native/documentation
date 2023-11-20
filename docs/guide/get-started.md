@@ -93,9 +93,11 @@ Une fois les dépôts d'infrastructure sont ajoutés, il sera possible d'ajouter
 
 <img src="/img/tuto/3tuto-environnement.png" alt="ArgoCD" width="75%" title="environnement">
 
-Selectionner ensuite l'environnement et le cluster ou vous souhaitez le déployer puis sur `Ajouter l'environnement`
+Il faudra d'abord sélectionner le *stage* de déploiement de l'application permettant ensuite de choisir le cluster de déploiement (Prod/HorsProd/Dédié) ains que différents *quotas*.
 
-:warning: La création de dépôt d'infrastructure et la déclaration d'un environnement déclenche la création d'une application dans ArgoCD et d'un namespace dédié afin de déployer l'application. 
+Selectionner ensuite l'environnement, les quotas, et le cluster ou vous souhaitez le déployer puis sur `Ajouter l'environnement`
+
+:warning: La création de dépôt d'infrastructure et la déclaration d'un environnement déclenche la création d'une application dans ArgoCD et d'un namespace dédié afin de déployer l'application.
 
 Des informations seront précréer dans ce namespace notamment l'imagePullSecrets qui sera a utilisé pour votre projet.
 
