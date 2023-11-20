@@ -6,19 +6,12 @@ Les plateformes PaaS peuvent s'exécuter dans le cloud ou sur site. En ce qui co
 
 ## Description de l'offre
 
-L'offre s'appelle "Cloud π Native" est composée d'une **plateforme de services** à destination des équipes DevSecOps et hébergée au sein d'un **cloud souverain**. 
-La plateforme est constituée de: 
+L'offre "Cloud π Native" est composée d'une **plateforme de services** qu'on a nommé **Hexaforge**.**Hexaforge** est **Open Source** à destination des équipes DevSecOps. 
 
-- Cluster d'orchestrateur de conteneur qui est Kubernetes
+**Hexaforge** comprend:
 
-La plateforme qui s'appelle *Hexa Forge* est Open source qui comprend:
-- Une usine de logicielle sécurisée et interconnectée composant l'offre de services DevSecOps. Cette offre de services est **Open Source**. 
-- Une [console](https://github.com/cloud-pi-native/console) Web **Open Source** consommant ses services afin de construire et déployer vos ressources applicatifs (projets, membres, environnements, etc). Il est aussi possible d'enregistrer des services custom gràce à son architecture à plugins. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projet (Par le gestionnaire des plugins). Le rajout d'un nouveau plugin est détaillé [ici](https://github.com/cloud-pi-native/console)
-
-- 
-
-L'usine de logicielle est la console peuvent être installer directement au sein de vos clusters Kubernetes, et ainsi bénéficier de l'ensemble des services de l'offre. La méthode d'installation de l'usine logicielle et la console sont détaillés [ici](https://cloud-pi-native.fr/installation/introduction.html)
-
+- Une [usine de logicielle](https://github.com/cloud-pi-native/socle) qui utilise plusieurs services. 
+- Une [console](https://github.com/cloud-pi-native/console) Web consommant ses services afin de construire et déployer vos ressources applicatifs (projets, membres, environnements, etc). Il est aussi possible d'enregistrer des services custom gràce à son architecture à plugins. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projet (Par le gestionnaire des plugins). Le rajout d'un nouveau plugin est détaillé [ici](https://github.com/cloud-pi-native/console/blob/888119681ed82adf593ba00152511ddeec25faf3/misc/plugins.md)
 
 ## Architecture fonctionnelle de la plateforme
 
