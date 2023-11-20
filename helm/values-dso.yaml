@@ -1,0 +1,62 @@
+nameOverride: ""
+fullnameOverride: ""
+serviceAccount:
+  create: false
+  annotations: {}
+  name: ""
+imageCredentials:
+  registry: ""
+  username: ""
+  password: ""
+  email: ""
+
+docs:
+  replicaCount: 1
+  image:
+    repository: ghcr.io/cloud-pi-native/documentation
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: latest
+  podAnnotations: {}
+  podSecurityContext: {}
+    # fsGroup: 2000
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+  container:
+    port: 8080
+    env: {}
+    secrets: {}
+  service:
+    type: ClusterIP
+    port: 80
+  ingress:
+    enabled: true
+    className: ""
+    annotations: {}
+    hosts:
+      - host: doc-dso.dev.numerique-interieur.com
+        paths:
+          - path: /
+            pathType: Prefix
+    tls: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
