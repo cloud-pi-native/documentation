@@ -138,30 +138,22 @@ smtp:
 
 ### Bucket S3
 
-Le chart permet également de créer un bucket de stockage objet S3.
+Le chart permet également de créer un bucket de stockage objet S3 via MinIO.
 
 ```yaml
-s3:
-  # Active ou non la création d'un bucket
-  enabled: true
-  # Nom du bucket
-  bucketName: my-bucket
-  # Bucket class et storage classe. Ne pas modifier sans demande de la Service Team
-  bucketclass: noobaa-default-bucket-class
-  storageClassName: openshift-storage.noobaa.io
+minio:
+  enabled: true # Activation de minIO
+  ingress:
+    enabled: true # Activation de l'ingress pour l'IHM
+    hostname: minio-st.dso.numerique-interieur.com # Hostname de l'IHM à adapter par projet
+  defaultBuckets: "my-bucket-app, my-second-bucket" # Nom de bucket par defaut
 ```
 
 Le chart dans cette configuration va créer sur le namespace :
- - Un bucket S3 nommé my-bucket (paramètre bucketName)
- - Un secret nommé my-bucket (paramètre bucketName) contenant 2 clés **AWS_ACCESS_KEY_ID** et **AWS_SECRET_ACCESS_KEY** pour se connecter au bucket
- - Une configMap nommée my-bucket (paramètre bucketName) contenant les informations de connexion : 
-   - BUCKET_HOST: s3.openshift-storage.svc
-   - BUCKET_NAME: my-bucket-49211a12-307c-4da9-8236-9b9eb0fc874f
-   - BUCKET_PORT: "443"
-   - BUCKET_REGION: ""
-   - BUCKET_SUBREGION: ""
+ - 2 buckets S3 nommés my-bucket-app et my-second-bucket
+ - Un secret contenant 2 clés **root-password** et **root-user** pour se connecter à l'IHM permettant d'administrer minIO (création de bucket de 'AK/SK).
  
-Pour utiliser ces variables sur un pod, il faut injecter cette configuration comme cela:
+Pour utiliser MinIO sur un pod, il faut créer et injecter la configuration via configMap ou Secret :
 
 ```yaml
 [...]
@@ -169,9 +161,9 @@ Pour utiliser ces variables sur un pod, il faut injecter cette configuration com
           [...]
           envFrom:
           - configMapRef:
-              name: my-bucket
+              name: cm-name
           - secretRef:
-              name: my-bucket
+              name: secret-name
 [...]
 ```
 
