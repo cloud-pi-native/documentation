@@ -80,6 +80,10 @@
         "link": "/agreement/labels-list"
       },
       {
+        "text": "Observabilité",
+        "link": "/agreement/observability"
+      },
+      {
         "text": "F.A.Q",
         "link": "/agreement/faq"
       }
@@ -104,6 +108,22 @@
       {
         "text": "Bonnes pratiques",
         "link": "/guide/best-practices"
+      },
+      {
+        "text": "Métriques",
+        "link": "/guide/metrics"
+      },
+      {
+        "text": "Alerting",
+        "link": "/guide/alerting"
+      },
+      {
+        "text": "Logs (Kibana)",
+        "link": "/guide/logs-kibana"
+      },
+      {
+        "text": "Archivage des logs",
+        "link": "/guide/archive-logs"
       },
       {
         "text": "Tutoriels",
