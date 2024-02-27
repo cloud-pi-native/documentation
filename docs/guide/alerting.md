@@ -62,20 +62,28 @@ Par exemple ici, AlertManager surveille le nombre de pod pgrest ready et s'il es
 Une alerte a 3 états différents:
 - **Normal**: le service tourne normalement
 - **Pending**: changement d'état en cours
-- **Fired**: le service n'est plus assuré et l'alerte est levée
+- **Firing**: le service n'est plus assuré et l'alerte est levée
 
-Service OK
+Service Normal
 ![alert_ns_group](/img/guide/alerting/alert_ns_group.png)
 
-Pending
-
-Service KO
+Service Firing
+![alert_firing](/img/guide/alerting/alert_firing.png)
 
 ## Points de contact
 Les contact points définissent les différents canaux qu'il est possible d'utiliser pour notifier d'une alerte (les plus courants étant les emails et les webhook)
 
-Cliquer sur `Contact points` dans le menu
+Cliquer sur `Contact points` dans le menu.
 
+Dans la liste déroulante `Choose Alertmanager`, choisir `Alertmanager`
+![contact_point_manager](/img/guide/alerting/contact_point_manager.png)
+
+Cliquer sur le bouton `+ Add contact point`
+
+Remplir les informations selon le canal voulu, exemple pour un webhook:
+![contact_point_create](/img/guide/alerting/contact_point_create.png)
+
+Dans le sous menu `> Optional webhook settings` il est possible de retrouver les options d'authentification pour les webhooks
 
 ## Politiques de notifications
 Les alertes levées sont normalement envoyées via le canal de communication défini par défaut dans les contact points.
@@ -83,3 +91,26 @@ Les alertes levées sont normalement envoyées via le canal de communication dé
 Il est possible de définir d'autres politiques pour envoyer certaines alertes à d'autres canaux de communication.
 
 Cliquer sur `Notification policies` dans le menu
+
+Dans la liste déroulante `Choose Alertmanager`, choisir `Alertmanager`
+![contact_point_manager](/img/guide/alerting/contact_point_manager.png) 
+
+La première politique sera celle par défaut (choisir un canal approprié pour les recevoir), il est possible par la suite de définir des politiques imbriquées pour router les alertes selon des règles spécifiques
+
+---
+La liste déroulante `Default contact Point` permet de choisir le canal de communication par défaut.
+![policy_default](/img/guide/alerting/policy_default.png) 
+Cliquer sur `Add default policy` pour sauvegarder
+
+---
+Il est par la suite possible de définir des politiques imbriquées.
+
+Choisir où l'imbrication se fera et cliquer sur le bouton `+ New nested policy`
+
+Une nouvelle fenêtre s'ouvre, où il est possible de choisir les alertes selon l'existence d'un label, etc. (attention le bouton `Add policy` se trouve en bas)
+
+Exemple si le label `refapp`est égal à `demo`, alors l'alerte est routée vers le point de contact nommé `opsdroid`
+![notification_policy_nested_create](/img/guide/alerting/notification_policy_nested_create.png) 
+
+Cliquer sur `Add policy` pour créer la nouvelle politique imbriquée, que l'on retrouve sous celle par défaut dans cet exemple:
+![notification_policies](/img/guide/alerting/notification_policies.png) 

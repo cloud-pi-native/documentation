@@ -15,6 +15,7 @@ Les clés de sécurité (AK/SK) sont sauvegardés dans un secret, voir avec [SOP
 ## Archivage
 
 **Chart.yaml:**
+*Version 0.30.0 à la date d'écriture de cette documentation*
 ```yaml
 dependencies:
 - name: vector
