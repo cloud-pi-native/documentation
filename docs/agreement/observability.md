@@ -2,6 +2,9 @@
 
 # Observabilité
 
+> __:warning: L'observabilité n'est pas en place sur les environnements OVH.__
+
+
 Dans le cadre de l'offre Cloud-Pi Native, l'observabilité est disponible via plusieurs composants:
 - Prometheus/Grafana pour les métriques
 - AlertManager/Grafana pour l'alerting

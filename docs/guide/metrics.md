@@ -1,6 +1,6 @@
 # Métriques
 
-Retrouver ce service dans la console Cloud Pi via le menu `Projet > Mes Projets > Sélectionner un projet > Mes Services` et cliquer sur l'icône Grafana qui vous intéresse.
+Retrouver ce service dans la console Cloud Pi via le menu `Projet > Mes Projets > Sélectionner un projet > Mes Services` et cliquer sur l'icône Grafana correspondant au cluster sur lequel votre déploiement applicatif est présent.
 
 Dans cette section, nous allons découvrir comment créer un nouveau dashboard contenant un graphique.
 
@@ -11,7 +11,7 @@ Pour se logguer, cliquer sur le bouton en bas de page commençant par "Sign in w
 
 ![signin](/img/guide/grafana-sign-in.png)
 
-Via la menu hamburger en haut à gauche, vous aurez accès aux dashboards.
+Une fois connecté, l'accès aux dashboards est disponible via la menu hamburger en haut à gauche 
 
 ![menu](/img/guide/grafana_menu.png)
 ![menu dashboard](/img/guide/grafana_menu_dashboard.png)
