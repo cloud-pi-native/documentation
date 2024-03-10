@@ -10,9 +10,9 @@
     "preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "vitepress": "1.0.0-rc.27"
+    "vitepress": "1.0.0-rc.45"
   },
   "volta": {
-    "node": "20.9.0"
+    "node": "20.11.1"
   }
 }
