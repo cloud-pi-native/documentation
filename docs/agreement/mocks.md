@@ -11,7 +11,7 @@ Le chart Helm est disponible sur le [repo github public](https://github.com/clou
 
 Ces éléments sont à utiliser uniquement sur les environnements **Hors ministère de l'intérieur**, ainsi il est préférable de ne pas les ajouter dans le repo d'infra de l'application à déployer mais *à côté*.
 
-Ainsi, pour utiliser ce chart HELM, il faut, depuis la console DSO, ajouter un nouveau Dépôt sur un projet existant, choisir comme nom de repo "bouchon" et comme URL : https://github.com/cloud-pi-native/helm-projects-mocks.git et cocher la *case Dépôt d'infrastructure* :
+Ainsi, pour utiliser ce chart HELM, il faut, depuis la console DSO, ajouter un nouveau Dépôt sur un projet existant, choisir comme nom de repo "bouchon" et comme URL : <https://github.com/cloud-pi-native/helm-projects-mocks.git> et cocher la *case Dépôt d'infrastructure* :
 
 ![Ajout du repo bouchon](/img/mocks/add-repo.png)
 
