@@ -1,5 +1,5 @@
 # Base stage
-FROM docker.io/node:20.9.0-bullseye-slim AS dev
+FROM docker.io/node:20.11.1-bullseye-slim AS dev
 
 WORKDIR /app
 RUN npm install --location=global pnpm
@@ -16,7 +16,7 @@ RUN pnpm run build
 
 
 # Prod stage
-FROM docker.io/bitnami/nginx:1.25.2 AS prod
+FROM docker.io/bitnami/nginx:1.24.0 AS prod
 
 USER 0
 COPY --chown=1001:0 --chmod=770 --from=build /app/docs/.vitepress/dist /opt/bitnami/nginx/html/
