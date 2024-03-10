@@ -4,14 +4,14 @@ Le PaaS (Platform-as-a-Service) est une forme de cloud computing dans laquelle l
 
 Les plateformes PaaS peuvent s'exécuter dans le cloud ou sur site. En ce qui concerne les offres gérées, le fournisseur héberge le matériel et les logiciels sur sa propre infrastructure et met à disposition de l'utilisateur une plateforme, sous la forme d'une solution intégrée, d'une pile de solutions ou d'un service.
 
-## Description de l'offre
+## Description de la plateforme
 
-L'offre "Cloud π Native" est composée d'une **plateforme de services** qu'on a nommé **Hexaforge**.**Hexaforge** est **Open Source** à destination des équipes DevSecOps. 
+Cloud π Native est composée d'une **plateforme de services Open Source** à destination des équipes DevSecOps. 
 
-**Hexaforge** comprend:
+**La plateforme** comprend:
 
 - Une [usine de logicielle](https://github.com/cloud-pi-native/socle) qui utilise plusieurs services. 
-- Une [console](https://github.com/cloud-pi-native/console) Web consommant ses services afin de construire et déployer vos ressources applicatifs (projets, membres, environnements, etc). Il est aussi possible d'enregistrer des services custom gràce à son architecture à plugins. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projet (Par le gestionnaire des plugins). Le rajout d'un nouveau plugin est détaillé [ici](https://github.com/cloud-pi-native/console/blob/888119681ed82adf593ba00152511ddeec25faf3/misc/plugins.md)
+- Une [console](https://github.com/cloud-pi-native/console) Web consommant ses services afin de construire et déployer vos ressources applicatives (projets, membres, environnements, etc). Il est aussi possible d'enregistrer des services supplémentaires grâce à son `architecture core / plugins`. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projets par le biais du gestionnaire de plugins. L'ajout d'un nouveau plugin est détaillé [ici](https://github.com/cloud-pi-native/console/blob/main/misc/plugins.md)
 
 ## Architecture fonctionnelle de la plateforme
 

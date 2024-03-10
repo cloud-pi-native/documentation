@@ -1,6 +1,6 @@
 # Labélisation des ressources kubernetes
 
-Dans le cadre de l'offre de service du MIOM, il sera demandé d'ajouter les labels suivants sur vos ressources kubernetes :
+Dans le cadre de l'offre de services du MIOM, il sera demandé d'ajouter les labels suivants sur vos ressources kubernetes :
 
 ## Type d'environnement
 

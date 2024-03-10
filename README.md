@@ -2,7 +2,7 @@
 
 :warning: __*La plateforme est en cours de construction et des évolutions fréquentes sont à prévoir.*__ :warning:
 
-Ce dépôt est construit et déployé à l'adresse : https://cloud-pi-native.fr
+Ce dépôt est construit et déployé à l'adresse : <https://cloud-pi-native.fr>
 
 ## L'offre
 

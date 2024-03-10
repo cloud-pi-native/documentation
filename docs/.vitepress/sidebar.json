@@ -1,6 +1,44 @@
 [
   {
-    "text": "Le produit Hexaforge",
+    "text": "L'offre de services",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Introduction",
+        "link": "/agreement/introduction"
+      },
+      {
+        "text": "Accompagnement",
+        "link": "/agreement/support"
+      },
+      {
+        "text": "Exploitation",
+        "link": "/agreement/exploitation"
+      },
+      {
+        "text": "Bouchons",
+        "link": "/agreement/mocks"
+      },
+      {
+        "text": "Règles kyverno",
+        "link": "/agreement/kyverno"
+      },
+      {
+        "text": "Labels kubernetes",
+        "link": "/agreement/labels-list"
+      },
+      {
+        "text": "Observabilité",
+        "link": "/agreement/observability"
+      },
+      {
+        "text": "F.A.Q",
+        "link": "/agreement/faq"
+      }
+    ]
+  },
+  {
+    "text": "La plateforme",
     "collapsed": true,
     "items": [
       {
@@ -48,44 +86,6 @@
       {
         "text": "Glossaire",
         "link": "/platform/glossary"
-      }
-    ]
-  },
-  {
-    "text": "L'offre Cloud Pi Native",
-    "collapsed": true,
-    "items": [
-      {
-        "text": "Introduction",
-        "link": "/agreement/introduction"
-      },
-      {
-        "text": "Accompagnement",
-        "link": "/agreement/support"
-      },
-      {
-        "text": "Exploitation",
-        "link": "/agreement/exploitation"
-      },
-      {
-        "text": "Bouchons",
-        "link": "/agreement/mocks"
-      },
-      {
-        "text": "Règles kyverno",
-        "link": "/agreement/kyverno"
-      },
-      {
-        "text": "Labels kubernetes",
-        "link": "/agreement/labels-list"
-      },
-      {
-        "text": "Observabilité",
-        "link": "/agreement/observability"
-      },
-      {
-        "text": "F.A.Q",
-        "link": "/agreement/faq"
       }
     ]
   },

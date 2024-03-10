@@ -1,7 +1,7 @@
 # L'offre Cloud Pi Native
 
 La Direction de la Transformation Numérique du Ministère de l'Intérieur et des Outre-mer propose une offre de services autours de deux instances de la plateforme *(OVH SecNumCloud / Cloud π)* à destination des *administrations* ou des *entreprises de services numériques* travaillant pour leur compte.
-Cette offre de service est une implémentation du produit *Hexaforge* pour le Ministère de l'intérieur ainsi qu'un accompagment dédié aux spécificités des infrastructures ministériel.
+Cette offre de services est une implémentation du produit *Hexaforge* pour le Ministère de l'intérieur ainsi qu'un accompagment dédié aux spécificités des infrastructures ministériel.
 
 > __:warning: Attention, les seuls bénéficiaires de cette offre managée sont les administrations ou leurs ESN partenaires__.
 
@@ -26,11 +26,11 @@ Dés que les [prérequis](https://cloud-pi-native.fr/agreement/support.html) son
 
 Enfin, le déploiement s'effectue sur différentes cibles d'hébergement possibles :
 
-**Vision d'ensemble de l'offre de service:**
+**Vision d'ensemble de l'offre de services:**
 
 ![vision](/img/global-vision.png)
 
-Comme mentionné dans le schèma, l'offre de service comprend si vous le souhaitez l'infrastructure hébergeant vos applicatifs. 
+Comme mentionné dans le schèma, l'offre de services comprend si vous le souhaitez l'infrastructure hébergeant vos applicatifs. 
 Cette infrastrcture peut être:
  - Un socle kubernetes/Openshift mutualisé dans la zone "Non Protégé" (NP) du ministère de l'intérieur. 
  - Un socle kubernetes/Openshift dédié dans la zone "Non Protégé" (NP) ou la zone "Diffusion Restreinet (DR)du ministère de l'intérieur. 

@@ -86,8 +86,8 @@ Votre dashboard est maintenant disponible dans la liste des dashbords
 La communauté propose des dashboards pré-définis pour la plupart des outils.
 
 Quelques liens utiles concernant les dashboard:
-- https://grafana.com/grafana/dashboards/: Dashboards créés par la communauté
-- https://promcat.io/: dashboards créés par la société Sysdig basés sur le principe des golden signals
-- https://prometheus.io/docs/prometheus/latest/querying/basics/: Documentation sur le langage PromQL, permettant d'interroger Prometheus
-- https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/import-dashboards/: Comment importer un dashboard dans grafana
+- <https://grafana.com/grafana/dashboards>: Dashboards créés par la communauté
+- <https://promcat.io>: dashboards créés par la société Sysdig basés sur le principe des golden signals
+- <https://prometheus.io/docs/prometheus/latest/querying/basics>: Documentation sur le langage PromQL, permettant d'interroger Prometheus
+- <https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/import-dashboards>: Comment importer un dashboard dans grafana
 
