@@ -13,6 +13,8 @@ export AGE_KEY=age1g867s7tcftkgkdraz3ezs8xk5c39x6l4thhekhp9s63qxz0m7cgs5kan9a
 ```
 
 Afin de chiffrer un secret, il faut commencer par créer un objet kubernetes de type SopsSecret par exemple :
+
+:warning: __*Ne pas encode en base64 les secrets dans ce fichier, sops s'en occupera automatiquement*__ :warning:
 ```yaml
 apiVersion: isindir.github.com/v1alpha3
 kind: SopsSecret
