@@ -1,6 +1,6 @@
 # Archivage des logs
 
-Il est possible de demander le forward des logs de son application vers son namespace applicatif afin de par exemple les archiver pour des raisons légales.
+Il est possible de demander le transfert des logs de son application vers son namespace applicatif afin de par exemple les archiver pour des raisons légales.
 
 Cette section va décrire comment recevoir les logs applicatifs et les archiver sur un S3 grâce au logiciel [vector](https://vector.dev)
 
@@ -29,7 +29,7 @@ dependencies:
 vector:
   enabled: true
   commonLabels:
-    app: tcnp-infra
+    app:my-app
     tier: logs
     component: vector
   podMonitor:
@@ -119,7 +119,7 @@ Vector est capable de parser les logs afin d'en tirer des métriques.
 
 Dans l'exemple précédent, le podMonitor ainsi que le service lié à prometheus sont démarrés, il ne reste plus que les instructions liées au parsage des logs pour avoir des métriques qui remontent dans grafana.
 
-L'exemple suivant prendre en exemple des logs issus de postgrest (log au format apache combined).
+L'exemple suivant prend en exemple des logs issus de postgrest (log au format apache combined).
 
 Ainsi le log suivant: `127.0.0.1 bob frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 200 2326 "http://www.seniorinfomediaries.com/vertical/channels/front-end/bandwidth" "Mozilla/5.0 (X11; Linux i686; rv:5.0) Gecko/1945-10-12 Firefox/37.0"`
 

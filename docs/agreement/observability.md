@@ -34,9 +34,9 @@ Le couple Elastisearch/Kibana est utilisé pour vous donner accès à vos logs.
 
 > __:warning: Les logs ne sont conservés que sur une durée de 7 jours.__
 
-Pour couvrir d'autres besoins, le projet doit mettre en place un collecteur de logs (rsyslog, fluentbit, fluentd, vector, kafka, ...) dans son application.
+Pour les besoins de conservation au delà de 7 jours, le projet doit mettre en place un collecteur de logs (rsyslog, fluentbit, fluentd, vector, kafka, ...) dans le périmètre de son application afin de récupérer le flux de logs et les stockés sur un autre support (S3 par exemple)
 
-Les logs seront transmis via le protocol HTTP, syslog ou vers un kafka.
+Les logs peuvent être transmises via le protocol HTTP, syslog ou vers un kafka.
 
 Pour bénéficier de ce service, merci de créer un ticket auprès de la ServiceTeam.
 
