@@ -61,6 +61,7 @@ L'offre Cloud π Native, portée par le Ministère de l'Intérieur et des Outre-
   - Gestion des [secrets applicatifs](docs/guide/secrets-management.md)
   - Outil de [déploiement automatisé](docs/services/gitops.md) des images Docker sur les infrastructures du ministère ou à l'extérieur du ministère en suivant les principes GitOps (Déploiement continue)
   - Hébergement des [environnements](docs/guide/environments-management.md) applicatifs de l'intégration à la production
+  - Gestion des [équipes](docs/guide/team.md)
   - Mise à disposition d'outil d'[observabilité et exploitabilité](docs/agreement/exploitation.md) des applications déployées sur l'offre : accès aux logs, métriques techniques et applicatives, procédures standard d'exploitation
 
 L'architecture générale de l'offre Cloud π Native est la suivante :
