@@ -62,7 +62,7 @@ Pour contacter la service Team, plusieurs moyens sont mis en place :
 
 Pour une meilleure traçabilité des échanges, nous avons mis en place un outil de ticketing permettant aux projets de faire des demandes ou de remonter des incidents à la Service Team.
 
-- Voici le lien pour s'y rendre: <https://support.numerique-interieur.com>.
+- Voici le lien pour s'y rendre: <https://support.dev.numerique-interieur.com>.
 
 ## Mattermost
 
