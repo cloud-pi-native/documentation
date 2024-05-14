@@ -32,24 +32,24 @@ Enfin, le déploiement s'effectue sur différentes cibles d'hébergement possibl
 
 Comme mentionné dans le schèma, l'offre de services comprend si vous le souhaitez l'infrastructure hébergeant vos applicatifs. 
 Cette infrastructure peut être:
- - Un socle kubernetes/Openshift mutualisé dans la zone "Non Protégé" (NP) du ministère de l'intérieur. 
- - Un socle kubernetes/Openshift dédié dans la zone "Non Protégé" (NP) ou la zone "Diffusion Restreinet (DR)du ministère de l'intérieur. 
- - Un socle kubernetes directement gérés par l'équipe projet.
+ - Un socle Kubernetes/Openshift mutualisé dans la zone "Non Protégé" (NP) du Ministère de l'Intérieur. 
+ - Un socle Kubernetes/Openshift dédié dans la zone "Non Protégé" (NP) ou la zone "Diffusion Restreinte (DR) du ministère de l'intérieur. 
+ - Un socle Kubernetes directement gérés par l'équipe projet.
 
-Le choix de la cible est cas par cas et fait lors des premières phases d'échange. 
+Le choix de la cible est au cas par cas et fait lors des premières phases d'échange. 
 
 ## Accompagnement
 
-Comme metionné plus haut, à la souscription de l'offre Cloud π Native, une équipe accompagnement sera le vis-à-vis du projet et assurera: 
+Comme mentionné plus haut, à la souscription de l'offre Cloud π Native, une équipe accompagnement sera le vis-à-vis du projet et assurera: 
 - Un [accompagnement](/agreement/support) rapproché aux projets pour que l'utilisation de l'offre se réalise dans des conditions optimales.
-- Le parcours technique d'embarquement sur l'offre Cloud π Native qui s'articule à trois niveaux: 
+- Le parcours technique d'embarquement sur l'offre Cloud π Native qui s'articule sur trois niveaux: 
    * Démarche autonome ( kit d'autoformation, tutoriels, etc... )
    * Démarche d'accompagnement à l'initialisation ( "Service Team" )
    * Formation et certification d'acteurs externes ( offre en cours d'élaboration )
 
 Les ressources d'accompagnement étant limitées, l'embarquement est conditionné à des prérequis techniques et ou organisationnels [prérequis](/platform/compatibility) pour embarquer sur l'offre Cloud π Native de façon sereine et optimale.
 
-Typiquement l'équipe doit être dans un parcours de montée en compétence à l'agilité et à la conteneurisation/kubernetes.
+Typiquement l'équipe doit être dans un parcours de montée en compétence à l'agilité et à la conteneurisation/Kubernetes.
 
 ## Embarquement technique
 
@@ -64,11 +64,11 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
   - Etape 5 : Félicitation ! Vous êtes maintenant un utilisateur de la plateforme Cloud π Native et votre application peut passer en production via les principes d'[exploitation et observabilité](/agreement/exploitation) de vos projets.
 
 
-A tout moment, vous pouvez consulter la [documentation détaillée](/platform/introduction) de la plateforme Cloud π Native, son architecture et les services proposés
+À tout moment, vous pouvez consulter la [documentation détaillée](/platform/introduction) de la plateforme Cloud π Native, son architecture et les services proposés.
 
-Enfin notre [FAQ](/agreement/faq) permet de lister les questions fréquentes de nos clients, et des exemples pour réaliser des bouchons (S3, SMTP, ...)
+Enfin notre [FAQ](/agreement/faq) permet de lister les questions fréquentes de nos clients, et des exemples pour réaliser des bouchons (S3, SMTP, ...).
 
 ## Contact
 
-Pour toute information ou demande, veuillez nous contacter à l'adresse suivante : <cloudpinative-relations@interieur.gouv.fr>. Nous vous recontacterons au plus vite dés la réception du mail.  
+Pour toute information ou demande, veuillez nous contacter à l'adresse suivante : <cloudpinative-relations@interieur.gouv.fr>. Nous vous recontacterons au plus vite dès la réception du mail.  
 Si vous faites déjà parti des beta testeurs et que vous souhaitez poser des questions ou avoir de l'accompagnement, veuillez nous contacter directement via le serveur Mattermost prévu à cet effet (si vous n'avez pas été ajouté au serveur Mattermost, veuillez contacter l'adresse mail précédente).
