@@ -31,7 +31,7 @@ Enfin, le déploiement s'effectue sur différentes cibles d'hébergement possibl
 ![vision](/img/global-vision.png)
 
 Comme mentionné dans le schèma, l'offre de services comprend si vous le souhaitez l'infrastructure hébergeant vos applicatifs. 
-Cette infrastrcture peut être:
+Cette infrastructure peut être:
  - Un socle kubernetes/Openshift mutualisé dans la zone "Non Protégé" (NP) du ministère de l'intérieur. 
  - Un socle kubernetes/Openshift dédié dans la zone "Non Protégé" (NP) ou la zone "Diffusion Restreinet (DR)du ministère de l'intérieur. 
  - Un socle kubernetes directement gérés par l'équipe projet.
