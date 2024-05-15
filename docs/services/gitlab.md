@@ -2,7 +2,7 @@
 
 ## Présentation
 
-Pour stocker et gérer vos sources applicatifs, l'usine logcielle de l'offre Cloud π Native vous propose le service de gestionnaire de source **Gitlab** en version communautaire.
+Pour stocker et gérer vos sources applicatifs, l'usine logicielle de l'offre Cloud π Native vous propose le service de gestionnaire de source **Gitlab** en version communautaire.
 
 Le principe de l'offre Cloud π Native est de laisser les projets autonomes sur leur chaine de construction sur les environnements de développement et notamment les outils utilisés. Ainsi, une équipe projet peut utiliser le gestionnaire de source qu'il souhaite en amont de l'offre Cloud π Native : Github, Gitlab.com, Bitbucket, Gitlab on premise, etc. et sur des dépôts de code publics ou privés. La seule contrainte est que ce gestionnaire soit **accessible depuis Internet** afin qu'il puisse être *copié* sur le GitLab de l'usine logicielle de l'offre Cloud π Native.
 
