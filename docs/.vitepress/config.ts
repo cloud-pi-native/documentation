@@ -6,7 +6,7 @@ export default defineConfig({
   lang: 'fr-FR',
   title: 'Cloud π Native',
   description: 'Documentation de la plateforme Cloud Pi Native',
-  cleanUrls: false,
+  cleanUrls: true,
   themeConfig: {
     logo: '/logo-marianne-gouvernement.png',
     nav: [

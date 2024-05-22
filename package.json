@@ -7,7 +7,7 @@
     "dev": "vitepress dev docs --port 8081",
     "docker:build": "docker build --tag cloud-pi-native/documentation --target prod .",
     "docker:run": "docker run --publish 8081:8080 --rm cloud-pi-native/documentation",
-    "preview": "vitepress preview docs"
+    "preview": "vitepress preview docs --port 8081"
   },
   "devDependencies": {
     "vitepress": "1.2.0"
