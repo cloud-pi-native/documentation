@@ -82,6 +82,9 @@ Remplir les informations et cliquer sur `Save`
 Votre dashboard est maintenant disponible dans la liste des dashbords
 ![dashboard_list](/img/guide/grafana_list_dashboard_final.png)
 
+>[!WARNING]
+> Les dashboards personnels ne sont pas sauvegardés, penser à faire un backup du code yaml nécessaire à sa mise en place
+
 ## Aller plus loin
 La communauté propose des dashboards pré-définis pour la plupart des outils.
 
