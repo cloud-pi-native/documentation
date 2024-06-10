@@ -8,7 +8,7 @@ Cette page liste les technologies nécessaires à maitriser avant d'utiliser la 
 | ---------------- | ---------------------------------------------------------------------------------------------------------------- |
 | Conteneurisation | **Obligatoire** Connaitre les principes de construction et de lancement d'images Docker                          |
 | Kubernetes       | **Obligatoire** Connaître et comprendre les principes et objets principaux de k8s et les manifest de déploiement |
-| Gitlab-CI        | **Obligatoire** Connaître les pipelines de déploiements gitlab-ci                                                |
+| GitLab-CI        | **Obligatoire** Connaître les pipelines de déploiements gitlab-ci                                                |
 | Helm             | **Conseillé** Savoir utiliser et créer un chart HELM                                                             |
 | GitOps           | **Obligatoire** Comprendre les principes de déploiement GitOps                                                   |
 | Openshift        | **Conseillé** Comprendre les différences avec kubernetes                                                         |

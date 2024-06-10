@@ -69,7 +69,7 @@ Remplir le formulaire de synchronisation des dépôts:
 <img src="/img/tuto/3tuto-depots-ajouter.png" alt="Dépôts synchronisés" width="75%" title="Dépôts synchronisés">
 
 
-Dans le cas d'un dépôt de code applicatif, générer les fichiers de *gitlab-ci* en cliquant sur le bouton *Fichiers de Gitlab CI*. Le fichier `.gitlab-ci-dso.yml` est à placer à la racine de votre dépôt externe et les `includes` (les autres fichiers `.yml`) sont à placer dans un dossier `includes/` à la racine de votre dépôt externe. Ces fichiers seront utilisés par le Gitlab de Cloud π Native pour effectuer les divers tests, scans et déploiements du projet.
+Dans le cas d'un dépôt de code applicatif, générer les fichiers de *gitlab-ci* en cliquant sur le bouton *Fichiers de GitLab CI*. Le fichier `.gitlab-ci-dso.yml` est à placer à la racine de votre dépôt externe et les `includes` (les autres fichiers `.yml`) sont à placer dans un dossier `includes/` à la racine de votre dépôt externe. Ces fichiers seront utilisés par le GitLab de Cloud π Native pour effectuer les divers tests, scans et déploiements du projet.
 
 <img src="/img/tuto/3tuto-depots-ajouter-gitlab-ci.png" alt="Gitlab-CI" width="75%" title="Gitlab-CI">
 
@@ -180,11 +180,11 @@ Une fois le dépôt interne à la plateforme créé et lié à un dépôt extern
 
 Pour paramétrer la synchronisation d'un dépôt :
 
-<!-- - Un dépôt nommé `<nom_de_votre_project>/<nom_de_votre_project>-mirror` a été créé dans le groupe Gitlab du projet. Dans ce dernier se trouve un script `script-mirror.sh` à copier dans votre dépôt externe.
+<!-- - Un dépôt nommé `<nom_de_votre_project>/<nom_de_votre_project>-mirror` a été créé dans le groupe GitLab du projet. Dans ce dernier se trouve un script `script-mirror.sh` à copier dans votre dépôt externe.
   > Ce script a pour but de demander à la plateforme de synchroniser le dépôt en effectuant un appel api (avec authentification auprès de l'api gateway).
   > Il faut donc lancer ce script dans la CI/CD du dépôt source selon les évènements sur lesquels on souhaite déclencher une synchronisation (ex: lors d'un push sur la branche main).
 
-- Dans le Gitlab de la plateforme, récupérer dans le dépôt `<nom_de_votre_project>/<nom_de_votre_project>-mirror` le token `GITLAB_TRIGGER_TOKEN` (`Settings > CI/CD > Pipeline triggers`, au besoin en créer un).
+- Dans le GitLab de la plateforme, récupérer dans le dépôt `<nom_de_votre_project>/<nom_de_votre_project>-mirror` le token `GITLAB_TRIGGER_TOKEN` (`Settings > CI/CD > Pipeline triggers`, au besoin en créer un).
 
 - Ajouter les variables d'environnements suivantes dans les __*secrets*__ de la CI/CD externe avec les valeurs fournies par l'équipe DSO ou précédemment récupérées (ces secrets seront utilisés par le script `script-mirror.sh`)
 
@@ -229,20 +229,20 @@ Pour paramétrer la synchronisation d'un dépôt :
 
 La synchronisation est maintenant en place et chaque appel API effectué avec le script `script-mirror.sh` entrainera le déclenchement de la chaine DevSecOps. -->
 
-- Un dépôt nommé `<nom_de_votre_project>/mirror` a été créé dans le groupe Gitlab du projet. Dans ce dernier se trouve un script `mirror.sh` à copier dans votre dépôt externe.
+- Un dépôt nommé `<nom_de_votre_project>/mirror` a été créé dans le groupe GitLab du projet. Dans ce dernier se trouve un script `mirror.sh` à copier dans votre dépôt externe.
   > Ce script a pour but de demander à la plateforme de synchroniser le dépôt en effectuant un appel api (avec authentification un trigger_token).
   > Il faut donc lancer ce script dans la CI/CD du dépôt source selon les évènements sur lesquels on souhaite déclencher une synchronisation (ex: lors d'un push sur la branche main).
 
-- Dans le Gitlab de la plateforme, récupérer dans le dépôt `<nom_de_votre_project>/mirror` le token `GITLAB_TRIGGER_TOKEN` (`Settings > CI/CD > Pipeline triggers`, au besoin en créer un).
+- Dans le GitLab de la plateforme, récupérer dans le dépôt `<nom_de_votre_project>/mirror` le token `GITLAB_TRIGGER_TOKEN` (`Settings > CI/CD > Pipeline triggers`, au besoin en créer un).
 
 - Ajouter les variables d'environnements suivantes dans les __*secrets*__ de la CI/CD externe avec les valeurs fournies par l'équipe DSO ou précédemment récupérées (ces secrets seront utilisés par le script `mirror.sh`)
 
   | Nom de variable          | Description                                                                  |
   | ------------------------ | ---------------------------------------------------------------------------- |
-  | API_URL                  | Url de GITLAB                                                                |
+  | API_URL                  | Url de GitLab                                                                |
   | BRANCH_TO_SYNC           | Branche ou tag a synchroniser                                                |
-  | GITLAB_MIRROR_PROJECT_ID | ID du projet mirror dans gitlab                                              |
-  | REPOSITORY_NAME          | Nom du repo a synchronisé dans le Gitlab DSO                                 |
+  | GITLAB_MIRROR_PROJECT_ID | ID du projet mirror dans GitLab                                              |
+  | REPOSITORY_NAME          | Nom du repo a synchronisé dans le GitLab DSO                                 |
   | GITLAB_TRIGGER_TOKEN     | Token de déclenchement du pipeline de synchronisation dans le GitLab interne |
 
 - Ajouter dans la CI/CD l'exécution de ce script pour déclencher la synchronisation automatiquement.

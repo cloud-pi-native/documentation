@@ -2,24 +2,24 @@
 
 ## Présentation
 
-Pour stocker et gérer vos sources applicatifs, l'usine logicielle de l'offre Cloud π Native vous propose le service de gestionnaire de source **Gitlab** en version communautaire.
+Pour stocker et gérer vos sources applicatifs, l'usine logicielle de l'offre Cloud π Native vous propose le service de gestionnaire de source **GitLab** en version communautaire.
 
-Le principe de l'offre Cloud π Native est de laisser les projets autonomes sur leur chaine de construction sur les environnements de développement et notamment les outils utilisés. Ainsi, une équipe projet peut utiliser le gestionnaire de source qu'il souhaite en amont de l'offre Cloud π Native : Github, Gitlab.com, Bitbucket, Gitlab on premise, etc. et sur des dépôts de code publics ou privés. La seule contrainte est que ce gestionnaire soit **accessible depuis Internet** afin qu'il puisse être *copié* sur le GitLab de l'usine logicielle de l'offre Cloud π Native.
+Le principe de l'offre Cloud π Native est de laisser les projets autonomes sur leur chaine de construction sur les environnements de développement et notamment les outils utilisés. Ainsi, une équipe projet peut utiliser le gestionnaire de source qu'il souhaite en amont de l'offre Cloud π Native : Github, GitLab.com, Bitbucket, GitLab on premise, etc. et sur des dépôts de code publics ou privés. La seule contrainte est que ce gestionnaire soit **accessible depuis Internet** afin qu'il puisse être *copié* sur le GitLab de l'usine logicielle de l'offre Cloud π Native.
 
 Dans la suite de cette page :
   - *dépôt externe* correspond au dépôt GIT externe à la plateforme Cloud π Native, et utilisé généreralement pour tester vos développement;
   - *dépôt interne* correspond à la copie du dépôt externe dans le service GitLab l'offre Cloud π Native;
-  - *gitlab interne* correspond à l'instance gitlab de l'offre Cloud π Native.
+  - *gitlab interne* correspond à l'instance GitLab de l'offre Cloud π Native.
 
 ![gitlab-synchro-repos](/img/repo-sync-01.png)
 
-> la copie des dépôts externes vers le gitlab interne est piloté par le Gitlab interne. Le flux de synchronisation *part* de l'instance gitlab interne.
+> la copie des dépôts externes vers le GitLab interne est piloté par le GitLab interne. Le flux de synchronisation *part* de l'instance GitLab interne.
 
 ## Import d'un dépôts externe depuis la Console DSO
 
 La déclaration de dépôts externes à synchroniser se fait depuis la **Console** Cloud π Native, une fois le projet est crée. Les opérations suivantes sont réalisées par la Console DSO:
- - Création d'un groupe Gitlab : <NOM_ORGANISATION>/<NOM_PROJET> sur le gitlab interne;
- - Attribution de droits d'administration sur le groupe Gitlab <NOM_ORGANISATION>/<NOM_PROJET>à l'utilisateur qui crée le projet;
+ - Création d'un groupe GitLab : <NOM_ORGANISATION>/<NOM_PROJET> sur le GitLab interne;
+ - Attribution de droits d'administration sur le groupe GitLab <NOM_ORGANISATION>/<NOM_PROJET>à l'utilisateur qui crée le projet;
  - Création d'un dépôt vide correspondant au dépôt distant dans le groupe ci-dessus;
  - Création d'un dépôt "mirror" avec les informations de synchrnonisation permettant, de réaliser un mirroir du dépôt GIT externe vers le dépôt interne créé plus haut.
 
@@ -36,7 +36,7 @@ Deux types de dépôts sont pris en comptes par l'offre Cloud π Native :
  - Dépôt applicatifs
  - Dépôt d'infrastructure applicatifs.
 
-### Dépôts applicatifs et chaine de construction Gitlab-ci 
+### Dépôts applicatifs et chaine de construction gitlab-ci 
 
 Les dépôts applicatifs contiennent le code source de vos applications.
 
@@ -47,7 +47,7 @@ Les projets applicatifs sont analysés et construits et les images de conteneurs
 
 ### Variables prédéfinies gitlab-ci DSO
 
-Un certains nombres de variables pré-définies, en plus des variables standards de gitlab :
+Un certains nombres de variables pré-définies, en plus des variables standards de GitLab :
 
  - http_proxy, https_proxy, HTTP_PROXY et HTTPS_PROXY, PROXY_HOST, PROXY_PORT,  : paramètres liés au proxy de l'environnement.
  - MVN_CONFIG_FILE : fichier de configuration Maven avec le paramètrage pré-défini de l'environnement et du projet en cours, notamment pour le dépot d'artefact sur le repo Nexus.
@@ -58,7 +58,7 @@ Un certains nombres de variables pré-définies, en plus des variables standards
  - REGISTRY_URL : URL d'accès à l'instance Harbor (image repository)
  - SONAR_HOST_URL : URL d'accès à l'instance SonarQube (analyse de qualité statique)
  - VAULT_AUTH_PATH : PATH dans l'URL d'accès à VAULT pour l'authentification par jwt
- - VAULT_AUTH_ROLE : PATH dans l'URL d'accès à VAULT pour la récupération des roles depuis les appels de Gitlab
+ - VAULT_AUTH_ROLE : PATH dans l'URL d'accès à VAULT pour la récupération des roles depuis les appels de GitLab
  - VAULT_SERVER_URL : URL d'accès à l'instance Vault (gestionnaire de secrets)
  
 ### Dépôt source d'infrastructure applicatifs

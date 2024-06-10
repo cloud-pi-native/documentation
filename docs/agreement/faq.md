@@ -14,13 +14,13 @@ La description de l'utilisation de ces bouchons est détaillée [ici](/agreement
 ### Comment puis-je lancer la pipeline de synchronisation de mes repos depuis mes repos externes ?
 
 Pour synchroniser le code tu peux suivre la procédure suivante.
-Sur Gitlab:
+Sur GitLab:
 
 - Aller sur ton projet
 - Aller sur le dépôt mirror
 - Dans la barre latérale gauche Build > Pipelines
 - Cliquer en haut à droite de l'écran sur Run pipeline
-- Ajouter comme valeur pour la variable PROJECT_NAME le nom du dépôt (dans le Gitlab) que tu souhaites synchroniser
+- Ajouter comme valeur pour la variable PROJECT_NAME le nom du dépôt (dans le GitLab) que tu souhaites synchroniser
 - Ajouter la variable GIT_BRANCH_DEPLOY avec comme valeur la branche que tu souhaites synchroniser
 - Cliquer sur Run pipeline
 

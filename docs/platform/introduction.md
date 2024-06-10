@@ -25,7 +25,7 @@ Liste des services de la plateforme :
 | -------------- | ------------------------------------------ | ----------- |
 | Argocd         | Outil de déploiement automatique (GitOps)  | Oui         |
 | Harbor / Trivy | Hébergement / analyse d'image de conteneur | Oui         |
-| Gitlab         | Hébergement de code et pipeline CI/CD      | Oui         |
+| GitLab         | Hébergement de code et pipeline CI/CD      | Oui         |
 | Kubernetes     | Création des ressources kubernetes         | Oui         |
 | Nexus          | Hébergement d'artefacts                    | Oui [1]     |
 | Sonarqube      | Analyse de qualité de code                 | Oui         |
@@ -37,13 +37,13 @@ Liste des services de la plateforme :
 
 L'ambition de cette plateforme est de proposer aux équipes projets une offre de services large, complète déployée au sein d'un cloud souverain et permettant d'automatiser la construction et le déploiement de vos projets en assurant les standards de qualité et sécurité. 
 
-Pour pouvoir manipuler les services de cette plateforme, la première étape consister à synchroniser le code applicatif depuis un repo externe accéssible depuis la plateforme. 
+Pour pouvoir manipuler les services de cette plateforme, la première étape consister à synchroniser le code applicatif depuis un repo externe accéssible depuis la plateforme.
 
-La chaine de CI/CD sur le Gitlab de la plateforme permet:
+La chaine de CI/CD sur le GitLab de la plateforme permet:
 
 - Lancer vos jeux de tests applicatif (unitaires, de bout en bout, ...).
 - Effectuer une analyse de la qualité de votre code source à l'aide du service [Sonarqube](https://www.sonarqube.org/).
-- Construire vos images de conteneur de l'application dans la CI/CD du service [Gitlab](https://about.gitlab.com/).
+- Construire vos images de conteneur de l'application dans la CI/CD du service [GitLab](https://about.gitlab.com/).
 - Scanner vos images et le code source à l'aide de [Trivy](https://aquasecurity.github.io/trivy).
 - Stocker vos images dans un registry de conteneurs dans la plateforme: [Harbor](https://goharbor.io/).
 

@@ -7,7 +7,7 @@
 | Dépôt externe | Dépôt de code sur lequel travaillent les utilisateurs au quotidien                                             |
 | Dépôt interne | Dépôt de code interne de la plateforme vers lequel est cloné le dépôt externe                                  |
 | DSO           | DSO pour DevSecOps est le nom communément utilisé par les équipes Cloud Pi Native pour parler de la plateforme |
-| Gitlab        | Service d'hébergement de code source et service de CI/CD                                                       |
+| GitLab        | Service d'hébergement de code source et service de CI/CD                                                       |
 | Gitops        | Système de déploiement via l'observation de code source dans un dépôt                                          |
 | Harbor        | Service d'hébergement d'image de conteneur                                                                     |
 | Nexus         | Service d'hébergement d'artefacts (ex: lib npm)                                                                |
