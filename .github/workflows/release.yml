@@ -57,3 +57,10 @@ jobs:
           target: prod
           platforms: linux/amd64,linux/arm64
           push: true
+
+      - name: Deploy new image
+        run: |
+          curl -X POST https://gitops.fabrique-numerique.fr/api/v1/applications/cloud-pi-native-docs/sync \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.ARGOCD_TOKEN }}" \
+            -d '${{ vars.ARGOCD_SYNC_PAYLOAD }}'

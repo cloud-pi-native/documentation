@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths: 
+      - docs/**
   workflow_dispatch:
 
 jobs:
@@ -41,6 +43,9 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
 
-      - name: Sync dso
+      - name: Deploy new image
         run: |
-          curl -X POST --fail -F token=${{ secrets.GITLAB_TRIGGER_TOKEN }} -F ref=main -F "variables[GIT_BRANCH_DEPLOY]=${{ github.ref_name }}" -F variables[PROJECT_NAME]=doc ${{secrets.URL_MIRROR}}
+          curl -X POST https://gitops.fabrique-numerique.fr/api/v1/applications/cloud-pi-native-docs/sync \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.ARGOCD_TOKEN }}" \
+            -d '${{ vars.ARGOCD_SYNC_PAYLOAD }}'
