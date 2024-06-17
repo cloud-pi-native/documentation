@@ -10,9 +10,9 @@
     "preview": "vitepress preview docs --port 8081"
   },
   "devDependencies": {
-    "vitepress": "1.2.0"
+    "vitepress": "^1.2.3"
   },
   "volta": {
-    "node": "20.11.1"
+    "node": "20.14.0"
   }
 }
