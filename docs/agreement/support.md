@@ -2,7 +2,7 @@
 
 ## Introduction
 
-La service team est l'équipe qui vous accompagne à embarquer sur l'offre Cloud π native. Cet accompagnement a pour objectif d'__aider les projets, les faire monter en compétences mais de ne pas faire à leur place__. En effet, une fois que les projets sont déployés sur l'offre Cloud π native, l'exploitation, le MCO/MCS reste de la responsabilité du projet qui doit comprendre l'esprit de la plateforme, les technologies sous jacentes et les paradigmes de déploiement. L'offre Cloud π native favorise le modéle DevSecOps ** ou Build it, You Run it**
+La Service Team est l'équipe qui vous accompagne à embarquer sur l'offre Cloud π native. Cet accompagnement a pour objectif d'__aider les projets, les faire monter en compétences mais de ne pas faire à leur place__. En effet, une fois que les projets sont déployés sur l'offre Cloud π native, l'exploitation, le MCO/MCS reste de la responsabilité du projet qui doit comprendre l'esprit de la plateforme, les technologies sous jacentes et les paradigmes de déploiement. L'offre Cloud π native favorise le modéle DevSecOps ** ou Build it, You Run it**
 
 L'accompagnement technique se fera sur 2 plateformes :
 
@@ -54,7 +54,7 @@ Identique à l'accompagnement sur OVH plus :
 
 ## Outils de communication
 
-Pour contacter la service Team, plusieurs moyens sont mis en place :
+Pour contacter la Service Team, plusieurs moyens sont mis en place :
 - Un outil de ticketing (moyen privilégié car permet de tracer les demandes)
 - Un outil de discussion en ligne: Mattermost
 
