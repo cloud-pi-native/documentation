@@ -43,9 +43,9 @@ Le choix de la cible est au cas par cas et fait lors des premières phases d'éc
 Comme mentionné plus haut, à la souscription de l'offre Cloud π Native, une équipe accompagnement sera le vis-à-vis du projet et assurera : 
 - Un [accompagnement](/agreement/support) rapproché aux projets pour que l'utilisation de l'offre se réalise dans des conditions optimales.
 - Le parcours technique d'embarquement sur l'offre Cloud π Native qui s'articule sur trois niveaux : 
-* Démarche autonome (Kit d'autoformation, tutoriels, etc. )
-* Démarche d'accompagnement à l'initialisation ( "Service Team" )
-* Formation et certification d'acteurs externes
+  * Démarche autonome (Kit d'autoformation, tutoriels, etc. )
+  * Démarche d'accompagnement à l'initialisation ( "Service Team" )
+  * Formation et certification d'acteurs externes
 
 Les ressources d'accompagnement étant limitées, l'embarquement est conditionné à des prérequis techniques et ou organisationnels [prérequis](/platform/compatibility) pour embarquer sur l'offre Cloud π Native de façon sereine et optimale.
 
@@ -68,5 +68,6 @@ Un parcours technique d'apprentissage permettant de valider les prérequis et d'
 Enfin notre [FAQ](/agreement/faq) permet de lister les questions fréquentes de nos clients, et des exemples pour réaliser des bouchons (S3, SMTP, ...).
 
 ## Contact
-Pour toute information ou demande, veuillez nous contacter à l'adresse suivante : <cdtnum-brm-contacts@interieur.gouv.fr> nous vous recontacterons au plus vite dès la réception du mail.  
-Si vous faites déjà parti des beta testeurs et que vous souhaitez poser des questions ou avoir de l'accompagnement, veuillez nous contacter directement via le serveur Mattermost prévu à cet effet (si vous n'avez pas été ajouté au serveur Mattermost, veuillez contacter l'adresse mail précédente.).
+
+Pour toute information ou demande, veuillez nous contacter à l'adresse suivante : <dtnum-brm-contacts@interieur.gouv.fr>. Nous vous recontacterons au plus vite dès la réception du mail.  
+Si vous faites déjà parti des beta testeurs et que vous souhaitez poser des questions ou avoir de l'accompagnement, veuillez nous contacter directement via le serveur Mattermost prévu à cet effet (si vous n'avez pas été ajouté au serveur Mattermost, veuillez contacter l'adresse mail précédente).
