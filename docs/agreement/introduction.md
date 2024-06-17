@@ -70,5 +70,5 @@ Enfin notre [FAQ](/agreement/faq) permet de lister les questions fréquentes de 
 
 ## Contact
 
-Pour toute information ou demande, veuillez nous contacter à l'adresse suivante : <cloudpinative-relations@interieur.gouv.fr>. Nous vous recontacterons au plus vite dès la réception du mail.  
+Pour toute information ou demande, veuillez nous contacter à l'adresse suivante : <dtnum-brm-contacts@interieur.gouv.fr>. Nous vous recontacterons au plus vite dès la réception du mail.  
 Si vous faites déjà parti des beta testeurs et que vous souhaitez poser des questions ou avoir de l'accompagnement, veuillez nous contacter directement via le serveur Mattermost prévu à cet effet (si vous n'avez pas été ajouté au serveur Mattermost, veuillez contacter l'adresse mail précédente).
