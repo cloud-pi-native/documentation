@@ -101,7 +101,7 @@ https://gitlab.com/gitlab-org/cloud-native/gitlab-operator/-/tags
 
 Dans le même ordre d'idée, une version de chart GitLab correspond à une version d'instance GitLab.
 
-La correspondance entre versions de charts GitLab et versions d'instances Gitlab est fournie par la page de documentation suivante :
+La correspondance entre versions de charts GitLab et versions d'instances GitLab est fournie par la page de documentation suivante :
 
 https://docs.gitlab.com/charts/installation/version_mappings.html
 

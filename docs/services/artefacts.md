@@ -29,7 +29,7 @@ Les urls de repositories seront toujours constuites de la même façon **\${NEXU
 ## Dépôts d'images de conteneurs: Harbor
 
 Harbor est la registry d'images de conteneurs utilisé pour stocker, gérer et distribuer les images de conteneurs des différents clusters, ainsi que de les scanner pour détecter les vulnérabilités de sécurité.
-Celui-ci est préconfiguré dans les templates Gitlab CI et utilisable via l'exemple suivant :
+Celui-ci est préconfiguré dans les templates GitLab CI et utilisable via l'exemple suivant :
 
 ```yaml
 build_docker_back:
@@ -46,7 +46,7 @@ build_docker_back:
 Il sera possible de définir différentes variables d'environnement dans GITLAB pour définir le TAG de l'image du conteneur, son nom et le path du Dockerfile:
  - IMAGE_NAMES: Nom de l'image de conteneur qui sera push dans le registry Harbor
  - DOCKERFILE: Chemin relatif depuis la racine du projet vers le Dockerfile
- - TAG: Tag de l'image par default le nom de la branche sera utilisé, il est possible d'utiliser d'autres valeurs disponible dans [Gitlab](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html) comme le $CI_COMMIT_SHORT_SHA ou des valeurs personnaliées.
+ - TAG: Tag de l'image par default le nom de la branche sera utilisé, il est possible d'utiliser d'autres valeurs disponible dans [GitLab](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html) comme le $CI_COMMIT_SHORT_SHA ou des valeurs personnaliées.
 
 Les images seronts publiées (Push) sur l'url prédéfini de harbor ayant le format suivant :
 

@@ -4,7 +4,7 @@ Le déploiement applicatif suit le principe gitOps et donc de "pousser" l'ensemb
 
 La solution que nous proposons aujourd'hui est [SOPS](https://github.com/mozilla/sops). Avec SOPS, vos secrets applicatifs sont poussés chiffrés sur vos dépôts git. Une clé asymétrique est utilisée dont la clé privée n'est connue que du cluster Kubernetes hébergeant votre application et la clé publique accessible à tous les projets.
 
-Dans le cas ou vous choisissez l'offre de services de la plateforme SecNumCloud MIOM pour déployer vos applicatifs dans les clusters kubernetes gérés par les équipes Cloud π Native, des paires de clés au format age ont été générées sur les différents clusters et les clés publiques ont été déposées par les admins dans le dépôt `documentation-dso-projets-interne` du Gitlab de la plateforme.
+Dans le cas ou vous choisissez l'offre de services de la plateforme SecNumCloud MIOM pour déployer vos applicatifs dans les clusters kubernetes gérés par les équipes Cloud π Native, des paires de clés au format age ont été générées sur les différents clusters et les clés publiques ont été déposées par les admins dans le dépôt `documentation-dso-projets-interne` du GitLab de la plateforme.
 
 Exportez la variable `AGE_KEY` avec la valeur du cluster souhaité, exemple :
 
