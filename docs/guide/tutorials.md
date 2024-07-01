@@ -64,7 +64,9 @@ __Multirepo__
 | IAC *(Manifestes)* | <https://github.com/cloud-pi-native/tuto-java-infra-manifest> |
 | IAC *(Helm)*       | <https://github.com/cloud-pi-native/tuto-java-infra-helm>     |
 
-## Data-tooling
+## Mocks
+
+### Data-tooling
 
 Un mock data-tooling permettant d'exposer un base de données PostgreSQL en tant qu'api rest est disponible [ici](https://github.com/cloud-pi-native/mock-data-tooling).
 
@@ -82,6 +84,12 @@ Ce mock contenant les outils suivants:
 Pour l'utiliser, forker le dépôt et modifier le chart helm.
 
 Il est accompagné d'un autre chart helm disponible [ici](https://github.com/cloud-pi-native/mock-data-tooling-minio) permettant d'installer un S3 (minio) avec un certain nombre de buckets créés par défaut.
+
+### INES et Passage 2
+
+Une fois que vous avez validé votre déploiement sur la console DSO d'OVH, la suite logique est de répéter ce procédé au sein du réseau ministériel. Et dépendamment des besoins de votre application, vous aurez besoin ou non de communiquer avec les équipes de Passage2 et d'INES.
+
+Pour vous aider, un mock a été mis en place [ici](https://github.com/cloud-pi-native/helm-projects-mocks/)
 
 ## Divers
 
