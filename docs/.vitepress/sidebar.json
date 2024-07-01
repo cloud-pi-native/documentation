@@ -98,16 +98,28 @@
         "link": "/guide/get-started"
       },
       {
+        "text": "Gestion des projets",
+        "link": "/guide/projects-management"
+      },
+      {
+        "text": "Gestion des équipes",
+        "link": "/guide/team"
+      },
+      {
+        "text": "Gestion des dépôts",
+        "link": "/guide/repositories-management"
+      },
+      {
         "text": "Gestion des environnements",
         "link": "/guide/environments-management"
       },
       {
-        "text": "Gestion des equipes",
-        "link": "/guide/team"
-      },
-      {
         "text": "Gestion des secrets",
         "link": "/guide/secrets-management"
+      },
+      {
+        "text": "Déploiement de votre application",
+        "link": "/guide/deployment-with-argo"
       },
       {
         "text": "Bonnes pratiques",
