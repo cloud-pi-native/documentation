@@ -12,7 +12,7 @@ D'autres bonnes pratiques à réspecter impérantivement:
 
 2. Dépendances
 
-    __TOUTES__ dépendances necessaires à la constuction de l'application (Libraries,Images, ...) doivent prévenir des dépôts de librairies connus telsque Maven, Coposer et Node. Il est aussi possible de construire les dépendences par l'offre Cloud π Native et les déposer dans son gestionnaire d'artefact.
+    __TOUTES__ dépendances necessaires à la constuction de l'application (Libraries,Images, ...) doivent provenir des dépôts de librairies connus tels que Maven, Composer et Node. Il est aussi possible de construire les dépendences par l'offre Cloud π Native et les déposer dans son gestionnaire d'artefact.
 
 3. Configuration / Service Externe
 
