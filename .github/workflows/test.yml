@@ -1,0 +1,67 @@
+name: Build tests
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+    branches:
+      - "**"
+  workflow_dispatch:
+    inputs:
+      NODE_VERSION:
+        description: Nodejs version used to run build tests
+        required: true
+        type: string
+        default: "20"
+      PNPM_VERSION:
+        description: Pnpm version used to run build tests
+        required: true
+        type: string
+        default: "9"
+
+env:
+  NODE_VERSION: "20"
+  PNPM_VERSION: "9"
+
+jobs:
+  lint:
+    name: Test app build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checks-out repository
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        id: pnpm-install
+        with:
+          version: "${{ inputs.PNPM_VERSION || env.PNPM_VERSION }}"
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "${{ inputs.NODE_VERSION || env.NODE_VERSION }}"
+
+      - name: Get pnpm store directory
+        id: pnpm-store
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Cache node files
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.pnpm-store.outputs.STORE_PATH }}
+          key: node-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            node-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test application build
+        run: pnpm run build

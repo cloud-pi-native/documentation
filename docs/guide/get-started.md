@@ -42,9 +42,6 @@ Pour déployer un environnement un guide est disponible [ici](/guide/environment
 
 ## Divers
 
-Afin d'accéder à vos images construites via Cloud Pi Native et stockées sur Harbor, un secret, nommé `registry-pull-secret`, est créé automatiquement par la plateforme.
+- Afin d'accéder à vos images construites via Cloud Pi Native et stockées sur Harbor, un secret, nommé `registry-pull-secret`, est créé automatiquement par la plateforme.
 
-Un tutoriel est disponible [ici](/guide/tutorials/#acces-aux-images-harbor)
-
-Un tutoriel est disponible [ici](/guide/tutorials) pour automatiser la synchronisation entre votre dépôt primaire et le dépôt sur la plateforme Cloud Pi Native
-
+- Un tutoriel est disponible [ici](/guide/tutorials) pour automatiser la synchronisation entre votre dépôt primaire et le dépôt sur la plateforme Cloud Pi Native.
