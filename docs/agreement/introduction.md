@@ -7,6 +7,8 @@ Cette offre de services est une implémentation du produit *Hexaforge* pour le m
 
 Vous pouvez consulter [la documentation détaillée](https://github.com/cloud-pi-native/embarquement-autoformation) du processus d'embarquement sur cette offre.
 
+**Votre point de contact** : dtnum-brm-contacts@interieur.gouv.fr  
+
 ## Introduction
 
 Avec l’adoption de la doctrine « Cloud au centre », le gouvernement français fait du Cloud un prérequis pour tout nouveau projet numérique au sein de l’État ou refonte substantielle de l’architecture applicative existante.
@@ -14,15 +16,24 @@ Avec l’adoption de la doctrine « Cloud au centre », le gouvernement françai
 **Objectif** : Accélérer la transformation numérique au bénéfice des usagers et dans le strict respect de la cybersécurité et de la protection des données des citoyens et des entreprises.
 
 L'offre *interministérielle* Cloud π Native, offre les services d'une plateforme *DevSecOps* complète afin de suivre le cycle de vie complet de son projet.
+La philosophie de l'offre est de créer une chaîne collaborative étendue entre l'équipe de développement et l'hébergement, qui s'appuient sur :
+* Un socle d'intégration à la main des développeurs, appelé chaine primaire.
+* Un service côté infrastructure étatique effectuant la recompilation du code et l'automatisation des déploiement, appelé chaîne secondaire.
+
+La chaîne secondaire a également la charge de mesurer la qualité du code et la conduite d'audits automatisés à chaque build/déploiement contribuant à l'homologation en continu de l'application.
+
+L'usage de standards industriels largement distribués tel que kubernetes, Gitops et la sécabilité de l'offre, permettent un transfert facilité depuis et vers d'autres solutions d'hébergement kubernetes telles que les Clouds Publics.
+
+Lorsque que l'équipe projet est prête avec une première base de code fonctionnelle, il est possible de l'intégrer sur l'offre Cloud π Native.
 
 Vous trouverez le détail de cette offre [ici](https://cloud-pi-native.fr/platform/introduction.html)
 
 Le cadre interministériel d'utilisaton de l'offre est disponible à l'emplacement suivant : <https://github.com/cloud-pi-native/cct-cloud-native>
 
 Dés que les [prérequis](https://cloud-pi-native.fr/agreement/support.html) sont présents, la souscription à l'offre Cloud π Native est possible en suivant les étapes suivantes :
-
-  - Effectuer une demande d'accès au service via le formulaire suivant : <https://www.demarches-simplifiees.fr/commencer/cloud-pi-native>. 
-  - Après acceptation du dossier, l'équipe [Accompagnement](https://cloud-pi-native.fr/agreement/introduction.html#accompagnement) prendra contact avec vous pour la phase d'accompagnement. 
+ Dés que les prérequis sont présents, la souscription à l'offre Cloud π Native est possible en suivant les étapes suivantes :
+ - Contacter l’adresse suivante pour faire une demande : dtnum-brm-contacts@interieur.gouv.fr
+ - Après acceptation de la demande, l'équipe [Accompagnement](https://cloud-pi-native.fr/agreement/introduction.html#accompagnement) prendra contact avec vous pour la phase d'accompagnement. 
 
 Enfin, le déploiement s'effectue sur différentes cibles d'hébergement possibles :
 
