@@ -2,12 +2,14 @@
 
 En phase de développement, les équipes projets sont autonomes et travaillent avec leurs outils sans contraintes apportées par la plateforme Cloud π Native. La synchronisation des dépôts est le processus qui permet de *copier* les dépôts externes stockés sur github, gitab.com, bitbucket, etc. vers le repo de code de la plateforme Cloud π Native. la seule contrainte est que le repo externe soit accessible depuis Internet. Ce repo peut être public ou privé. Pour plus d'information, voir la page dédiée au [repo de code](/services/gitlab)
 
-Cliquez sur le menu gauche **Dépôts synchronisés**
+Cliquez sur le menu gauche **Dépôts**
 ![menu-projet-depot](/img/tuto/3tuto-depots.png)
+
+## Ajouter un dépôt
 
 Puis sur le bouton **+ Ajouter un nouveau dépôt**
 
-Remplir le formulaire de synchronisation des dépôts:
+Remplir le formulaire de des dépôts:
 
 - Choisir un nom
 - Saisir l'URL du repo git distant. Dans le cas d'un repo privé cocher la case et préciser les credentials d'accès
@@ -31,5 +33,17 @@ Une fois que le dépôt est correctement ajouté, il apparait avec une icône in
 <img src="/img/tuto/3tuto-depots-ajouter-ok.png" alt="depots synchronisés ok" width="25%" title="depots synchronisés ok">
 
 > Cette opération demande d'attendre jusqu'à quelques minutes.
-> 
+>
 > Des exemples de dépôts sont disponibles dans la sections [tutoriels](tutorials).
+
+## Synchronisation d'un dépôt
+
+Il est possible de synchroniser son dépôt depuis la console. Pour cela cliquer sur la tuile d'un dépôt, une page s'ouvre avec tout en haut la branche à synchroniser et un bouton **Lancer la synchronisation**
+
+![repository synchro](/img/guide/repository_synchro.png)
+
+Ce bouton lancer une pipeline sur la GitLab DSO afin de synchroniser la branche voulue.
+
+> Il est possible de lancer via curl cette pipeline, le propriétaire du projet peut retrouver la commande dans les secrets du projet.
+> Cette commande pourra servir de base pour un GitHub action, etc...
+
