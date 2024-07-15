@@ -18,6 +18,9 @@ hero:
       text: Guide d'installation
       link: /installation/introduction
     - theme: brand
+      text: Administration
+      link: /administration/introduction
+    - theme: brand
       text: Contribuer
       link: /contribution/contribute
     - theme: alt
@@ -36,6 +39,9 @@ features:
   - title: Guide d'installation
     details: Guide d'installation de la plateforme pour un hébergement self hosted
     link: /installation/introduction
+  - title: Administration
+    details: Guide d'administration de la console DSO
+    link: /administration/introduction
   - title: Guide de contribution
     details: Guide de contribution à la plateforme open source
     link: /contribution/contribute

@@ -186,6 +186,52 @@
     ]
   },
   {
+    "text": "Administration de la console",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Démarrer",
+        "link": "/administration/introduction"
+      },
+      {
+        "text": "Utilisateurs",
+        "link": "/administration/utilisateurs"
+      },
+      {
+        "text": "Organisations",
+        "link": "/administration/organisations"
+      },
+      {
+        "text": "Projets",
+        "link": "/administration/projets"
+      },
+      {
+        "text": "Jounaux",
+        "link": "/administration/journaux"
+      },
+      {
+        "text": "Clusters",
+        "link": "/administration/clusters"
+      },
+      {
+        "text": "Quotas",
+        "link": "/administration/quotas"
+      },
+      {
+        "text": "Types d'environnement",
+        "link": "/administration/environnements"
+      },
+      {
+        "text": "Zones",
+        "link": "/administration/zones"
+      },
+      {
+        "text": "Plugins",
+        "link": "/administration/plugins"
+      }
+    ]
+  },
+  {
     "text": "Contribution",
     "collapsed": true,
     "items": [
