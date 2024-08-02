@@ -46,4 +46,30 @@ Ce bouton lancer une pipeline sur la GitLab DSO afin de synchroniser la branche 
 
 > Il est possible de lancer via curl cette pipeline, le propriétaire du projet peut retrouver la commande dans les secrets du projet.
 > Cette commande pourra servir de base pour un GitHub action, etc...
-
+>
+> Exemple de GitHub Action :
+> ```yaml
+> name: Webhook to update the Cloud Pi repo
+> on: push
+> jobs:
+>  curl:
+>     runs-on: ubuntu-latest
+>     steps:
+>       - name: call webhook
+>         env:
+>           # Needs GIT_MIRROR_TOKEN to be added to github repo actions secrets
+>           GIT_MIRROR_TOKEN: ${{ secrets.GIT_MIRROR_TOKEN }}
+>           BRANCH_TO_SYNC: ${{ github.head_ref || github.ref_name }}
+>         run: |
+>           REPOSITORY_NAME=<my_repo_name>
+>           GIT_MIRROR_PROJECT_ID=<my_project_id>
+>
+>           curl -X POST --fail \
+>             -F token=$GIT_MIRROR_TOKEN \
+>             -F ref=main \
+>             -F variables[GIT_BRANCH_DEPLOY]=$BRANCH_TO_SYNC \
+>             -F variables[PROJECT_NAME]=$REPOSITORY_NAME \
+>             "https://gitlab.apps.dso.numerique-interieur.com/api/v4/projects/$GIT_MIRROR_PROJECT_ID/trigger/pipeline"
+> ```
+>
+> A noter dans l'exemple précedent qu'il convient d'utiliser le bon url Gitlab.
