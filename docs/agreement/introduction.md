@@ -31,7 +31,6 @@ Vous trouverez le détail de cette offre [ici](https://cloud-pi-native.fr/platfo
 Le cadre interministériel d'utilisaton de l'offre est disponible à l'emplacement suivant : <https://github.com/cloud-pi-native/cct-cloud-native>
 
 Dés que les [prérequis](https://cloud-pi-native.fr/agreement/support.html) sont présents, la souscription à l'offre Cloud π Native est possible en suivant les étapes suivantes :
- Dés que les prérequis sont présents, la souscription à l'offre Cloud π Native est possible en suivant les étapes suivantes :
  - Contacter l’adresse suivante pour faire une demande : dtnum-brm-contacts@interieur.gouv.fr
  - Après acceptation de la demande, l'équipe [Accompagnement](https://cloud-pi-native.fr/agreement/introduction.html#accompagnement) prendra contact avec vous pour la phase d'accompagnement. 
 
