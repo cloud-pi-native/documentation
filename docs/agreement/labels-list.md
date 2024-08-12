@@ -36,42 +36,42 @@ Ajouter un label `criticality: <element>` où `element` est un élément de la l
 Ajouter un label `component: <element>` où `element` est un élément de la liste suivante :
 
 - web :
-	- nginx
-	- apache
-	- caddy
-	- tomcat
+  - nginx
+  - apache
+  - caddy
+  - tomcat
 
 - defaults :
-	- python
-	- node
-	- openjdk
-	- golang
-	- php
-	- ruby
-	- perl
-	- drupal
-	- java
+  - python
+  - node
+  - openjdk
+  - golang
+  - php
+  - ruby
+  - perl
+  - drupal
+  - java
 
-- database : 
-	- postgres
-	- mariadb
-	- mysql
-	- mongo
-	- cassandra
-	- cockroach
-	- influx
-	- etcd
+- database :
+  - postgres
+  - mariadb
+  - mysql
+  - mongo
+  - cassandra
+  - cockroach
+  - influx
+  - etcd
 
 - caching :
-	- varnish
-	- redis
-	- memcached
+  - varnish
+  - redis
+  - memcached
 
 - broker :
-	- rabbitmq
-	- kafka
-	- apachemq
-	- kubemq
+  - rabbitmq
+  - kafka
+  - apachemq
+  - kubemq
 
 - others :
-	- busybox
+  - busybox

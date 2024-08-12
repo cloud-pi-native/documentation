@@ -9,7 +9,6 @@ Pour se logguer, cliquer sur le bouton `dso-client`
 
 ![login](/img/guide/kibana/log-in.png)
 
-
 *Les prochaines étapes ne seront à faire qu'une seule fois*
 
 - Kibana va demander l'autorisation d'accéder à des ressources, cocher tout et cliquer sur `Allow selected permissions`
@@ -24,7 +23,6 @@ Kibana va demander quel champ utiliser pour la date, choisir `@timestamp` dans l
 
 Félicitations, vous venez de créer votre premier index Kibana et allez pouvoir dès à présent découvrir et filtrer vos logs
 ![create_index_valid](/img/guide/kibana/create_index_valid.png)
-
 
 ## Explorer vos logs
 Pour explorer et requêter vos logs, allez sur l'onglet `Discover`
@@ -47,16 +45,13 @@ A gauche se trouve les champs requêtables (ceux trouvés dans l'index créé à
 ---
 A droite se trouve les résultats avec un graphique reprenant la disparité des lignes de logs selon la date.
 
-En en dessous, les logs correspondants à la recherche (avec les critères surlignés). 
+En en dessous, les logs correspondants à la recherche (avec les critères surlignés).
 
 *A noter qu'il est possible de déplier les résultats en cliquant sur la flèche à côté de la date*
 
 ![discover_results](/img/guide/kibana/discover_results.png)
 
-
-
 ## Aller plus loin
 La documentation de Kibana se trouve [ici](https://www.elastic.co/guide/en/kibana/6.8/index.html)
 
 Plus d'informations concernant la syntaxe de requêtage [ici](https://www.elastic.co/guide/en/kibana/6.8/kuery-query.html)
-

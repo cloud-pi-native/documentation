@@ -14,8 +14,7 @@ Cette page liste les technologies nécessaires à maitriser avant d'utiliser la 
 | Openshift        | **Conseillé** Comprendre les différences avec kubernetes                                                         |
 | GitOps/ArgoCD    | **Conseillé** Connaitre l'utilisation d'ArgoCD                                                                   |
 
-
-## Liens utiles 
+## Liens utiles
 
 - [Kubernetes Basics: Pods, Nodes, Containers, Deployments and Clusters](https://www.youtube.com/watch?v=B_X4l4HSgtc) - *video en anglais*
 - [Kubernetes in 5 mins](https://www.youtube.com/watch?v=PH-2FfFD2PU) - *video en anglais*

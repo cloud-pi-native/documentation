@@ -29,7 +29,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: mynamespace
-  name: postgres-demo  # Sets Deployment name
+  name: postgres-demo # Sets Deployment name
 spec:
   replicas: 1
   strategy:
@@ -45,13 +45,13 @@ spec:
       containers:
         - name: postgres
           image: bitnami/postgresql:14.9.0
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 5432  # Exposes container port
+            - containerPort: 5432 # Exposes container port
           env:
-            - name: "POSTGRES_USER"
-              value: "demo_user"
-            - name: "POSTGRES_PASSWORD"
+            - name: POSTGRES_USER
+              value: demo_user
+            - name: POSTGRES_PASSWORD
               value: "My$ecrETPAss0rd*"
             - name: POSTGRES_DB
               value: demo
@@ -62,8 +62,8 @@ spec:
               name: postgredb
           resources:
             limits:
-              memory: "512Mi"
-              cpu: "500m"
+              memory: 512Mi
+              cpu: 500m
       restartPolicy: Always
       volumes:
         - name: postgredb

@@ -1,15 +1,18 @@
 {
   "name": "@cloud-pi-native/docs",
-  "version": "1.0.0",
   "type": "module",
+  "version": "1.0.0",
   "scripts": {
     "build": "vitepress build docs",
     "dev": "vitepress dev docs --port 8081",
     "docker:build": "docker build --tag cloud-pi-native/documentation --target prod .",
     "docker:run": "docker run --publish 8081:8080 --rm cloud-pi-native/documentation",
+    "format": "eslint . --fix",
+    "lint": "eslint .",
     "preview": "vitepress preview docs --port 8081"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.24.1",
     "vitepress": "^1.2.3"
   },
   "volta": {

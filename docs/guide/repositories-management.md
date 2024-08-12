@@ -27,7 +27,6 @@ Cliquer enfin sur le bouton `Ajouter le dépôt`.
 
 Lorsqu'un dépôt est créé dans la console en tant que `dépôt d'infrastructure`, la plateforme créée automatiquement l'application [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) associée qui permettra le déploiement.
 
-
 Une fois que le dépôt est correctement ajouté, il apparait avec une icône indiquant son statut :
 
 <img src="/img/tuto/3tuto-depots-ajouter-ok.png" alt="depots synchronisés ok" width="25%" title="depots synchronisés ok">
@@ -52,7 +51,7 @@ Ce bouton lancer une pipeline sur la GitLab DSO afin de synchroniser la branche 
 > name: Webhook to update the Cloud Pi repo
 > on: push
 > jobs:
->  curl:
+>   curl:
 >     runs-on: ubuntu-latest
 >     steps:
 >       - name: call webhook

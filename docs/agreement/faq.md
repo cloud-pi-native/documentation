@@ -10,7 +10,6 @@ Des bouchons sont proposés afin de simuler un serveur SMTP, création d'un buck
 
 La description de l'utilisation de ces bouchons est détaillée [ici](/agreement/mocks)
 
-
 ### Comment puis-je lancer la pipeline de synchronisation de mes repos depuis mes repos externes ?
 
 Pour synchroniser le code tu peux suivre la procédure suivante.
@@ -36,25 +35,24 @@ Toutes les images déployées sur la plateforme Cloud π Native doivent :
 
 Afin de construire une image personnalisée, il est nécessaire de créer un Dockerfile dans son repo de sources applicative et d'intégrer la construction de cette image dans l'étape de construction de l'application.
 
-
 Extrait du gitlab-ci-dso.yml
 ```yaml
 build_docker_custom:
   variables:
-    WORKING_DIR: 'images'
-    IMAGE_NAME: 'image_custom_to_build'
-    DOCKERFILE: 'Dockerfile-custom'
+    WORKING_DIR: images
+    IMAGE_NAME: image_custom_to_build
+    DOCKERFILE: Dockerfile-custom
   stage: build-docker
   extends:
     - .kaniko:build
 ```
 
-Fichier images/Dockerfile-custom dans le répertoire 
+Fichier images/Dockerfile-custom dans le répertoire
 ```dockerfile
 FROM alpine:edge
 
 WORKDIR /tmp
-RUN apk upgrade --update-cache --available 
+RUN apk upgrade --update-cache --available
 [...]
 CMD [ "command_to_execute"]
 ```
@@ -70,12 +68,12 @@ Ainsi, il est possible d'utiliser une image non construite sur DSO, par exemple,
 ### Quelles sont les contraintes génériques d'Openshift par rapport à Kubernetes ?
 
 - Les images doivent être rootless
-- Le root filesystem des images doit être en lecture seule à l'exception et seul les répertoire /tmp et /var/tmp sont en écriture 
+- Le root filesystem des images doit être en lecture seule à l'exception et seul les répertoire /tmp et /var/tmp sont en écriture
 - Les ports d'écoute des PODs doivent être supérieurs à 1024
 
 ### J'ai une erreur de récupération des dépendances Java via Maven à cause d'un problème de certificat SSL:
 
-Cette erreur apparait lors des appels internes au cluster qui ne reconnait pas les certificats présentés: 
+Cette erreur apparait lors des appels internes au cluster qui ne reconnait pas les certificats présentés:
 
 Message d'erreur :
 ```
@@ -88,16 +86,15 @@ Ajouter dans le fichier .gitlab-ci.dso.yml la variable MAVEN_CLI_OPTS pour ignor
 package-app:
   variables:
     BUILD_IMAGE_NAME: maven:3.8-openjdk-17
-    WORKING_DIR: "."
-    ARTEFACT_DIR: "target"
-    MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+    WORKING_DIR: .
+    ARTEFACT_DIR: target
+    MAVEN_OPTS: -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
     MAVEN_CLI_OPTS: " -Dmaven.wagon.http.ssl.insecure=true "
     MVN_CONFIG_FILE: $MVN_CONFIG
   stage: package-app
   extends:
     - .java:build
 ```
-
 
 ## Déploiement
 
@@ -112,12 +109,12 @@ L'utilisation de chart Helm est une autre solution pour déployer une base de do
 Voici un exemple de déclaration de dépendances vers le chart Helm de PostgreSQL de Bitnami :
 ```yaml
 dependencies:
-- name: postgresql
-  version: "12.2.2"
-  repository: "https://charts.bitnami.com/bitnami"
-``` 
+  - name: postgresql
+    version: 12.2.2
+    repository: "https://charts.bitnami.com/bitnami"
+```
 
-la configuration de chart Helm se fait 
+la configuration de chart Helm se fait
 
 Un exemple complet est présent sur le tutoriel de déploiement [dso-tuto-java-helm](https://github.com/cloud-pi-native/tuto-java-infra-helm.git)
 
@@ -132,7 +129,7 @@ Questions concernant l'exploitabilité et l'observabilité des applications
 Pour créer un backup "fonctionnel" sur une base postgres en plus des backup proposés par l'offre DSO, il est possible de procéder comme suit :
 Création d'un CronJob avec 2 pods partageant le même volume :
   - Un container (initContainer) à partir d'une image postgres se connectant au service de base de données et réalisant le dump
-  - Un container récupérant le dump et l'envoyant sur un stockage S3.  
+  - Un container récupérant le dump et l'envoyant sur un stockage S3.
 
 Création d'un script d'upload de backup vers un stockage S3 (monté comme configMap)
 ```sh
@@ -161,11 +158,11 @@ metadata:
   name: postgres-backup
   namespace: my-namespace
 spec:
-  schedule: "0 6 * * *" #Tous les jours à 6h00 du matin
-  [..]
+  schedule: "0 6 * * *" # Tous les jours à 6h00 du matin
+  # [..]
   jobTemplate:
     spec:
-      [..]
+      # [..]
       template:
         spec:
           initContainers:
@@ -174,7 +171,7 @@ spec:
               volumeMounts:
                 - name: data
                   mountPath: /backup
-              args: ["pg_dump", "-Fc", "-f", "/backup/backup.pgdump", "-h", "postgresql-svc"]
+              args: [pg_dump, -Fc, -f, /backup/backup.pgdump, -h, postgresql-svc]
               env:
                 - name: PGPASSWORD
                   valueFrom:
@@ -190,9 +187,9 @@ spec:
                 - name: config-volume
                   mountPath: /backup-script
               envFrom:
-              - configMapRef:
-                  name: env-backup-S3
-              command: ["/backup-script/backup-s3.sh"]
+                - configMapRef:
+                    name: env-backup-S3
+              command: [/backup-script/backup-s3.sh]
           restartPolicy: Never
           volumes:
             - name: config-volume

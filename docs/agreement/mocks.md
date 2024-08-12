@@ -46,7 +46,7 @@ smtp:
   # Référence vers l'image mailhog sur docker.io
   image:
     repository: docker.io/mailhog/mailhog
-    tag: "v1.0.1"
+    tag: v1.0.1
     pullPolicy: IfNotPresent
 
   nameOverride: ""
@@ -73,16 +73,16 @@ smtp:
     enabled: true
     # ingressClassName: nginx
     annotations: {}
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
     labels: {}
-#    hostOverride: mailhog.example.com
+  #    hostOverride: mailhog.example.com
 
   auth:
     enabled: true
     existingSecret: ""
     fileName: auth.txt
-    fileContents: "Ym9iOiQyYSQwNCRRN1VwdmQvWUlwck5DcExsUHpFQ2VlRnZrVlI1RVhKbG1uZjZ4S050ZHlXSnJoeW1hNUhlaQ==" # format user:password (où password est bcrypted) le tout en base64
+    fileContents: Ym9iOiQyYSQwNCRRN1VwdmQvWUlwck5DcExsUHpFQ2VlRnZrVlI1RVhKbG1uZjZ4S050ZHlXSnJoeW1hNUhlaQ== # format user:password (où password est bcrypted) le tout en base64
 
   # JSON file defining outgoing SMTP servers
   outgoingSMTP:
@@ -90,21 +90,21 @@ smtp:
     existingSecret: ""
     fileName: outgoing-smtp.json
     fileContents: {}
-      # See https://github.com/mailhog/MailHog/blob/master/docs/CONFIG#outgoing-smtp-configuration
-      # Only name, host and port are required.
-      #
-      # server_name1:
-      #   name: "server_name1"
-      #   host: "mail.example.com"
-      #   port: "25"    # NOTE: go requires this port number to be a string... otherwise the container won't start
-      #   email: ""
-      #   username: ""
-      #  password: ""
-      #  mechanism: "PLAIN|CRAM-MD5"
-      # server_name2:
-      #   name: "server_name2"
-      #   host: "mail2.example.com"
-      #   port: "587"   # NOTE: go requires this port number to be a string... otherwise the container won't start
+    # See https://github.com/mailhog/MailHog/blob/master/docs/CONFIG#outgoing-smtp-configuration
+    # Only name, host and port are required.
+    #
+    # server_name1:
+    #   name: "server_name1"
+    #   host: "mail.example.com"
+    #   port: "25"    # NOTE: go requires this port number to be a string... otherwise the container won't start
+    #   email: ""
+    #   username: ""
+    #  password: ""
+    #  mechanism: "PLAIN|CRAM-MD5"
+    # server_name2:
+    #   name: "server_name2"
+    #   host: "mail2.example.com"
+    #   port: "587"   # NOTE: go requires this port number to be a string... otherwise the container won't start
 
   podReplicas: 1
 
@@ -124,7 +124,7 @@ smtp:
     initialDelaySeconds: 10
     timeoutSeconds: 1
 
-  resources: 
+  resources:
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
     # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -153,19 +153,19 @@ minio:
 Le chart dans cette configuration va créer sur le namespace :
  - 2 buckets S3 nommés my-bucket-app et my-second-bucket
  - Un secret contenant 2 clés **root-password** et **root-user** pour se connecter à l'IHM permettant d'administrer minIO (création de bucket de 'AK/SK).
- 
+
 Pour utiliser MinIO sur un pod, il faut créer et injecter la configuration via configMap ou Secret :
 
 ```yaml
-[...]
-      containers:
-          [...]
-          envFrom:
-          - configMapRef:
-              name: cm-name
-          - secretRef:
-              name: secret-name
-[...]
+# [...]
+containers:
+  # [...]
+  envFrom:
+    - configMapRef:
+        name: cm-name
+    - secretRef:
+        name: secret-name
+# [...]
 ```
 
 ### Passage2
@@ -186,9 +186,8 @@ passage2:
     # Url de l'ingress du reverse proxy authentifiant
     hostname: mellon.example.com
     proxy:
-      #Valeur des headers ajouté par MELLON
+      # Valeur des headers ajouté par MELLON
       headers: |-
-
         #Ajout de header Mellon-NameID avec le nom de l'utilisateur connecté
         RequestHeader set Mellon-NameID %{MELLON_NAME_ID}e
         Header set Mellon-NameID %{MELLON_NAME_ID}e

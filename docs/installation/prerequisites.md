@@ -1,7 +1,7 @@
 # Prérequis
 
 Aujourd'hui l'installation de la plateforme Cloud π Native est testée uniquement sur un cluster OpenShift (version 4.X).
-La compatibilité kubernetes sera effective dans une prochaine release. 
+La compatibilité kubernetes sera effective dans une prochaine release.
 
 Vous devrez disposer d'un **accès administrateur au cluster**.
 

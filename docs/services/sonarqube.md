@@ -16,7 +16,7 @@ SonarQube est préconfiguré pour certains outils telsque npm et Maven, présent
 ```yaml
 test_front:
   variables:
-    WORKING_DIR: "src"
+    WORKING_DIR: src
   stage: test
   extends:
     - .node:sonar

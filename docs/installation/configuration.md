@@ -118,7 +118,7 @@ spec:
           tag: v2.9.1
   ingress:
     annotations:
-      route.openshift.io/termination: "edge"
+      route.openshift.io/termination: edge
     tls:
       type: tlsSecret
       tlsSecret:
@@ -135,7 +135,7 @@ spec:
     storageSize: 5Gi
   proxy:
     enabled: true
-    host: "192.168.xx.xx"
+    host: 192.168.xx.xx
     http_proxy: http://192.168.xx.xx:3128/
     https_proxy: http://192.168.xx.xx:3128/
     no_proxy: .cluster.local,.svc,10.0.0.0/8,127.0.0.1,192.168.0.0/16,api.example.com,api-int.example.com,canary-openshift-ingress-canary.apps.example.com,console-openshift-console.apps.example.com,localhost,oauth-openshift.apps.example.com,svc.cluster.local,localdomain
@@ -156,18 +156,18 @@ spec:
     values:
       injector:
         image:
-          repository: "docker.io/hashicorp/vault-k8s"
-          tag: "1.2.1"
+          repository: docker.io/hashicorp/vault-k8s
+          tag: 1.2.1
           pullPolicy: IfNotPresent
         agentImage:
-          repository: "docker.io/hashicorp/vault"
-          tag: "1.14.0"
+          repository: docker.io/hashicorp/vault
+          tag: 1.14.0
       server:
         image:
-          repository: "docker.io/hashicorp/vault"
-          tag: "1.14.0"
+          repository: docker.io/hashicorp/vault
+          tag: 1.14.0
           pullPolicy: IfNotPresent
-        updateStrategyType: "RollingUpdate"
+        updateStrategyType: RollingUpdate
 ```
 
 Les champs utilisables dans cette ressource de type **dsc** peuvent être décrits pour chaque outil à l'aide de la commande `kubectl explain`. Exemple avec argocd :
@@ -193,4 +193,4 @@ Voici les liens vers les documentations de chart Helm pour les outils concernés
 - [SOPS](https://github.com/isindir/sops-secrets-operator/tree/master/chart/helm3/sops-secrets-operator)
 - [HashiCorp Vault](https://github.com/hashicorp/vault-helm)
 
-S'agissant du gel des versions de charts ou d'images pour les outils en question, **nous vous invitons fortement à consulter la section détaillée [Gel des versions](#gel-des-versions)** située plus bas dans le présent document.  
+S'agissant du gel des versions de charts ou d'images pour les outils en question, **nous vous invitons fortement à consulter la section détaillée [Gel des versions](#gel-des-versions)** située plus bas dans le présent document.

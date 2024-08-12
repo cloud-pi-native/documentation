@@ -47,16 +47,16 @@ Les tags dits "immutables" sont ceux qui possèdent un suffixe de type rXX, lequ
 Pour spécifier un tel tag, il nous suffira d'éditer la ressource `dsc` de configuration (par défaut ce sera la `dsc` nommée `conf-dso`) et de surcharger les "values" correspondantes du chart Helm, en ajoutant celles dont nous avons besoin. Exemple :
 
 ```yaml
-  argocd:
-    admin:
-      enabled: true
-      password: WeAreThePasswords
-    values:
-      image:
-        registry: docker.io
-        repository: bitnami/argo-cd
-        tag: 2.7.6-debian-11-r2
-        imagePullPolicy: IfNotPresent
+argocd:
+  admin:
+    enabled: true
+    password: WeAreThePasswords
+  values:
+    image:
+      registry: docker.io
+      repository: bitnami/argo-cd
+      tag: 2.7.6-debian-11-r2
+      imagePullPolicy: IfNotPresent
 ```
 
 Pour mémoire, les values utilisables sont disponibles ici : <https://github.com/bitnami/charts/blob/main/bitnami/argo-cd/values.yaml>
@@ -145,62 +145,62 @@ Les différents tags utilisables sont disponibles ici :
 Pour spécifier nos tags, il nous suffira d'éditer la ressource `dsc` de configuration (par défaut ce sera la `dsc` nommée `conf-dso`) et de surcharger les "values" correspondantes du chart Helm, en ajoutant celles dont nous avons besoin. Exemple, pour la version 1.13.1 du chart :
 
 ```yaml
-  harbor:
-    adminPassword: WhoWantsToPassForever
-    pvcRegistrySize: 50Gi
-    values:
-      nginx:
-        image:
-          repository: docker.io/goharbor/nginx-photon
-          tag: v2.9.1
-      portal:
-        image:
-          repository: docker.io/goharbor/harbor-portal
-          tag: v2.9.1
-      core:
-        image:
-          repository: docker.io/goharbor/harbor-core
-          tag: v2.9.1
-      jobservice:
-        image:
-          repository: docker.io/goharbor/harbor-jobservice
-          tag: v2.9.1
+harbor:
+  adminPassword: WhoWantsToPassForever
+  pvcRegistrySize: 50Gi
+  values:
+    nginx:
+      image:
+        repository: docker.io/goharbor/nginx-photon
+        tag: v2.9.1
+    portal:
+      image:
+        repository: docker.io/goharbor/harbor-portal
+        tag: v2.9.1
+    core:
+      image:
+        repository: docker.io/goharbor/harbor-core
+        tag: v2.9.1
+    jobservice:
+      image:
+        repository: docker.io/goharbor/harbor-jobservice
+        tag: v2.9.1
+    registry:
       registry:
-        registry:
-          image:
-            repository: docker.io/goharbor/registry-photon
-            tag: v2.9.1
-        controller:
-          image:
-            repository: docker.io/goharbor/harbor-registryctl
-            tag: v2.9.1
-      trivy:
         image:
-          repository: docker.io/goharbor/trivy-adapter-photon
+          repository: docker.io/goharbor/registry-photon
           tag: v2.9.1
-      notary:
-        server:
-          image:
-            repository: docker.io/goharbor/notary-server-photon
-            tag: v2.9.1
-        signer:
-          image:
-            repository: docker.io/goharbor/notary-signer-photon
-            tag: v2.9.1
-      database:
-        internal:
-          image:
-            repository: docker.io/goharbor/harbor-db
-            tag: v2.9.1
-      redis:
-        internal:
-          image:
-            repository: docker.io/goharbor/redis-photon
-            tag: v2.9.1
-      exporter:
+      controller:
         image:
-          repository: docker.io/goharbor/harbor-exporter
+          repository: docker.io/goharbor/harbor-registryctl
           tag: v2.9.1
+    trivy:
+      image:
+        repository: docker.io/goharbor/trivy-adapter-photon
+        tag: v2.9.1
+    notary:
+      server:
+        image:
+          repository: docker.io/goharbor/notary-server-photon
+          tag: v2.9.1
+      signer:
+        image:
+          repository: docker.io/goharbor/notary-signer-photon
+          tag: v2.9.1
+    database:
+      internal:
+        image:
+          repository: docker.io/goharbor/harbor-db
+          tag: v2.9.1
+    redis:
+      internal:
+        image:
+          repository: docker.io/goharbor/redis-photon
+          tag: v2.9.1
+    exporter:
+      image:
+        repository: docker.io/goharbor/harbor-exporter
+        tag: v2.9.1
 ```
 
 Pour mémoire, les values utilisables sont disponibles et documentées ici : <https://github.com/goharbor/harbor-helm/tree/master>
@@ -218,12 +218,12 @@ Les tags dits "immutables" sont ceux qui possèdent un suffixe de type rXX, lequ
 Pour spécifier un tel tag, il nous suffira d'éditer la ressource `dsc` de configuration (par défaut ce sera la `dsc` nommée `conf-dso`) et de surcharger les "values" correspondantes du chart Helm, en ajoutant celles dont nous avons besoin. Exemple :
 
 ```yaml
-  keycloak:
-    values:
-      image:
-        registry: docker.io
-        repository: bitnami/keycloak
-        tag: 19.0.3-debian-11-r22
+keycloak:
+  values:
+    image:
+      registry: docker.io
+      repository: bitnami/keycloak
+      tag: 19.0.3-debian-11-r22
 ```
 
 Pour mémoire, les values utilisables sont disponibles ici : <https://github.com/bitnami/charts/blob/main/bitnami/keycloak/values.yaml>
@@ -249,9 +249,9 @@ Si toutefois vous souhaitez la modifier, les tags d'images utilisables sont disp
 Pour déployer une autre version, il suffira d'éditer la `dsc`, de préférence avec le fichier YAML que vous avez initialement utilisé pendant l'installation, puis modifier la section suivante en y indiquant la version d'image désirée au niveau du paramètre **imageTag**. Exemple :
 
 ```yaml
-  nexus:
-    storageSize: 25Gi
-    imageTag: 3.56.0
+nexus:
+  storageSize: 25Gi
+  imageTag: 3.56.0
 ```
 
 ## SonarQube Community Edition
@@ -269,14 +269,14 @@ Il faudra juste leur ajouter le suffixe "-community" qui correspond à l'éditio
 Pour spécifier un tel tag, il nous suffira d'éditer la ressource `dsc` de configuration (par défaut ce sera la `dsc` nommée `conf-dso`) et de surcharger les "values" correspondantes du chart Helm, en ajoutant celles dont nous avons besoin. Exemple :
 
 ```yaml
-  sonarqube:
-    postgresPvcSize: 25Gi
-    values:
-      image:
-        registry: docker.io
-        repository: sonarqube
-        edition: community
-        tag: 9.9.2-{{ .Values.edition }}
+sonarqube:
+  postgresPvcSize: 25Gi
+  values:
+    image:
+      registry: docker.io
+      repository: sonarqube
+      edition: community
+      tag: 9.9.2-{{ .Values.edition }}
 ```
 
 ## SOPS
@@ -286,11 +286,11 @@ Fixer la version d'image de SOPS sera **recommandé en production**.
 Pour spécifier cette version d'image, il nous suffira d'éditer la ressource `dsc` de configuration (par défaut ce sera la `dsc` nommée `conf-dso`) et de surcharger les "values" correspondantes du chart Helm, en ajoutant celles dont nous avons besoin. Exemple :
 
 ```yaml
-  sops:
-    namespace: mynamespace-sops
-    values:
-      image:
-        tag: 0.11.0
+sops:
+  namespace: mynamespace-sops
+  values:
+    image:
+      tag: 0.11.0
 ```
 
 Pour mémoire, les values utilisables sont disponibles et documentées ici : <https://github.com/isindir/sops-secrets-operator/tree/master/chart/helm3/sops-secrets-operator>
@@ -324,22 +324,22 @@ Les différents tags d'images utilisables sont disponibles ici :
 Pour spécifier nos tags, il nous suffira d'éditer la ressource `dsc` de configuration (par défaut ce sera la `dsc` nommée `conf-dso`) et de surcharger les "values" correspondantes du chart Helm, en ajoutant celles dont nous avons besoin. Exemple :
 
 ```yaml
-  vault:
-    values:
-      injector:
-        image:
-          repository: "docker.io/hashicorp/vault-k8s"
-          tag: "1.2.1"
-          pullPolicy: IfNotPresent
-        agentImage:
-          repository: "docker.io/hashicorp/vault"
-          tag: "1.14.0"
-      server:
-        image:
-          repository: "docker.io/hashicorp/vault"
-          tag: "1.14.0"
-          pullPolicy: IfNotPresent
-        updateStrategyType: "RollingUpdate"
+vault:
+  values:
+    injector:
+      image:
+        repository: docker.io/hashicorp/vault-k8s
+        tag: 1.2.1
+        pullPolicy: IfNotPresent
+      agentImage:
+        repository: docker.io/hashicorp/vault
+        tag: 1.14.0
+    server:
+      image:
+        repository: docker.io/hashicorp/vault
+        tag: 1.14.0
+        pullPolicy: IfNotPresent
+      updateStrategyType: RollingUpdate
 ```
 
 **Remarque importante** : En cas de tentative de mise à jour des versions d'images, dans la section `server` de vos values, le paramètre `updateStrategyType` doit impérativement être présent et positionné sur "RollingUpdate" pour que l'image du serveur Vault puisse éventuellement se mettre à jour avec le tag que vous avez indiqué.

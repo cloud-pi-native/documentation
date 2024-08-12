@@ -10,7 +10,7 @@ Ainsi, les secrets gérés dans hashicorp Vault concernent, pour l'instant, les 
 
 ## Organisation du Vault
 
-Les secrets de la chaine DevSecOps sont stockés sur Vault sur un engine kv v2 (clé / valeur). Ces secrets sont traités de façon hiérarchique dans une arborescence : 
+Les secrets de la chaine DevSecOps sont stockés sur Vault sur un engine kv v2 (clé / valeur). Ces secrets sont traités de façon hiérarchique dans une arborescence :
 
   - /
     - projects/

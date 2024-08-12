@@ -15,4 +15,4 @@ maintainers:
 deprecated: false
 annotations: {}
 version: 1.0.0
-appVersion: "6.0.0"  # x-release-please-version
+appVersion: 6.0.0 # x-release-please-version

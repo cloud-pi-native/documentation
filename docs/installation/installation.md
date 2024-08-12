@@ -33,17 +33,17 @@ Pensez également à déclarer pour chaque outil **un `namespace` et un `subDoma
 Exemple pour Argo CD :
 
 ```yaml
-  argocd:
-    namespace: mynamespace-argocd
-    subDomain: argocd-perso
-    admin:
-      enabled: true
-      password: PasswordForEveryone
-    values:
-      image:
-        registry: docker.io
-        repository: bitnami/argo-cd
-        tag: 2.7.6-debian-11-r2
+argocd:
+  namespace: mynamespace-argocd
+  subDomain: argocd-perso
+  admin:
+    enabled: true
+    password: PasswordForEveryone
+  values:
+    image:
+      registry: docker.io
+      repository: bitnami/argo-cd
+      tag: 2.7.6-debian-11-r2
 ```
 
 Pour mémoire, les namespaces et subDomains par défaut, déclarés lors de la première installation du socle, peuvent être listés en se positionnant préalablement dans le répertoire socle, puis en affichant le fichier « config.yaml » du role socle-config :

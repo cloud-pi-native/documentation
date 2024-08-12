@@ -8,7 +8,7 @@ La console crée automatiquement :
  - un namespace applicatif par environnement sur le cluster correspondant.
  - le pullsecret associé au projet.
  - les quotas correspondant à l'environnement sur le namespace
- - une application ArgoCD par environnement et par repo de code infrastructure. 
+ - une application ArgoCD par environnement et par repo de code infrastructure.
 
  ## Création d'un environnement
 

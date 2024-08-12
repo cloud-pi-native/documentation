@@ -7,12 +7,12 @@ La Service Team est l'équipe qui vous accompagne pour embarquer sur l'offre Clo
 L'accompagnement technique se fera sur 2 plateformes :
 
 - Plateforme d'accélération OVH; plateforme non liée aux réseaux interministères et a pour objectif de fournir aux projets un accès plus rapide à la console et aux services Cloud π native. Ainsi les projets peuvent anticiper en effectuant leurs premiers tests.
-  
+
 - Cluster Cloud π native sur les infrastructures du ministère de l'intérieur
 
 ## Prérequis organisationnels
 
-Avant d'utiliser l'offre Cloud π native, il est nécessaire : 
+Avant d'utiliser l'offre Cloud π native, il est nécessaire :
 - De suivre le processus d'accompagnement [haut niveau](https://github.com/cloud-pi-native/embarquement-autoformation)
 
 ## Prérequis techniques
@@ -27,7 +27,7 @@ En plus de ces prérequis, les éléments suivants sont à fournir par le projet
 - Si une reprise de données est à prévoir et la volumétrie associée
 - Processus de sauvegarde et restauration demandé et/ou prévues par l'application
 - Procédure de création de la base de données (portée par l'application / manuel)
-- Liste des composants externes au projet et appelés par l'application pour évaluer les ouvertures de flux: 
+- Liste des composants externes au projet et appelés par l'application pour évaluer les ouvertures de flux:
   - Internes MI / RIE
   - Sur Internet
 - Exposition de l'application (Internet/Intranet/RIE/DR/NP)
@@ -44,7 +44,7 @@ En plus de ces prérequis, les éléments suivants sont à fournir par le projet
 - Prise en main de la console :
   - Intégration des projets applicatifs et construction de la chaine de construction sur DSO (gitlab-ci-dso)
   - Intégration des repos d'infra et intégation sur ArgoCD
-  - Accès aux éléments de monitoring 
+  - Accès aux éléments de monitoring
 
 ## Accompagnement sur Cloud π
 
