@@ -22,14 +22,14 @@ docs:
     tag: latest
   podAnnotations: {}
   podSecurityContext: {}
-    # fsGroup: 2000
+  # fsGroup: 2000
   securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
   container:
     port: 8080
     env: {}

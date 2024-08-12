@@ -24,4 +24,3 @@ Pour mettre à jour un quota, il suffit de cliquer sur sa tuile dans la page pri
 Si le quota est utilisé par des projets, la liste des projets et environnement est affichée.
 
 Un quota ne peut être supprimé que s'il n'a pas de projet lié.
-

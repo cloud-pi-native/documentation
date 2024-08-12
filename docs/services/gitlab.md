@@ -36,14 +36,13 @@ Deux types de dépôts sont pris en comptes par l'offre Cloud π Native :
  - Dépôt applicatifs
  - Dépôt d'infrastructure applicatifs.
 
-### Dépôts applicatifs et chaine de construction gitlab-ci 
+### Dépôts applicatifs et chaine de construction gitlab-ci
 
 Les dépôts applicatifs contiennent le code source de vos applications.
 
 Les projets présents sur la plateforme Cloud π Native sont paramétrés pour exécuter une pipeline gitlab-ci. Les informations de votre pipeline sont présentes dans le fichier **gitlab-ci-dso.yml** qui doit être présent à la racine de votre dépôt externe du projet. Pour vous aider à construire vos premiers pipeline GitLab, nous vous proposons dans la console de la plateforme Cloud π Native des templates pour vous aider à la construction de projets de différents langages (Java, nodejs, python, etc.). Ces templates sont directement paramétrés avec des variables prédéfinies liées au projet courant. Cependant, ils sont donnés à titre d'exemple et doivent être adaptés aux besoins réels de vos projets.
 
 Les projets applicatifs sont analysés et construits et les images de conteneurs construits sont analysées, pui déposées dans le registry d'images de conteneurs qui est Harbor.
-
 
 ### Variables prédéfinies gitlab-ci DSO
 
@@ -60,7 +59,7 @@ Un certains nombres de variables pré-définies, en plus des variables standards
  - VAULT_AUTH_PATH : PATH dans l'URL d'accès à VAULT pour l'authentification par jwt
  - VAULT_AUTH_ROLE : PATH dans l'URL d'accès à VAULT pour la récupération des roles depuis les appels de GitLab
  - VAULT_SERVER_URL : URL d'accès à l'instance Vault (gestionnaire de secrets)
- 
+
 ### Dépôt source d'infrastructure applicatifs
 
 Suivant les principes *GitOps*, les déploiements sur l'orchestrateur du conteneurs (Celui de la plateforme Cloud π Native ou le votre) sont pilotés par un dépôt de code git contenant les manifests kubernetes, des charts **Helm** ou  **Kustomize** . Ces dépôts de code sont nommés dépôts d'infrastructure permettent de déployer vos images de conteneurs, ainsi que vos objects kubernets (service, ingress, configmap ...)
@@ -68,8 +67,6 @@ Suivant les principes *GitOps*, les déploiements sur l'orchestrateur du contene
 Ces dépôts sources sont utilisés par ArgoCD afin de déployer l'infrastructure applictive sur Kubernetes. Votre application est déployé dans un namespace dédié au projet et automatiquement provisionné par la console de la plateforme Cloud π Native.
 
 ## Schéma de fonctionnement
-Le schéma ci-dessous présente le fonctionnement général : 
+Le schéma ci-dessous présente le fonctionnement général :
 
 ![gitlab-général](/img/gitlab.png)
-
-

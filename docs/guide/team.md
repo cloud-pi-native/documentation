@@ -12,7 +12,7 @@ La page Equipe présente la liste des membres du projet :
 
 ![Menu](/img/team/members.png)
 
-Depuis cette liste, il est possible de retirer une personne de la liste sur l'icone 'X' 
+Depuis cette liste, il est possible de retirer une personne de la liste sur l'icone 'X'
 
 ## Ajouter une personne au projet
 
@@ -38,4 +38,3 @@ Une fois selectionner, lui attribuer les droits (sur ArgoCD):
  - rwd : droits de lecture, écriture et suppression sur l'environnement  (visibilité du projet sur ArgoCD et modification des values et suppression des objets : pods etc.)
 
 > L'attribution de droits à un membre pour un environnement est une opération *nécessaire* pour donner accès à ArgoCD sur l'environnement concerné.
-

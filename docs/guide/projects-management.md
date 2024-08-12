@@ -4,7 +4,7 @@ Un projet est un espace virtuel (namespace au sens kubernetes) cloisonné pour u
 
 Chaque projet contient une liste de collaborateurs (voir [Gestion des équipes](/guide/team)) ainsi qu'un ou plusieurs dépôts de code (voir [Gestion des dépôts](/guide/repositories-management.md))
 
-## Création d'un projet
+## Création d'un projet
 
 Une fois connecté sur la console, le menu gauche présente une entrée "Mes Projets" contenant la liste de ses projets.
 ![mes projets](/img/tuto/2tuto-mes-projets.png)
@@ -42,4 +42,3 @@ La partie GitLab permet d'avoir le token ainsi que l'id du dépôt mirror (perme
 Concernant Harbor, la registry stockant les images construites sur la plateforme CPiN
 Pour la section Kubernetes, le nom du secret permettant de s'authentifier auprès d'Harbor.
 - **Supprimer le projet monprojet**: après confirmation, supprime définitivement le projet. Aucune restauration n'est possible.
-

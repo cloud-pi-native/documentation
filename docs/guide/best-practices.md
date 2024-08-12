@@ -4,7 +4,7 @@
 
 Une application Cloud π Native doit respecter les [Twelve-Factor](https://12factor.net/fr/)
 
-D'autres bonnes pratiques à réspecter impérantivement: 
+D'autres bonnes pratiques à réspecter impérantivement:
 
 1. Base de code
 
@@ -21,7 +21,7 @@ D'autres bonnes pratiques à réspecter impérantivement:
 4. Port
 
     Afin de respecter les préconisation de sécurité, les applications déployées doivent écouter sur des ports > 1024.
-   
+
 6. Logs
 
     L'application __NE DOIT PAS__ écrire dans un fichier de logs spécifique mais écrire l'ensemble de ces logs dans la sortie standards (stdout) au format GELF ou à defaut JSON.
@@ -53,16 +53,16 @@ L'application déployée doit être conteneurisée (sous la forme d'un ou plusie
 L'application doit se déployer à l'aide de fichiers d'__Infrastructure As Code__:
  - Utiliser des manifestes [kubernetes](https://kubernetes.io/) avec Kustomize pour variabliser vos manifestes (cf. [tutoriels](/guide/tutorials))
  - Utiliser des charts [helm](https://helm.sh/) (cf. [tutoriels](/guide/tutorials) pour avoir des exemples de fichiers).
- - Utiliser [Kustomize](https://kustomize.io/) 
+ - Utiliser [Kustomize](https://kustomize.io/)
 
 ## Labels
 
-Les ressources doivent comporter des labels permettant de les identifier. les labels pourraient etre decomposés de la facon suivante : 
+Les ressources doivent comporter des labels permettant de les identifier. les labels pourraient etre decomposés de la facon suivante :
 
-``` Yaml 
+``` Yaml
 App : " "
 Env : " "
-Tier : " " 
+Tier : " "
 Criticality : " "
 Component : " "
 ```
@@ -73,7 +73,7 @@ Tous les labels disponibles [ici](/agreement/labels-list).
 
 Les images poussées dans le registry devront etre unique et identifiés via un Sha ou Short-Sha qui pourrait etre lié au commit Git. Grace a cela une gestion des releases et un rollback seront possibles.
 
-Exemple de valeur pour le Tag de l'image : 
+Exemple de valeur pour le Tag de l'image :
 
 ```
 CI_COMMIT_SHA
@@ -84,8 +84,8 @@ CI_JOB_ID
 
 ## Politiques de nommage
 
-Les noms de toutes les ressources Openshift ne doivent jamais etre trop longs, il est donc conseillé de choisir des noms courts. 
-il se pourrait que des ressources ne soient pas déployées si le nom est trop long. 
+Les noms de toutes les ressources Openshift ne doivent jamais etre trop longs, il est donc conseillé de choisir des noms courts.
+il se pourrait que des ressources ne soient pas déployées si le nom est trop long.
 Coté exploitation, cela facilite grandement la gestion.
 
 Exemple :
@@ -101,20 +101,20 @@ Route : env-route
 PVC : env-name-pvc
 ```
 
-## Secrets 
+## Secrets
 
 Les secrets comportent toutes les informations sensibles. Les différents types de secrets peuvent etre :
 
 - Passwords
-- Certificats 
-- Usernames 
-- Tokens 
+- Certificats
+- Usernames
+- Tokens
 
-Toutes les secrets devront etre contenus dans un Vault qui sera mis a disposition pour l'ensemble des projets. Les objets contenus dans le Vault sont séparés par projets (NS). 
- 
+Toutes les secrets devront etre contenus dans un Vault qui sera mis a disposition pour l'ensemble des projets. Les objets contenus dans le Vault sont séparés par projets (NS).
+
 ## Liveness et Readiness
 
-Il est très important de mettre en place ces checks afin de vérifier l'etat de vos applications. Ceci est nécessaire pour assurer la haute disponibilité et la résilience de vos applications. 
+Il est très important de mettre en place ces checks afin de vérifier l'etat de vos applications. Ceci est nécessaire pour assurer la haute disponibilité et la résilience de vos applications.
 Cela peut-etre une fonctionnalité de l'application, une page d'un site web, une entrée en base de donnée, etc.
 
 ``` Yaml
@@ -133,11 +133,11 @@ readinessProbe:
   periodSeconds: 3
 ```
 
-## SSL 
+## SSL
 
-Afin d'optimiser un flux sécurisé,il est préférable que cela soit de bout en bout. 
+Afin d'optimiser un flux sécurisé,il est préférable que cela soit de bout en bout.
 
-Exemple du schéma de distribution de la requete. 
+Exemple du schéma de distribution de la requete.
 
 Users --HTTPS-> ReverseProxy --HTTPS-> Ingress Kubernetes --HTTPS-> Container   (Best Case)
 
@@ -147,14 +147,14 @@ Users --HTTPS-> ReverseProxy --HTTPS-> Ingress Kubernetes --HTTP-> Container   (
 
 Le scaling est très important afin de répondre aux besoins en termes d'affluence. il est aujourd'hui un atout majeur pour avoir une application qui soit le plus disponible possible avec des performances élevées. Pour cela il est donc possible de définir des triggers afin d'upscale l'applicatif (CPU, RAM, Métriques Applicatives).
 
-## QOS 
+## QOS
 
 Il est important de définir les consommations de chaque POD (prévisionnelles), Savoir si il serait intéressant que certains disposent d’une "request" égal a la "limit" afin d’assurer une réservation des ressources. (Guaranteed Class)
 L'utilisation du "Burstable" n'est pas pas une bonne pratique. il est vraiment necessaire d'avoir une "limit" même si celle-ci n'est pas équivalente a la "request".
 
-Exemple : 
+Exemple :
 
-```Yaml 
+```Yaml
 limits:
   memory: "200Mi"
   cpu: "700m"
@@ -165,14 +165,14 @@ requests:
 
 ## Taille des images
 
-Il est très important de construire des images les plus légères possibles, c'est a dire utiliser uniquement les paquets nécéssaires au bon fonctionnement de l'application ainsi que la meilleure image de base. 
+Il est très important de construire des images les plus légères possibles, c'est a dire utiliser uniquement les paquets nécéssaires au bon fonctionnement de l'application ainsi que la meilleure image de base.
 C'est un gros vecteur de sécurité, de charge stockage et réseau.
 
 Exemple d'image base Lightway : Alpine
 
 ## Politiques réseau
 
-Les "Network policies" sont par défaut en "Deny ALL". Il est donc à vous de déifnir les flux entrants et sortants sur les namespaces de vos projets. 
+Les "Network policies" sont par défaut en "Deny ALL". Il est donc à vous de déifnir les flux entrants et sortants sur les namespaces de vos projets.
 
 ReverseProxy-->Networkpolicies-->Pods (Ingress)
 
@@ -187,9 +187,8 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      Tier: frontend 
+      Tier: frontend
   ingress:
   - ports:
     - port: 80
 ```
-

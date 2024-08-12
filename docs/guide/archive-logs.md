@@ -18,10 +18,10 @@ Les clés de sécurité (AK/SK) sont sauvegardés dans un secret, voir avec [SOP
 *Version 0.30.0 à la date d'écriture de cette documentation*
 ```yaml
 dependencies:
-- name: vector
-  version: "0.30.0"
-  repository: "https://helm.vector.dev"
-  condition: vector.enabled
+  - name: vector
+    version: 0.30.0
+    repository: "https://helm.vector.dev"
+    condition: vector.enabled
 ```
 
 **values.yaml:**
@@ -29,7 +29,7 @@ dependencies:
 vector:
   enabled: true
   commonLabels:
-    app:my-app
+    app: my-app
     tier: logs
     component: vector
   podMonitor:
@@ -39,19 +39,19 @@ vector:
     enabled: true
     size: 10Gi
   extraVolumes:
-  - name: aws-creds
-    secret:
-      secretName: aws-log-archive
+    - name: aws-creds
+      secret:
+        secretName: aws-log-archive
   extraVolumeMounts:
-  - name: aws-creds
-    mountPath: /var/aws/
+    - name: aws-creds
+      mountPath: /var/aws/
   resources:
     requests:
       cpu: 100m
       memory: 200Mi
     limits:
       cpu: 100m
-      memory:  200Mi
+      memory: 200Mi
   customConfig:
     data_dir: /vector-data-dir
     api:
@@ -71,23 +71,23 @@ vector:
         inputs: [internal_metrics]
         address: 0.0.0.0:9090
       aws_s3_out:
-        type: "aws_s3"
+        type: aws_s3
         acknowledgements:
           enabled: true
-        tls: 
+        tls:
           verify_certificate: false
         inputs:
-        - http_server
+          - http_server
         endpoint: "https://monendpointS3"
-        bucket: "logs"
-        region: "eu-east-1"
+        bucket: logs
+        region: eu-east-1
         auth:
           credentials_file: /var/aws/credentials
-        compression: "gzip"
+        compression: gzip
         encoding:
-          codec: "raw_message"
+          codec: raw_message
         key_prefix: "%Y/%m/%d/"
-        buffer: 
+        buffer:
           type: disk
           max_size: 268435488
         batch:
@@ -95,7 +95,6 @@ vector:
           timeout_secs: 1800
         tags:
           Project: monprojet
-
 ```
 
 Les clés de sécurité (AK/SK):
@@ -107,9 +106,9 @@ metadata:
 type: Opaque
 data:
   credentials: |-
-              [default]
-              aws_access_key_id = ++++++++++++
-              aws_secret_access_key = ++++++++++++
+    [default]
+    aws_access_key_id = ++++++++++++
+    aws_secret_access_key = ++++++++++++
 ```
 
 :warning: **Pour profiter de ce service, ouvrir un ticket auprès de la ServiceTeam détaillant le namespace source, la méthode de transmission (http, kafka, syslog) ainsi que l'url (+ port) vers laquelle envoyer les logs.** :warning:
@@ -143,7 +142,6 @@ est parsé en:
 
 L'idée est de compter le nombre de requête par utilisateur (ici frank).
 
-
 La propriété `transforms` permet de transformer ses logs (voir [documentation](https://vector.dev/docs/reference/configuration/transforms/) pour plus d'exemple).
 
 Les transformations peuvent s'enchaîner, c'est ce qui est utilisé ici sélectionner, parser et remonter une métrique.
@@ -164,7 +162,7 @@ vector:
           - http_server
         source: >-
           . =  parse_json!(.message)
-      parse_pgrest_log: 
+      parse_pgrest_log:
         # Check si le log reçu correspond est émis par le pod qui contient un label component:postgrest
         # Si c'est le cas, parse la clé message qui est au format apache combined
         type: remap
@@ -183,7 +181,7 @@ vector:
 
           . = parse_apache_log!(.message, "combined")
       pgrest_log_to_metrics:
-        ## Transforme le log en métrique, ici compter le nombre de requête par utilisateur
+        # # Transforme le log en métrique, ici compter le nombre de requête par utilisateur
         type: log_to_metric
         inputs:
           - parse_pgrest_log # Fait appel au transform précédent
@@ -199,7 +197,7 @@ vector:
         type: prometheus_exporter
         flush_period_secs: 3600
         inputs:
-        - internal_metrics
-        - pgrest_log_to_metrics # Ajout du dernier transform afin d'avoir la métrique exposée au format prometheus
+          - internal_metrics
+          - pgrest_log_to_metrics # Ajout du dernier transform afin d'avoir la métrique exposée au format prometheus
         address: 0.0.0.0:9090
 ```

@@ -8,14 +8,14 @@ Dès qu'un problème apparait, l'entrée du journal est entourée en rouge (vert
 
 ```json
 {
-    args:{
-    }
-    config:{
-    }
-    failed:[
-    ]
-    results:{
-    }
+  "args": {
+  },
+  "config": {
+  },
+  "failed": [
+  ],
+  "results": {
+  }
 }
 ```
 

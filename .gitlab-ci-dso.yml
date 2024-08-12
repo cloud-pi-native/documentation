@@ -5,7 +5,6 @@ include:
       - kaniko-ci.yml
     ref: main
 
-
 default:
   image: alpine:latest
 
@@ -25,7 +24,7 @@ read_secret:
 
 docker-build:
   variables:
-    WORKING_DIR: "."
+    WORKING_DIR: .
     IMAGE_NAME: dso-documentation
   stage: docker-build
   extends:

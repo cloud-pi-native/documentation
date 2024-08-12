@@ -14,6 +14,6 @@ La console permet d'administrer les items suivants:
 - Jounaux: liste des journaux de la console DSO pour débugger en cas de problème
 - Clusters: liste des clusters, détail de chaque cluster, ajout de nouveau cluster
 - Quotas: liste des quotas, détail des quotas et ajout de quota
-- Types d'environnement: 
+- Types d'environnement:
 - Zones
 - Plugins: configuration des différents plugins utilisés par la console

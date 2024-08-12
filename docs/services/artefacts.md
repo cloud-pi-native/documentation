@@ -1,4 +1,4 @@
-# Artefects 
+# Artefects
 
 ## Nexus
 
@@ -9,7 +9,6 @@ Pour stocker et gérer vos artefacts applicatifs, l'usine logcielle de l'offre C
 Il est mis à à disposition des projets afin de stocker les artefacts "intermédiaires" (library java, js, ...) necessaires pour la construction des artefacts finaux embarqués sur les images des conteneurs projets.
 
 A noter que cette instance Nexus fait également *proxy* vers les différents repos publics (maven central, npm, composer, etc.)
-
 
 ### Utilisation depuis la CI
 
@@ -34,9 +33,9 @@ Celui-ci est préconfiguré dans les templates GitLab CI et utilisable via l'exe
 ```yaml
 build_docker_back:
   variables:
-    WORKING_DIR: 'server'
-    IMAGE_NAMES: 'candilibv2-devops'
-    DOCKERFILE: 'server/Dockerfile-devops'
+    WORKING_DIR: server
+    IMAGE_NAMES: candilibv2-devops
+    DOCKERFILE: server/Dockerfile-devops
     TAG: $CI_COMMIT_BRANCH
   stage: build-docker
   extends:
@@ -56,4 +55,4 @@ Exemple: `harbor.apps.c6.numerique-interieur.com/mi-monprojet/monimage-backend:v
 
 > *Les images publiées par la CI seront signées afin de garantir leur origine et harbor autorisera uniquement l'utilisation d'une image signée*
 
-Harbor est également accessible aux utilisateurs afin de pouvoir vérifier les analyses de sécurité des images de conteneurs. 
+Harbor est également accessible aux utilisateurs afin de pouvoir vérifier les analyses de sécurité des images de conteneurs.

@@ -6,11 +6,11 @@ Les plateformes PaaS peuvent s'exécuter dans le cloud ou sur site. En ce qui co
 
 ## Description de la plateforme
 
-Cloud π Native est composée d'une **plateforme de services Open Source** à destination des équipes DevSecOps. 
+Cloud π Native est composée d'une **plateforme de services Open Source** à destination des équipes DevSecOps.
 
 **La plateforme** comprend:
 
-- Une [usine de logicielle](https://github.com/cloud-pi-native/socle) qui utilise plusieurs services. 
+- Une [usine de logicielle](https://github.com/cloud-pi-native/socle) qui utilise plusieurs services.
 - Une [console](https://github.com/cloud-pi-native/console) Web consommant ses services afin de construire et déployer vos ressources applicatives (projets, membres, environnements, etc). Il est aussi possible d'enregistrer des services supplémentaires grâce à son `architecture core / plugins`. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projets par le biais du gestionnaire de plugins. L'ajout d'un nouveau plugin est détaillé [ici](https://github.com/cloud-pi-native/console/blob/main/misc/plugins.md)
 
 ## Architecture fonctionnelle de la plateforme
@@ -35,7 +35,7 @@ Liste des services de la plateforme :
 
 ## Ambition
 
-L'ambition de cette plateforme est de proposer aux équipes projets une offre de services large, complète déployée au sein d'un cloud souverain et permettant d'automatiser la construction et le déploiement de vos projets en assurant les standards de qualité et sécurité. 
+L'ambition de cette plateforme est de proposer aux équipes projets une offre de services large, complète déployée au sein d'un cloud souverain et permettant d'automatiser la construction et le déploiement de vos projets en assurant les standards de qualité et sécurité.
 
 Pour pouvoir manipuler les services de cette plateforme, la première étape consister à synchroniser le code applicatif depuis un repo externe accéssible depuis la plateforme.
 

@@ -34,7 +34,7 @@ Il existe deux types de dépôts:
 
 ## Etape 5 - Ajouter un environnement
 
-Un environnement est un namespace cloisonné au sens kubernetes permettant de déployer le code d'infrastructure du dépôt idoine. 
+Un environnement est un namespace cloisonné au sens kubernetes permettant de déployer le code d'infrastructure du dépôt idoine.
 
 Pour déployer un environnement un guide est disponible [ici](/guide/environments-management).
 

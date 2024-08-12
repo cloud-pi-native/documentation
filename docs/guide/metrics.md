@@ -11,7 +11,7 @@ Pour se logguer, cliquer sur le bouton en bas de page commençant par "Sign in w
 
 ![signin](/img/guide/grafana-sign-in.png)
 
-Une fois connecté, l'accès aux dashboards est disponible via la menu hamburger en haut à gauche 
+Une fois connecté, l'accès aux dashboards est disponible via la menu hamburger en haut à gauche
 
 ![menu](/img/guide/grafana_menu.png)
 ![menu dashboard](/img/guide/grafana_menu_dashboard.png)
@@ -55,7 +55,6 @@ Le bouton composé de 2 flèches formant un cercle permet de rafraichir la prév
 Le panel de droite permet de définir des options pour le graphique, notamment son type (ici `bar chart`) et le titre associé (ici `RAM postgresql`)
 ![option](/img/guide/grafana_first_visualization_option.png)
 
-
 ---
 Tout en haut à droite se trouve 3 boutons:
 ![visualization_save](/img/guide/grafana_visualization_save.png)
@@ -93,4 +92,3 @@ Quelques liens utiles concernant les dashboard:
 - <https://promcat.io>: dashboards créés par la société Sysdig basés sur le principe des golden signals
 - <https://prometheus.io/docs/prometheus/latest/querying/basics>: Documentation sur le langage PromQL, permettant d'interroger Prometheus
 - <https://grafana.com/docs/grafana/latest/dashboards/build-dashboards/import-dashboards>: Comment importer un dashboard dans grafana
-

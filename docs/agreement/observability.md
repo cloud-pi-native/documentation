@@ -1,9 +1,6 @@
-
-
 # Observabilité
 
 > __:warning: L'observabilité n'est pas en place sur les environnements OVH.__
-
 
 Dans le cadre de l'offre Cloud-Pi Native, l'observabilité est disponible via plusieurs composants:
 - Prometheus/Grafana pour les métriques
@@ -20,7 +17,6 @@ Ces différents services sont accessibles via la console `Cloud Pi Native > Proj
 > __:warning: Les métriques sont disponibles pendant un an sur les environnements de production et quelques mois pour les environnements hors production.__
 
 Pour apprendre à utiliser ce service, [cliquer ici](/guide/metrics)
-
 
 ## Alerting
 [AlertManager](https://grafana.com/docs/grafana/latest/alerting/fundamentals/alertmanager/) est utilisé pour gérer les différentes alertes de vos projets.

@@ -28,7 +28,7 @@ Dans le cadre de l'offre de services du MIOM, les règles suivantes sont appliqu
 | need-liveness-readiness    | AUDIT                                   | ENFORCE                         |                                                                                                 | medium | Best Practices            | Assure que tous les conteneurs ont l'une des trois sondes (Liveness, Readiness ou Startup), pour s'assurer qu'ils signalent correctement leur statut à Openshift                 |
 | job-history                | AUDIT                                   | ENFORCE                         |                                                                                                 | low | Best Practices            | Cronjob: ajoute les propriétés `successfulJobsHistoryLimit: 5` et `failedJobsHistoryLimit: 5`                                                                                    |
 
-Explication de la difference entre ENFORCE et AUDIT : 
+Explication de la difference entre ENFORCE et AUDIT :
 - Enforce : Kyverno bloquera l'action (par exemple, la création, la mise à jour ou la suppression d'une ressource) si la politique n'est pas respectée. Cela garantit que toutes les ressources du cluster respectent les politiques mises en place.
 
 - Audit: Une action d'Audit ne bloquera pas une action si la politique n'est pas respectée, mais elle enregistrera l'infraction dans les résultats d'audit de Kyverno. C'est utile pour observer les infractions aux politiques sans bloquer les actions, ce qui peut être particulièrement utile dans les environnements de développement ou de test.
