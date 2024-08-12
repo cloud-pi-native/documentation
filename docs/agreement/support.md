@@ -6,7 +6,7 @@ La Service Team est l'équipe qui vous accompagne pour embarquer sur l'offre Clo
 
 L'accompagnement technique se fera sur 2 plateformes :
 
-- Plateforme d'accélération OVH; plateforme non liée aux réseaux interministères et a pour objectif de fournir aux projets un accès plus rapide à la console et aux services Cloud π native. Ainsi les projets peuvent anticiper en effectuant leurs premiers tests.
+- Plateforme d'accélération OVH ; plateforme non liée aux réseaux interministèriels et a pour objectif de fournir aux projets un accès plus rapide à la console et aux services Cloud π native. Ainsi les projets peuvent anticiper en effectuant leurs premiers tests.
   
 - Cluster Cloud π native sur les infrastructures du ministère de l'intérieur
 
