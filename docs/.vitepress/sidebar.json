@@ -110,6 +110,10 @@
         "link": "/guide/team"
       },
       {
+        "text": "Gestion des rôles",
+        "link": "/guide/roles"
+      },
+      {
         "text": "Gestion des dépôts",
         "link": "/guide/repositories-management"
       },
