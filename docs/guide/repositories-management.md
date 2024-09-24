@@ -16,6 +16,9 @@ Remplir le formulaire de des dépôts:
 - Deux types de repo peuvent être ajoutés:
   - Un repo applicatif: contenant du code applicatif et qui sera construit afin de créer des images Docker à déployer sur l'infrastructure cible.
   - Un repo d'infra: contenant les manifests de déploiement ou chart HELM contenant *l'infrastructure as code* du projet à déployer
+- Il est possible de spécifier si le dépôt sera lié ou non à un dépôt externe (Github, GitLab, Bitbucket, ...).
+
+**Il est recommandé de passer par l'ajout d'un dépôt dans la console et non de le faire directement dans Gitlab. A chaque modification dans la console, celle-ci vérifie la cohérence des dépôts configurés avec ceux qui existent vraiment et supprime ceux en trop.**
 
 ![ajout dépôt](/img/tuto/3tuto-depots-ajouter.png)
 
