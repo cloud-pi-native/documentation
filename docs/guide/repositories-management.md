@@ -1,6 +1,6 @@
 # Gestion des dépôts
 
-En phase de développement, les équipes projets sont autonomes et travaillent avec leurs outils sans contraintes apportées par la plateforme Cloud π Native. La synchronisation des dépôts est le processus qui permet de *copier* les dépôts externes stockés sur github, gitab.com, bitbucket, etc. vers le repo de code de la plateforme Cloud π Native. la seule contrainte est que le repo externe soit accessible depuis Internet. Ce repo peut être public ou privé. Pour plus d'information, voir la page dédiée au [repo de code](/services/gitlab)
+En phase de développement, les équipes projets sont autonomes et travaillent avec leurs outils. La synchronisation des dépôts est le processus qui permet de *copier* les dépôts externes stockés sur github, gitab.com, bitbucket, etc. vers le dépôt de code de la plateforme Cloud π Native. la seule contrainte est que le dépôt externe soit accessible depuis Internet. Ce dépôt peut être public ou privé. Pour plus d'information, voir la page dédiée au [dépôt de code](/services/gitlab)
 
 Cliquez sur le menu gauche **Dépôts**
 ![menu-projet-depot](/img/tuto/3tuto-depots.png)
@@ -9,44 +9,38 @@ Cliquez sur le menu gauche **Dépôts**
 
 Puis sur le bouton **+ Ajouter un nouveau dépôt**
 
-Remplir le formulaire de des dépôts:
+Remplir le formulaire des dépôts :
 
-- Choisir un nom
-- Saisir l'URL du repo git distant. Dans le cas d'un repo privé cocher la case et préciser les credentials d'accès
-- Deux types de repo peuvent être ajoutés:
-  - Un repo applicatif: contenant du code applicatif et qui sera construit afin de créer des images Docker à déployer sur l'infrastructure cible.
-  - Un repo d'infra: contenant les manifests de déploiement ou chart HELM contenant *l'infrastructure as code* du projet à déployer
-- Il est possible de spécifier si le dépôt sera lié ou non à un dépôt externe (Github, GitLab, Bitbucket, ...).
+- Choisir un nom pour votre dépôt interne (herbéger sur la plateforme)
+- Deux types de dépôt peuvent être ajoutés :
+  - Un dépôt applicatif: contenant du code applicatif et qui sera construit afin de créer des images Docker à déployer sur l'infrastructure cible. Choix par défaut.
+  - Un dépôt d'infra: contenant les manifests de déploiement ou chart HELM contenant *l'infrastructure as code* du projet a déployé. Il suffit de cocher la case associée.
+- Si vous n'avez pas de dépôts distants vous pouvez selectionner le bouton "Dépôt sans source git externe".
+- Dans le cas contraire, il vous suffit de saisir l'URL du dépôt git distant. Dans le cas d'un dépôt privé cocher la case et préciser les informations d'accès
 
 **Il est recommandé de passer par l'ajout d'un dépôt dans la console et non de le faire directement dans Gitlab. A chaque modification dans la console, celle-ci vérifie la cohérence des dépôts configurés avec ceux qui existent vraiment et supprime ceux en trop.**
 
 ![ajout dépôt](/img/tuto/3tuto-depots-ajouter.png)
 
-Dans le cas d'un dépôt de code applicatif, générer les fichiers de *gitlab-ci* en cliquant sur le bouton *Fichiers de GitLab CI*. Le fichier `.gitlab-ci-dso.yml` est à placer à la racine de votre dépôt externe. Ces fichiers seront utilisés par le GitLab de Cloud π Native pour effectuer les divers tests, scans et déploiements du projet.
-
-![gitlab-ci-dso](/img/tuto/3tuto-depots-ajouter-gitlab-ci.png)
-
 Cliquer enfin sur le bouton `Ajouter le dépôt`.
+
+> Cette opération demande d'attendre jusqu'à quelques minutes.
 
 Lorsqu'un dépôt est créé dans la console en tant que `dépôt d'infrastructure`, la plateforme créée automatiquement l'application [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) associée qui permettra le déploiement.
 
-Une fois que le dépôt est correctement ajouté, il apparait avec une icône indiquant son statut :
-
-<img src="/img/tuto/3tuto-depots-ajouter-ok.png" alt="depots synchronisés ok" width="25%" title="depots synchronisés ok">
-
-> Cette opération demande d'attendre jusqu'à quelques minutes.
->
-> Des exemples de dépôts sont disponibles dans la sections [tutoriels](tutorials).
+> Des exemples de dépôts sont disponibles dans la section [tutoriels](tutorials).
 
 ## Synchronisation d'un dépôt
 
-Il est possible de synchroniser son dépôt depuis la console. Pour cela cliquer sur la tuile d'un dépôt, une page s'ouvre avec tout en haut la branche à synchroniser et un bouton **Lancer la synchronisation**
+Il est possible de synchroniser son dépôt depuis la console, pour cela il suffit de cliquer sur la tuile d'un dépôt.
+Deux options sont disponibles : 
+ - Synchroniser toutes les branches
+ - Renseigner le nom d'une branche a synchronisé
+Le bouton **Lancer la synchronisation** démarre une pipeline sur la GitLab DSO afin de synchroniser le dépôt.
 
 ![repository synchro](/img/guide/repository_synchro.png)
 
-Ce bouton lancer une pipeline sur la GitLab DSO afin de synchroniser la branche voulue.
-
-> Il est possible de lancer via curl cette pipeline, le propriétaire du projet peut retrouver la commande dans les secrets du projet.
+> Il est possible de lancer via curl cette pipeline,la commande est disponible dans les secrets du projet.
 > Cette commande pourra servir de base pour un GitHub action, etc...
 >
 > Exemple de GitHub Action :
@@ -74,4 +68,4 @@ Ce bouton lancer une pipeline sur la GitLab DSO afin de synchroniser la branche 
 >             "https://gitlab.apps.dso.numerique-interieur.com/api/v4/projects/$GIT_MIRROR_PROJECT_ID/trigger/pipeline"
 > ```
 >
-> A noter dans l'exemple précedent qu'il convient d'utiliser le bon url Gitlab.
+> A noter dans l'exemple précèdent qu'il convient d'utiliser le bon url Gitlab.
