@@ -1,0 +1,68 @@
+[
+  {
+    "text": "Offre de services",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Introduction",
+        "link": "/agreement/introduction"
+      },
+      {
+        "text": "Accompagnement",
+        "link": "/agreement/support"
+      },
+      {
+        "text": "Exploitation",
+        "link": "/agreement/exploitation"
+      },
+      {
+        "text": "Observabilité",
+        "link": "/agreement/observability"
+      }
+    ]
+  },
+  {
+    "text": "Certification",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Introduction",
+        "link": "/certification/introduction"
+      }
+    ]
+  },
+  {
+    "text": "Acceleration",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Bouchons",
+        "link": "/acceleration/mocks"
+      }
+    ]
+  },
+  {
+    "text": "Bonnes pratiques",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Règles kyverno",
+        "link": "/best-practices/kyverno"
+      },
+      {
+        "text": "Labels kubernetes",
+        "link": "/best-practices/labels-list"
+      }
+    ]
+  },
+  {
+    "text": "F.A.Q",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Introduction",
+        "link": "/faq/introduction"
+      }
+    ]
+  }
+]

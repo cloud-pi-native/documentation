@@ -3,16 +3,27 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "build": "vitepress build docs",
-    "dev": "vitepress dev docs --port 8081",
-    "docker:build": "docker build --tag cloud-pi-native/documentation --target prod .",
-    "docker:run": "docker run --publish 8081:8080 --rm cloud-pi-native/documentation",
+    "build": "run-p build:*",
+    "dev": "run-p dev:*",
+    "docker:build": "run-p docker:build:*",
+    "docker:run": "run-p docker:run:*",
+    "preview": "run-p preview:*",
     "format": "eslint . --fix",
     "lint": "eslint .",
-    "preview": "vitepress preview docs --port 8081"
+    "build:hexa": "vitepress build hexaforge",
+    "build:cpin": "vitepress build cloud-pi-native",
+    "dev:hexa": "vitepress dev hexaforge --port 8081",
+    "dev:cpin": "vitepress dev cloud-pi-native --port 8082",
+    "docker:build:hexa": "docker build --tag hexaforge/documentation --file Dockerfile.hexaforge --target prod .",
+    "docker:build:cpin": "docker build --tag cloud-pi-native/documentation --file Dockerfile.cloud-pi-native --target prod .",
+    "docker:run:hexa": "docker run --publish 8081:8080 --rm hexaforge/documentation",
+    "docker:run:cpin": "docker run --publish 8081:8080 --rm cloud-pi-native/documentation",
+    "preview:hexa": "vitepress preview hexaforge --port 8081",
+    "preview:cpin": "vitepress preview cloud-pi-native --port 8082"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.24.1",
+    "npm-run-all": "^4.1.5",
     "vitepress": "^1.2.3"
   },
   "volta": {

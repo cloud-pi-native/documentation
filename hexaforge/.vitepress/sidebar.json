@@ -1,0 +1,196 @@
+[
+  {
+    "text": "La plateforme",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Introduction",
+        "link": "/platform/introduction"
+      },
+      {
+        "text": "Compatibilité",
+        "link": "/platform/compatibility"
+      },
+      {
+        "text": "Matrice de compétences",
+        "link": "/platform/skills-matrix"
+      },
+      {
+        "text": "Les services",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "Gestion des sources",
+            "link": "/services/gitlab"
+          },
+          {
+            "text": "Gestion des artefacts",
+            "link": "/services/artefacts"
+          },
+          {
+            "text": "Analyse qualité",
+            "link": "/services/sonarqube"
+          },
+          {
+            "text": "Gestion des secrets",
+            "link": "/services/vault"
+          },
+          {
+            "text": "Gestion du déploiement",
+            "link": "/services/gitops"
+          }
+        ]
+      },
+      {
+        "text": "Feuille de route",
+        "link": "/platform/roadmap"
+      },
+      {
+        "text": "Glossaire",
+        "link": "/platform/glossary"
+      }
+    ]
+  },
+  {
+    "text": "Guide d'installation",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Introduction",
+        "link": "/installation/introduction"
+      },
+      {
+        "text": "Prérequis",
+        "link": "/installation/prerequisites"
+      },
+      {
+        "text": "Configuration",
+        "link": "/installation/configuration"
+      },
+      {
+        "text": "Installation",
+        "link": "/installation/installation"
+      },
+      {
+        "text": "Secrets",
+        "link": "/installation/secrets"
+      },
+      {
+        "text": "Debug",
+        "link": "/installation/debug"
+      },
+      {
+        "text": "Désinstallation",
+        "link": "/installation/uninstallation"
+      },
+      {
+        "text": "Gel des versions",
+        "link": "/installation/versions"
+      }
+    ]
+  },
+  {
+    "text": "Guide d'utilisation",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Démarrer",
+        "link": "/guide/get-started"
+      },
+      {
+        "text": "Gestion des projets",
+        "link": "/guide/projects-management"
+      },
+      {
+        "text": "Gestion des équipes",
+        "link": "/guide/team"
+      },
+      {
+        "text": "Gestion des dépôts",
+        "link": "/guide/repositories-management"
+      },
+      {
+        "text": "Gestion des environnements",
+        "link": "/guide/environments-management"
+      },
+      {
+        "text": "Gestion des secrets",
+        "link": "/guide/secrets-management"
+      },
+      {
+        "text": "Déploiement de votre application",
+        "link": "/guide/deployment-with-argo"
+      },
+      {
+        "text": "Bonnes pratiques",
+        "link": "/guide/best-practices"
+      },
+      {
+        "text": "Métriques",
+        "link": "/guide/metrics"
+      },
+      {
+        "text": "Alerting",
+        "link": "/guide/alerting"
+      },
+      {
+        "text": "Logs (Kibana)",
+        "link": "/guide/logs-kibana"
+      },
+      {
+        "text": "Archivage des logs",
+        "link": "/guide/archive-logs"
+      },
+      {
+        "text": "Tutoriels",
+        "link": "/guide/tutorials"
+      }
+    ]
+  },
+  {
+    "text": "Administration de la console",
+    "collapsed": true,
+    "items": [
+      {
+        "text": "Démarrer",
+        "link": "/administration/introduction"
+      },
+      {
+        "text": "Utilisateurs",
+        "link": "/administration/utilisateurs"
+      },
+      {
+        "text": "Organisations",
+        "link": "/administration/organisations"
+      },
+      {
+        "text": "Projets",
+        "link": "/administration/projets"
+      },
+      {
+        "text": "Jounaux",
+        "link": "/administration/journaux"
+      },
+      {
+        "text": "Clusters",
+        "link": "/administration/clusters"
+      },
+      {
+        "text": "Quotas",
+        "link": "/administration/quotas"
+      },
+      {
+        "text": "Types d'environnement",
+        "link": "/administration/environnements"
+      },
+      {
+        "text": "Zones",
+        "link": "/administration/zones"
+      },
+      {
+        "text": "Plugins",
+        "link": "/administration/plugins"
+      }
+    ]
+  }
+]
