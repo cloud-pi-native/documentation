@@ -35,7 +35,7 @@ Prérequis :
 * la certification est soumise à un prérequis d'obtention de la Certified Kubernetes Application Developer de la Linux Foundation, permettant de garantir la bonne maitrise de kubernetes en tant que développeur
 
 Promotion :
-* Des promotions de 20 personnes sont organisées 2 à 3 fois par an par Cloud Pi Native. Veuillez contacter cloudpinative-relations@interieur.gouv.fr pour enregistrer votre candidature.
+* Des promotions de 20 personnes sont organisées environ 1 fois par mois par l'équipe Cloud Pi Native. Veuillez compléter la démarche simplifiée suivante : https://www.demarches-simplifiees.fr/commencer/certification-cloud-pi-native pour enregistrer votre candidature.
 
 Type d'examen :
 *  l'examen est réalisé en présentiel sur Paris, à ce jour.
