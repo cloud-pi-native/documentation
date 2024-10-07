@@ -1,6 +1,6 @@
 # Gestion des équipes
 
-Cette page présente la gestion des équipes sur un projets.
+Cette page présente la gestion des équipes sur un projet.
 
 Cette fonctionnalité se trouve dans le menu "Equipe" sur un projet.
 
@@ -18,7 +18,7 @@ Depuis cette liste, il est possible de retirer une personne de la liste sur l'ic
 
 L'ajout d'une personne au projet s'effectue sur la partie basse de la page en saisissant l'adresse e-mail d'une personne existante dans le référentiel utilisateur CPiN.
 
-Lors de la saisie une auto-complétion permet de rechercher les personnes existantes dans le référentiel utilisateurs
+Lors de la saisie une auto-complétion permet de rechercher les personnes existantes dans le référentiel utilisateur.
 
 ![Menu](/img/team/members.png)
 
@@ -26,15 +26,5 @@ Lors de la saisie une auto-complétion permet de rechercher les personnes exista
 
 ## Attribution de droits à un membre
 
-> Attention, seul le créateur du projet peut ajouter des repos de code à un projet.
+Une fois qu'une personne a été ajoutée à un projet, un rôle par défaut lui est attribué. Celui-ci lui permet de voir les dépôts, les environnements ainsi que l'option de reprovisionner le projet. Vous pouvez consulter le guide [suivant](/guide/roles) pour une gestion des droits avancés.
 
-Une fois qu'une personne a été ajoutée à un projet, il convient de lui donner des droits sur les environnements du projet. Pour cela, aller dans le menu environnement, choisir l'environnement sur lequel ajouter la personne et aller en bas de page. Saisir le nom de la personne dans le champ de saisie Accréditer un membre du projet.
-
-![Attribution de droits](/img/team/permission-environnement.png)
-
-Une fois selectionner, lui attribuer les droits (sur ArgoCD):
- - r : droits de lecture seule sur l'environnement (visibilité du projet sur ArgoCD)
- - rw : droits de lecture et écriture sur l'environnement (visibilité du projet sur ArgoCD et modification des values)
- - rwd : droits de lecture, écriture et suppression sur l'environnement  (visibilité du projet sur ArgoCD et modification des values et suppression des objets : pods etc.)
-
-> L'attribution de droits à un membre pour un environnement est une opération *nécessaire* pour donner accès à ArgoCD sur l'environnement concerné.
