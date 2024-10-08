@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim # Create PVC
+metadata:
+  namespace: mynamespace
+  name: postgresql-data-claim # Sets name of PV
+spec:
+  accessModes:
+    - ReadWriteOnce # Sets read and write access
+  resources:
+    requests:
+      storage: 1Gi # Sets volume size
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: mynamespace
+  name: postgres # Sets service name
+  labels:
+    app: postgres # Labels and Selectors
+spec:
+  type: ClusterIP # Sets service type
+  ports:
+    - port: 5432 # Sets port to run the postgres application
+  selector:
+    app: postgres
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mynamespace
+  name: postgres-demo # Sets Deployment name
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: bitnami/postgresql:14.9.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432 # Exposes container port
+          env:
+            - name: POSTGRES_USER
+              value: demo_user
+            - name: POSTGRES_PASSWORD
+              value: "My$ecrETPAss0rd*"
+            - name: POSTGRES_DB
+              value: demo
+            - name: POSTGRESQL_DATABASE
+              value: demo
+          volumeMounts:
+            - mountPath: /bitnami/postgresql
+              name: postgredb
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 500m
+      restartPolicy: Always
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: postgresql-data-claim
