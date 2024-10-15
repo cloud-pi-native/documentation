@@ -146,8 +146,18 @@
         "link": "/guide/alerting"
       },
       {
-        "text": "Logs (Kibana)",
-        "link": "/guide/logs-kibana"
+        "text": "Logs",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "Loki",
+            "link": "/guide/logs/loki"
+          },
+          {
+            "text": "ArgoCD",
+            "link": "/guide/logs/argocd"
+          }
+        ]
       },
       {
         "text": "Archivage des logs",
