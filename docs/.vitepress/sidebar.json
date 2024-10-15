@@ -142,8 +142,8 @@
         "link": "/guide/alerting"
       },
       {
-        "text": "Logs (Kibana)",
-        "link": "/guide/logs-kibana"
+        "text": "Logs",
+        "link": "/guide/logs"
       },
       {
         "text": "Archivage des logs",
