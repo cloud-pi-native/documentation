@@ -2,7 +2,7 @@
 
 Les logs sont gérés via la solution [Loki de Grafana](https://grafana.com/oss/loki/)
 
-Retrouvez ce service dans la console Cloud Pi via le menu `Projet > Mes Projets > Sélectionner un projet > Mes Services` et cliquer sur l'icône Grafana qui vous intéresse.
+Retrouvez ce service dans la console Cloud Pi Native via le menu `Projet > Mes Projets > Sélectionner un projet > Mes Services` et cliquer sur l'icône Grafana qui vous intéresse.
 
 ## Connexion
 
