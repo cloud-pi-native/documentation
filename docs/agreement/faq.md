@@ -68,8 +68,8 @@ Ainsi, il est possible d'utiliser une image non construite sur DSO, par exemple,
 ### Quelles sont les contraintes génériques d'Openshift par rapport à Kubernetes ?
 
 - Les images doivent être rootless
-- Le root filesystem des images doit être en lecture seule à l'exception et seul les répertoire /tmp et /var/tmp sont en écriture
 - Les ports d'écoute des PODs doivent être supérieurs à 1024
+- L'utilisateur (uid) du conteneur est un nombre aléatoire, attention aux permissions des fichiers
 
 ### J'ai une erreur de récupération des dépendances Java via Maven à cause d'un problème de certificat SSL:
 
@@ -201,7 +201,7 @@ spec:
 
 ### Comment tester mon container en lecture seul ?
 
-Afin de simuler la contraite de lecture seul d'openshift sur le container, il est possible de lancer le container en mode **read_only** via la commande docker suivantes:
+Il est possible de lancer le container en mode **read_only** via la commande docker suivantes:
 ```sh
 docker run — read-only [image-name]
 ```
