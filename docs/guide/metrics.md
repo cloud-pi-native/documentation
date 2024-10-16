@@ -1,6 +1,6 @@
 # Métriques
 
-Retrouver ce service dans la console Cloud Pi via le menu `Projet > Mes Projets > Sélectionner un projet > Mes Services` et cliquer sur l'icône Grafana correspondant au cluster sur lequel votre déploiement applicatif est présent.
+Retrouver ce service dans la console Cloud Pi Native via le menu `Projet > Mes Projets > Sélectionner un projet > Mes Services` et cliquer sur l'icône Grafana correspondant au cluster sur lequel votre déploiement applicatif est présent.
 
 Dans cette section, nous allons découvrir comment créer un nouveau dashboard contenant un graphique.
 
