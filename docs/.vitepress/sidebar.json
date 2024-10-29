@@ -130,6 +130,10 @@
         "link": "/guide/deployment-with-argo"
       },
       {
+        "text": "Signature des images",
+        "link": "/guide/sign-images"
+      },
+      {
         "text": "Bonnes pratiques",
         "link": "/guide/best-practices"
       },
