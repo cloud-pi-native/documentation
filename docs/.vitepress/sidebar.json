@@ -152,6 +152,17 @@
       {
         "text": "Tutoriels",
         "link": "/guide/tutorials"
+      },
+      {
+        "text": "Accélérateurs",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "API Gateway",
+            "link": "/guide/accelerateurs/api-gateway"
+          }
+
+        ]
       }
     ]
   },
