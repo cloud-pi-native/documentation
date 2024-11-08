@@ -16,10 +16,10 @@ Cette partie représente des liens d'accès aux différents services CPiN positi
    - ArgoCD DSO : à utiliser en priorité
    - ArgoCD zone xxx : correspondant à l'instance ArgoCD de la zone sur lequel le projet est déployé (feature en cours)
  - Gitlab : Accès au [Gitlab](/services/gitlab) positionné sur le groupe de son projet
- - Grafana : Accès à [Grafana](guide/metrics) pour la consultation des métriques et logs de son projet. À noter qu'il existe 2 entrées grafana :
+ - Grafana : Accès à [Grafana](/guide/metrics) pour la consultation des métriques et logs de son projet. À noter qu'il existe 2 entrées grafana :
    - Hors production : pour les métriques des environnements **non taggués production**
    - Production : pour les métriques des environnements **taggués production**
- - Harbor : Accès au service [Harbor](services/artefacts#depots-d-images-de-conteneurs-harbor) positionné sur son projet.
+ - Harbor : Accès au service [Harbor](/services/artefacts#depots-d-images-de-conteneurs-harbor) positionné sur son projet.
  - sonarqube : Accès au service [SonarQube](/services/sonarqube) positionné sur son projet.
 
 ![liens services externes](/img/guide/services/services-externes.png)
