@@ -54,4 +54,4 @@ Deux types de repos peuvent ainsi être créés :
 
 La configuration du plugin permet au projet d'activer ou non la création du ou des repos ainsi que la politique d'écriture associée (la possibilité de redéployer un articfact avec la même version)
 
-![configuration-argocd](/img/guide/services/configuration-harbor.png)
+![configuration-argocd](/img/guide/services/configuration-nexus.png)
