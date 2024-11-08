@@ -10,7 +10,7 @@ Une fois le menu ```Services externes``` selectionné, la page affiche 2 grandes
 
 ## Services externes
 
-Cette partie représente des liens d'accès aux différents services CPiN positionné sur projet :
+Cette partie représente des liens d'accès aux différents services CPiN positionnés sur projet :
 
  - ArgoCD : Accès au service [ArgoCD](/services/gitops#argocd) positionné sur son projet. À noter qu'il existe plusieurs entrées ArgoCD :
    - ArgoCD DSO : à utiliser en priorité
