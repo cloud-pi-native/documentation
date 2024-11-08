@@ -22,7 +22,7 @@ Cette partie représente des liens d'accès aux différents services CPiN positi
  - Harbor : Accès au service [Harbor](services/artefacts#depots-d-images-de-conteneurs-harbor) positionné sur son projet.
  - sonarqube : Accès au service [SonarQube](/services/sonarqube) positionné sur son projet.
 
-![liens services externes](/img/guide/servives/services-externes.png)
+![liens services externes](/img/guide/services/services-externes.png)
 
 ## Configuration des plugins
 
