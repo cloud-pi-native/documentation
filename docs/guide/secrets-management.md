@@ -1,4 +1,4 @@
-# Gestion des secrets
+# Gestion des secrets avec SOPS
 
 Le déploiement applicatif suit le principe gitOps et donc de "pousser" l'ensemble des manifestes et charts helm sur un repository GIT. Cependant, ce principe ne peut s'appliquer aux secrets afin de ne pas divulger le contenu d'un secret dans l'historique du repository.
 

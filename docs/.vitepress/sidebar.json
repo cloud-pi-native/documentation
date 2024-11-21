@@ -127,7 +127,17 @@
       },
       {
         "text": "Gestion des secrets",
-        "link": "/guide/secrets-management"
+        "collapsed": true,
+        "items": [
+          {
+            "text": "SOPS",
+            "link": "/guide/secrets-management"
+          },
+          {
+            "text": "Vault",
+            "link": "/guide/secrets-vault"
+          }
+        ]
       },
       {
         "text": "Signature des images",
