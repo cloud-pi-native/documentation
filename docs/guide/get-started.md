@@ -19,26 +19,24 @@ Créer un projet sur la console (un détail des opérations à mener est trouvab
 
 Ajouter vos collaborateurs sur le projet, un guide est disponible [ici](/guide/team)
 
-Les collaborateurs devant accéder à Argo CD devront être ajoutés à chaque environnement concernés, voir le guide [ici](/guide/team#attribution-de-droits-a-un-membre)
 
 ## Etape 4 - Ajouter un dépôt synchronisé
 
-Ajouter vos dépôts (qui devront par la suite être synchronisé - manuellement ou via un automatisation), un guide est disponible [ici](/guide/repositories-management).
+Ajouter vos dépôts (qui peuvent être synchronisés - manuellement ou via un automatisation), un guide est disponible [ici](/guide/repositories-management).
 
 Il existe deux types de dépôts:
 
-- dépôt avec du code applicatif: génère une image docker utilisée plus tard dans vos déploiements (doit contenir un Dockerfile et un fichier gitlab-ci nommé `.gitlab-ci-dso.yaml`)
-- dépôt avec du code d'infrastructure: manifest / template kuztomize / chart helm générant votre infrastructure via ArgoCD
+- dépôt avec du code applicatif : génère une image docker utilisée plus tard dans vos déploiements (doit contenir un Dockerfile et un fichier gitlab-ci nommé `.gitlab-ci-dso.yaml`)
+- dépôt avec du code d'infrastructure : manifest / template kuztomize / chart helm générant votre infrastructure via ArgoCD
 
-> Note: il est possible d'avoir un seul dépôt avec les 2 fonctionnalités
+> Note: il est possible d'avoir un seul dépôt avec les deux fonctionnalités
 
 ## Etape 5 - Ajouter un environnement
 
-Un environnement est un namespace cloisonné au sens kubernetes permettant de déployer le code d'infrastructure du dépôt idoine.
+Un environnement est un namespace cloisonné au sens kubernetes permettant de déployer le code d'infrastructure.
 
 Pour déployer un environnement un guide est disponible [ici](/guide/environments-management).
 
-> Note: les collaborateurs du projet devant intervenir sur ArgoCD concernant l'infrastructure doivent être rajouté sur chaque environnement, un guide disponible [ici](/guide/team#attribution-de-droits-a-un-membre).
 
 ## Divers
 
