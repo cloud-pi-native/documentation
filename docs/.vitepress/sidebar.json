@@ -130,6 +130,10 @@
         "link": "/guide/secrets-management"
       },
       {
+        "text": "Signature des images",
+        "link": "/guide/images-sign"
+      },
+      {
         "text": "Déploiement de votre application",
         "link": "/guide/deployment-with-argo"
       },
