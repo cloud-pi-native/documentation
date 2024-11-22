@@ -155,7 +155,7 @@ spec:
   vaultAuthRef: vault-auth # Nom du VaultAuth, toujours vault-auth dans le cas de CPiN
   mount: mi-vaultdemo # Nom du coffre dans vault (<organisation>-<nom du projet>)
   path: foo # Chemin vers le secret
-  type: kv-v1 # Type du coffre, toujours kv-v1 dans le cas de CPiN
+  type: kv-v2 # Type du coffre, toujours kv-v1 dans le cas de CPiN
   destination:
     name: foo-secrets # Nom du secret kubernetes que l'opérateur va créer
     create: true
