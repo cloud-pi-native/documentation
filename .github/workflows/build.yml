@@ -5,16 +5,59 @@ on:
     branches:
       - main
     paths:
-      - docs/**
+      - hexaforge/**
+      - cloud-pi-native/**
   workflow_dispatch:
 
 jobs:
+  path-filter:
+    runs-on: ubuntu-latest
+    outputs:
+      hexaforge: ${{ steps.filter.outputs.hexaforge }}
+      cpin: ${{ steps.filter.outputs.cpin }}
+    steps:
+      - name: Check updated files paths
+        uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            hexaforge:
+              - 'hexaforge/**'
+            cpin:
+              - 'cloud-pi-native/**'
+
+  infos:
+    name: Get infos
+    runs-on: ubuntu-latest
+    needs: 
+      - path-filter
+    outputs:
+      matrix: ${{ steps.infos.outputs.MATRIX }}
+    steps:
+      - name: Checks-out repository
+        id: infos
+        run: |
+          MATRIX="[]"
+          HEXAFORGE='[{"name": "hexaforge"}]'
+          if [ "${{ needs.path-filter.outputs.hexaforge }}" = 'true' ]; then
+            MATRIX="$( jq -n -c --argjson acc "$MATRIX" '$acc + [{ "name": "hexaforge", "context": ".", "dockerfile": "Dockerfile.hexaforge" }] )"
+          else if [ "${{ needs.path-filter.outputs.cpin }}" = 'true' ]; then
+            MATRIX="$( jq -n -c --argjson acc "$MATRIX" '$acc + [{ "name": "cpin", "context": ".", "dockerfile": "Dockerfile.cpin" }] )"
+          fi
+          echo "MATRIX=$MATRIX" >> $GITHUB_OUTPUT
+
   build:
     name: Build application
     runs-on: ubuntu-latest
+    needs: 
+      - path-filter
+      - infos
     permissions:
       contents: read
       packages: write
+    strategy:
+      matrix:
+        images: ${{ fromJSON(needs.infos.outputs.matrix) }}
     steps:
       - name: Checks-out repository
         uses: actions/checkout@v4
@@ -36,9 +79,9 @@ jobs:
       - name: Build docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: Dockerfile
-          tags: ghcr.io/${{ github.repository }}:latest
+          context: ${{ matrix.images.context }}
+          file: ${{ matrix.images.dockerfile }}
+          tags: ghcr.io/${{ github.repository }}-${{ matrix.images.name }}:latest
           target: prod
           platforms: linux/amd64,linux/arm64
           push: true
