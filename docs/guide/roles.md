@@ -76,7 +76,7 @@ Admin :
 > Celui-ci permet de gérer l'ensemble des ressources du projet
 
 - Projet
-  - [x] Gérer le projet 
+  - [x] Gérer le projet
   - [ ] Gérer les rôles du projet
   - [ ] Gérer les membres du projet
   - [ ] Afficher les secrets
@@ -95,7 +95,7 @@ Devops :
 > Celui-ci permet de gérer les dépôts ainsi que les environnements
 
 - Projet
-  - [ ] Gérer le projet 
+  - [ ] Gérer le projet
   - [ ] Gérer les rôles du projet
   - [ ] Gérer les membres du projet
   - [x] Afficher les secrets
@@ -108,5 +108,3 @@ Devops :
 - Dépôts
   - [x] Gérer les dépôts
   - [x] Voir les dépôts
-
-

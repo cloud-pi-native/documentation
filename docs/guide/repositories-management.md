@@ -33,7 +33,7 @@ Lorsqu'un dépôt est créé dans la console en tant que `dépôt d'infrastructu
 ## Synchronisation d'un dépôt
 
 Il est possible de synchroniser son dépôt depuis la console, pour cela il suffit de cliquer sur la tuile d'un dépôt.
-Deux options sont disponibles : 
+Deux options sont disponibles :
  - Synchroniser toutes les branches
  - Renseigner le nom d'une branche a synchronisé
 Le bouton **Lancer la synchronisation** démarre une pipeline sur la GitLab DSO afin de synchroniser le dépôt.

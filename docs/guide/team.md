@@ -27,4 +27,3 @@ Lors de la saisie une auto-complétion permet de rechercher les personnes exista
 ## Attribution de droits à un membre
 
 Une fois qu'une personne a été ajoutée à un projet, un rôle par défaut lui est attribué. Celui-ci lui permet de voir les dépôts, les environnements ainsi que l'option de reprovisionner le projet. Vous pouvez consulter le guide [suivant](/guide/roles) pour une gestion des droits avancés.
-

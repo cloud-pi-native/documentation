@@ -1,6 +1,6 @@
 # Services externes
 
-Lorsqu'un projet est selectionné, il est possible d'accéder à l'ensemble des services CPiN depuis l'entrée ```Services externes``` du menu Projet : 
+Lorsqu'un projet est selectionné, il est possible d'accéder à l'ensemble des services CPiN depuis l'entrée ```Services externes``` du menu Projet :
 
 ![services externes](/img/guide/services/menu.png)
 
@@ -50,7 +50,7 @@ Deux types de repos peuvent ainsi être créés :
  - Repos de type Maven : Pour Maven, trois repos sont créés :
    - Un repo de type SNAPSHOT
    - Un repo de type RELEASE
-   - Un repo de type groupe pointant sur les deux repos SNAPSHOT et RELEASE du projet.  
+   - Un repo de type groupe pointant sur les deux repos SNAPSHOT et RELEASE du projet.
 
 La configuration du plugin permet au projet d'activer ou non la création du ou des repos ainsi que la politique d'écriture associée (la possibilité de redéployer un articfact avec la même version)
 
