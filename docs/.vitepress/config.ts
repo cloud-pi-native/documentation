@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import sidebar from './sidebar.json' assert { type: 'json'}
+import sidebar from './sidebar.json' with { type: 'json' }
 
 export default defineConfig({
   base: '/',

@@ -15,16 +15,16 @@ on:
         description: Nodejs version used to run build tests
         required: true
         type: string
-        default: "20"
+        default: "22"
       PNPM_VERSION:
         description: Pnpm version used to run build tests
         required: true
         type: string
-        default: "9"
+        default: "10"
 
 env:
-  NODE_VERSION: "20"
-  PNPM_VERSION: "9"
+  NODE_VERSION: "22"
+  PNPM_VERSION: "10"
 
 jobs:
   lint:
