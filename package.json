@@ -12,7 +12,8 @@
     "preview": "vitepress preview docs --port 8081"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.24.1",
-    "vitepress": "^1.2.3"
+    "@antfu/eslint-config": "^4.1.0",
+    "eslint": "^9.19.0",
+    "vitepress": "^1.6.3"
   }
 }
