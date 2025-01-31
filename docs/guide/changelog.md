@@ -31,17 +31,19 @@ Les onglets détaillent :
  - Liste des clusters disponibles pour le projet.
 
 
-### Décorrélation entre l'organisation et le projet et nom du namespace
+### Suppression de la notion d'organisation et namespace des projets
 
-La version 9 de la console introduit la séparation entre projet et organisation. Avant la version 9, le nom du namespace était composé de l'acronyme de l'organisation et du nom du projet. Cela peut poser des problèmes en cas de modification de l'organisation fonctionnel (un projet qui passe d'une organisation à une autre) et imposait que le nom des projets soient uniques.
+La version 9 de la console supprime la notion d'organisation (qui pourra revenir dans une version ultérieure de la console mais sous une autre forme). Avant la version 9 de la Console, le nom du namespace était composé de l'acronyme de l'organisation et du nom du projet. Cela peut poser des problèmes en cas de modification de l'organisation fonctionnel (un projet qui change d'organisme de rattachement) ou dans le cas de doublons de nom de projet.
 
-A partir de la version 9, lors de la création d'un projet depuis la console, la notion de **slug** est présente sur la page d'un projet :
+A partir de la version 9 de la console, la notion d'organisation disparait depuis l'interface de la console et la notion de **slug** (identifiant unique du projet) est ajoutée est présente sur la page d'un projet :
 
 ![slugs](/img/guide/changelog/slug-projet-v9.png)
 
 Depuis le tableau de bord du projet on peut voir deux informations importantes :
- - Le SLUG est un identifiant unique pour le projet qui correspond au nom du projet ou nom du projet '-' un numéro si le nom du projet est déjà utilsé sur DSO. Ce slug devient l'identifiant unique du projet.
+ - Le SLUG qui est l'identifiant unique du projet et qui correspond au nom du projet ou nom du projet '-' un numéro si le nom du projet est déjà utilsé sur DSO. **Ce slug devient l'identifiant unique du projet** dans tous les outils et services tiers.
  - Le champ version présenté ici indique la version de la console lors de la création (ou reprovisionnement) du projet permettant de savoir si les dernières fonctionnalités de la console ont bien été provisionnées pour le projet. Si une différence de version existe entre cette version et la version de la console, il est conseillé de faire un **reprovisionnement** du projet.
+
+> Impacts : les URL des repos sont impactés (suppression du niveau de groupe de l'organisation). Les liens vers les repos dans gitlab sont modifiés et devront être adapté par les clients sur leurs différents appels : bookmark, historique de navigateur, référence dans le lien de synchro repo externe / repo interne, référence des remote en cas d'utilisation de git en local vers un remote sur le gitlab DSO, scripts de manipulation de projets git à distance (par exemple backup), etc.
 
 Le nom du namespace est devenu opaque par la génération d'UUID. Ce nom est consultable depuis l'onglet ressources puis en cliquant sur la ligne d'un environnement : 
 
