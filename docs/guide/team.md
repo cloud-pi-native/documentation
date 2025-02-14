@@ -2,9 +2,10 @@
 
 Cette page présente la gestion des équipes sur un projet.
 
-Cette fonctionnalité se trouve dans le menu "Equipe" sur un projet.
+Cette fonctionnalité se trouve dans l'onglet "Equipe" sur un projet.
 
 ![Menu](/img/team/menu.png)
+
 
 ## Membres du projet
 

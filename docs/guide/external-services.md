@@ -1,6 +1,6 @@
 # Services externes
 
-Lorsqu'un projet est selectionné, il est possible d'accéder à l'ensemble des services CPiN depuis l'entrée ```Services externes``` du menu Projet :
+Lorsqu'un projet est selectionné, il est possible d'accéder à l'ensemble des services CPiN depuis l'onglet ```Services externes``` du menu Projet :
 
 ![services externes](/img/guide/services/menu.png)
 
