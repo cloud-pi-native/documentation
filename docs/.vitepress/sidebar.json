@@ -287,5 +287,15 @@
         "link": "/contribution/contribute"
       }
     ]
+  },
+  {
+    "text": "Changelog",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "Change log",
+        "link": "/guide/changelog"
+      }
+    ]
   }
 ]

@@ -1,6 +1,6 @@
 # Services externes
 
-Lorsqu'un projet est selectionné, il est possible d'accéder à l'ensemble des services CPiN depuis l'entrée ```Services externes``` du menu Projet :
+Lorsqu'un projet est selectionné, il est possible d'accéder à l'ensemble des services CPiN depuis l'onglet ```Services externes``` du menu Projet :
 
 ![services externes](/img/guide/services/menu.png)
 
@@ -20,7 +20,7 @@ Cette partie représente des liens d'accès aux différents services CPiN positi
    - Hors production : pour les métriques des environnements **non taggués production**
    - Production : pour les métriques des environnements **taggués production**
  - Harbor : Accès au service [Harbor](/services/artefacts#depots-d-images-de-conteneurs-harbor) positionné sur son projet.
- - sonarqube : Accès au service [SonarQube](/services/sonarqube) positionné sur son projet.
+ - SonarQube : Accès au service [SonarQube](/services/sonarqube) positionné sur son projet.
 
 ![liens services externes](/img/guide/services/services-externes.png)
 

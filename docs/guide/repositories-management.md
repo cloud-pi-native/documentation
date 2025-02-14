@@ -2,7 +2,7 @@
 
 En phase de développement, les équipes projets sont autonomes et travaillent avec leurs outils. La synchronisation des dépôts est le processus qui permet de *copier* les dépôts externes stockés sur github, gitab.com, bitbucket, etc. vers le dépôt de code de la plateforme Cloud π Native. la seule contrainte est que le dépôt externe soit accessible depuis Internet. Ce dépôt peut être public ou privé. Pour plus d'information, voir la page dédiée au [dépôt de code](/services/gitlab)
 
-Cliquez sur le menu gauche **Dépôts**
+Cliquez sur l'onglet **ressources**
 ![menu-projet-depot](/img/tuto/3tuto-depots.png)
 
 ## Ajouter un dépôt

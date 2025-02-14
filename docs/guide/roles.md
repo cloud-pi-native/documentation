@@ -4,6 +4,9 @@ Les rôles permettent d'augmenter ou diminuer les droits de chaque membre de vot
 
 Si un membre de l'équipe est associé à plusieurs rôles, il prendra les permissions de tous les rôles associés.
 
+Cliquez sur l'onglet **roles**
+![menu-projet-depot](/img/guide/roles/onglets-projet-v9-roles.png)
+
 ## Rôles du projet
 
 La page Rôles présente la liste des rôles du projet :
