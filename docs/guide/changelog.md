@@ -41,6 +41,7 @@ A partir de la version 9 de la console, la notion d'organisation disparait depui
 
 Depuis le tableau de bord du projet on peut voir deux informations importantes :
  - Le SLUG qui est l'identifiant unique du projet et qui correspond au nom du projet ou nom du projet '-' un numéro si le nom du projet est déjà utilsé sur DSO. **Ce slug devient l'identifiant unique du projet** dans tous les outils et services tiers.
+ - L'UUID du projet en base de données.
  - Le champ version présenté ici indique la version de la console lors de la création (ou reprovisionnement) du projet permettant de savoir si les dernières fonctionnalités de la console ont bien été provisionnées pour le projet. Si une différence de version existe entre cette version et la version de la console, il est conseillé de faire un **reprovisionnement** du projet.
 
 > Impacts : les URL des repos sont impactés (suppression du niveau de groupe de l'organisation). Les liens vers les repos dans gitlab sont modifiés et devront être adapté par les clients sur leurs différents appels : bookmark, historique de navigateur, référence dans le lien de synchro repo externe / repo interne, référence des remote en cas d'utilisation de git en local vers un remote sur le gitlab DSO, scripts de manipulation de projets git à distance (par exemple backup), etc.
