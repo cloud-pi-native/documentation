@@ -36,7 +36,7 @@ Deux informations concernant les statuts sont affichés :
 Un certain nombre d'actions sont disponibles :
 
 - **Reprovisionner le projet** : la console DSO étant en cours de développement actif, divers changements ont lieu (correction de bugs, ajouts de nouvelles fonctionnalitées). Ce bouton permet de mettre à jour son projet par rapport aux derniers développement de la console.
-- **Afficher les secrets des services** : affiche des configurations utiles mais sencible des projets (par défaut seul le propriétaire du projet peut voir les secrets)
+- **Afficher les secrets des services** : affiche des configurations utiles mais sensible des projets (par défaut seul le propriétaire du projet peut voir les secrets)
 ![mon projet - secrets](/img/guide/project/monprojet_secrets.png)
 La partie GitLab permet d'avoir le token ainsi que l'id du dépôt mirror (permettant de cloner son dépôt primaire sur Cloud Pi Native). Cela permet d'automatiser cette action via des pipelines sur votre dépôt primaire.
 Concernant Harbor, la registry stockant les images construites sur la plateforme CPiN

@@ -17,7 +17,7 @@ Un exemple de création de type d'environnement, les explication se trouvant apr
 
 ## Mise à jour et Suppression
 
-Pour mettre à jour un type d'evironnement, il faut sélectionner sa tuile dans la liste.
+Pour mettre à jour un type d'environnement, il faut sélectionner sa tuile dans la liste.
 
 Il est possible de modifier les quotas associés ainsi que les clusters mais pas le nom.
 
