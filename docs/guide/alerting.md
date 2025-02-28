@@ -113,3 +113,99 @@ Exemple si le label `refapp`est égal à `demo`, alors l'alerte est routée vers
 
 Cliquer sur `Add policy` pour créer la nouvelle politique imbriquée, que l'on retrouve sous celle par défaut dans cet exemple:
 ![notification_policies](/img/guide/alerting/notification_policies.png)
+
+## Import/Export des alertes
+
+L'interface web ne propose pas d'import/export mais on peut rejouter les requêtes API à la main.
+Les deux scripts suivants permettent d'exporter/importer les alertes. Il faut extraire de Grafana l'URL de l'AlertManager ainsi que votre cookie de session (qui expire assez vite, à peu près 10min).
+
+Attention ça ne demande pas confirmation à l'import en cas de conflits.
+
+Pour récupérer le cookie, il faut aller sur Grafana dans son navigateur, ouvrir les outils développeur et inspecter une requête dans l'onglet Network.
+
+Dans chaque requête, il y a le header `Cookies` qui contient la chaîne `grafana_session_token=<votre-token>; ....`
+
+(On peut aussi aller voir dans Stockage > Cookies)
+
+Attention ils expirent assez vite, et sont différents entre integ & prod :wink:
+
+L'URL est de la forme suivante: `https://metrique...fr/<ministere>-<projet>/api/ruler/prom-<uid datasource>`. Les datasources sont visibles dans Grafana
+
+```powershell
+.\export.ps1 <url...> <cookie «grafana_session»> <fichier.json> # exporte vers le fichier
+.\import.ps1 <url...> <cookie «grafana_session»> <fichier.json> # importe depuis le fichier
+```
+
+Ces deux scripts sont compatibles avec Powershell 5.1, qui est la version installée par défaut sur Windows 10 et 11.
+
+```powershell
+# export.ps1
+param($alertManagerUrl, $grafanaCookie, $filename)
+
+$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+$session.Cookies.Add((
+        New-Object System.Net.Cookie(
+            "grafana_session",
+            $grafanaCookie,
+            '/',
+             ([uri]$alertManagerUrl).Host
+        )
+    ))
+
+$r = Invoke-WebRequest -UseBasicParsing `
+    -Method Get `
+    -Uri "$alertManagerUrl/api/v1/rules?subtype=mimir" `
+    -WebSession $session `
+    -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0" `
+    -Headers @{
+    "x-grafana-org-id" = "1"
+    "Accept"           = "application/json"
+}
+if ($r.StatusCode -ne 200) {
+    exit 1
+}
+
+Set-Content -Path $filename $r.Content -Encoding UTF8
+```
+
+```powershell
+# import.ps1
+param($alertManagerUrl, $grafanaCookie, $filename)
+
+$ErrorActionPreference = "Stop"
+
+$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+$session.Cookies.Add((
+    New-Object System.Net.Cookie(
+      "grafana_session",
+      $grafanaCookie,
+      '/',
+             ([uri]$alertManagerUrl).Host
+    )
+  ))
+
+$data = Get-Content -Encoding UTF8 -Path $filename | ConvertFrom-Json
+
+$data.PSobject.Properties | Select-Object name, value | ForEach-Object { # on itére les "dossiers"
+  $folderName = $_.Name
+  $folder = $_.Value
+  Write-Host "* $folderName"
+  $folder | ForEach-Object { # on itère les règles d'alertes
+    $rule = $_
+    Write-Host "  - $($rule.name)"
+    $ruleData = ConvertTo-Json -Depth 10 $rule
+    Write-Host $ruleData
+
+    Invoke-WebRequest -UseBasicParsing -Uri "$($alertManagerUrl)/api/v1/rules/$($folderName)?subtype=mimir" `
+      -Method POST `
+      -WebSession $session `
+      -UserAgent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0" `
+      -Headers @{
+      "Accept"           = "application/json"
+      "x-grafana-org-id" = "1"
+    } `
+      -ContentType "application/json" `
+      -Body $ruleData
+  }
+}
+```
