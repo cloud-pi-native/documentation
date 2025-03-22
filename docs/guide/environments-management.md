@@ -12,9 +12,9 @@ La console crée automatiquement :
 
  ## Création d'un environnement
 
- Depuis la console aller dans le menu ![environnement](/img/environnement/menu.png)
+ Depuis la console aller dans l'onglet ressources ![ressources](/img/environnement/menu.png)
 
- Donner :
+Cliquez sur le bouton **+ Ajouter un nouvel environnement** puis compléter :
   - Un nom à l'environnement, par exemple integration
   - Un type environnement (dev / staging / integration / prod), celui-ci donne accès à des quotas différents
   ![type](/img/environnement/type-env.png)
@@ -23,4 +23,3 @@ La console crée automatiquement :
   - Le cluster de destination
   ![quota](/img/environnement/cluster-env.png)
 
-Cliquez sur le bouton **Ajouter l'environnement** pour créer l'environnement
