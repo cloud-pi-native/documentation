@@ -97,6 +97,8 @@ spec:
 
 Le suivi du traitement peut ensuite être réalisé via le statut de l'objet *ChaineDeService* via ArgoCD. 
 
+La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail à l'adresse du propriétaire du projet et contenant un lien de validation de la demande ainsi qu'un rappel des conditions général d'utilisation de la plateforme (CGU).  
+
 ### Limitations / remarques
 
 Lors de la création d'une CDS via le kind ChaineDeService, il est important d'avoir en têtes certains éléments :
