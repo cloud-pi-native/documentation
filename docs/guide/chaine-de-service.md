@@ -1,4 +1,4 @@
-# Création automatique de Chaine de Service : OpenCDS (au MI)
+# Création automatique de Chaine de Service : OpenCDS (au MI) - VERSION BETA
 
 ## Introduction
 
@@ -54,15 +54,14 @@ metadata:
   name: chainedeservice-rie
 spec:
   network: "RIE"
-  commonName: "mon-app.rie.interieur.gouv.fr"
+  commonName: "mon-app.rie.midaas.fr"
   PAI: "short-pai"
 ````
-Ceci va créer une chaine de Service pour l'URL mon-app.rie.interieur.gouv.fr en utilisant le certificat SSL XXX
+Ceci va créer une chaine de Service pour l'URL mon-app.rie.midaas.fr en utilisant un certificat SSL auto-signé. Ceci est utilisé sur les environnements hors production.
 
-Dans le cas où le certificat est a également été demandé il est nécessaire de l'ajouter dans ce cas la demande de CDS devient :
+Dans le cas où il est souhaité un certificat valide et récupéré préalablement par le service concerné, il est nécessaire de l'ajouter sous la forme d'un secret Kubernetes en plus de la CDS dans ce cas la demande de CDS devient :
 
-
-Pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé soit via SOPS, soit via Vault.
+A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé soit via SOPS, soit via Vault.
 
 ````yaml
 apiVersion: v1
