@@ -54,10 +54,10 @@ metadata:
   name: chainedeservice-midaas
 spec:
   network: "RIE"
-  commonName: "mon-app.app1hp.d436.dev.forge.minint.fr"
+  commonName: "mon-app.app1hp.d356.dev.forge.minint.fr"
   PAI: "short-pai"
 ````
-Ceci va créer une chaine de Service pour l'URL ```mon-app.app1hp.d436.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production.
+Ceci va créer une chaine de Service pour l'URL ```mon-app.app1hp.d356.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production.
 
 Dans le cas où il est souhaité un certificat valide et récupéré préalablement par le service concerné, il est nécessaire de l'ajouter sous la forme d'un secret Kubernetes en plus de la CDS dans ce cas la demande de CDS devient :
 
