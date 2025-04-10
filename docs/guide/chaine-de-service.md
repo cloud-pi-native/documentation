@@ -32,7 +32,7 @@ Cet objet prend les paramètres suivants :
 | :----| :--------| :-------| :-----------| :-------|
 | network | required | RIE ou INTERNET | choix du type d'exposition | n/a |
 | commonName | required | fqdn | url primaire de l'application | n/a |
-| PAI | required | string | nom du PAI comme indiqué lors de sa création | n/a |
+| pai | required | string | nom du PAI comme indiqué lors de sa création | n/a |
 | subjectAlternativeName | optionnel | list(string) | liste d'urls secondaires | null |
 | certificate | optionnel | map | element permettant de retrouver le secret contenant le certificat | null |
 | certificate.secretName | required | string | nom du secret | n/a |
@@ -55,7 +55,7 @@ metadata:
 spec:
   network: "RIE"
   commonName: "mon-app.app1hp.d356.dev.forge.minint.fr"
-  PAI: "short-pai"
+  pai: "short-pai"
 ````
 Ceci va créer une chaine de Service pour l'URL ```mon-app.app1hp.d356.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production.
 
@@ -69,7 +69,7 @@ kind: Secret
 metadata:
   name: mon-secret
 type: Opaque
-data:
+stringData:
   mon-cert.p12: |
     base64(p12)
   passphrase: Passw0rd!
@@ -81,7 +81,7 @@ metadata:
 spec:
   network: "INTERNET"
   commonName: "mon-app.interieur.gouv.fr"
-  PAI: "short-pai"
+  pai: "short-pai"
   subjectAlternativeName: ["mon-app.interieur.gouv.fr"]
   certificate:
     secretName: "mon-secret"
@@ -104,3 +104,5 @@ La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail à l'adre
 Lors de la création d'une CDS via le kind ChaineDeService, il est important d'avoir en têtes certains éléments :
  - L'enregistrement DNS est demandé via la création d'un ticket *minitil*, le suivi du traitement du ticket n'est pas pris en compte dans le statut de traitement de l'objet. Autrement dit, le statut de l'objet ChaineDeService correspond à la configuration des équipements réseau. Il faut attendre que le ticket correspondant à la demande DNS ait été traité aifn que la CDS soit réellement opérationnelle.
  - La demande de configuration des équipement réseau est faite par un ordonnanceur qui traite les demandes sur la période 8h00->9h00 et 13h->14h du lundi au jeudi. Ainsi, l'opération de configuration de la CDS sera réalisé lors du prochain créneau de traitement suivant la demande.
+
+> Attention, il n'est pas possible de modifier une CDS, vérifiez bien vos valeurs avant de lancer la création. Une fois créée, en cas de besoin de modification, il est nécessaire de passer par le Chef de projet hébergement.
