@@ -20,6 +20,11 @@ Sur Cloud Pi Native, les différentes opérations de création d'une CDS peuvent
 
 ### Création d'une CDS en IaC
 
+Deux cas d'usage peuvent se présenter lors de la création de CDS :
+ - mode automatique, uniquement sur un sous-domaine de **.d356.dev.forge.minint.fr** et sans certificat.
+ - mode semi-automatique, sur tous les autres sous-domaines. Dans ce cas la création de CDS va créer un ticket minitil pour créer l'enregistrement DNS. A noter que le status de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseau et non au traitement du ticket minitil. Ainsi, une fois que le status ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.  
+
+
 Depuis le chart helm de son projet créer un nouvel objet Kubernetes de type ChaineDe Service :
 
 ```yaml
