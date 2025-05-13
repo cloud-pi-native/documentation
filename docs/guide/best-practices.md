@@ -150,7 +150,7 @@ Le scaling est très important afin de répondre aux besoins en termes d'affluen
 ## QOS
 
 Il est important de définir les consommations de chaque POD (prévisionnelles), savoir si il serait intéressant que certains disposent d’une "request" égal a la "limit" afin d’assurer une réservation des ressources. (Guaranteed Class)
-L'utilisation du "Burstable" n'est pas une bonne pratique. Ll est vraiment nécessaire d'avoir une "limit" même si celle-ci n'est pas équivalente a la "request".
+L'utilisation du "Burstable" n'est pas une bonne pratique. Il est vraiment nécessaire d'avoir une "limit" même si celle-ci n'est pas équivalente a la "request".
 
 Exemple :
 
