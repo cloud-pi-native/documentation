@@ -20,10 +20,7 @@ Sur Cloud Pi Native, les différentes opérations de création d'une CDS peuvent
 
 ### Création d'une CDS en IaC
 
-Deux cas d'usage peuvent se présenter lors de la création de CDS :
- - mode automatique, uniquement sur un sous-domaine de **.d356.dev.forge.minint.fr** et sans certificat.
- - mode semi-automatique, sur tous les autres sous-domaines. Dans ce cas la création de CDS va créer un ticket minitil pour créer l'enregistrement DNS. A noter que le status de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseau et non au traitement du ticket minitil. Ainsi, une fois que le status ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.  
-
+La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket minitil pour créer l'enregistrement DNS. A noter que le status de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseau et non au traitement du ticket minitil. Ainsi, une fois que le status ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.  
 
 Depuis le chart helm de son projet créer un nouvel objet Kubernetes de type ChaineDe Service :
 
@@ -56,13 +53,13 @@ La version minimale de création d'une CDS est la suivante :
 apiVersion: octant.interieur.gouv.fr/v1alpha1
 kind: ChaineDeService
 metadata:
-  name: chainedeservice-midaas
+  name: chainedeservice
 spec:
   network: "RIE"
-  commonName: "mon-app.app1hp.d356.dev.forge.minint.fr"
+  commonName: "mon-app.app1hp.dev.forge.minint.fr"
   pai: "short-pai"
 ````
-Ceci va créer une chaine de Service pour l'URL ```mon-app.app1hp.d356.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production.
+Ceci va créer une chaine de Service pour l'URL ```mon-app.app1hp.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production.
 
 Dans le cas où il est souhaité un certificat valide et récupéré préalablement par le service concerné, il est nécessaire de l'ajouter sous la forme d'un secret Kubernetes en plus de la CDS dans ce cas la demande de CDS devient :
 
@@ -102,7 +99,9 @@ spec:
 
 Le suivi du traitement peut ensuite être réalisé via le statut de l'objet *ChaineDeService* via ArgoCD. 
 
-La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail à l'adresse du propriétaire du projet et contenant un lien de validation de la demande ainsi qu'un rappel des conditions général d'utilisation de la plateforme (CGU).  
+### Validation de la création de CDS
+
+La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail contenant un lien de validation à l'adresse des membres du projets ayant le role *CDS*. Ce mail contient égakement un rappel des conditions général d'utilisation de la plateforme (CGU).
 
 ### Limitations / remarques
 
@@ -111,3 +110,218 @@ Lors de la création d'une CDS via le kind ChaineDeService, il est important d'a
  - La demande de configuration des équipement réseau est faite par un ordonnanceur qui traite les demandes sur la période 8h00->9h00 et 13h->14h du lundi au jeudi. Ainsi, l'opération de configuration de la CDS sera réalisé lors du prochain créneau de traitement suivant la demande.
 
 > Attention, il n'est pas possible de modifier une CDS, vérifiez bien vos valeurs avant de lancer la création. Une fois créée, en cas de besoin de modification, il est nécessaire de passer par le Chef de projet hébergement.
+
+
+### Gestion des erreurs
+
+Lors de la création d'une ChaineDeService, plusieurs erreurs peuvent survenir, ce paragraphe présente différents possible.
+
+#### Erreurs sur les paramètres passés à OpenCDS
+
+Ces erreurs sont retournées par le controler OpenCDS qui va refuser la création de l'objet ChaineDeService.
+
+Dans ces cas, il convient de modifier l'objet ChaineDeService et de le redéployer via ArgoCD
+
+##### 1. Paramètre manquant :
+
+Cette erreur survient lorsqu'il manque un paramètre obligatoire dans le manifest.
+
+Exemple :
+```
+apiVersion: octant.interieur.gouv.fr/v1alpha1
+kind: ChaineDeService
+metadata:
+  name: cds-missing-param
+spec:
+  certificate:
+    certificateKey: missing-param.p12
+    passphraseKey: passphrase
+    secretName: secret-cds-missing-param
+  commonName: missing-param.minint.fr 
+  network: RIE
+```
+
+Réponse du controler :
+```
+The ChaineDeService "cds-missing-param" is invalid: spec.pai: Required value
+```
+
+##### 2. Paramètre inexistant :
+
+Cette erreur survient lorsqu'un paramètre inexistant est renseigné dans le manifest.
+
+Exemple:
+```
+apiVersion: octant.interieur.gouv.fr/v1alpha1
+kind: ChaineDeService
+metadata:
+  name: cds-wrong-param
+spec:
+  certificate:
+    certificateKey: wrong-param.p12
+    passphraseKey: passphrase
+    secretName: secret-cds-wrong-param
+  commonName: wrong-param.minint.fr 
+  network: RIE
+  pai: TEST
+  wrongParam: wrong
+```
+
+Réponse du controler :
+```
+Error from server (BadRequest): error when creating "cds-wrong-param.yaml": ChaineDeService in version "v1alpha1" cannot be handled as a ChaineDeService: strict decoding error: unknown field "spec.wrongParam"
+```
+
+##### 3. Mauvais type :
+
+Cette erreur survient lorsqu'on renseigne une valeur d'un mauvais type pour un des paramètres du manifest.
+
+Exemple:
+```
+apiVersion: octant.interieur.gouv.fr/v1alpha1
+kind: ChaineDeService
+metadata:
+  name: cds-wrong-type
+spec:
+  certificate:
+    certificateKey: wrong-type.p12
+    passphraseKey: passphrase
+    secretName: secret-cds-wrong-type
+  commonName: wrong-type.minint.fr 
+  network: RIE
+  pai: TEST
+  antivirus: wrong
+```
+
+Réponse du controler :
+```
+The ChaineDeService "cds-wrong-type" is invalid: spec.antivirus: Invalid value: "string": spec.antivirus in body must be of type boolean: "string"
+```
+
+##### 4. Mauvaise valeur pour les paramètres acceptant des valeurs précises :
+
+Cette erreur survient lorsqu'on renseigne une mauvaise valeur pour un des paramètres du manifest qui attendent des valeurs précises (enum).
+
+Exemple:
+```
+apiVersion: octant.interieur.gouv.fr/v1alpha1
+kind: ChaineDeService
+metadata:
+  name: cds-wrong-value
+spec:
+  certificate:
+    certificateKey: wrong-value.p12
+    passphraseKey: passphrase
+    secretName: secret-cds-wrong-value
+  commonName: wrong-value.minint.fr 
+  network: WRONG
+  pai: TEST
+```
+
+Réponse du controler :
+```
+The ChaineDeService "wrong-value" is invalid: spec.network: Unsupported value: "WRONG": supported values: "RIE"
+```
+
+#### Erreurs de l'API
+
+Ces erreurs n'empêche pas la création de l'objet OpenCDS mais sont retournés par l'API OpenCDS après avoir effectué davantage de verifications avant de lancer la création de la chaîne de service. 
+
+Ces erreurs peuvent être trouvées dans la partie Message du champs Status de l'objet ChaineDeService (il peut y avoir plusieurs erreurs en même temps, une erreur sera affichée par ligne): 
+
+```
+status:
+  Message: |
+    param1: ...
+    param2: ...
+```
+
+Dans ces cas, il convient de modifier l'objet ChaineDeService et de le redéployer via ArgoCD
+
+##### 1. PAI
+
+Le PAI ne fait pas parti de la liste des PAI accéptés. Verifier que le PAI est correct et contacter la Service Team si celui-ci est bien renseigné.
+
+Exemple:
+```
+apiVersion: octant.interieur.gouv.fr/v1alpha1
+kind: ChaineDeService
+metadata:
+  name: cds-wrong-pai
+spec:
+  certificate:
+    certificateKey: wrong-pai.p12
+    passphraseKey: passphrase
+    secretName: secret-cds-wrong-pai
+  commonName: wrong-pai.minint.fr 
+  network: RIE
+  pai: WRONG
+```
+
+Réponse de l'API :
+```
+PAI : PAI not in project list (input: WRONG)
+```
+
+##### 2. commonName
+
+Le commonName n'est pas un sous-domaine accepté par OpenCDS. Les seuls domaines acceptés sont des sous-domaines de *.minint.fr et *.interieur.rie.gouv.fr.
+
+Exemple:
+```
+apiVersion: octant.interieur.gouv.fr/v1alpha1
+kind: ChaineDeService
+metadata:
+  name: cds-wrong-commonName
+spec:
+  certificate:
+    certificateKey: wrong-commonName.p12
+    passphraseKey: passphrase
+    secretName: secret-cds-wrong-commonName
+  commonName: wrong-commonName.fr 
+  network: RIE
+  pai: TEST
+```
+
+Réponse de l'API :
+```
+commonName : commonName is not a subdomain of the allowed domains (input: wrong-commonName.fr)
+```
+
+##### 3. ipWhiteList
+
+L'une des valeurs dans la liste ipWhiteList n'est pas une IP valide.
+
+Exemple:
+```
+apiVersion: octant.interieur.gouv.fr/v1alpha1
+kind: ChaineDeService
+metadata:
+  name: cds-wrong-ipWhiteList
+spec:
+  certificate:
+    certificateKey: wrong-ipWhiteList.p12
+    passphraseKey: passphrase
+    secretName: secret-cds-wrong-ipWhiteList
+  commonName: wrong-ipWhiteList.minint.fr 
+  network: RIE
+  pai: TEST
+  ipWhiteList: [10.0.0.0/8, 1.2.3]
+```
+
+Réponse de l'API :
+```
+ipWhiteList : value is not a valid IPv4 or IPv6 network (input: 1.2.3)
+```
+
+#### Erreurs internes
+
+Ces erreurs arrivent lorsque le controler et l'API OpenCDS ont tous les deux acceptés la demande mais une erreur est survenue lors de la création de la chaîne de service. Vous en serez informé par le message suivant dans la partie Message du champs Status de l'objet ChaineDeService :
+
+```
+status:
+  Message: |
+    An internal error occured. An admin is looking at it.
+```
+
+Cette erreur survient lorsqu'une erreur serveur s'est produite lors de la création de la chaîne de service. Aucune intervention de votre part n'est nécessaire, un administrateur sera alerté de l'erreur et la résoudra ou vous recontactera en cas besoin.
