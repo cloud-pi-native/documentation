@@ -21,6 +21,7 @@ Sur Cloud Pi Native, les différentes opérations de création d'une CDS peuvent
 ### Création d'une CDS en IaC
 
 La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket minitil pour créer l'enregistrement DNS. A noter que le status de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseau et non au traitement du ticket minitil. Ainsi, une fois que le status ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.  
+@TODO ( Rajouter un schèma explicatif)
 
 Depuis le chart helm de son projet créer un nouvel objet Kubernetes de type ChaineDe Service :
 
@@ -41,10 +42,10 @@ Cet objet prend les paramètres suivants :
 | certificate.certificateKey | required | string | nom de la clé contenant le certificat en p12 | n/a |
 | certificate.passphraseKey | required | string | nom de la clé contenant la pass phrase du p12 | n/a |
 | redirect | optionnel | bool | activer la redirection HTTP to HTTPS | false |
-| antivirus | optionnel | bool | activer l'antivirus | false |
+| antivirus | optionnel | bool | activer l'antivirus @TO DO, c'est quoi les conséquences ? Peut-on désactiver l'antivirus aprés sa création ? | false |
 | maxFileSize | optionnel | int | taille maximal des fichiers pour l'antivirus en Mo | null |
 | websocket | optionnel | bool | activer la possibilité de faire du websocket | false |
-| ipWhiteList | optionnel | list(string) | liste des IPs autorisées a acceder a l'url | ["10.0.0.0/8"] ou ["0.0.0.0"] |
+| ipWhiteList | optionnel | list(string) | liste des IPs autorisées a acceder a l'url | ["10.0.0.0/8","192.168.1 /23"] ou ["0.0.0.0"]  |
 | endToEnd | optionnel | bool | a activer si l'ingress écoute en HTTPS | false |
 
 La version minimale de création d'une CDS est la suivante :
@@ -59,7 +60,7 @@ spec:
   commonName: "mon-app.app1hp.dev.forge.minint.fr"
   pai: "short-pai"
 ````
-Ceci va créer une chaine de Service pour l'URL ```mon-app.app1hp.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production.
+Ceci va créer une chaine de Service pour l'URL ```mon-app.app1hp.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production. 
 
 Dans le cas où il est souhaité un certificat valide et récupéré préalablement par le service concerné, il est nécessaire de l'ajouter sous la forme d'un secret Kubernetes en plus de la CDS dans ce cas la demande de CDS devient :
 
@@ -102,6 +103,7 @@ Le suivi du traitement peut ensuite être réalisé via le statut de l'objet *Ch
 ### Validation de la création de CDS
 
 La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail contenant un lien de validation à l'adresse des membres du projets ayant le role *CDS*. Ce mail contient égakement un rappel des conditions général d'utilisation de la plateforme (CGU).
+@TODO à préciser: Qui et comment obentenir le role CDS
 
 ### Limitations / remarques
 
