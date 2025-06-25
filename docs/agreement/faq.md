@@ -100,7 +100,7 @@ package-app:
 
 ### Comment déployer une base postgreSQL via manifests ?
 
-Le fichier manifest suivant présente le déploiement d'un service [PostgreSQL](/examples/postgres.yaml) à partir d'une image bitnami. Il peut servir de base pour un déploiement manuel d'une instance PostgreSQL. Pour un déploiement plus complexe, par exemple avec une gestion du clustering, il est préférable d'utiliser un déploiement par chart Helm pour par opérateur.
+Le fichier manifest suivant présente le déploiement d'un service [PostgreSQL](/examples/postgres.yaml) à partir d'une image bitnami. Il peut servir de base pour un déploiement manuel d'une instance PostgreSQL. Pour un déploiement plus complexe, par exemple avec une gestion du clustering, il est préférable d'utiliser un déploiement par chart Helm ou par opérateur.
 
 ### Comment déployer une base postgreSQL via un chart Helm ?
 
