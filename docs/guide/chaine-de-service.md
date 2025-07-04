@@ -8,6 +8,10 @@ Pour créer une chaine de service, deux macro opérations sont nécessaires :
  - Créer un enregistrement DNS correspondant au nom de domaine de son application et à destination de l'ingress d'entrée du Cluster cible;
  - Configurer les éléments réseaux pour prendre en compte l'entrée DNS ci-dessus.
 
+De plus, il est nécessaire d'être en possession:
+ - D'un certificat SSL pour son URL : un secret au sens Kubernetes devra être créé par le projet avec les informations de ce certificat.
+ - De connaitre le PAI de son projet 
+
 La demande de réalisation de ces opérations est à faire par la création de tickets et les tâches associées sont relativement complexes, fastidieuses et impliquent différentes équipes. Elles prennent donc un temps non négligeable à prendre en compte dans le planning de son projet et le suivi de l'avancé de ces travaux par les projet est difficile.
 
 > Le projet OpenCDS vise à automatiser au maximum ces opérations.
@@ -20,8 +24,11 @@ Sur Cloud Pi Native, les différentes opérations de création d'une CDS peuvent
 
 ### Création d'une CDS en IaC
 
-La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket minitil pour créer l'enregistrement DNS. A noter que le status de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseau et non au traitement du ticket minitil. Ainsi, une fois que le status ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.  
-@TODO ( Rajouter un schèma explicatif)
+La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket minitil pour demander la création d'un enregistrement DNS. A noter que le status de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseau et non au traitement du ticket minitil. Ainsi, une fois que le status ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.
+
+Il convient dans un premier temps de faire les demandes de PAI au BPAH et de certificat au BCS. Une fois ces éléments en main, il est possible de créer un objet ChaineDeService afin de lancer les processus de configuration des éléments réseau ainsi que la demande de création de DNS.
+
+![schema_creation_cds](/img/guide/openCDS/schema-openCDS.png)
 
 Depuis le chart helm de son projet créer un nouvel objet Kubernetes de type ChaineDe Service :
 
@@ -42,7 +49,7 @@ Cet objet prend les paramètres suivants :
 | certificate.certificateKey | required | string | nom de la clé contenant le certificat en p12 | n/a |
 | certificate.passphraseKey | required | string | nom de la clé contenant la pass phrase du p12 | n/a |
 | redirect | optionnel | bool | activer la redirection HTTP to HTTPS | false |
-| antivirus | optionnel | bool | activer l'antivirus @TO DO, c'est quoi les conséquences ? Peut-on désactiver l'antivirus aprés sa création ? | false |
+| antivirus | optionnel | bool | activer l'antivirus. Il est possible de l'activer à posteriori mais via ticket uniquement. L'antivirus analyse le trafic et notamment les fichiers uploadés. | false |
 | maxFileSize | optionnel | int | taille maximal des fichiers pour l'antivirus en Mo | null |
 | websocket | optionnel | bool | activer la possibilité de faire du websocket | false |
 | ipWhiteList | optionnel | list(string) | liste des IPs autorisées a acceder a l'url | ["10.0.0.0/8","192.168.1 /23"] ou ["0.0.0.0"]  |
@@ -102,8 +109,7 @@ Le suivi du traitement peut ensuite être réalisé via le statut de l'objet *Ch
 
 ### Validation de la création de CDS
 
-La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail contenant un lien de validation à l'adresse des membres du projets ayant le role *CDS*. Ce mail contient égakement un rappel des conditions général d'utilisation de la plateforme (CGU).
-@TODO à préciser: Qui et comment obentenir le role CDS
+La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail contenant un lien de validation à l'adresse des membres du projets ayant le role *CDS*. Ce mail contient égakement un rappel des conditions général d'utilisation de la plateforme (CGU). Dans un premier temps seul la ServiceTeam possède le rôle *CDS* et valide les demandes de CDS effectuées par les projets. A terme, le rôle *CDS* sera accessible depuis l'onglet rôle de la console et le propriétaire d'un projet pourra définir qui, au sein de son projet possède le rôle *CDS*
 
 ### Limitations / remarques
 
