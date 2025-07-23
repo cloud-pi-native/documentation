@@ -1,18 +1,18 @@
-# Création automatique de Chaine de Service : OpenCDS (au MI) - VERSION BETA
+# Création automatique de Chaîne de Service : OpenCDS (au MI) - VERSION BETA
 
 ## Introduction
 
-Lorsqu'un projet souhaite exposer un service sur Internet (ou sur le RIE) depuis les infrastructure du ministère de l'intérieur, il doit faire une demande de chaine de service. la chaine de service (CDS) est composée d'un ensemble de composants réseau et de sécurité permettant d'exposer une URL à l'extérieur du ministère.
+Lorsqu'un projet souhaite exposer un service sur Internet (ou sur le RIE) depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. la chaîne de service (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministère.
 
-Pour créer une chaine de service, deux macro opérations sont nécessaires :
+Pour créer une chaîne de service, deux macros opérations sont nécessaires :
  - Créer un enregistrement DNS correspondant au nom de domaine de son application et à destination de l'ingress d'entrée du Cluster cible;
  - Configurer les éléments réseaux pour prendre en compte l'entrée DNS ci-dessus.
 
 De plus, il est nécessaire d'être en possession:
  - D'un certificat SSL pour son URL : un secret au sens Kubernetes devra être créé par le projet avec les informations de ce certificat.
- - De connaitre le PAI de son projet 
+ - De connaitre le PAI de son projet.
 
-La demande de réalisation de ces opérations est à faire par la création de tickets et les tâches associées sont relativement complexes, fastidieuses et impliquent différentes équipes. Elles prennent donc un temps non négligeable à prendre en compte dans le planning de son projet et le suivi de l'avancé de ces travaux par les projet est difficile.
+La demande de réalisation de ces opérations est à faire par la création de tickets et les tâches associées sont relativement complexes, fastidieuses et impliquent différentes équipes. Elles prennent donc un temps non négligeable à prendre en compte dans le planning de son projet et le suivi de l'avancée de ces travaux par les projets est difficile.
 
 > Le projet OpenCDS vise à automatiser au maximum ces opérations.
 
@@ -24,13 +24,13 @@ Sur Cloud Pi Native, les différentes opérations de création d'une CDS peuvent
 
 ### Création d'une CDS en IaC
 
-La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket minitil pour demander la création d'un enregistrement DNS. A noter que le status de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseau et non au traitement du ticket minitil. Ainsi, une fois que le status ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.
+La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket Minitil pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseau et non au traitement du ticket Minitil. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.
 
 Il convient dans un premier temps de faire les demandes de PAI au BPAH et de certificat au BCS. Une fois ces éléments en main, il est possible de créer un objet ChaineDeService afin de lancer les processus de configuration des éléments réseau ainsi que la demande de création de DNS.
 
 ![schema_creation_cds](/img/guide/openCDS/schema-openCDS.png)
 
-Depuis le chart helm de son projet créer un nouvel objet Kubernetes de type ChaineDe Service :
+Depuis le chart Helm de son projet, créer un nouvel objet Kubernetes de type ChaineDeService :
 
 ```yaml
 kind: ChaineDeService
@@ -50,10 +50,10 @@ Cet objet prend les paramètres suivants :
 | certificate.passphraseKey | required | string | nom de la clé contenant la pass phrase du p12 | n/a |
 | redirect | optionnel | bool | activer la redirection HTTP to HTTPS | false |
 | antivirus | optionnel | bool | activer l'antivirus. Il est possible de l'activer à posteriori mais via ticket uniquement. L'antivirus analyse le trafic et notamment les fichiers uploadés. | false |
-| maxFileSize | optionnel | int | taille maximal des fichiers pour l'antivirus en Mo | null |
+| maxFileSize | optionnel | int | taille maximale des fichiers pour l'antivirus en Mo | null |
 | websocket | optionnel | bool | activer la possibilité de faire du websocket | false |
-| ipWhiteList | optionnel | list(string) | liste des IPs autorisées a acceder a l'url | ["10.0.0.0/8","192.168.1 /23"] ou ["0.0.0.0"]  |
-| endToEnd | optionnel | bool | a activer si l'ingress écoute en HTTPS | false |
+| ipWhiteList | optionnel | list(string) | liste des IPs autorisées à accéder à l'url | ["10.0.0.0/8","192.168.1 /23"] ou ["0.0.0.0"]  |
+| endToEnd | optionnel | bool | à activer si l'ingress écoute en HTTPS | false |
 
 La version minimale de création d'une CDS est la suivante :
 
@@ -67,7 +67,7 @@ spec:
   commonName: "mon-app.app1hp.dev.forge.minint.fr"
   pai: "short-pai"
 ````
-Ceci va créer une chaine de Service pour l'URL ```mon-app.app1hp.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production. 
+Ceci va créer une chaîne de service pour l'URL ```mon-app.app1hp.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production. 
 
 Dans le cas où il est souhaité un certificat valide et récupéré préalablement par le service concerné, il est nécessaire de l'ajouter sous la forme d'un secret Kubernetes en plus de la CDS dans ce cas la demande de CDS devient :
 
@@ -109,26 +109,26 @@ Le suivi du traitement peut ensuite être réalisé via le statut de l'objet *Ch
 
 ### Validation de la création de CDS
 
-La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail contenant un lien de validation à l'adresse des membres du projets ayant le role *CDS*. Ce mail contient égakement un rappel des conditions général d'utilisation de la plateforme (CGU). Dans un premier temps seul la ServiceTeam possède le rôle *CDS* et valide les demandes de CDS effectuées par les projets. A terme, le rôle *CDS* sera accessible depuis l'onglet rôle de la console et le propriétaire d'un projet pourra définir qui, au sein de son projet possède le rôle *CDS*
+La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail contenant un lien de validation à l'adresse des membres du projet ayant le role *CDS*. Ce mail contient également un rappel des conditions générales d'utilisation de la plateforme (CGU). Dans un premier temps seule la ServiceTeam possède le rôle *CDS* et valide les demandes de CDS effectuées par les projets. A terme, le rôle *CDS* sera accessible depuis l'onglet rôle de la console et le propriétaire d'un projet pourra définir qui au sein de son projet possède le rôle *CDS*.
 
-### Limitations / remarques
+### Limitations / Remarques
 
-Lors de la création d'une CDS via le kind ChaineDeService, il est important d'avoir en têtes certains éléments :
- - L'enregistrement DNS est demandé via la création d'un ticket *minitil*, le suivi du traitement du ticket n'est pas pris en compte dans le statut de traitement de l'objet. Autrement dit, le statut de l'objet ChaineDeService correspond à la configuration des équipements réseau. Il faut attendre que le ticket correspondant à la demande DNS ait été traité aifn que la CDS soit réellement opérationnelle.
- - La demande de configuration des équipement réseau est faite par un ordonnanceur qui traite les demandes sur la période 8h00->9h00 et 13h->14h du lundi au jeudi. Ainsi, l'opération de configuration de la CDS sera réalisé lors du prochain créneau de traitement suivant la demande.
+Lors de la création d'une CDS via le kind ChaineDeService, il est important d'avoir en tête certains éléments :
+ - L'enregistrement DNS est demandé via la création d'un ticket *minitil*, le suivi du traitement du ticket n'est pas pris en compte dans le statut de traitement de l'objet. Autrement dit, le statut de l'objet ChaineDeService correspond à la configuration des équipements réseau. Il faut attendre que le ticket correspondant à la demande DNS ait été traité afin que la CDS soit réellement opérationnelle.
+ - La demande de configuration des équipements réseau est faite par un ordonnanceur qui traite les demandes sur la période 8h00->9h00 et 13h->14h du lundi au jeudi. Ainsi, l'opération de configuration de la CDS sera réalisée lors du prochain créneau de traitement suivant la demande.
 
 > Attention, il n'est pas possible de modifier une CDS, vérifiez bien vos valeurs avant de lancer la création. Une fois créée, en cas de besoin de modification, il est nécessaire de passer par le Chef de projet hébergement.
 
 
 ### Gestion des erreurs
 
-Lors de la création d'une ChaineDeService, plusieurs erreurs peuvent survenir, ce paragraphe présente différents possible.
+Lors de la création d'un objet ChaineDeService, plusieurs erreurs peuvent survenir, ce paragraphe présente différents cas possibles.
 
 #### Erreurs sur les paramètres passés à OpenCDS
 
-Ces erreurs sont retournées par le controler OpenCDS qui va refuser la création de l'objet ChaineDeService.
+Ces erreurs sont retournées par le controller OpenCDS qui va refuser la création de l'objet ChaineDeService.
 
-Dans ces cas, il convient de modifier l'objet ChaineDeService et de le redéployer via ArgoCD
+Dans ces cas, il convient de modifier l'objet ChaineDeService et de le redéployer via ArgoCD.
 
 ##### 1. Paramètre manquant :
 
@@ -149,7 +149,7 @@ spec:
   network: RIE
 ```
 
-Réponse du controler :
+Réponse du controller :
 ```
 The ChaineDeService "cds-missing-param" is invalid: spec.pai: Required value
 ```
@@ -175,7 +175,7 @@ spec:
   wrongParam: wrong
 ```
 
-Réponse du controler :
+Réponse du controller :
 ```
 Error from server (BadRequest): error when creating "cds-wrong-param.yaml": ChaineDeService in version "v1alpha1" cannot be handled as a ChaineDeService: strict decoding error: unknown field "spec.wrongParam"
 ```
@@ -201,7 +201,7 @@ spec:
   antivirus: wrong
 ```
 
-Réponse du controler :
+Réponse du controller :
 ```
 The ChaineDeService "cds-wrong-type" is invalid: spec.antivirus: Invalid value: "string": spec.antivirus in body must be of type boolean: "string"
 ```
@@ -226,14 +226,14 @@ spec:
   pai: TEST
 ```
 
-Réponse du controler :
+Réponse du controller :
 ```
 The ChaineDeService "wrong-value" is invalid: spec.network: Unsupported value: "WRONG": supported values: "RIE"
 ```
 
 #### Erreurs de l'API
 
-Ces erreurs n'empêche pas la création de l'objet OpenCDS mais sont retournés par l'API OpenCDS après avoir effectué davantage de verifications avant de lancer la création de la chaîne de service. 
+Ces erreurs n'empêchent pas la création de l'objet OpenCDS mais sont retournés par l'API OpenCDS après avoir effectué davantage de vérifications avant de lancer la création de la chaîne de service. 
 
 Ces erreurs peuvent être trouvées dans la partie Message du champs Status de l'objet ChaineDeService (il peut y avoir plusieurs erreurs en même temps, une erreur sera affichée par ligne): 
 
@@ -248,7 +248,7 @@ Dans ces cas, il convient de modifier l'objet ChaineDeService et de le redéploy
 
 ##### 1. PAI
 
-Le PAI ne fait pas parti de la liste des PAI accéptés. Verifier que le PAI est correct et contacter la Service Team si celui-ci est bien renseigné.
+Le PAI ne fait pas partie de la liste des PAI acceptés. Vérifier que le PAI est correct et contacter la Service Team si celui-ci est bien renseigné.
 
 Exemple:
 ```
@@ -324,7 +324,7 @@ ipWhiteList : value is not a valid IPv4 or IPv6 network (input: 1.2.3)
 
 #### Erreurs internes
 
-Ces erreurs arrivent lorsque le controler et l'API OpenCDS ont tous les deux acceptés la demande mais une erreur est survenue lors de la création de la chaîne de service. Vous en serez informé par le message suivant dans la partie Message du champs Status de l'objet ChaineDeService :
+Ces erreurs arrivent lorsque le controller et l'API OpenCDS ont tous les deux acceptés la demande mais une erreur est survenue lors de la création de la chaîne de service. Vous en serez informés par le message suivant dans la partie Message du champs Status de l'objet ChaineDeService :
 
 ```
 status:
