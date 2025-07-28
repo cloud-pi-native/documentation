@@ -5,10 +5,10 @@
 Lorsqu'un projet souhaite exposer un service sur Internet (ou sur le RIE) depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. la chaîne de service (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministère.
 
 Pour créer une chaîne de service, deux macros opérations sont nécessaires :
- - Créer un enregistrement DNS correspondant au nom de domaine de son application et à destination de l'ingress d'entrée du Cluster cible;
- - Configurer les éléments réseaux pour prendre en compte l'entrée DNS ci-dessus.
+ - Configurer les éléments réseaux pour exposer la cible;
+ - Créer un enregistrement DNS correspondant au nom de domaine de son application et à destination du premier équipement de la CDS.
 
-De plus, il est nécessaire d'être en possession:
+De plus, il est nécessaire d'être en possession :
  - D'un certificat SSL pour son URL : un secret au sens Kubernetes devra être créé par le projet avec les informations de ce certificat.
  - De connaitre le PAI de son projet.
 
@@ -20,15 +20,13 @@ La demande de réalisation de ces opérations est à faire par la création de t
 
 Sur Cloud Pi Native, les différentes opérations de création d'une CDS peuvent être réalisées :
  - De façon classique via demande à son chef de projet infrastructure : celui-ci va faire les différentes demandes et coordonner les travaux.
- - Créer un objet *ChaineDeService* et gérer sa demande de CDS via *Infrastructure as Code* 
+ - Créer un objet *ChaineDeService* et gérer sa demande de CDS via *Infrastructure as Code*
 
 ### Création d'une CDS en IaC
 
-La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket Minitil pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseau et non au traitement du ticket Minitil. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.
+La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket Minitil pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseaux et non au traitement du ticket Minitil. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.
 
-Il convient dans un premier temps de faire les demandes de PAI au BPAH et de certificat au BCS. Une fois ces éléments en main, il est possible de créer un objet ChaineDeService afin de lancer les processus de configuration des éléments réseau ainsi que la demande de création de DNS.
-
-![schema_creation_cds](/img/guide/openCDS/schema-openCDS.png)
+Il convient dans un premier temps de faire les demandes de PAI au BPAH et de certificat au BCS. Une fois ces éléments en main, il est possible de créer un objet ChaineDeService afin de lancer les processus de configuration des éléments réseaux ainsi que la demande de création de DNS.
 
 Depuis le chart Helm de son projet, créer un nouvel objet Kubernetes de type ChaineDeService :
 
@@ -52,26 +50,10 @@ Cet objet prend les paramètres suivants :
 | antivirus | optionnel | bool | activer l'antivirus. Il est possible de l'activer à posteriori mais via ticket uniquement. L'antivirus analyse le trafic et notamment les fichiers uploadés. | false |
 | maxFileSize | optionnel | int | taille maximale des fichiers pour l'antivirus en Mo | null |
 | websocket | optionnel | bool | activer la possibilité de faire du websocket | false |
-| ipWhiteList | optionnel | list(string) | liste des IPs autorisées à accéder à l'url | ["10.0.0.0/8","192.168.1 /23"] ou ["0.0.0.0"]  |
-| endToEnd | optionnel | bool | à activer si l'ingress écoute en HTTPS | false |
+| ipWhiteList | optionnel | list(string) | liste des IPs autorisées à accéder à l'url | ["10.0.0.0/8","100.64.0.0/10"] si 'network' == 'RIE' ou n/a pour 'INTERNET |
+| sslOutgoing | optionnel | bool | à activer si l'ingress écoute en HTTPS | false |
 
 La version minimale de création d'une CDS est la suivante :
-
-````yaml
-apiVersion: octant.interieur.gouv.fr/v1alpha1
-kind: ChaineDeService
-metadata:
-  name: chainedeservice
-spec:
-  network: "RIE"
-  commonName: "mon-app.app1hp.dev.forge.minint.fr"
-  pai: "short-pai"
-````
-Ceci va créer une chaîne de service pour l'URL ```mon-app.app1hp.dev.forge.minint.fr``` en utilisant un certificat SSL auto-signé, donc générant une alerte de sécurité au niveau du navigateur pour les clients. Ceci est utilisé sur les environnements hors production. 
-
-Dans le cas où il est souhaité un certificat valide et récupéré préalablement par le service concerné, il est nécessaire de l'ajouter sous la forme d'un secret Kubernetes en plus de la CDS dans ce cas la demande de CDS devient :
-
-A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé soit via SOPS, soit via Vault.
 
 ````yaml
 apiVersion: v1
@@ -87,22 +69,125 @@ stringData:
 apiVersion: octant.interieur.gouv.fr/v1alpha1
 kind: ChaineDeService
 metadata:
-  name: chainedeservice-rie
+  name: chainedeservice
 spec:
-  network: "INTERNET"
-  commonName: "mon-app.interieur.gouv.fr"
+  network: "RIE"
+  commonName: "mon-app.app1hp.dev.forge.minint.fr"
   pai: "short-pai"
-  subjectAlternativeName: ["mon-app.interieur.gouv.fr"]
   certificate:
     secretName: "mon-secret"
     certificateKey: "mon-cert.p12"
     passphraseKey: "passphrase"
-  ipWhiteList: ["8.8.0.0/8"]
-  redirect: true
-  antivirus: true
-  websocket: true
-  endToEnd: true
-  maxFileSize: 50
+````
+Ceci va créer une chaîne de service pour l'URL ```mon-app.app1hp.dev.forge.minint.fr``` en utilisant le certificat SSL fourni dans le secret 'mon-secret'.
+A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé via SOPS (voir ci-dessous).
+
+### Création du secret contenant le certificat avec SOPS
+
+Dans le cadre d'un déploiement applicatif sur le principe GitOps, il est nécessaire de "pousser" tous les fichiers y compris les secrets sur Git, il est donc nécessaire de les chiffrer.
+La solution sur laquelle nous allons nous appuyer est [SOPS](https://github.com/mozilla/sops).
+> Pour plus d'informations sur SOPS au sein de CloudPI Native : https://cloud-pi-native.fr/guide/secrets-management
+
+Tout d'abord, il faut encoder le certificat en base64 :
+
+```bash
+base64 -w 0 mon-cert.p12
+```
+
+Nous allons ensuite créer un manifest d'un object SopsSecret où nous allons coller le certificat (encodé en base64) et le mot de passe (en clair), ce fichier ne doit pas être pousser sur git.
+
+```yaml
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
+metadata:
+  name: sops-secret-cds
+spec:
+  secretTemplates:
+    - name: secret-cds
+      stringData:
+        certificateKey:
+          | base64(mon-cert.p12)
+        passphraseKey: Pa$$W0rd!
+```
+
+Il faut ensuite chiffrer ce fichier en éxecutant la commande :
+
+```bash
+sops -e --age $AGE_KEY --encrypted-suffix Templates secret-cert.sops.yaml > secret-cert.sops.enc.yaml
+```
+> La variable AGE_KEY correspond à la clé publique SOPS du cluster sur lequel on déploie notre objet, cette clé peut être trouvée sur la console DSO.
+
+Nous obtenons alors un nouveau fichier de la forme suivante :
+
+```yaml
+
+```
+
+Voici un fichier yaml contenant tous les paramètres ainsi que leur description en commentaire :
+````yaml
+## Ce document est un exemple de manifest pour déployer un objet ChaineDeService 
+## qui utilise le controller OpenCDS
+
+apiVersion: octant.interieur.gouv.fr/v1alpha1
+kind: ChaineDeService
+metadata:
+  ## 'name': Le nom de l'objet ChaineDeService que vous souhaitez créer.
+  name: example-cds
+spec:
+  ## Paramètres requis
+
+  ## Ce paramètre est pour attribuer le secret au certificat.
+  ## Vous devez tout d'abord créer le secret en utilisant le manifest fourni. 
+  certificate:
+    certificateKey: certificate.p12
+    passphraseKey: passphrase
+    secretName: secret-cds
+
+  ## 'commonName': Il s'agit du CN de votre certificat.
+  commonName: cn-example-project.interieur.rie.gouv.fr
+
+  ## 'network': Le réseau sur lequel vous souhaitez déployer votre CDS ('RIE' or 'INTERNET'). 
+  network: RIE
+
+  ## 'pai': Le PAI de votre projet.
+  pai: EXAMPLE-PROJECT
+
+  ## Paramètres facultatifs
+  ## Ces paramètres sont en commentaire par défaut, vous pouvez les utiliser selon votre besoin.
+
+  ## 'antivirus': Un booléen permettant de décrire si vous souhaitez un antivirus pour analyser les fichiers importés.
+  ## Default: false
+  # antivirus: false
+
+  ## 'maxFileSize': Un integer (en Mb) permettant de fixer une taille maximale des fichiers analysés par l'antivirus.
+  ## Si le paramètre 'antivirus' est fixé sur 'true'
+  ## Default: 10
+  # maxFileSize: 10
+
+  ## 'ipWhiteList': La possibilité d'avoir une liste d'IP autorisées sur votre CDS.
+  ## Default: 
+  ##      - if 'network' == 'RIE' : ['10.0.0.0/8', '100.64.0.0/10']
+  ##      - if 'network' == 'INTERNET' : il n'y a pas de valeur par défaut, vous devez en fixer une.
+  # ipWhiteList: []
+
+  ## 'sslOutgoing': Un booléen permettant de décider si vous souhaitez une exposition du backend sur le port HTTP ou HTTPS.
+  ## Default: false
+  # sslOutgoing: false
+
+  ## 'redirect': Un booléen permettant de décider si vous souhaitez une redirection du protocole HTTP vers le protocole HTTPS
+  ## on your CDS
+  ## Default: false
+  # redirect: false
+
+  ## 'subjectAlternativeName': Permet de fixer une liste de SANs si votre certificat est de type SAN
+  ## Default: []
+  # subjectAlternativeName:
+  # - san1-example-project.interieur.rie.gouv.fr
+  # - san2-example-project.interieur.rie.gouv.fr
+
+  ## 'websocket': Un booléen permettant de décider si vous souhaitez autoriser l'utilisation des protocoles de websocket sur votre CDS.
+  ## Default: false
+  # websocket: false
 ````
 
 Le suivi du traitement peut ensuite être réalisé via le statut de l'objet *ChaineDeService* via ArgoCD. 
