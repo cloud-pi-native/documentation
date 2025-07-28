@@ -105,8 +105,8 @@ spec:
   secretTemplates:
     - name: secret-cds
       stringData:
-        certificateKey:
-          | base64(mon-cert.p12)
+        certificateKey: |
+          base64(mon-cert.p12)
         passphraseKey: Pa$$W0rd!
 ```
 
@@ -120,7 +120,16 @@ sops -e --age $AGE_KEY --encrypted-suffix Templates secret-cert.sops.yaml > secr
 Nous obtenons alors un nouveau fichier de la forme suivante :
 
 ```yaml
-
+apiVersion: isindir.github.com/v1alpha3
+kind: SopsSecret
+metadata:
+  name: sops-secret-cds
+spec:
+  secretTemplates:
+    - name: secret-cds
+      stringData:
+        certificateKey: ENC[AES256_GCM,data:pOJHaDqYuqbe3sF/a2+NZdZuK+VHOMQ62Vi2dVpevpuWpEFUEbhtI1k0/dqqrktnBedQQtmwfCPTnnayKlN6jNSJoYyokprCF/kXUpzZjoDHuU+SI4aPdL/F04408qzEmDLY7NuQ35bgmW3uvUtlaRRunDZzVqt0i4isoFhU/EpA5vlRt1A+k46B9dRQNcRdX/Qo6ph7qxAWr9NvOvSe2onU5gl3sjtSVjo0a5KkjA/XnzRAABPHLUscpcf/Dc40SfvE4dzVeROBcqKxAtQv9hCXLUhr4AuoAXfFxKv+jfqWR+gOl0pyA25/ti8DlAZH5yBoVkMqOCLZyZEKIqzyJecBPGbObxIbauX3qRux4gj+74UKKMeSHoCeZjlCaKNsZd7GfaNod8lj0IPf6xa/NPybD9Zt52jBPiQ9I78EtaoQ4SdldIJdyzhZItRxing+MuvsETVY4g3OO6i+W8MoXoQi7geOdCD8HKkFMc3m9/EzIPn/CM9ikhJ+xv95h55OXUlyCVSnp0P3EdTJ7s/UKxGhcwZQDfRTrB3L3GAf4VlNDJrIV8mooYx7xFuTK09q0nVJrDrQ2ozUhgS0eYM5yTYYTMNdp1JUkHaMzzNq9qldY4hCtNagiC2KuVQxQSq8vT8BfHSPth4cX6qsrPPa/RZPiV/2iQIfJ9VEfsxHnBbPUir+sal6eKekixLsb5sXIvZsnwEqu4/pLUDi/z9iGUSDaF42W6jTylFh4dv2bLuWC8FnZOHTPNiJrcX3PxJsYtPHY/WpU8W9CyUk29XbMxITTBhIO30c2PIMN+iqiAJqKKbl8iKDzGCD7wiWVS78mdShj5CH2p3CTCPL2T45Gcg4E9I21KrJs5HhqGb/Oh3VhuYY5SosE1QVbiRhWsRSaSwxGnBbmZgQ/f3Zd76cYZ9dgHOx9NhLcyxFVUCywxrcUMfcaxoADCf8swONoybAIG5LanpvGUo5542IIL2BMRUUw2ZpCFtir70rgvB1GQaTh5cA2w2rLMka0wS5vHqqVomUleRhY14VnY1ptvcQr368EaJHEZjFw1uui+gDgc1KvrN007KRtIbIe3a73ndlewYrBjR4/y1FOackiEhv9RBUg+8jOUDpzqpGiQEXu6XgUhYKDfUrw+RPSSGCIzcJSaad3oZXCK5ta4BTer1JtnveWtsI43JE8SEHYRwvV+hWKKCHXEkZHZABRZL42joPhWlwxb8XBYzvBOjsAY7rufZb5xOdgpOJeSOKoQli0jPabvpSaGcBJFEMFcK6Q1zxDnOz2ytDrJ+if9J4pRpNhuCQTpPhj5dUygZMHy0yLK84PnDE7qElMj65p2chq2GAEmKBZnSSG8Axkys52Tb4pm85ICykg1VzVQRHbh20jGmlUR1DBM1ZGkSjbb+uk1KTU5USjMeSyJ5Rcj1o7lSBrH43p7Uq5BjO4ZwcB+bGtH3gfdxdyq2edIT0UwPWP9QeKPmU2mb+PYBo7TBarnsvhyECndr4UxUI6593shoCwD3PMYEX+oZ0HoaBRGqpOH/rF6eMJOVxNHvBu7EZLsTqEy5YXKQSyyyQRZOk/JMAJdhJOSY69JawtmT2rEaQYzLHwOIeJgNhRUmdJMl/goh9pelJUlvdNW36y2ZJYcRZO8VFow2b7M9znXzQ8Ey6lFEV4lZNnGv1+tV1F1ikNztV8rMprYNI80/QJLhvULtofdIAxiZa6cEESwqzAfwu1p8grOIz5r9Rjb1QYxJZ57AWKB1N3u+rv7Sbpup7oqnaohYu2HbkZ04FefBs45Wiz/ZxtVFe1+sCSHaKzJxDzgn0HclQ+5ck7S7TQoXFs5sZSKsYTzENWsrsCreYLpwY1K2KnSDvKfqslTzM12gS4VT0dUGdzNFUGx1SiYx20ZS5eGsIu1bTlPF+Ro4GI/9x6Cn0xlxfkvAhjaDrmx0fvpl7mCGnCkT6lV4h9QQL3gVuZwlMrx4UnJ61/Wxrwzlae7m3n5VA0Vs=,iv:bFDUs+G3EBjtrOtcIe1dw9flLgosXxVLuSIDwQwgkv8=,tag:ZmsYuV9ywqJfZFYQ0lOdTA==,type:str]
+        passphraseKey: ENC[AES256_GCM,data:g1ynoshyQ71lfWhsZzlODBlFbzgojdI=,iv:3am/eWvmlZWUmMZ0NoLDYggh6N4qFppyGxTM2FwShp8=,tag:a6CMrUmMIFyfWkCSu40tzA==,type:str]
 ```
 
 Voici un fichier yaml contenant tous les paramètres ainsi que leur description en commentaire :
