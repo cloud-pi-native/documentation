@@ -425,7 +425,7 @@ Cette erreur survient lorsqu'une erreur serveur s'est produite lors de la créat
 
 ## Roadmap de l'évolution d u service OpenCDS
 
-| fonctionnalités | date |
+| Fonctionnalités | Date |
 | :---------------| :----|
 | Ouverture d'une console d'administration | Fin août 2025 |
 | Ouverture du service sur INTERNET | Octobre 2025 |
