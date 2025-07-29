@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Lorsqu'un projet souhaite exposer un service sur Internet (ou sur le RIE) depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. la chaîne de service (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministère.
+Lorsqu'un projet souhaite exposer un service sur le RIE depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. la chaîne de service (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministère.
 
 Pour créer une chaîne de service, deux macros opérations sont nécessaires :
  - Configurer les éléments réseaux pour exposer la cible;
@@ -14,38 +14,32 @@ De plus, il est nécessaire d'être en possession :
 
 La demande de réalisation de ces opérations est à faire par la création de tickets et les tâches associées sont relativement complexes, fastidieuses et impliquent différentes équipes. Elles prennent donc un temps non négligeable à prendre en compte dans le planning de son projet et le suivi de l'avancée de ces travaux par les projets est difficile.
 
-> Le projet OpenCDS vise à automatiser au maximum ces opérations.
-
-## Création d'une CDS sur CPiN
+> Le service OpenCDS vise à automatiser au maximum ces opérations.
 
 Sur Cloud Pi Native, les différentes opérations de création d'une CDS peuvent être réalisées :
- - De façon classique via demande à son chef de projet infrastructure : celui-ci va faire les différentes demandes et coordonner les travaux.
- - Créer un objet *ChaineDeService* et gérer sa demande de CDS via *Infrastructure as Code*
+ - De façon classique : via demande à son chef de projet infrastructure, celui-ci va faire les différentes demandes et coordonner les travaux.
+ - Via OpenCDS : créer un objet *ChaineDeService* et gérer sa demande de CDS via *Infrastructure as Code*
 
-### Création d'une CDS en IaC
+## Création d'une CDS en IaC
 
-La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket Minitil pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseaux et non au traitement du ticket Minitil. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle.
+La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket MIN-ITIL pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseaux et non au traitement du ticket MIN-ITIL. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle (il faut compter 24h à partir du passage du status à **Success**).
+
+### Pré-requis
 
 Il convient dans un premier temps de faire les demandes de PAI au BPAH et de certificat au BCS. Une fois ces éléments en main, il est possible de créer un objet ChaineDeService afin de lancer les processus de configuration des éléments réseaux ainsi que la demande de création de DNS.
 
-Depuis le chart Helm de son projet, créer un nouvel objet Kubernetes de type ChaineDeService :
-
-```yaml
-kind: ChaineDeService
-```
-
 Cet objet prend les paramètres suivants :
 
-| spec | required | valeurs | description | default |
+| spec | obligatoire | valeurs | description | default |
 | :----| :--------| :-------| :-----------| :-------|
-| network | required | RIE ou INTERNET | choix du type d'exposition | n/a |
-| commonName | required | fqdn | url primaire de l'application | n/a |
-| pai | required | string | nom du PAI comme indiqué lors de sa création | n/a |
+| network | obligatoire | RIE ou INTERNET | choix du type d'exposition | n/a |
+| commonName | obligatoire | fqdn | url primaire de l'application | n/a |
+| pai | obligatoire | string | nom du PAI comme indiqué lors de sa création | n/a |
 | subjectAlternativeName | optionnel | list(string) | liste d'urls secondaires | null |
 | certificate | optionnel | map | element permettant de retrouver le secret contenant le certificat | null |
-| certificate.secretName | required | string | nom du secret | n/a |
-| certificate.certificateKey | required | string | nom de la clé contenant le certificat en p12 | n/a |
-| certificate.passphraseKey | required | string | nom de la clé contenant la pass phrase du p12 | n/a |
+| certificate.secretName | obligatoire | string | nom du secret | n/a |
+| certificate.certificateKey | obligatoire | string | nom de la clé contenant le certificat en p12 | n/a |
+| certificate.passphraseKey | obligatoire | string | nom de la clé contenant la pass phrase du p12 | n/a |
 | redirect | optionnel | bool | activer la redirection HTTP to HTTPS | false |
 | antivirus | optionnel | bool | activer l'antivirus. Il est possible de l'activer à posteriori mais via ticket uniquement. L'antivirus analyse le trafic et notamment les fichiers uploadés. | false |
 | maxFileSize | optionnel | int | taille maximale des fichiers pour l'antivirus en Mo | null |
@@ -81,6 +75,10 @@ spec:
 ````
 Ceci va créer une chaîne de service pour l'URL ```mon-app.app1hp.dev.forge.minint.fr``` en utilisant le certificat SSL fourni dans le secret 'mon-secret'.
 A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé via SOPS (voir ci-dessous).
+
+### Schéma du déploiement d'une CDS
+
+![schema_opencds](/img/guide/schema_opencds.png)
 
 ### Création du secret contenant le certificat avec SOPS
 
@@ -203,16 +201,15 @@ Le suivi du traitement peut ensuite être réalisé via le statut de l'objet *Ch
 
 ### Validation de la création de CDS
 
-La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail contenant un lien de validation à l'adresse des membres du projet ayant le role *CDS*. Ce mail contient également un rappel des conditions générales d'utilisation de la plateforme (CGU). Dans un premier temps seule la ServiceTeam possède le rôle *CDS* et valide les demandes de CDS effectuées par les projets. A terme, le rôle *CDS* sera accessible depuis l'onglet rôle de la console et le propriétaire d'un projet pourra définir qui au sein de son projet possède le rôle *CDS*.
+La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail contenant un lien de validation à l'adresse des membres de la ServiceTeam qui valident les demandes de CDS effectuées par les projets.
 
 ### Limitations / Remarques
 
 Lors de la création d'une CDS via le kind ChaineDeService, il est important d'avoir en tête certains éléments :
- - L'enregistrement DNS est demandé via la création d'un ticket *minitil*, le suivi du traitement du ticket n'est pas pris en compte dans le statut de traitement de l'objet. Autrement dit, le statut de l'objet ChaineDeService correspond à la configuration des équipements réseau. Il faut attendre que le ticket correspondant à la demande DNS ait été traité afin que la CDS soit réellement opérationnelle.
- - La demande de configuration des équipements réseau est faite par un ordonnanceur qui traite les demandes sur la période 8h00->9h00 et 13h->14h du lundi au jeudi. Ainsi, l'opération de configuration de la CDS sera réalisée lors du prochain créneau de traitement suivant la demande.
+ - L'enregistrement DNS est demandé via la création d'un ticket *MIN-ITIL*, le suivi du traitement du ticket n'est pas pris en compte dans le statut de traitement de l'objet. Autrement dit, le statut de l'objet ChaineDeService correspond à la configuration des équipements réseau. Il faut attendre que le ticket correspondant à la demande DNS ait été traité afin que la CDS soit réellement opérationnelle (il faut compter 24h après la configuration des éléments réseaux).
+ - La demande de configuration des équipements réseaux est faite par un ordonnanceur qui traite les demandes sur la période 8h00->9h00 et 13h->14h du lundi au jeudi. Ainsi, l'opération de configuration de la CDS sera réalisée lors du prochain créneau de traitement suivant la demande.
 
 > Attention, il n'est pas possible de modifier une CDS, vérifiez bien vos valeurs avant de lancer la création. Une fois créée, en cas de besoin de modification, il est nécessaire de passer par le Chef de projet hébergement.
-
 
 ### Gestion des erreurs
 
