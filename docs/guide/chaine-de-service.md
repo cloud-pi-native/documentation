@@ -32,7 +32,7 @@ Cet objet prend les paramètres suivants :
 
 | spec | obligatoire | valeurs | description | default |
 | :----| :--------| :-------| :-----------| :-------|
-| network | obligatoire | RIE ou INTERNET | choix du type d'exposition | n/a |
+| network | obligatoire | RIE | choix du type d'exposition | n/a |
 | commonName | obligatoire | fqdn | url primaire de l'application | n/a |
 | pai | obligatoire | string | nom du PAI comme indiqué lors de sa création | n/a |
 | subjectAlternativeName | optionnel | list(string) | liste d'urls secondaires | null |
@@ -44,7 +44,7 @@ Cet objet prend les paramètres suivants :
 | antivirus | optionnel | bool | activer l'antivirus. Il est possible de l'activer à posteriori mais via ticket uniquement. L'antivirus analyse le trafic et notamment les fichiers uploadés. | false |
 | maxFileSize | optionnel | int | taille maximale des fichiers pour l'antivirus en Mo | null |
 | websocket | optionnel | bool | activer la possibilité de faire du websocket | false |
-| ipWhiteList | optionnel | list(string) | liste des IPs autorisées à accéder à l'url | ["10.0.0.0/8","100.64.0.0/10"] si 'network' == 'RIE' ou n/a pour 'INTERNET |
+| ipWhiteList | optionnel | list(string) | liste des IPs autorisées à accéder à l'url | ["10.0.0.0/8","100.64.0.0/10"] |
 | sslOutgoing | optionnel | bool | à activer si l'ingress écoute en HTTPS | false |
 
 La version minimale de création d'une CDS est la suivante :
@@ -153,7 +153,7 @@ spec:
   ## 'commonName': Il s'agit du CN de votre certificat.
   commonName: cn-example-project.interieur.rie.gouv.fr
 
-  ## 'network': Le réseau sur lequel vous souhaitez déployer votre CDS ('RIE' or 'INTERNET'). 
+  ## 'network': Le réseau sur lequel vous souhaitez déployer votre CDS ('RIE'). 
   network: RIE
 
   ## 'pai': Le PAI de votre projet.
@@ -172,9 +172,7 @@ spec:
   # maxFileSize: 10
 
   ## 'ipWhiteList': La possibilité d'avoir une liste d'IP autorisées sur votre CDS.
-  ## Default: 
-  ##      - if 'network' == 'RIE' : ['10.0.0.0/8', '100.64.0.0/10']
-  ##      - if 'network' == 'INTERNET' : il n'y a pas de valeur par défaut, vous devez en fixer une.
+  ## Default: ['10.0.0.0/8', '100.64.0.0/10']
   # ipWhiteList: []
 
   ## 'sslOutgoing': Un booléen permettant de décider si vous souhaitez une exposition du backend sur le port HTTP ou HTTPS.
@@ -424,3 +422,11 @@ status:
 ```
 
 Cette erreur survient lorsqu'une erreur serveur s'est produite lors de la création de la chaîne de service. Aucune intervention de votre part n'est nécessaire, un administrateur sera alerté de l'erreur et la résoudra ou vous recontactera en cas besoin.
+
+## Roadmap de l'évolution d u service OpenCDS
+
+| fonctionnalités | date |
+| :---------------| :----|
+| Ouverture d'une console d'administration | Fin août 2025 |
+| Ouverture du service sur INTERNET | Octobre 2025 |
+| Lancement du service en Full Auto | 2026 |
