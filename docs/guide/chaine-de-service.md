@@ -1,4 +1,4 @@
-# Serivce CPiN OpenCDS: Création automatique de la Chaîne de Service au ministère de l'intérieur. 
+# Serivice CPiN OpenCDS: Création automatique de la Chaîne de Service au ministère de l'intérieur. 
 
 ## Introduction
 
