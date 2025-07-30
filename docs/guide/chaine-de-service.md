@@ -14,10 +14,14 @@ Plusieurs éléments du projets, dont le PAI sont essentiels pour que ses opéra
 
 ## Fonctionnalités du service OpenCDS
 
-La nouvelle version du service Cloud Pi Native (CPiN) ** OpenCDS ** permet de:
+La nouvelle version du service Cloud Pi Native (CPiN) ** OpenCDS ** permet à l'utilisateur (ou projet) de faire une demande de la création de la CDS directement via son code d'infrastructure. 
 
-- Automatiser la configuration des briques réseau.
-- Création du ticket MIN-ITIL pour demander la création d'un enregistrement DNS
+Cette demande est envoyée automatiquement à l'équipe Service Team de CPiN pour validation (mail reçu dés que le code sera appliqué par le service Argo CD de CPiN)
+
+Dés validation de cette demaine, un processus automatique permettra de:
+
+- Configurer des briques réseau 
+- Créer un ticket MIN-ITIL pour demander la création d'un enregistrement DNS
 
 ## Pré-requis
 
@@ -26,8 +30,9 @@ Il convient dans un premier temps de faire les demandes (Via le CPH du projet) d
 - PAI au BPAH
 - Certificat TLS de vos DNS au BCS.
 
+## Comment fonctionne le service OpenCDS ?
 
-## Comment utiliser le service OpenCDS
+## Comment utiliser le service OpenCDS ?
 
 L'usage du service OpenCDS de CPiN se fait directement au niveau de votre code d'infrastructure. 
 Il s'agit d'un objet Kubernetes de type (kind) ChaineDeService
@@ -78,14 +83,11 @@ spec:
     passphraseKey: "passphrase"
 ````
 
-Sur cet exemple, la chaîne de service du DNS  ```mon-app.app1hp.dev.forge.minint.fr```, ayant le certificat TLS fourni dans le secret 'mon-secret' sera crée. 
+Sur cet exemple, le projet demande la création de la chaîne de service du DNS  ```mon-app.app1hp.dev.forge.minint.fr```, ayant le certificat TLS fourni dans le secret 'mon-secret' sera crée. 
 A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé via SOPS (voir ci-dessous).
 
-La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket MIN-ITIL pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseaux et non au traitement du ticket MIN-ITIL. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle (il faut compter 24h à partir du passage du status à **Success**).
+La demande  création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket MIN-ITIL pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseaux et non au traitement du ticket MIN-ITIL. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle (il faut compter 24h à partir du passage du status à **Success**).
 
-### Schéma du déploiement d'une CDS
-
-![schema_opencds](/img/guide/schema_opencds.png)
 
 ### Création du secret contenant le certificat avec SOPS
 
