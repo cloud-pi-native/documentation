@@ -1,4 +1,4 @@
-# Création automatique de Chaîne de Service : OpenCDS (au MI) - VERSION BETA
+# Serivce CPiN OpenCDS: Création automatique de la Chaîne de Service au ministère de l'intérieur. 
 
 ## Introduction
 
