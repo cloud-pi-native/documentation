@@ -2,31 +2,35 @@
 
 ## Introduction
 
-Lorsqu'un projet souhaite exposer un service sur le RIE depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. la chaîne de service (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministère.
+Lorsqu'un projet souhaite exposer un service sur le RIE depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. la chaîne de service (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministèrede lintérieur.
 
-Pour créer une chaîne de service, deux macros opérations sont nécessaires :
- - Configurer les éléments réseaux pour exposer la cible;
- - Créer un enregistrement DNS correspondant au nom de domaine de son application et à destination du premier équipement de la CDS.
+Pour créer une chaîne de service, plusieurs opérations sont réalisés  :
 
-De plus, il est nécessaire d'être en possession :
- - D'un certificat SSL pour son URL : un secret au sens Kubernetes devra être créé par le projet avec les informations de ce certificat.
- - De connaitre le PAI de son projet.
+ - Création d'un enregistrement DNS correspondant au nom de domaine de son application et à destination du premier équipement de la CDS.
+ - Création d'un certificat SSL pour son DNS. 
+ - Configuration de plusieurs briques réseau. 
 
-La demande de réalisation de ces opérations est à faire par la création de tickets et les tâches associées sont relativement complexes, fastidieuses et impliquent différentes équipes. Elles prennent donc un temps non négligeable à prendre en compte dans le planning de son projet et le suivi de l'avancée de ces travaux par les projets est difficile.
+Plusieurs éléments du projets, dont le PAI sont essentiels pour que ses opérations se réalisent. 
 
-> Le service OpenCDS vise à automatiser au maximum ces opérations.
+## Fonctionnalités du service OpenCDS
 
-Sur Cloud Pi Native, les différentes opérations de création d'une CDS peuvent être réalisées :
- - De façon classique : via demande à son chef de projet infrastructure, celui-ci va faire les différentes demandes et coordonner les travaux.
- - Via OpenCDS : créer un objet *ChaineDeService* et gérer sa demande de CDS via *Infrastructure as Code*
+La nouvelle version du service Cloud Pi Native (CPiN) ** OpenCDS ** permet de:
 
-## Création d'une CDS en IaC
+- Automatiser la configuration des briques réseau.
+- Création du ticket MIN-ITIL pour demander la création d'un enregistrement DNS
 
-La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket MIN-ITIL pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseaux et non au traitement du ticket MIN-ITIL. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle (il faut compter 24h à partir du passage du status à **Success**).
+## Pré-requis
 
-### Pré-requis
+Il convient dans un premier temps de faire les demandes (Via le CPH du projet) du 
 
-Il convient dans un premier temps de faire les demandes de PAI au BPAH et de certificat au BCS. Une fois ces éléments en main, il est possible de créer un objet ChaineDeService afin de lancer les processus de configuration des éléments réseaux ainsi que la demande de création de DNS.
+- PAI au BPAH
+- Certificat TLS de vos DNS au BCS.
+
+
+## Comment utiliser le service OpenCDS
+
+L'usage du service OpenCDS de CPiN se fait directement au niveau de votre code d'infrastructure. 
+Il s'agit d'un objet Kubernetes de type (kind) ChaineDeService
 
 Cet objet prend les paramètres suivants :
 
@@ -47,7 +51,7 @@ Cet objet prend les paramètres suivants :
 | ipWhiteList | optionnel | list(string) | liste des IPs autorisées à accéder à l'url | ["10.0.0.0/8","100.64.0.0/10"] |
 | sslOutgoing | optionnel | bool | à activer si l'ingress écoute en HTTPS | false |
 
-La version minimale de création d'une CDS est la suivante :
+Voici, un exemple de création d'une CDS est la suivante :
 
 ````yaml
 apiVersion: v1
@@ -73,8 +77,11 @@ spec:
     certificateKey: "mon-cert.p12"
     passphraseKey: "passphrase"
 ````
-Ceci va créer une chaîne de service pour l'URL ```mon-app.app1hp.dev.forge.minint.fr``` en utilisant le certificat SSL fourni dans le secret 'mon-secret'.
+
+Sur cet exemple, la chaîne de service du DNS  ```mon-app.app1hp.dev.forge.minint.fr```, ayant le certificat TLS fourni dans le secret 'mon-secret' sera crée. 
 A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé via SOPS (voir ci-dessous).
+
+La création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket MIN-ITIL pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseaux et non au traitement du ticket MIN-ITIL. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle (il faut compter 24h à partir du passage du status à **Success**).
 
 ### Schéma du déploiement d'une CDS
 
