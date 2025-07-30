@@ -14,7 +14,7 @@ Plusieurs éléments du projets, dont le PAI sont essentiels pour que ses opéra
 
 ## Fonctionnalités du service OpenCDS
 
-La nouvelle version du service Cloud Pi Native (CPiN) ** OpenCDS ** permet à l'utilisateur (ou projet) de faire une demande de la création de la CDS directement via son code d'infrastructure. 
+La nouvelle version du service Cloud Pi Native (CPiN) **OpenCDS** permet à l'utilisateur (ou projet) de faire une demande de la création de la CDS directement via son code d'infrastructure. 
 
 Cette demande est envoyée automatiquement à l'équipe Service Team de CPiN pour validation (mail reçu dés que le code sera appliqué par le service Argo CD de CPiN)
 
