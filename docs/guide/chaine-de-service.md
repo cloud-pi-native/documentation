@@ -86,155 +86,38 @@ spec:
 ````
 
 Sur cet exemple, le projet demande la création de la chaîne de service du DNS  ```mon-app.app1hp.dev.forge.minint.fr```, ayant le certificat TLS fourni dans le secret 'mon-secret' sera crée. 
-A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé via SOPS (voir ci-dessous).
+A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé via SOPS ou Vault. 
 
 Dés que cette demande de création de CDS est appliqué (via le service ArgoCD de CPiN): 
 
 1.  Une demande sera envoyée par mail à l'équipe Service Team de CPiN.
 2.  A la validation de cette demande par l'équipe service team, votre demande rentrera dans une file d'attente
 3.  A la sortie de cette demande  de la file d'attente:
-    - Un ticket MIN-ITIL sera créer pour demander la création d'un enregistrement DNS (Traitement en 24h au moyenne)
+    - Un ticket MIN-ITIL sera créer pour demander la création d'un enregistrement DNS (Traitement en 24h en moyenne)
     - Configuration automatique de la CDS. 
 
 Si ces étapes se déroulent avec succes, la statut de l'objet Kubernetes ChaineDeService sera à **Success** 
 
-### Recommandation: Sécurisation de votre secret certificat secret avec SOPS
+## Limitations / Remarques
 
-Dans le cadre d'un déploiement applicatif sur le principe GitOps, il est nécessaire de "pousser" tous les fichiers y compris les secrets sur Git, il est donc nécessaire de les chiffrer.
-La solution sur laquelle nous allons nous appuyer est [SOPS](https://github.com/mozilla/sops).
-> Pour plus d'informations sur SOPS au sein de CloudPI Native : https://cloud-pi-native.fr/guide/secrets-management
-
-Tout d'abord, il faut encoder le certificat en base64 :
-
-```bash
-base64 -w 0 mon-cert.p12
-```
-
-Nous allons ensuite créer un manifest d'un object SopsSecret où nous allons coller le certificat (encodé en base64) et le mot de passe (en clair), ce fichier ne doit pas être pousser sur git.
-
-```yaml
-apiVersion: isindir.github.com/v1alpha3
-kind: SopsSecret
-metadata:
-  name: sops-secret-cds
-spec:
-  secretTemplates:
-    - name: secret-cds
-      stringData:
-        certificate.p12: |
-          base64(mon-cert.p12)
-        passphrase: Pa$$W0rd!
-```
-
-Il faut ensuite chiffrer ce fichier en éxecutant la commande :
-
-```bash
-sops -e --age $AGE_KEY --encrypted-suffix Templates secret-cert.sops.yaml > secret-cert.sops.enc.yaml
-```
-> La variable AGE_KEY correspond à la clé publique SOPS du cluster sur lequel on déploie notre objet, cette clé peut être trouvée sur la console DSO.
-
-Nous obtenons alors un nouveau fichier de la forme suivante :
-
-```yaml
-apiVersion: isindir.github.com/v1alpha3
-kind: SopsSecret
-metadata:
-  name: sops-secret-cds
-spec:
-  secretTemplates:
-    - name: secret-cds
-      stringData:
-        certificate.p12: ENC[AES256_GCM,data:pOJHaDqYuqbe3sF/a2+NZdZuK+VHOMQ62Vi2dVpevpuWpEFUEbhtI1k0/dqqrktnBedQQtmwfCPTnnayKlN6jNSJoYyokprCF/kXUpzZjoDHuU+SI4aPdL/F04408qzEmDLY7NuQ35bgmW3uvUtlaRRunDZzVqt0i4isoFhU/EpA5vlRt1A+k46B9dRQNcRdX/Qo6ph7qxAWr9NvOvSe2onU5gl3sjtSVjo0a5KkjA/XnzRAABPHLUscpcf/Dc40SfvE4dzVeROBcqKxAtQv9hCXLUhr4AuoAXfFxKv+jfqWR+gOl0pyA25/ti8DlAZH5yBoVkMqOCLZyZEKIqzyJecBPGbObxIbauX3qRux4gj+74UKKMeSHoCeZjlCaKNsZd7GfaNod8lj0IPf6xa/NPybD9Zt52jBPiQ9I78EtaoQ4SdldIJdyzhZItRxing+MuvsETVY4g3OO6i+W8MoXoQi7geOdCD8HKkFMc3m9/EzIPn/CM9ikhJ+xv95h55OXUlyCVSnp0P3EdTJ7s/UKxGhcwZQDfRTrB3L3GAf4VlNDJrIV8mooYx7xFuTK09q0nVJrDrQ2ozUhgS0eYM5yTYYTMNdp1JUkHaMzzNq9qldY4hCtNagiC2KuVQxQSq8vT8BfHSPth4cX6qsrPPa/RZPiV/2iQIfJ9VEfsxHnBbPUir+sal6eKekixLsb5sXIvZsnwEqu4/pLUDi/z9iGUSDaF42W6jTylFh4dv2bLuWC8FnZOHTPNiJrcX3PxJsYtPHY/WpU8W9CyUk29XbMxITTBhIO30c2PIMN+iqiAJqKKbl8iKDzGCD7wiWVS78mdShj5CH2p3CTCPL2T45Gcg4E9I21KrJs5HhqGb/Oh3VhuYY5SosE1QVbiRhWsRSaSwxGnBbmZgQ/f3Zd76cYZ9dgHOx9NhLcyxFVUCywxrcUMfcaxoADCf8swONoybAIG5LanpvGUo5542IIL2BMRUUw2ZpCFtir70rgvB1GQaTh5cA2w2rLMka0wS5vHqqVomUleRhY14VnY1ptvcQr368EaJHEZjFw1uui+gDgc1KvrN007KRtIbIe3a73ndlewYrBjR4/y1FOackiEhv9RBUg+8jOUDpzqpGiQEXu6XgUhYKDfUrw+RPSSGCIzcJSaad3oZXCK5ta4BTer1JtnveWtsI43JE8SEHYRwvV+hWKKCHXEkZHZABRZL42joPhWlwxb8XBYzvBOjsAY7rufZb5xOdgpOJeSOKoQli0jPabvpSaGcBJFEMFcK6Q1zxDnOz2ytDrJ+if9J4pRpNhuCQTpPhj5dUygZMHy0yLK84PnDE7qElMj65p2chq2GAEmKBZnSSG8Axkys52Tb4pm85ICykg1VzVQRHbh20jGmlUR1DBM1ZGkSjbb+uk1KTU5USjMeSyJ5Rcj1o7lSBrH43p7Uq5BjO4ZwcB+bGtH3gfdxdyq2edIT0UwPWP9QeKPmU2mb+PYBo7TBarnsvhyECndr4UxUI6593shoCwD3PMYEX+oZ0HoaBRGqpOH/rF6eMJOVxNHvBu7EZLsTqEy5YXKQSyyyQRZOk/JMAJdhJOSY69JawtmT2rEaQYzLHwOIeJgNhRUmdJMl/goh9pelJUlvdNW36y2ZJYcRZO8VFow2b7M9znXzQ8Ey6lFEV4lZNnGv1+tV1F1ikNztV8rMprYNI80/QJLhvULtofdIAxiZa6cEESwqzAfwu1p8grOIz5r9Rjb1QYxJZ57AWKB1N3u+rv7Sbpup7oqnaohYu2HbkZ04FefBs45Wiz/ZxtVFe1+sCSHaKzJxDzgn0HclQ+5ck7S7TQoXFs5sZSKsYTzENWsrsCreYLpwY1K2KnSDvKfqslTzM12gS4VT0dUGdzNFUGx1SiYx20ZS5eGsIu1bTlPF+Ro4GI/9x6Cn0xlxfkvAhjaDrmx0fvpl7mCGnCkT6lV4h9QQL3gVuZwlMrx4UnJ61/Wxrwzlae7m3n5VA0Vs=,iv:bFDUs+G3EBjtrOtcIe1dw9flLgosXxVLuSIDwQwgkv8=,tag:ZmsYuV9ywqJfZFYQ0lOdTA==,type:str]
-        passphrase: ENC[AES256_GCM,data:g1ynoshyQ71lfWhsZzlODBlFbzgojdI=,iv:3am/eWvmlZWUmMZ0NoLDYggh6N4qFppyGxTM2FwShp8=,tag:a6CMrUmMIFyfWkCSu40tzA==,type:str]
-```
-
-Voici un fichier yaml contenant tous les paramètres ainsi que leur description en commentaire :
-````yaml
-## Ce document est un exemple de manifest pour déployer un objet ChaineDeService 
-## qui utilise le controller OpenCDS
-
-apiVersion: octant.interieur.gouv.fr/v1alpha1
-kind: ChaineDeService
-metadata:
-  ## 'name': Le nom de l'objet ChaineDeService que vous souhaitez créer.
-  name: example-cds
-spec:
-  ## Paramètres requis
-
-  ## Ce paramètre est pour attribuer le secret au certificat.
-  ## Vous devez tout d'abord créer le secret en utilisant le manifest fourni. 
-  certificate:
-    certificateKey: certificate.p12
-    passphraseKey: passphrase
-    secretName: secret-cds
-
-  ## 'commonName': Il s'agit du CN de votre certificat.
-  commonName: cn-example-project.interieur.rie.gouv.fr
-
-  ## 'network': Le réseau sur lequel vous souhaitez déployer votre CDS ('RIE'). 
-  network: RIE
-
-  ## 'pai': Le PAI de votre projet.
-  pai: EXAMPLE-PROJECT
-
-  ## Paramètres facultatifs
-  ## Ces paramètres sont en commentaire par défaut, vous pouvez les utiliser selon votre besoin.
-
-  ## 'antivirus': Un booléen permettant de décrire si vous souhaitez un antivirus pour analyser les fichiers importés.
-  ## Default: false
-  # antivirus: false
-
-  ## 'maxFileSize': Un integer (en Mb) permettant de fixer une taille maximale des fichiers analysés par l'antivirus.
-  ## Si le paramètre 'antivirus' est fixé sur 'true'
-  ## Default: 10
-  # maxFileSize: 10
-
-  ## 'ipWhiteList': La possibilité d'avoir une liste d'IP autorisées sur votre CDS.
-  ## Default: ['10.0.0.0/8', '100.64.0.0/10']
-  # ipWhiteList: []
-
-  ## 'sslOutgoing': Un booléen permettant de décider si vous souhaitez une exposition du backend sur le port HTTP ou HTTPS.
-  ## Default: false
-  # sslOutgoing: false
-
-  ## 'redirect': Un booléen permettant de décider si vous souhaitez une redirection du protocole HTTP vers le protocole HTTPS
-  ## on your CDS
-  ## Default: false
-  # redirect: false
-
-  ## 'subjectAlternativeName': Permet de fixer une liste de SANs si votre certificat est de type SAN
-  ## Default: []
-  # subjectAlternativeName:
-  # - san1-example-project.interieur.rie.gouv.fr
-  # - san2-example-project.interieur.rie.gouv.fr
-
-  ## 'websocket': Un booléen permettant de décider si vous souhaitez autoriser l'utilisation des protocoles de websocket sur votre CDS.
-  ## Default: false
-  # websocket: false
-````
-
-Le suivi du traitement peut ensuite être réalisé via le statut de l'objet *ChaineDeService* via ArgoCD. 
-
-
-### Limitations / Remarques
-
-Lors de la création d'une CDS via le kind ChaineDeService, il est important d'avoir en tête certains éléments :
- - L'enregistrement DNS est demandé via la création d'un ticket *MIN-ITIL*, le suivi du traitement du ticket n'est pas pris en compte dans le statut de traitement de l'objet. Autrement dit, le statut de l'objet ChaineDeService correspond à la configuration des équipements réseau. Il faut attendre que le ticket correspondant à la demande DNS ait été traité afin que la CDS soit réellement opérationnelle (il faut compter 24h après la configuration des éléments réseaux).
- - La demande de configuration des équipements réseaux est faite par un ordonnanceur qui traite les demandes sur la période 8h00->9h00 et 13h->14h du lundi au jeudi. Ainsi, l'opération de configuration de la CDS sera réalisée lors du prochain créneau de traitement suivant la demande.
+- La CDS sera opérationnelle une fois que le ticket MIN-ITIL correspondant à la demande DNS soit traité.
+- La demande de configuration des équipements réseaux est faite par un ordonnanceur qui traite les demandes sur la période 8h00->9h00 et 13h->14h du lundi au jeudi. Ainsi, l'opération de configuration de la CDS sera réalisée lors du prochain créneau de traitement suivant la demande.
 
 > Attention, il n'est pas possible de modifier une CDS, vérifiez bien vos valeurs avant de lancer la création. Une fois créée, en cas de besoin de modification, il est nécessaire de passer par le Chef de projet hébergement.
 
-### Gestion des erreurs
+
+
+## Gestion des erreurs
 
 Lors de la création d'un objet ChaineDeService, plusieurs erreurs peuvent survenir, ce paragraphe présente différents cas possibles.
 
-#### Erreurs sur les paramètres passés à OpenCDS
+### Erreurs sur les paramètres passés au service OpenCDS
 
 Ces erreurs sont retournées par le controller OpenCDS qui va refuser la création de l'objet ChaineDeService.
 
 Dans ces cas, il convient de modifier l'objet ChaineDeService et de le redéployer via ArgoCD.
 
-##### 1. Paramètre manquant :
+#### 1. Paramètre manquant :
 
 Cette erreur survient lorsqu'il manque un paramètre obligatoire dans le manifest.
 
@@ -258,7 +141,7 @@ Réponse du controller :
 The ChaineDeService "cds-missing-param" is invalid: spec.pai: Required value
 ```
 
-##### 2. Paramètre inexistant :
+#### 2. Paramètre inexistant :
 
 Cette erreur survient lorsqu'un paramètre inexistant est renseigné dans le manifest.
 
@@ -284,7 +167,7 @@ Réponse du controller :
 Error from server (BadRequest): error when creating "cds-wrong-param.yaml": ChaineDeService in version "v1alpha1" cannot be handled as a ChaineDeService: strict decoding error: unknown field "spec.wrongParam"
 ```
 
-##### 3. Mauvais type :
+#### 3. Mauvais type :
 
 Cette erreur survient lorsqu'on renseigne une valeur d'un mauvais type pour un des paramètres du manifest.
 
@@ -310,7 +193,7 @@ Réponse du controller :
 The ChaineDeService "cds-wrong-type" is invalid: spec.antivirus: Invalid value: "string": spec.antivirus in body must be of type boolean: "string"
 ```
 
-##### 4. Mauvaise valeur pour les paramètres acceptant des valeurs précises :
+#### 4. Mauvaise valeur pour les paramètres acceptant des valeurs précises :
 
 Cette erreur survient lorsqu'on renseigne une mauvaise valeur pour un des paramètres du manifest qui attendent des valeurs précises (enum).
 
@@ -335,7 +218,7 @@ Réponse du controller :
 The ChaineDeService "wrong-value" is invalid: spec.network: Unsupported value: "WRONG": supported values: "RIE"
 ```
 
-#### Erreurs de l'API
+### Erreurs de l'API
 
 Ces erreurs n'empêchent pas la création de l'objet OpenCDS mais sont retournés par l'API OpenCDS après avoir effectué davantage de vérifications avant de lancer la création de la chaîne de service. 
 
@@ -350,7 +233,7 @@ status:
 
 Dans ces cas, il convient de modifier l'objet ChaineDeService et de le redéployer via ArgoCD
 
-##### 1. PAI
+#### 1. PAI
 
 Le PAI ne fait pas partie de la liste des PAI acceptés. Vérifier que le PAI est correct et contacter la Service Team si celui-ci est bien renseigné.
 
@@ -375,7 +258,7 @@ Réponse de l'API :
 PAI : PAI not in project list (input: WRONG)
 ```
 
-##### 2. commonName
+#### 2. commonName
 
 Le commonName n'est pas un sous-domaine accepté par OpenCDS. Les seuls domaines acceptés sont des sous-domaines de *.minint.fr et *.interieur.rie.gouv.fr.
 
@@ -400,7 +283,7 @@ Réponse de l'API :
 commonName : commonName is not a subdomain of the allowed domains (input: wrong-commonName.fr)
 ```
 
-##### 3. ipWhiteList
+#### 3. ipWhiteList
 
 L'une des valeurs dans la liste ipWhiteList n'est pas une IP valide.
 
@@ -426,7 +309,7 @@ Réponse de l'API :
 ipWhiteList : value is not a valid IPv4 or IPv6 network (input: 1.2.3)
 ```
 
-#### Erreurs internes
+### Erreurs internes
 
 Ces erreurs arrivent lorsque le controller et l'API OpenCDS ont tous les deux acceptés la demande mais une erreur est survenue lors de la création de la chaîne de service. Vous en serez informés par le message suivant dans la partie Message du champs Status de l'objet ChaineDeService :
 
@@ -438,7 +321,7 @@ status:
 
 Cette erreur survient lorsqu'une erreur serveur s'est produite lors de la création de la chaîne de service. Aucune intervention de votre part n'est nécessaire, un administrateur sera alerté de l'erreur et la résoudra ou vous recontactera en cas besoin.
 
-## Roadmap de l'évolution d u service OpenCDS
+## Roadmap de l'évolution du service OpenCDS
 
 | Fonctionnalités | Date |
 | :---------------| :----|
