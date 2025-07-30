@@ -2,32 +2,32 @@
 
 ## Introduction
 
-Lorsqu'un projet souhaite exposer un service sur le RIE depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. la chaîne de service (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministèrede lintérieur.
+Lorsqu'un projet souhaite exposer un service sur le RIE depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. la chaîne de service (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministère de l'intérieur.
 
-Pour créer une chaîne de service, plusieurs opérations sont réalisés  :
+Pour créer une chaîne de service, plusieurs opérations sont réalisées  :
 
  - Création d'un enregistrement DNS correspondant au nom de domaine de son application et à destination du premier équipement de la CDS.
  - Création d'un certificat SSL pour son DNS. 
  - Configuration de plusieurs briques réseau. 
 
-Plusieurs éléments du projets, dont le PAI sont essentiels pour que ses opérations se réalisent. 
+Plusieurs éléments du projets, dont le PAI sont essentiels pour que ces opérations se réalisent. 
 
 ## Fonctionnalités du service OpenCDS
 
 La nouvelle version du service Cloud Pi Native (CPiN) **OpenCDS** permet à l'utilisateur (ou projet) de faire une demande de la création de la CDS directement via son code d'infrastructure. 
 
-Cette demande est envoyée automatiquement à l'équipe Service Team de CPiN pour validation (mail reçu dés que le code sera appliqué par le service Argo CD de CPiN)
+Cette demande est envoyée automatiquement à l'équipe Service Team de CPiN pour validation (mail reçu dès que le code sera appliqué par le service Argo CD de CPiN)
 
-Dés validation de cette demaine, un processus automatique permettra de:
+Dès validation de cette demande, un processus automatique permettra de:
 
-- Configurer des briques réseau 
-- Créer un ticket MIN-ITIL pour demander la création d'un enregistrement DNS
+- Configurer des briques réseau.
+- Créer un ticket MINITIL pour demander la création d'un enregistrement DNS.
 
 ## Pré-requis
 
-Il convient dans un premier temps de faire les demandes (Via le CPH du projet) du 
+Il convient dans un premier temps de faire les demandes (via le CPH du projet) du : 
 
-- PAI au BPAH
+- PAI au BPAH.
 - Certificat TLS de vos DNS au BCS.
 
 ## Comment fonctionne le service OpenCDS ?
@@ -37,7 +37,7 @@ Il convient dans un premier temps de faire les demandes (Via le CPH du projet) d
 ## Comment utiliser le service OpenCDS ?
 
 L'usage du service OpenCDS de CPiN se fait directement au niveau de votre code d'infrastructure. 
-Il s'agit d'un objet Kubernetes de type (kind) ChaineDeService
+Il s'agit d'un objet Kubernetes de type (kind) ChaineDeService.
 
 Cet objet prend les paramètres suivants :
 
@@ -47,7 +47,7 @@ Cet objet prend les paramètres suivants :
 | commonName | obligatoire | fqdn | url primaire de l'application | n/a |
 | pai | obligatoire | string | nom du PAI comme indiqué lors de sa création | n/a |
 | subjectAlternativeName | optionnel | list(string) | liste d'urls secondaires | null |
-| certificate | optionnel | map | element permettant de retrouver le secret contenant le certificat | null |
+| certificate | optionnel | map | élément permettant de retrouver le secret contenant le certificat | null |
 | certificate.secretName | obligatoire | string | nom du secret | n/a |
 | certificate.certificateKey | obligatoire | string | nom de la clé contenant le certificat en p12 | n/a |
 | certificate.passphraseKey | obligatoire | string | nom de la clé contenant la pass phrase du p12 | n/a |
@@ -58,7 +58,7 @@ Cet objet prend les paramètres suivants :
 | ipWhiteList | optionnel | list(string) | liste des IPs autorisées à accéder à l'url | ["10.0.0.0/8","100.64.0.0/10"] |
 | sslOutgoing | optionnel | bool | à activer si l'ingress écoute en HTTPS | false |
 
-Voici, un exemple de création d'une CDS est la suivante :
+Voici un exemple de création d'une CDS :
 
 ````yaml
 apiVersion: v1
@@ -85,22 +85,22 @@ spec:
     passphraseKey: "passphrase"
 ````
 
-Sur cet exemple, le projet demande la création de la chaîne de service du DNS  ```mon-app.app1hp.dev.forge.minint.fr```, ayant le certificat TLS fourni dans le secret 'mon-secret' sera crée. 
+Sur cet exemple, le projet demande la création de la chaîne de service du DNS  ```mon-app.app1hp.dev.forge.minint.fr```, ayant le certificat TLS fourni dans le secret 'mon-secret'. 
 A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé via SOPS ou Vault. 
 
-Dés que cette demande de création de CDS est appliqué (via le service ArgoCD de CPiN): 
+Dès que cette demande de création de CDS est appliquée (via le service ArgoCD de CPiN): 
 
 1.  Une demande sera envoyée par mail à l'équipe Service Team de CPiN.
-2.  A la validation de cette demande par l'équipe service team, votre demande rentrera dans une file d'attente
-3.  A la sortie de cette demande  de la file d'attente:
-    - Un ticket MIN-ITIL sera créer pour demander la création d'un enregistrement DNS (Traitement en 24h en moyenne)
+2.  A la validation par l'équipe Service Team, votre demande rentrera dans une file d'attente.
+3.  A la sortie de cette demande de la file d'attente:
+    - Un ticket MINITIL sera créé pour demander la création d'un enregistrement DNS (Traitement en 24h en moyenne).
     - Configuration automatique de la CDS. 
 
-Si ces étapes se déroulent avec succes, la statut de l'objet Kubernetes ChaineDeService sera à **Success** 
+Si ces étapes se déroulent avec succès, la statut de l'objet Kubernetes ChaineDeService sera à **Success** 
 
 ## Limitations / Remarques
 
-- La CDS sera opérationnelle une fois que le ticket MIN-ITIL correspondant à la demande DNS soit traité.
+- La CDS sera opérationnelle une fois que le ticket MINITIL correspondant à la demande DNS sera traité.
 - La demande de configuration des équipements réseaux est faite par un ordonnanceur qui traite les demandes sur la période 8h00->9h00 et 13h->14h du lundi au jeudi. Ainsi, l'opération de configuration de la CDS sera réalisée lors du prochain créneau de traitement suivant la demande.
 
 > Attention, il n'est pas possible de modifier une CDS, vérifiez bien vos valeurs avant de lancer la création. Une fois créée, en cas de besoin de modification, il est nécessaire de passer par le Chef de projet hébergement.
