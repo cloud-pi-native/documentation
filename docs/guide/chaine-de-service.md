@@ -32,6 +32,8 @@ Il convient dans un premier temps de faire les demandes (Via le CPH du projet) d
 
 ## Comment fonctionne le service OpenCDS ?
 
+
+
 ## Comment utiliser le service OpenCDS ?
 
 L'usage du service OpenCDS de CPiN se fait directement au niveau de votre code d'infrastructure. 
@@ -86,10 +88,17 @@ spec:
 Sur cet exemple, le projet demande la création de la chaîne de service du DNS  ```mon-app.app1hp.dev.forge.minint.fr```, ayant le certificat TLS fourni dans le secret 'mon-secret' sera crée. 
 A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé via SOPS (voir ci-dessous).
 
-La demande  création de CDS se fait en mode semi-automatique, c'est à dire que la création de CDS va créer un ticket MIN-ITIL pour demander la création d'un enregistrement DNS. A noter que le statut de l'objet ChaineDeService correspond uniquement à la configuration des éléments réseaux et non au traitement du ticket MIN-ITIL. Ainsi, une fois que le statut ChaineDeService est **Success**, il convient de vérifier que l'enregistrement DNS est créé afin que la CDS soit opérationnelle (il faut compter 24h à partir du passage du status à **Success**).
+Dés que cette demande de création de CDS est appliqué (via le service ArgoCD de CPiN): 
 
+1.  Une demande sera envoyée par mail à l'équipe Service Team de CPiN.
+2.  A la validation de cette demande par l'équipe service team, votre demande rentrera dans une file d'attente
+3.  A la sortie de cette demande  de la file d'attente:
+    - Un ticket MIN-ITIL sera créer pour demander la création d'un enregistrement DNS (Traitement en 24h au moyenne)
+    - Configuration automatique de la CDS. 
 
-### Création du secret contenant le certificat avec SOPS
+Si ces étapes se déroulent avec succes, la statut de l'objet Kubernetes ChaineDeService sera à **Success** 
+
+### Recommandation: Sécurisation de votre secret certificat secret avec SOPS
 
 Dans le cadre d'un déploiement applicatif sur le principe GitOps, il est nécessaire de "pousser" tous les fichiers y compris les secrets sur Git, il est donc nécessaire de les chiffrer.
 La solution sur laquelle nous allons nous appuyer est [SOPS](https://github.com/mozilla/sops).
@@ -206,9 +215,6 @@ spec:
 
 Le suivi du traitement peut ensuite être réalisé via le statut de l'objet *ChaineDeService* via ArgoCD. 
 
-### Validation de la création de CDS
-
-La création d'un objet ChaineDeService déclenche l'envoi d'un e-mail contenant un lien de validation à l'adresse des membres de la ServiceTeam qui valident les demandes de CDS effectuées par les projets.
 
 ### Limitations / Remarques
 
