@@ -10,7 +10,7 @@ Pour créer une chaîne de service, plusieurs opérations sont réalisées  :
  - Création d'un certificat SSL pour son DNS. 
  - Configuration de plusieurs briques réseau. 
 
-Plusieurs éléments du projets, dont le PAI sont essentiels pour que ces opérations se réalisent. 
+Plusieurs éléments du projets, dont le PAI sont essentiels pour que ces opérations soient réalisées. 
 
 ## Fonctionnalités du service OpenCDS
 
@@ -20,7 +20,7 @@ Cette demande est envoyée automatiquement à l'équipe Service Team de CPiN pou
 
 Dès validation de cette demande, un processus automatique permettra de:
 
-- Configurer des briques réseau.
+- Configurer les briques réseau.
 - Créer un ticket MINITIL pour demander la création d'un enregistrement DNS.
 
 ## Pré-requis
@@ -52,7 +52,7 @@ Cet objet prend les paramètres suivants :
 | certificate.certificateKey | obligatoire | string | nom de la clé contenant le certificat en p12 | n/a |
 | certificate.passphraseKey | obligatoire | string | nom de la clé contenant la pass phrase du p12 | n/a |
 | redirect | optionnel | bool | activer la redirection HTTP to HTTPS | false |
-| antivirus | optionnel | bool | activer l'antivirus. Il est possible de l'activer à posteriori mais via ticket uniquement. L'antivirus analyse le trafic et notamment les fichiers uploadés. | false |
+| antivirus | optionnel | bool | activer l'antivirus. L'antivirus analyse le trafic et notamment les fichiers uploadés. | false |
 | maxFileSize | optionnel | int | taille maximale des fichiers pour l'antivirus en Mo | null |
 | websocket | optionnel | bool | activer la possibilité de faire du websocket | false |
 | ipWhiteList | optionnel | list(string) | liste des IPs autorisées à accéder à l'url | ["10.0.0.0/8","100.64.0.0/10"] |
@@ -85,8 +85,8 @@ spec:
     passphraseKey: "passphrase"
 ````
 
-Sur cet exemple, le projet demande la création de la chaîne de service du DNS  ```mon-app.app1hp.dev.forge.minint.fr```, ayant le certificat TLS fourni dans le secret 'mon-secret'. 
-A noter que pour le besoin de l'exemple, le secret est créé *en dur* il devrait être sécurisé via SOPS ou Vault. 
+Sur cet exemple, le projet demande la création de la chaîne de service du DNS  ```mon-app.app1hp.dev.forge.minint.fr```, avec le certificat TLS fourni dans le secret 'mon-secret'. 
+A noter que pour le besoin de l'exemple, le secret est créé *en dur*, il devrait être sécurisé via SOPS ou Vault. 
 
 Dès que cette demande de création de CDS est appliquée (via le service ArgoCD de CPiN): 
 
