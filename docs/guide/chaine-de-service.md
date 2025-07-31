@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Lorsqu'un projet souhaite exposer un service sur le RIE depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. la chaîne de service (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministère de l'intérieur.
+Lorsqu'un projet souhaite exposer un service sur le RIE depuis les infrastructures du ministère de l'intérieur, il doit faire une demande de chaîne de service. La Chaîne De Dervice (CDS) est composée d'un ensemble de composants réseau et de sécurités permettant d'exposer une URL à l'extérieur du ministère de l'intérieur.
 
 Pour créer une chaîne de service, plusieurs opérations sont réalisées  :
 
@@ -14,7 +14,7 @@ Plusieurs éléments du projets, dont le PAI sont essentiels pour que ces opéra
 
 ## Fonctionnalités du service OpenCDS
 
-La nouvelle version du service Cloud Pi Native (CPiN) **OpenCDS** permet à l'utilisateur (ou projet) de faire une demande de la création de la CDS directement via son code d'infrastructure. 
+Cette version du service Cloud Pi Native (CPiN) **OpenCDS v1.0** permet à l'utilisateur (ou projet) de faire une demande de la création de la Chaine De Service (CDS) directement via son code d'infrastructure. 
 
 Cette demande est envoyée automatiquement à l'équipe Service Team de CPiN pour validation (mail reçu dès que le code sera appliqué par le service Argo CD de CPiN)
 
