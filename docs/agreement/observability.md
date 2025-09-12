@@ -2,9 +2,9 @@
 
 
 Dans le cadre de l'offre Cloud-Pi Native, l'observabilité est disponible via plusieurs composants:
-- Prometheus pour les métriques et les dashboard de sécurité
+- Prometheus pour les métriques et les dashboards de sécurité
 - Loki pour les logs
-- AlertManager/Grafana pour l'alerting et les dashboards
+- Grafana pour les dashboard et les alertes
 
 Ces différents services sont accessibles via la console `Cloud Pi Native > Projet > Mes Projets > Sélectionner un projet > Services externes`
 
