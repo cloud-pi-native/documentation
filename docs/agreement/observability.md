@@ -41,8 +41,8 @@ Lors de la création d'un projet (ou lors du reprovisionnement d'un projet pour 
 ![repo infra-observability](/img/agreement/repo-infra-observability.png.png)
 
 Ce repo de code contient 2 types de fichiers :
- - Des Dashboard grafana sous forme de fichiers **.json* dans le répertoire "/files/dashboards/"
- - Des alertes sous la forme de fichiers **.yaml.tpl*  dans le répertoire /files/rules/
+ - Des Dashboard grafana sous forme de fichiers .json dans le répertoire "/files/dashboards/"
+ - Des alertes sous la forme de fichiers .yaml.tpl  dans le répertoire /files/rules/
 
 L'ajout de fichier dans ces répertoires sont automatiquements déployés dans grafana (peut prendre jusqu'à 3 minutes pour se synchroniser).
 
