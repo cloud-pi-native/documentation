@@ -25,7 +25,7 @@ Par défaut, aucune alerte n'est mise en place.
 Pour apprendre à créer une alerte, [cliquer ici](/guide/alerting.md)
 
 ## Dashboard
-Des dashboards [Grafana](https://grafana.com/grafana/) pour consulter les métriques, les logs ainsi que des indicateurs de sécurités son fournis par defaut pour son projet :
+Des dashboards [Grafana](https://grafana.com/grafana/) pour consulter les métriques, les logs ainsi que des indicateurs de sécurité sont fournis par défaut pour son projet :
 
 ![dashboard par defaut](/img/agreement/dashboard-defaut.png)
 
@@ -34,15 +34,15 @@ Pour consulter les dashboard de sécurité, [cliquer ici](/guide/dashboardsecuri
 
 ## Dashboard as code
 
-A partie de la version 9.4.0 de la console, une fonctionnalité *Dashboard as code* est disponible.
+À partir de la version 9.4.0 de la console, une fonctionnalité *Dashboard as code* est disponible.
 
-Lors de la création d'un projet (ou lors du reprovionnement d'un projet pour les projets créés avant la version 9.4.0 de la console), un nouveau repo de code est automatiquement créé dans gitlab : infra-observability
+Lors de la création d'un projet (ou lors du reprovisionnement d'un projet pour les projets créés avant la version 9.4.0 de la console), un nouveau repo de code est automatiquement créé dans gitlab : infra-observability
 
 ![repo infra-observability](/img/agreement/repo-infra-observability.png.png)
 
 Ce repo de code contient 2 types de fichiers :
  - Des Dashboard grafana sous forme de fichiers **.json* dans le répertoire /files/dashboards/
- - Des alertes sous la forme de fichiers **.yaml.tpl* 
+ - Des alertes sous la forme de fichiers **.yaml.tpl*  dans le répertoire /files/rules/
 
 L'ajout de fichier dans ces répertoires sont automatiquements déployés dans grafana (peut prendre jusqu'à 3 minutes pour se synchroniser).
 
@@ -63,9 +63,9 @@ La synchronisation du repo de code gitlab *infra-observability* vers *Grafana* s
 
 ![share](/img/agreement/argocd-dashboard-as-code.png)
 
-Un objet de type Kubernets *GrafanaDashboard* est créé pour chaque dashboard créé *as code*. En cas d'erreur sur le contenu du JSON, les erreurs seront visible depuis cet objet via ArgoCD.
+Un objet de type Kubernetes *GrafanaDashboard* est créé pour chaque dashboard créé *as code*. En cas d'erreur sur le contenu du JSON, les erreurs seront visibles depuis cet objet via ArgoCD.
 
-> A noter que seule la branche **main** est synchronisé 
+> À noter que seule la branche **main** est synchronisée
 
 
 La video suivante illustre cette fonctionnalité
