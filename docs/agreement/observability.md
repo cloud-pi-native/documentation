@@ -57,8 +57,6 @@ Puis *Export* et *View JSON*
 Enfin cliquez sur Copy to Clipboard
 ![share](/img/agreement/dashboard-copy-to-clipboard.png)
 
-Une synchronisation de ce répertoire vers grafana est réalisé automatiquement par l'offre Cloud Pi Native.
-
 La synchronisation du repo de code gitlab *infra-observability* vers *Grafana* se fait via une *Application ArgoCD* nommée <env>-<projet>-observability :
 
 ![share](/img/agreement/argocd-dashboard-as-code.png)
