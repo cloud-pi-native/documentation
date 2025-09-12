@@ -4,7 +4,7 @@ Cette section regroupe les questions fréquentes de nos clients.
 
 ## Construction
 
-### Comment simuler les services S3, SSO, SMTP, etc sur les environnements OVH ?
+### Comment simuler les services S3, SSO, SMTP, etc sur les environnements PAX ?
 
 Des bouchons sont proposés afin de simuler un serveur SMTP, création d'un bucket S3, SSO, etc.
 

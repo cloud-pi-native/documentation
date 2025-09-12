@@ -1,7 +1,7 @@
 # L'offre Cloud Pi Native
 
-La direction de la transformation numérique du ministère de l'Intérieur et des outre-mer propose une offre de services autour de deux instances de la plateforme *(OVH SecNumCloud / Cloud π)* à destination des *administrations* ou des *entreprises de services numériques* travaillant pour leur compte.
-Cette offre de services est une implémentation du produit *Hexaforge* pour le ministère de l'intérieur ainsi qu'un accompagnement dédié aux spécificités des infrastructures ministérielles.
+La Direction de la Transformation Numérique du Ministère de l'Intérieur et des Outre-mer propose une offre de services autours de plusieurs instances de la plateforme *(PAX / Cloud π)* à destination des *administrations* ou des *entreprises de services numériques* travaillant pour leur compte.
+Cette offre de services est une implémentation du produit *Hexaforge* pour le Ministère de l'intérieur ainsi qu'un accompagment dédié aux spécificités des infrastructures ministériel.
 
 > __:warning: Attention, les seuls bénéficiaires de cette offre managée sont les administrations ou leurs ESN partenaires.
 
