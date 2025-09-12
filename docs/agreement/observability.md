@@ -38,7 +38,7 @@ Pour consulter les dashboard de sécurité, [cliquer ici](/guide/dashboardsecuri
 
 Lors de la création d'un projet (ou lors du reprovisionnement d'un projet pour les projets créés avant la version 9.4.0 de la console), un nouveau repo de code est automatiquement créé dans gitlab : infra-observability
 
-![repo infra-observability](/img/agreement/repo-infra-observability.png.png)
+![repo infra-observability](/img/agreement/repo-infra-observability.png)
 
 Ce repo de code contient 2 types de fichiers :
  - Des Dashboard grafana sous forme de fichiers .json dans le répertoire "/files/dashboards/"
@@ -52,14 +52,13 @@ Pour cela depuis un dashboard cliquez sur *share* :
 ![share](/img/agreement/dashboard-share.png)
 
 Puis *Export* et *View JSON*
-![share](/img/agreement/dashboard-export-view-json.png)
+![export](/img/agreement/dashboard-export-view-json.png)
 
 Enfin cliquez sur Copy to Clipboard
-![share](/img/agreement/dashboard-copy-to-clipboard.png)
+![copy](/img/agreement/dashboard-copy-to-clipboard.png)
 
-La synchronisation du repo de code gitlab *infra-observability* vers *Grafana* se fait via une *Application ArgoCD* nommée <env>-<projet>-observability :
-
-![share](/img/agreement/argocd-dashboard-as-code.png)
+La synchronisation du repo de code gitlab *infra-observability* vers *Grafana* se fait via une *Application ArgoCD* nommée [env]-[projet]-observability :
+![argo](/img/agreement/argocd-dashboard-as-code.png)
 
 Un objet de type Kubernetes *GrafanaDashboard* est créé pour chaque dashboard créé *as code*. En cas d'erreur sur le contenu du JSON, les erreurs seront visibles depuis cet objet via ArgoCD.
 
