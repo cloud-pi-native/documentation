@@ -3,7 +3,7 @@
 > __:warning: L'observabilité n'est pas en place sur les environnements OVH.__
 
 Dans le cadre de l'offre Cloud-Pi Native, l'observabilité est disponible via plusieurs composants:
-- Prometheus/Grafana pour les métriques
+- Prometheus/Grafana pour les métriques et les dashboard de sécurité
 - AlertManager/Grafana pour l'alerting
 - ElasticSearch/Kibana pour les logs
 
@@ -24,6 +24,11 @@ Pour apprendre à utiliser ce service, [cliquer ici](/guide/metrics)
 Par défaut, aucune alerte n'est mise en place.
 
 Pour apprendre à créer une alerte, [cliquer ici](/guide/alerting.md)
+
+## Dashboard
+Des dashboards [Grafana](https://grafana.com/grafana/) pour Kyverno/Falcon/Trivy sont aussi mis a dispostion afin de permettre une analyse de sécurité (CVE/Comportemental) et bonne pratique au runtime.
+
+Pour consulter les dashboard de sécurité, [cliquer ici](/guide/dashboardsecurite.md)
 
 ## Logs
 Le couple Elastisearch/Kibana est utilisé pour vous donner accès à vos logs.

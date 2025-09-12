@@ -20,14 +20,6 @@
         "link": "/agreement/mocks"
       },
       {
-        "text": "Règles kyverno",
-        "link": "/agreement/kyverno"
-      },
-      {
-        "text": "Labels kubernetes",
-        "link": "/agreement/labels-list"
-      },
-      {
         "text": "Observabilité",
         "link": "/agreement/observability"
       },
@@ -146,6 +138,10 @@
       {
         "text": "Déploiement de votre application",
         "link": "/guide/deployment-with-argo"
+      },
+      {
+        "text": "Règles kyverno",
+        "link": "/agreement/kyverno"
       },
       {
         "text": "Bonnes pratiques",
