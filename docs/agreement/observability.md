@@ -25,7 +25,7 @@ Par défaut, aucune alerte n'est mise en place.
 Pour apprendre à créer une alerte, [cliquer ici](/guide/alerting.md)
 
 ## Dashboard
-Des dashboards [Grafana](https://grafana.com/grafana/) pour consulter les métriques, les logs ainsi que des indicateurs de sécurités son fournis par defaut por son projet :
+Des dashboards [Grafana](https://grafana.com/grafana/) pour consulter les métriques, les logs ainsi que des indicateurs de sécurités son fournis par defaut pour son projet :
 
 ![dashboard par defaut](/img/agreement/dashboard-defaut.png)
 
