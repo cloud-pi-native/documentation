@@ -112,7 +112,7 @@ smtp:
 
   podLabels:
     app: bouchon-smtp
-    env: ovh
+    env: pax
     tier: bouchon
     criticality: low
     component: smtp

@@ -1,6 +1,5 @@
 # Observabilité
 
-> __:warning: L'observabilité n'est pas en place sur les environnements OVH.__
 
 Dans le cadre de l'offre Cloud-Pi Native, l'observabilité est disponible via plusieurs composants:
 - Prometheus pour les métriques et les dashboard de sécurité

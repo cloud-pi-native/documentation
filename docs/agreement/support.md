@@ -6,8 +6,8 @@ La Service Team est l'équipe qui vous accompagne pour embarquer sur l'offre Clo
 
 L'accompagnement technique se fera sur 2 plateformes :
 
-- Plateforme d'accélération OVH; plateforme non liée aux réseaux interministères et a pour objectif de fournir aux projets un accès plus rapide à la console et aux services Cloud π native. Ainsi les projets peuvent anticiper en effectuant leurs premiers tests.
-
+- Plateforme PAX; plateforme non lié aux réseaux interministères et a pour objectif de fournir aux projets un accès plus rapide à la console et aux services Cloud π native. Ainsi les projets peuvent anticiper en effectuat leurs premiers tests.
+  
 - Cluster Cloud π native sur les infrastructures du ministère de l'intérieur
 
 ## Prérequis organisationnels
@@ -36,7 +36,7 @@ En plus de ces prérequis, les éléments suivants sont à fournir par le projet
 - Estimation des ressources nécessaires CPU/RAM
 - Calendrier du projet et échéances importantes et état d'avancement du projet (déjà en production, nouvelle application, etc.)
 
-## Accompagnement sur OVH
+## Accompagnement sur PAX
 
 - Création de compte pour l'accès à la console et aux services
 - Accostage entre la chaine primaire et la chaine secondaire (github action)
