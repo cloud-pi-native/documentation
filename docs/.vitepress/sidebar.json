@@ -170,6 +170,10 @@
         ]
       },
       {
+        "text": "Dashboard",
+        "link": "/guide/dashboardsecurite"
+      },
+      {
         "text": "Archivage des logs",
         "link": "/guide/archive-logs"
       },
