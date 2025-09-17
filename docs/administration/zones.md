@@ -5,7 +5,7 @@ Une zone désigne un datacenter particulier. Dans le cadre de Cloud Pi Native, i
 - Zone Usuelle: zone pour les projets présentant une sensibilité moindre.
 - Zone Restreinte: zone pour les projets sensibles, plus contraignant au niveau des flux réseaux
 
-L'instructure sur OVH n'est pas concerné par cette notion de zone, aussi il n'existe que le choix **Zone Défaut**
+L'instructure sur Scaleway n'est pas concerné par cette notion de zone, aussi il n'existe que le choix **Zone Défaut**
 
 ## Création d'une zone
 

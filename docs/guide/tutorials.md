@@ -87,7 +87,7 @@ Il est accompagné d'un autre chart helm disponible [ici](https://github.com/clo
 
 ### INES et Passage 2
 
-Une fois que vous avez validé votre déploiement sur la console DSO d'OVH, la suite logique est de répéter ce procédé au sein du réseau ministériel. Et dépendamment des besoins de votre application, vous aurez besoin ou non de communiquer avec les équipes de Passage2 et d'INES.
+Une fois que vous avez validé votre déploiement sur la console DSO de Scaleway, la suite logique est de répéter ce procédé au sein du réseau ministériel. Et dépendamment des besoins de votre application, vous aurez besoin ou non de communiquer avec les équipes de Passage2 et d'INES.
 
 Pour vous aider, un mock a été mis en place [ici](https://github.com/cloud-pi-native/helm-projects-mocks/)
 

@@ -51,10 +51,10 @@ Puis sur **Copy token**
 
 ---
 
-Par défaut, la CLI de vault tente de se connecter sur un serveur local, il faut lui spécifier l'adresse du serveur avec une variable d'environnement (dans l'exemple, il s'agit du vault disponible sur la plateforme OVH):
+Par défaut, la CLI de vault tente de se connecter sur un serveur local, il faut lui spécifier l'adresse du serveur avec une variable d'environnement (dans l'exemple, il s'agit du vault disponible sur la plateforme Scaleway):
 
 ```shell
-export VAULT_ADDR=https://vault.apps.dso.numerique-interieur.com
+export VAULT_ADDR=https://vault.apps.sdid.numerique-interieur.com
 ```
 
 ---
