@@ -67,7 +67,7 @@ Un objet de type Kubernetes *GrafanaDashboard* est créé pour chaque dashboard 
 
 La video suivante illustre cette fonctionnalité
 
-<video width="320" height="240" controls>
+<video width="640" height="480" controls>
   <source src="https://cpin-public-ressources.s3.fr-par.scw.cloud/documentation/cloud-pi-native/dashboard-as-code.mp4" type="video/mp4" />
 </video>
 
