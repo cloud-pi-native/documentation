@@ -261,10 +261,6 @@
         "link": "/administration/clusters"
       },
       {
-        "text": "Quotas",
-        "link": "/administration/quotas"
-      },
-      {
         "text": "Types d'environnement",
         "link": "/administration/environnements"
       },
