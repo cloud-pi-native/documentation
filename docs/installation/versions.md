@@ -36,13 +36,12 @@ Les sections suivantes détaillent la façon de procéder au gel de version d'im
 
 ## Argo CD
 
-Le composant Argo CD est installé à l'aide du chart Helm Bitnami.
+Le composant Argo CD est installé à l'aide du chart Helm officiel ArgoProj : [https://github.com/argoproj/argo-helm](https://github.com/argoproj/argo-helm)
 
-Nous utiliserons un tag dit "[immutable](https://docs.bitnami.com/kubernetes/infrastructure/argo-cd/configuration/understand-rolling-immutable-tags)" (**recommandé en production**).
+Nous utiliserons un tag dit "[immutable](https://docs.gitlab.com/user/packages/container_registry/immutable_container_tags/)" (**recommandé en production**).
 
-Les différents tags utilisables pour l'image d'Argo CD sont disponibles ici : <https://hub.docker.com/r/bitnami/argo-cd/tags>
-
-Les tags dits "immutables" sont ceux qui possèdent un suffixe de type rXX, lequel correspond au numéro de révision. Ils pointent toujours vers la même image. Par exemple le tag "2.7.6-debian-11-r2" est un tag immutable.
+Les différents tags utilisables pour l'image d'Argo CD sont disponibles ici : [https://quay.io/repository/argoproj/argocd?tab=tags&tag=latest](https://quay.io/repository/argoproj/argocd?tab=tags&tag=latest)
+Les tags dits "immutables" sont ceux qui possèdent un suffixe de type vXX, lequel correspond au numéro de révision. Ils pointent toujours vers la même image. Par exemple le tag "v2.14.20" est un tag immutable.
 
 Pour spécifier un tel tag, il nous suffira d'éditer la ressource `dsc` de configuration (par défaut ce sera la `dsc` nommée `conf-dso`) et de surcharger les "values" correspondantes du chart Helm, en ajoutant celles dont nous avons besoin. Exemple :
 
@@ -53,13 +52,13 @@ argocd:
     password: WeAreThePasswords
   values:
     image:
-      registry: docker.io
-      repository: bitnami/argo-cd
-      tag: 2.7.6-debian-11-r2
+      registry: quay.io
+      repository: argoproj/argocd
+      tag: v2.7.6
       imagePullPolicy: IfNotPresent
 ```
 
-Pour mémoire, les values utilisables sont disponibles ici : <https://github.com/bitnami/charts/blob/main/bitnami/argo-cd/values.yaml>
+Pour mémoire, les values utilisables sont disponibles ici : [https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml](https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml)
 
 Les releases d'Argo CD et leurs changelogs se trouvent ici : <https://github.com/argoproj/argo-cd/releases>
 

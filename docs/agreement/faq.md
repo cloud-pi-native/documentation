@@ -31,7 +31,7 @@ Sur argocd, dans App Details:
 
 Toutes les images déployées sur la plateforme Cloud π Native doivent :
   - Etre construite par l'offre
-  - Faire partie des repo publics autorisés par exemple Bitnami (règle non encore mise en place)
+  - Faire partie des repo publics autorisés par exemple docker.io
 
 Afin de construire une image personnalisée, il est nécessaire de créer un Dockerfile dans son repo de sources applicative et d'intégrer la construction de cette image dans l'étape de construction de l'application.
 
@@ -59,7 +59,7 @@ CMD [ "command_to_execute"]
 
 ### Puis-je pousser directement un binaire non construit par l'offre Cloud π Native ?
 
-Toutes les images et librairies utilisées sur la plateforme doivent être construites par la chaine DSO ou être disponibles sur les repos publics dont l'auteur est reconnu et autorisé (par exemple bitnami).
+Toutes les images et librairies utilisées sur la plateforme doivent être construites par la chaine DSO ou être disponibles sur les repos publics dont l'auteur est reconnu et autorisé.
 
 Il n'est pas possible d'uploader un binaire directement sur le gestionnaire d'artefacts (Nexus) en dehors de la chaine de construction DSO.
 

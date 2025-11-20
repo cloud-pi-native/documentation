@@ -92,7 +92,7 @@ sign_push:
   variables:
     COSIGN_PASSWORD: $MON_SUPER_MDP
     REGISTRY_URL: $IMAGE_REPOSITORY
-  image: bitnami/cosign:2.4.1-debian-12-r0
+  image: chainguard/cosign:latest
   before_script:
     - mkdir -p $HOME/.docker
     - echo "$DOCKER_AUTH" > $HOME/.docker/config.json
