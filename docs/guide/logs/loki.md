@@ -173,6 +173,8 @@ La requête LogQL utilisée est la suivante: `rate({namespace="mi-demo", service
 
 ## Aller plus loin
 
+La création de dashboard as code se trouve [ici](/agreement/observability#dashboard-as-code)
+
 La documentation de Loki se trouve [ici](https://grafana.com/docs/loki/latest/)
 
 Plus d'informations concernant la syntaxe de requêtage (LogQL) [ici](https://grafana.com/docs/loki/latest/query/)
