@@ -82,12 +82,13 @@ Votre dashboard est maintenant disponible dans la liste des dashbords
 ![dashboard_list](/img/guide/grafana_list_dashboard_final.png)
 
 >[!WARNING]
-> Les dashboards personnels ne sont pas sauvegardés, penser à faire un backup du code yaml nécessaire à sa mise en place
+> Afin de sauvegarder vos dashboard suivez la documentation sur le [dashboard as code](/agreement/observability#dashboard-as-code)
 
 ## Aller plus loin
 La communauté propose des dashboards pré-définis pour la plupart des outils.
 
 Quelques liens utiles concernant les dashboard:
+- La création de dashboard as code se trouve [ici](/agreement/observability#dashboard-as-code)
 - <https://grafana.com/grafana/dashboards>: Dashboards créés par la communauté
 - <https://promcat.io>: dashboards créés par la société Sysdig basés sur le principe des golden signals
 - <https://prometheus.io/docs/prometheus/latest/querying/basics>: Documentation sur le langage PromQL, permettant d'interroger Prometheus
