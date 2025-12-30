@@ -43,4 +43,4 @@ Une fois l'environnement créé, il est possible de voir la consommation total d
 Une Application ArgoCD est créé pour chaque Environnement déclaré dans la Console (et pour chaque Dépôt de type *infra*, voir [Déploiement](/guide/deployment-with-argo)).
 Par défaut, ArgoCD synchronise automatiquement cette Application et les modifications pilotées par la Console. Toutefois si des spécificités ou des tests temporaires sont nécessaires, il est possible de désactiver cette synchronisation au niveau du paramétrage de l'Environnement.
 
-![Désactivation de la synchronisation automatique](/img/tuto/env-autosync.png)
+![Désactivation de la synchronisation automatique](/img/environnement/env-autosync.png)
