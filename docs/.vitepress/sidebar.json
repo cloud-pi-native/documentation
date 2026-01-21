@@ -148,6 +148,10 @@
         "link": "/guide/best-practices"
       },
       {
+        "text": "Opérateurs",
+        "link": "/guide/operator"
+      },
+      {
         "text": "Métriques",
         "link": "/guide/metrics"
       },
