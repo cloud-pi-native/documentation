@@ -77,4 +77,4 @@ Remarques générales :
 
 > En cas de drift, il est **toujours** possible de continuer à utiliser l'application historique, le temps de corriger les drifts.
 
-> Tant qu'un `drift` est présent, il ne faut **surtout pas** activer la `Synchronisation automatique` depuis les environnements dans la console CPiN.
+> :warning: Tant qu'un `drift` est présent, il ne faut **surtout pas** activer la `Synchronisation automatique` depuis les environnements dans la console CPiN. :warning: 
