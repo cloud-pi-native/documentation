@@ -63,7 +63,7 @@ Si aucun `drift` n'est identifié, alors l'application ArgoCD historique est sup
 Si un `drift` est identifé :
  - L'environnement dans la console CPiN n'est pas positonné en `Synchronisation automatique` et l'application historique est maintenue. Il est toujours possible de la modifier depuis ArgoCD.
 
- > :warning: Il est nécessaire de corriger tous les drift avant de passer l'environnement en `Synchronisation automatique` afin de ne pas impacter vos application.
+ > :exclamation: Il est nécessaire de corriger tous les drift avant de passer l'environnement en `Synchronisation automatique` afin de ne pas impacter vos application.
  
   Afin de corriger les `drifts` plusieurs cas sont possibles :
    - *cas 1* : Présence de paramètre dans l'argoCD (surcharges de valeur depuis l'IHM) sur les champs parameters (surcharge d'un paramètre) et values (ajout d'un fichier de values depuis l'IHM). 
