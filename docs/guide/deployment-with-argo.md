@@ -77,6 +77,8 @@ Si un `drift` est identifé :
 
 Remarques générales :
 
+> Il est possible que pour un projet un environnement soit considéré comme n'ayant pas de `drift` et les autres environnements si. C'est par exemple le cas si un projet utilise une branche par environnement, un environnement sera considéré comme ok et les autres comme ayant un `drift` 
+
 > Un script réalisé par les équipes CPiN permet d'identifier les drifts pour les projets et de savoir dans quel cas le projet se trouve. La ServiceTeam communiquera aux projets ce cas afin d'indiquer quelles sont les modifications à apporter et pourra valider ces modifications afin de passer dans le nouveau mode de gestion des applications ArgoCD.
 
 > En cas de drift, il est **toujours** possible d'utiliser l'application historique, le temps de corriger les drifts.
