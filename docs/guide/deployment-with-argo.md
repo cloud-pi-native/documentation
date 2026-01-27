@@ -58,10 +58,12 @@ Les applications ArgoCD créées avant la version 9.11.5 de la console CPiN suiv
 
 Lors de la mise en production de la version 9.11.5 de la console, pour chaque application ArgoCD existante, un test est réalisé afin de vérifier s'il existe des modifications réalisées depuis l'IHM ArgoCD (nommé `drift` par les équipes CPiN).
 
-Si aucun `drift` n'est identifié, alors l'application ArgoCD historique est supprimée (en `non cascading`) et remplacée par la nouvelle avec le pattern `[nom-prj-console]-[env]-[id]-[nom-repo-infra]-[id]` l'environnement depuis la console CPiN est positionné en `Synchronisation automatique`. Les modifications de l'application ArgoCD doivent désormais passer par les fichiers values et il n'est plus possible de modifier des paramètres directement dans ArgoCD (c'est la situation cible pour tous les projets).
+Si aucun `drift` n'est identifié, alors l'application ArgoCD historique est supprimée (en `non cascading` donc sans suppression de ressources) et remplacée par la nouvelle avec le pattern `[nom-prj-console]-[env]-[id]-[nom-repo-infra]-[id]`. L'environnement depuis la console CPiN est positionnée en `Synchronisation automatique`. Les modifications de l'application ArgoCD doivent désormais se faire en mode `GirOps` ce qui apporte un versionning et un historique des modifications dans les fichiers values.
 
-Si un drift est identifé :
- - L'environnement depius la console CPiN n'est pas positonné en `Synchronisation automatique` et l'application historique est maintenue et il est toujours possible de la modifier depuis ArgoCD. Afin de corriger les `drifts` nous avons identifés différents cas de `drift` :
+Si un `drift` est identifé :
+ - L'environnement dans la console CPiN n'est pas positonné en `Synchronisation automatique` et l'application historique est maintenue. Il est toujours possible de la modifier depuis ArgoCD.
+ > Il est nécessaire de corriger tous les drift avant de passer l'environnement en `Synchronisation automatique` afin de ne pas impacter vos application.
+  Afin de corriger les `drifts` plusieurs cas sont possibles :
    - *cas 1* : Présence de paramètre dans l'argoCD (surcharges de valeur depuis l'IHM) sur les champs parameters (surcharge d'un paramètre) et values (ajout d'un fichier de values depuis l'IHM). Ce cas se corrige en renseignant les valeurs des paramètres dans les fichiers de values et indiquer le nom des fichiers values à utiliser depuis les repos d'infra dans la console.
    - *cas 2* : le nom des fichiers values utilisés par l'environnement ne correspondent pas au nom de l'environnement CPiN. Ce cas se corrige en renommant les fichiers values en utilisant le système de templating `values-<env>.yaml`
    - *cas 3* :  Utilisation d'une target revision différente par enironnement : pour l'instant feature non supportée, développement en cours dans la console pour le supporter dans un prochaine version. Dans ce cas, il faut continuer à utiliser l'application historique et surtout ne pas cocher la `Synchronisation automatique` de l'environnement depuis la console CPiN
