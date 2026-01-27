@@ -8,7 +8,7 @@ Lors de la configuration du **dépôt d'infrastructure**, depuis la console, il 
 
 ![Options de déploiement](/img/tuto/options-repo-infra.png)
 
-> Attention, sur les versions précédentes de la console CPiN, ces modifications s'effectuaient depuis ArgoCD dans le menu details de l'application. Il est maintenant *obligatoire* de faire ces modifications depuis la console. En effet, toute modification depuis l'interface ArgoCD sur ces éléments ne sera pas pris en compte.
+> Attention, sur les versions précédentes de la console CPiN, ces modifications s'effectuaient depuis ArgoCD dans le menu details de l'application. Il est maintenant *obligatoire* de faire ces modifications depuis la console. En effet, toute modification depuis l'interface ArgoCD sur ces éléments ne sera pas prise en compte.
 
 ## Visualisation dans ArgoCD
 
@@ -22,7 +22,7 @@ Il est possible de forcer la synchronisation avec le dépôt sur gitlab Cloud π
 
 Note : Si vous avez désactivé la synchronisation automatique, il faudra obligatoirement passer par cette synchronisation manuelle *SYNC*. Voir [Gestion des environnements](/guide/environments-management#synchronisation-argocd).
 
-Une fois que le déploiement est correctement effectué le status de l'application ArgoCD doit correspondre à :
+Une fois que le déploiement est correctement effectué le status de l'application ArgoCD passe à `Healthy` par exemple :
 
 ![ArgoCD-menus](/img/tuto/4argocd-menus.png)
 
@@ -32,10 +32,10 @@ Depuis la version 9.11.5 de la console CPiN, un changement majeur est apporté s
 
 Plusieurs applications ArgoCD sont créées en plus des applications ArgoCD associés aux repos d'infra:
 
- - [prod|hprod]-[nom-prj-console]-observability : Cette application correspond au déploiement des dashboard as code (voir le tuto sur l'observabilité). Une autre application nommée "prod" et non "hprod-[nom_projet]-observability" peut également être présente si au moins un environnement de type production est déployé. 
- - [nom-prj-console]-[env]-[id]-env : Cette application ArgoCD correspond aux éléments d'infrastructure déployé au sein de son namespace : registry pull secret pour la récupération des images sur Harbor par exemple (aucune modification n'est à faire sur cette application). Une application de ce type est créé par environnement de son projet CPiN
- - [nom-prj-console]-[nom-cluster]-[env]-root : App of apps permettant de piloter l'ensemble des applis de son projet (aucune modification n'est à faire sur cette application). Une application de ce type est créé par environnement de son projet CPiN
- - [nom-prj-console]-[env]-[id]-[nom-repo-infra]-[id] : Application ArgoCD associé au repo de code d'infra déclaré dans la console, c'est l'application correspondant à notre déploiement.
+ - [prod|hprod]-[nom-prj-console]-observability : Cette application correspond au déploiement de l'instance Grafana et des dashboard as code (voir le tuto sur l'observabilité). 2 applications de ce type peuvent exister : une pour la production (si au moins un environnement de type production existe) et une pour le hors production. 
+ - [nom-prj-console]-[env]-[id]-env : Cette application ArgoCD correspond aux éléments d'infrastructure déployés au sein de son namespace : registry pull secret pour la récupération des images sur Harbor par exemple. Une application de ce type est créé par environnement de son projet CPiN. (aucune modification n'est à faire sur cette application)
+ - [nom-prj-console]-[nom-cluster]-[env]-root : App of apps permettant de piloter l'ensemble des applis de son projet. Une application de ce type est créé par environnement de son projet CPiN. (aucune modification n'est à faire sur cette application)
+ - [nom-prj-console]-[env]-[id]-[nom-repo-infra]-[id] : Application ArgoCD associé au repo de code d'infra déclaré dans la console, c'est l'application correspondant à un déploiement.
 
  où :
   - nom-prj-console : correspond au nom du projet dans la console CPiN
@@ -44,7 +44,7 @@ Plusieurs applications ArgoCD sont créées en plus des applications ArgoCD asso
   - nom-repo-infra : correspond au nom du repo d'infra déclaré dans la console CPiN
   - id : correspond à un identifiant technique sur 4 caractères.
 
-Ainsi pour le projet `stform`, avec un environnement `demo` de type hors prod (par exemple type dev), un repo d'infra nommé `infra`dans la console et déployé sur l'environnement de formation dont le cluster se nomme `formation-app` les projets suivants seront présents dans ArgoCD :
+Ainsi pour le projet `stform`, avec un environnement `demo` de type hors prod (par exemple type dev), un repo d'infra nommé `infra` dans la console et déployé sur l'environnement de formation dont le cluster se nomme `formation-app` les projets suivants seront présents dans ArgoCD :
  - hprod-stform-observability : Car seul un environnement de type hors prod est déployé  
  - stform-demo-3c58-env : correspond au déploiement du ns des quotas et du registry pull secret
  - stform-formation-app-demo-root : Meta application qui controle les autres.
