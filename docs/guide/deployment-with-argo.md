@@ -69,9 +69,11 @@ Si un `drift` est identifé :
    - *cas 1* : Présence de paramètre dans l'argoCD (surcharges de valeur depuis l'IHM) sur les champs parameters (surcharge d'un paramètre) et values (ajout d'un fichier de values depuis l'IHM). 
    > :white_check_mark: Ce cas se corrige en renseignant les valeurs des paramètres dans les fichiers de values et indiquer le nom des fichiers values à utiliser depuis les repos d'infra dans la console.
    - *cas 2* : le nom des fichiers values utilisés par l'environnement ne correspondent pas au nom de l'environnement CPiN.
-   :white_check_mark:  Ce cas se corrige en renommant les fichiers values en utilisant le système de templating `values-<env>.yaml`
-   - *cas 3* :  Utilisation d'une target revision différente par enironnement : pour l'instant feature non supportée, développement en cours dans la console pour le supporter dans un prochaine version. Dans ce cas, il faut continuer à utiliser l'application historique et surtout ne pas cocher la `Synchronisation automatique` de l'environnement depuis la console CPiN
-   - *cas 4* : utilisation du multi-sources  pour l'instant feature non supportée, développement en cours dans la console pour le supporter dans un prochaine version. Dans ce cas, il faut continuer à utiliser l'application historique et surtout ne pas cocher la `Synchronisation automatique` de l'environnement depuis la console CPiN 
+   > :white_check_mark:  Ce cas se corrige en renommant les fichiers values en utilisant le système de templating `values-<env>.yaml`
+   - *cas 3* :  Utilisation d'une target revision différente par enironnement : pour l'instant cette feature n'est pas supportée, un développement est en cours dans la console pour supporter cette option et sera présente dans un prochaine version.
+   > :warning: Dans ce cas, il faut continuer à utiliser l'application historique et surtout ne pas cocher la `Synchronisation automatique` de l'environnement depuis la console CPiN
+   - *cas 4* : utilisation du multi-sources : pour l'instant cette feature npour l'instant cette feature n'est pas supportée, un développement est en cours dans la console pour supporter cette option et sera présente dans un prochaine version.
+   > :warning: Dans ce cas, il faut continuer à utiliser l'application historique et surtout ne pas cocher la `Synchronisation automatique` de l'environnement depuis la console CPiN 
 
 Remarques générales :
 
