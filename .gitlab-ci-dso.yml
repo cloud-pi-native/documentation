@@ -12,10 +12,29 @@ variables:
   TAG: "${CI_COMMIT_REF_SLUG}"
   DOCKERFILE: Dockerfile
   REGISTRY_URL: "${IMAGE_REPOSITORY}"
+  NODE_VERSION: "22"
+  PNPM_VERSION: "10"
 
 stages:
+  - test
   - read-secret
   - docker-build
+
+test-build:
+  stage: test
+  image: node:${NODE_VERSION}-alpine
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@${PNPM_VERSION} --activate
+  script:
+    - pnpm install --frozen-lockfile
+    - pnpm run build
+  cache:
+    key:
+      files:
+        - pnpm-lock.yaml
+    paths:
+      - .pnpm-store
 
 read_secret:
   stage: read-secret
