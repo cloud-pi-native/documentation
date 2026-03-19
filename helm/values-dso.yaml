@@ -19,7 +19,7 @@ docs:
     repository: harbor.dso.cpin.numerique-interieur.fr/documentationcpin/dso-documentation
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
-    tag: latest
+    tag: ci-cpin-hosting
   podAnnotations: {}
   podSecurityContext: {}
   # fsGroup: 2000
