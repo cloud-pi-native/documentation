@@ -8,9 +8,10 @@ sources:
   - https://github.com/cloud-pi-native/documentation
 dependencies: []
 maintainers:
-  - name: this-is-tobi
-    email: this-is-tobi@proton.me
-    url: https://github.com/this-is-tobi
+  - name: Team Socle
+    url: https://github.com/orgs/cloud-pi-native/teams/socle
+  - name: Service Team
+    url: https://github.com/orgs/cloud-pi-native/teams/service-team
 # icon: A URL to an SVG or PNG image to be used as an icon (optional).
 deprecated: false
 annotations: {}

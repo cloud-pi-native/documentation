@@ -16,7 +16,7 @@ imagePullSecrets:
 docs:
   replicaCount: 1
   image:
-    repository: ghcr.io/cloud-pi-native/documentation
+    repository: harbor.dso.cpin.numerique-interieur.fr/documentationcpin/dso-documentation
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: latest
@@ -42,7 +42,7 @@ docs:
     className: ""
     annotations: {}
     hosts:
-      - host: doc-dso.dev.numerique-interieur.com
+      - host: doc-dso.app.cpin.numerique-interieur.fr
         paths:
           - path: /
             pathType: Prefix
