@@ -1,33 +1,44 @@
 # Gestion des rôles
 
-Les rôles permettent d'augmenter ou diminuer les droits de chaque membre de votre équipe.
+Cette page explique la gestion des rôles au niveau projet.
 
-Si un membre de l'équipe est associé à plusieurs rôles, il prendra les permissions de tous les rôles associés.
+Pour les rôles plateforme (scope Console), voir : [Rôles plateforme](/administration/roles).
 
-Cliquez sur l'onglet **roles**
-![menu-projet-depot](/img/guide/roles/onglets-projet-v9-roles.png)
+## Accéder aux onglets Équipe et Rôles
 
-## Rôles du projet
+Chemin : sélectionner un projet → onglets `Équipe` / `Rôles`.
 
-La page Rôles présente la liste des rôles du projet :
+![Onglets du projet](/img/guide/roles/onglets-projet-v9-roles.png)
+
+## Consulter qui a quoi (onglet Équipe)
+
+L’onglet `Équipe` affiche les membres du projet et les rôles qui leur sont associés.
+
+![Membres du projet et rôles](/img/iam/project-members.png)
+
+La capture ci-dessus illustre un exemple avec un utilisateur de test.
+
+## Gérer les rôles (onglet Rôles)
+
+L’onglet `Rôles` présente la liste des rôles du projet.
 
 ![default](/img/guide/roles/default.png)
 
-Par défaut le rôle `Tout le monde` regroupe tous les membres de l'équipe avec les permissions suivantes :
+Par défaut, le rôle `Tout le monde` regroupe tous les membres de l'équipe avec les permissions suivantes :
 
 - Reprovisionner le projet
 - Voir les environnements
 - Voir les dépôts
 
-## Créer un rôle
+## Créer ou modifier un rôle
 
 Cliquer sur le bouton `Ajouter un rôle`.
 
 ![add_role](/img/guide/roles/add.png)
 
-Le champ de texte `Nom du rôle` permet de choisir le nom du rôle à créer.
+Le champ `Nom du rôle` permet de choisir le nom du rôle à créer.
 
-Détail des permissions :
+### Permissions disponibles
 
 - Projet
   - Gérer le projet : Permet de gérer tout le projet et ses ressources associées
@@ -44,31 +55,39 @@ Détail des permissions :
   - Gérer les dépôts : Permet de créer, éditer, supprimer des dépôts
   - Voir les dépôts : Permet de visualiser tous les dépôts et leurs configurations
 
-Cliquer sur le bouton `Enregistrer` pour créer le rôle.
+Cliquer sur `Enregistrer` pour créer le rôle.
 
-## Assigner/Retirer un membre à un rôle
+### Ajouter/retirer des membres à un rôle
 
-Cliquer sur le rôle voulu et aller dans l'onglet `Membres`
+Après création, sélectionner le rôle puis ouvrir l’onglet `Membres` pour ajouter/retirer des utilisateurs. Les modifications sont sauvegardées automatiquement.
 
-![Menu](/img/guide/roles/membres.png)
-
-Dans l'exemple, Aurahan est associé au rôle Dev.
-
-Les modifications concernant les membres d'un rôle sont sauvegardées automatiquement.
-
-Il est possible de retrouver un récapitulatif des rôles associés aux membres du projet sur la page `Equipes` :
-
-![Menu](/img/guide/roles/recap_membres_projet.png)
-
-Ici :
-
-- Baptiste est le créateur du projet
-- Pierre a le rôle ops
-- Aurahan a les rôles dev et PO
+![Membres d’un rôle projet](/img/iam/project-role-members.png)
 
 ## Supprimer un rôle
 
-Pour supprimer un rôle, sélectionner celui-ci dans la liste des rôles et cliquer sur le bouton `Supprimer`
+Pour supprimer un rôle, sélectionner celui-ci dans la liste des rôles puis cliquer sur `Supprimer`.
+
+## Règles importantes
+
+### Cumul des rôles
+
+Les permissions sont cumulatives : un utilisateur obtient l’ensemble des permissions de tous les rôles qui lui sont assignés. Il n’y a pas de mécanisme de “refus” qui viendrait retirer des droits.
+
+Exemple : si un rôle donne `Voir les dépôts` et un autre donne `Gérer les dépôts`, l’utilisateur pourra `Gérer les dépôts`.
+
+### Rôles préconfigurés (lecture seule)
+
+Certains rôles sont fournis par la plateforme (rôles “système”). Ils sont en lecture seule : vous ne pouvez pas modifier leurs permissions ni leur nom, mais vous pouvez ajouter/retirer des membres.
+
+Pour les identifier, vérifier que les champs de paramétrage sont non modifiables (grisés) dans l’interface.
+
+![Paramétrage d’un rôle lecture seule](/img/iam/project-role-readonly.png)
+
+## Vérification GitLab (si synchronisation active)
+
+Selon l’intégration et le niveau de synchronisation, l’affectation à un rôle peut se traduire par une appartenance visible côté GitLab (groupe synchronisé).
+
+![GitLab - membres du groupe](/img/iam/gitlab-group-members.png)
 
 ## Exemple de rôle
 

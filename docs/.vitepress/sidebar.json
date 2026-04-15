@@ -46,6 +46,10 @@
         "link": "/platform/compatibility"
       },
       {
+        "text": "Architecture IAM",
+        "link": "/platform/iam"
+      },
+      {
         "text": "Matrice de compétences",
         "link": "/platform/skills-matrix"
       },
@@ -243,6 +247,10 @@
       {
         "text": "Utilisateurs",
         "link": "/administration/utilisateurs"
+      },
+      {
+        "text": "Rôles",
+        "link": "/administration/roles"
       },
       {
         "text": "Organisations",
