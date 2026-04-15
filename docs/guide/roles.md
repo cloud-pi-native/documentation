@@ -4,12 +4,43 @@ Les rôles permettent d'augmenter ou diminuer les droits de chaque membre de vot
 
 Si un membre de l'équipe est associé à plusieurs rôles, il prendra les permissions de tous les rôles associés.
 
-Cliquez sur l'onglet **roles**
-![menu-projet-depot](/img/guide/roles/onglets-projet-v9-roles.png)
+## Cumul des rôles
+
+Les permissions sont cumulatives : un utilisateur obtient l’ensemble des permissions présentes dans tous les rôles qui lui sont assignés. Il n’y a pas de mécanisme de “refus” qui viendrait retirer des droits.
+
+Exemple : si un rôle donne `Voir les dépôts` et un autre donne `Gérer les dépôts`, l’utilisateur pourra `Gérer les dépôts`.
+
+Cette page couvre les rôles au niveau projet. Pour les rôles plateforme (scope Console), voir : [Rôles plateforme](/administration/roles).
+
+Chemin : sélectionner un projet → onglets `Équipe` / `Rôles`.
+
+![Onglets du projet](/img/guide/roles/onglets-projet-v9-roles.png)
+
+## Rôles préconfigurés (lecture seule)
+
+Certains rôles peuvent être fournis par la plateforme (rôles “système”). Ces rôles préconfigurés sont en lecture seule : vous ne pouvez pas modifier leurs permissions (ni leur nom), mais vous pouvez ajouter/retirer des membres.
+
+Pour des permissions spécifiques à votre équipe, créez un rôle sur mesure.
 
 ## Rôles du projet
 
-La page Rôles présente la liste des rôles du projet :
+### Voir les rôles par membre (onglet Équipe)
+
+L’onglet `Équipe` affiche les membres du projet et les rôles qui leur sont associés.
+
+![Membres du projet et rôles](/img/iam/project-members.png)
+
+La capture ci-dessus illustre un exemple avec un utilisateur de test.
+
+Pour vérifier “qui a quoi”, privilégier l’onglet `Équipe`. Pour modifier des permissions, utiliser l’onglet `Rôles`.
+
+Selon l’intégration et le niveau de synchronisation, l’affectation à un rôle peut aussi se traduire par une appartenance visible côté GitLab (groupe synchronisé).
+
+![GitLab - membres du groupe](/img/iam/gitlab-group-members.png)
+
+### Gérer les rôles (onglet Rôles)
+
+L’onglet `Rôles` présente la liste des rôles du projet :
 
 ![default](/img/guide/roles/default.png)
 
@@ -46,25 +77,11 @@ Détail des permissions :
 
 Cliquer sur le bouton `Enregistrer` pour créer le rôle.
 
-## Assigner/Retirer un membre à un rôle
+### Ajouter/retirer des membres à un rôle
 
-Cliquer sur le rôle voulu et aller dans l'onglet `Membres`
+Une fois le rôle créé, sélectionner le rôle voulu puis aller dans l’onglet `Membres` pour ajouter/retirer des utilisateurs. Les modifications sont sauvegardées automatiquement.
 
-![Menu](/img/guide/roles/membres.png)
-
-Dans l'exemple, Aurahan est associé au rôle Dev.
-
-Les modifications concernant les membres d'un rôle sont sauvegardées automatiquement.
-
-Il est possible de retrouver un récapitulatif des rôles associés aux membres du projet sur la page `Equipes` :
-
-![Menu](/img/guide/roles/recap_membres_projet.png)
-
-Ici :
-
-- Baptiste est le créateur du projet
-- Pierre a le rôle ops
-- Aurahan a les rôles dev et PO
+![Membres d’un rôle projet](/img/iam/project-role-members.png)
 
 ## Supprimer un rôle
 
