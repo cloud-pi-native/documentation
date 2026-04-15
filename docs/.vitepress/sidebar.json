@@ -46,6 +46,10 @@
         "link": "/platform/compatibility"
       },
       {
+        "text": "Architecture IAM",
+        "link": "/platform/iam"
+      },
+      {
         "text": "Matrice de compétences",
         "link": "/platform/skills-matrix"
       },
