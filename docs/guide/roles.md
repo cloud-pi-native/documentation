@@ -60,15 +60,11 @@ Détail des permissions :
 
 Cliquer sur le bouton `Enregistrer` pour créer le rôle.
 
-## Assigner/Retirer un membre à un rôle
-
-Cliquer sur le rôle voulu et aller dans l'onglet `Membres`
+Une fois le rôle créé, sélectionner le rôle voulu puis aller dans l’onglet `Membres` pour ajouter/retirer des utilisateurs. Les modifications sont sauvegardées automatiquement.
 
 ![Menu](/img/guide/roles/membres.png)
 
 Dans l'exemple, Aurahan est associé au rôle Dev.
-
-Les modifications concernant les membres d'un rôle sont sauvegardées automatiquement.
 
 Il est possible de retrouver un récapitulatif des rôles associés aux membres du projet sur la page `Equipes` :
 
