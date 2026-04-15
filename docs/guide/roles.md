@@ -4,8 +4,16 @@ Les rôles permettent d'augmenter ou diminuer les droits de chaque membre de vot
 
 Si un membre de l'équipe est associé à plusieurs rôles, il prendra les permissions de tous les rôles associés.
 
+Cette page couvre les rôles au niveau projet. Pour les rôles plateforme (scope Console), voir : [Rôles plateforme](/administration/roles).
+
 Cliquez sur l'onglet **roles**
 ![menu-projet-depot](/img/guide/roles/onglets-projet-v9-roles.png)
+
+## Rôles préconfigurés (lecture seule)
+
+Certains rôles peuvent être fournis par la plateforme (rôles “système”). Ces rôles préconfigurés sont en lecture seule : vous ne pouvez pas modifier leurs permissions (ni leur nom), mais vous pouvez ajouter/retirer des membres.
+
+Pour des permissions spécifiques à votre équipe, créez un rôle sur mesure.
 
 ## Rôles du projet
 
@@ -65,6 +73,20 @@ Ici :
 - Baptiste est le créateur du projet
 - Pierre a le rôle ops
 - Aurahan a les rôles dev et PO
+
+## Parcours dans la Console
+
+Chemin : sélectionner un projet → onglet `Rôles`.
+
+![Paramétrage d’un rôle projet](/img/iam/project-role-general.png)
+
+L’onglet `Membres` permet d’ajouter/retirer des utilisateurs au rôle.
+
+![Membres d’un rôle projet](/img/iam/project-role-members.png)
+
+Le récapitulatif des rôles par utilisateur est visible dans l’onglet `Équipe`.
+
+![Membres du projet et rôles](/img/iam/project-members.png)
 
 ## Supprimer un rôle
 
