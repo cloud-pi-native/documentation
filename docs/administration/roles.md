@@ -72,7 +72,11 @@ Paramètres de configuration utiles (plugin GitLab) :
 | `auditorGroupPath` | Groupe OIDC donnant les droits d’auditeur GitLab |
 | `projectMaintainerGroupPathSuffix` | Suffixe OIDC donnant l’accès Maintainer |
 | `projectDeveloperGroupPathSuffix` | Suffixe OIDC donnant l’accès Developer |
-| `projectReporterGroupPathSuffix` | Suffixe OIDC donnant l’accès Reporter |
+| `projectReporterGroupPathSuffix` | Suffixe OIDC donnant l'accès Reporter |
+
+:::warning
+**Comportement hérité (9.16.x)** — Par défaut, GitLab attribue le rôle **Developer** à tout membre ajouté à un groupe/projet. Le rôle *Lecture seule* (`/console/readonly` → Reporter / Auditeur) n'a donc aucun effet, le rôle Developer par défaut l'emporte. Ce comportement sera corrigé dans une prochaine version : GitLab utilisera le rôle **Guest** par défaut.
+:::
 
 ## Voir aussi
 
