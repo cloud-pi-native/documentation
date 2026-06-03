@@ -78,6 +78,10 @@ Paramètres de configuration utiles (plugin GitLab) :
 **Phase de rétrocompatibilité (9.16.x)** — **GitLab** attribue toujours le rôle `Developer` par défaut lors de l'ajout d'un membre. Le rôle `Lecture seule` de la Console (`/console/readonly`, normalement dédié aux personnes chargés de faire des rapports ou des audits) n'a donc aucun effet sur **Gitlab**. Ce comportement est conservé temporairement pour compatibilité ; Il évoluera vers le rôle **Gitlab** `Invité` (`Guest`) dans une prochaine version.
 :::
 
+:::danger
+**Changement cassant** — Les rôles sont désormais provisionnés de manière autoritaire dans les services intégrés (GitLab). La Console prend le contrôle total de l'appartenance : tout membre non tracé par la Console sera **supprimé**, et seuls les membres assignés via les rôles Console seront **ajoutés**. Ce comportement empêche toute dérive entre la Console et les services externes. Les modifications manuelles de membership dans GitLab seront écrasées lors de la synchronisation.
+:::
+
 ## Voir aussi
 
 - [Gestion des rôles (projet)](/guide/roles)
