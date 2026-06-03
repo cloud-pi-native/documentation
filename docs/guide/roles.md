@@ -103,6 +103,10 @@ Correspondance des rôles projet vers GitLab (par défaut) :
 
 Cette correspondance peut être adaptée par les administrateurs via la configuration du plugin GitLab.
 
+:::warning
+**Phase de rétrocompatibilité (9.16.x)** — GitLab attribue toujours le rôle **Developer** par défaut lors de l'ajout d'un membre. En conséquence, le rôle *Lecture seule* (`/console/readonly` → Reporter) n'a aucun effet pratique, le rôle Developer par défaut l'emportant. Ce comportement est conservé temporairement pour compatibilité ; il évoluera vers le rôle **Guest** par défaut dans une prochaine version, ce qui permettra au rôle Lecture seule de s'appliquer correctement.
+:::
+
 Exemple (GitLab) :
 
 ![GitLab - membres du groupe](/img/iam/gitlab-group-members.png)
