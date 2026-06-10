@@ -122,6 +122,10 @@
         "link": "/guide/environments-management"
       },
       {
+        "text": "Gestion des déploiements",
+        "link": "/guide/deployment-management"
+      },
+      {
         "text": "Gestion des secrets",
         "collapsed": true,
         "items": [
@@ -193,7 +197,6 @@
             "text": "API Gateway",
             "link": "/guide/accelerateurs/api-gateway"
           }
-
         ]
       }
     ]
