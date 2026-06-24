@@ -10,7 +10,7 @@ Cloud π Native est composée d'une **plateforme de services Open Source** à de
 
 **La plateforme** comprend:
 
-- Une [usine de logicielle](https://github.com/cloud-pi-native/socle) qui utilise plusieurs services.
+- Une [usine logicielle](https://github.com/cloud-pi-native/socle) qui utilise plusieurs services.
 - Une [console](https://github.com/cloud-pi-native/console) Web consommant ses services afin de construire et déployer vos ressources applicatives (projets, membres, environnements, etc). Il est aussi possible d'enregistrer des services supplémentaires grâce à son `architecture core / plugins`. Chaque plugin s'enregistre sur des hooks liés au cycle de vie du projet (création d'un projet, d'un environnement ou d'un dépôt, ajout d'un membre, etc...). Les plugins enregistrés recoivent l'ensemble des informations liées aux actions sur les projets par le biais du gestionnaire de plugins. L'ajout d'un nouveau plugin est détaillé [ici](https://github.com/cloud-pi-native/console/blob/main/misc/plugins.md)
 
 ## Architecture fonctionnelle de la plateforme
