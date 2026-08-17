@@ -74,9 +74,9 @@ La video suivante illustre cette fonctionnalité
 ## Logs
 Le couple Loki/Grafana est utilisé pour vous donner accès à vos logs.
 
-> __:warning: Les logs ne sont conservés que sur une durée de 30 jours.__
+> __:warning: Les logs ne sont conservés que sur une durée de 6 mois.__
 
-Pour les besoins de conservation au delà de 30 jours, le projet doit mettre en place un collecteur de logs (rsyslog, fluentbit, fluentd, vector, kafka, ...) dans le périmètre de son application afin de récupérer le flux de logs et les stockés sur un autre support (S3 par exemple)
+Pour les besoins de conservation au delà de 6 mois, le projet doit mettre en place un collecteur de logs (rsyslog, fluentbit, fluentd, vector, kafka, ...) dans le périmètre de son application afin de récupérer le flux de logs et les stockés sur un autre support (S3 par exemple)
 
 Les logs peuvent être transmises via le protocol HTTP, syslog ou vers un kafka.
 
