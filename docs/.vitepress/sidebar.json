@@ -279,6 +279,40 @@
       {
         "text": "Plugins",
         "link": "/administration/plugins"
+      },
+      {
+        "text": "Droits fins (RBAC outils)",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "Console CPiN",
+            "link": "/administration/rbac/console-cpin"
+          },
+          {
+            "text": "Vault",
+            "link": "/administration/rbac/vault"
+          },
+          {
+            "text": "Keycloak",
+            "link": "/administration/rbac/keycloak"
+          },
+          {
+            "text": "Harbor",
+            "link": "/administration/rbac/harbor"
+          },
+          {
+            "text": "Nexus",
+            "link": "/administration/rbac/nexus"
+          },
+          {
+            "text": "SonarQube",
+            "link": "/administration/rbac/sonarqube"
+          },
+          {
+            "text": "Grafana",
+            "link": "/administration/rbac/grafana"
+          }
+        ]
       }
     ]
   },
