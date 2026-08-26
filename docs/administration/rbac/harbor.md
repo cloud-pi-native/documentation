@@ -15,9 +15,9 @@ Ce que chaque rôle Console obtient réellement dans Harbor. Les chemins `/conso
 | DevOps | `project-<name>-devops` | **Guest** sur le projet (pull/lecture, pas de push) |
 | Développeur | `project-<name>-developer` | **Guest** sur le projet (pull/lecture) |
 | Lecture seule | `project-<name>-readonly` | **Guest** sur le projet (lecture) |
-| Lecture seule | `platform-readonly` | **Guest** sur **tous** les projets (lecture transverse) |
+| Lecture seule | `/console/readonly` | **Guest** sur **tous** les projets (lecture transverse) |
 | Security | `project-<name>-security` | **Guest** sur le projet (lecture) |
-| Security | `platform-security` | **Guest** sur **tous** les projets (lecture transverse) |
+| Security | `/console/security` | **Guest** sur **tous** les projets (lecture transverse) |
 | Guest | — | Aucun accès |
 
 ---
@@ -35,23 +35,22 @@ La Console mappe chaque groupe OIDC vers un **rôle Harbor** et une **portée** 
 
 | Groupe Keycloak (ADR 014) | Rôle Harbor | Portée |
 | --- | --- | --- |
-| `console-admin` | **Admin** (global) | Global |
-| `platform-admin` | **Admin** (global) | Global |
-| `platform-security` | **Guest** | Tous projets (plateforme) |
-| `platform-readonly` | **Guest** | Tous projets (plateforme) |
+| `console-admin` (`/console/admin`) | **Admin** (global) | Global |
+| `/console/security` | **Guest** | Tous projets (plateforme) |
+| `/console/readonly` | **Guest** | Tous projets (plateforme) |
 | `project-<name>-admin` | **Developer** | Projet `<name>` |
 | `project-<name>-devops` | **Guest** | Projet `<name>` |
 | `project-<name>-developer` | **Guest** | Projet `<name>` |
 | `project-<name>-security` | **Guest** | Projet `<name>` |
 | `project-<name>-readonly` | **Guest** | Projet `<name>` |
 
-> Le groupe racine du projet (`/<slug>`) est ajouté en tant que membre avec un niveau **Guest** (access level 3) pour l'ensemble de ses membres.
+> Le groupe racine du projet (`/<slug>`) est ajouté en tant que membre avec un niveau **Limited Guest** (pas de tirage d'images) pour l'ensemble de ses membres.
 
 ---
 
 ## 3. Points d'attention
 
-- **Admin plateforme = Admin global Harbor.** `console-admin` et `platform-admin` obtiennent le rôle **Admin global** Harbor (gestion de tous les projets), pas un simple rôle de projet.
+- **Admin plateforme = Admin global Harbor.** `console-admin` (`/console/admin`) obtient le rôle **Admin** Harbor (gestion de tous les projets), pas un simple rôle de projet.
 - **Seul `project-<name>-admin` pousse des images.** Tous les autres rôles projet (`devops`, `developer`, `security`, `readonly`) sont en **Guest** (pull/lecture uniquement).
 - **Groupes `security`/`readonly` = Guest transverse.** Ils sont ajoutés en Guest sur **tous** les projets Harbor (portée plateforme), ce qui donne une lecture globale des registres.
 

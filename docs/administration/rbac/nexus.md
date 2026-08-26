@@ -15,9 +15,9 @@ Ce que chaque rôle Console obtient réellement dans Nexus. Les chemins `/consol
 | DevOps | `project-<name>-devops` | Déployer des artefacts (écriture, projet) |
 | Développeur | `project-<name>-developer` | Téléchargement de dépendances (lecture, projet) |
 | Lecture seule | `project-<name>-readonly` | Lecture des packages/dépôts du projet |
-| Lecture seule | `platform-readonly` | Lecture de tous les dépôts (plateforme) |
+| Lecture seule | `/console/readonly` | Lecture de tous les dépôts (plateforme) |
 | Security | `project-<name>-security` | Lecture des dépôts du projet |
-| Security | `platform-security` | Lecture de tous les dépôts (plateforme) |
+| Security | `/console/security` | Lecture de tous les dépôts (plateforme) |
 | Guest | — | Aucun accès |
 
 ---
@@ -35,10 +35,9 @@ La Console répartit les chemins de groupes OIDC en deux ensembles : **écriture
 
 | Groupe Keycloak (ADR 014) | Type d'accès Nexus | Portée |
 | --- | --- | --- |
-| `console-admin` | **Admin** | Tous les dépôts |
-| `platform-admin` | **Admin** + lecture tous projets | Tous les dépôts |
-| `platform-security` | **Lecture** | Tous les dépôts (repos) |
-| `platform-readonly` | **Lecture** | Tous les dépôts |
+| `console-admin` (`/console/admin`) | **Admin** + lecture tous projets | Tous les dépôts |
+| `/console/security` | **Lecture** | Tous les dépôts (repos) |
+| `/console/readonly` | **Lecture** | Tous les dépôts |
 | `project-<name>-admin` | **Écriture** | Dépôt CI/CD du projet `<name>` |
 | `project-<name>-devops` | **Écriture** (déployer artefacts) | Dépôt du projet `<name>` |
 | `project-<name>-developer` | **Lecture** (téléchargement dépendances) | Dépôt du projet `<name>` |
@@ -50,7 +49,7 @@ La Console répartit les chemins de groupes OIDC en deux ensembles : **écriture
 ## 3. Points d'attention
 
 - **DevOps = déployer, Developer = télécharger.** Les groupes `admin`/`devops` projet écrivent (publish artefacts, deploy) ; `developer`/`security`/`readonly` ne font que lire/télécharger.
-- **Admin plateforme = Admin Nexus.** `console-admin` et `platform-admin` obtiennent le rôle Admin Nexus (gestion de tous les dépôts).
+- **Admin plateforme = Admin Nexus.** `console-admin` (`/console/admin`) obtient les privilèges Admin + lecture de tous les dépôts (rôles platform agrégés sur l'ensemble des projets).
 - **Rôles agrégés par projet Nexus.** Le rôle `<name>-ID` agrège les privilèges de tous les projets Nexus activés ; un groupe OIDC est rattaché à ce rôle avec le bon niveau (read/write).
 
 ---

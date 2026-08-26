@@ -13,7 +13,7 @@ Ce que chaque rôle peut réellement faire dans la Console CPiN. Les chemins `/c
 | Admin plateforme (administration) | `/console/admin` | Administration globale : tous les projets, utilisateurs, plugins |
 | Administrateur projet | `project-<name>-admin` | Gérer le projet : membres, environnements, dépôts, suppression |
 | DevOps | `project-<name>-devops` | Gérer environnements + dépôts, rejouer les hooks, voir les secrets. **Pas** de déploiement applicatif ni de gestion des membres |
-| Développeur | `project-<name>-developer` | Voir les secrets, rejouer le projet, gérer/lister les dépôts, lister les environnements |
+| Développeur | `project-<name>-developer` | Gérer et lister les dépôts, lister les environnements. **Pas** d'accès aux secrets ni de rejeu du projet |
 | Lecture seule (projet) | `project-<name>-readonly` | Lister environnements et dépôts uniquement |
 | Lecture seule (administration) | `/console/readonly` | Lecture transverse (tous projets) |
 | Security (projet) | `project-<name>-security` | Lecture transverse du projet (audit) |
@@ -68,7 +68,7 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `project-
 
 - **Permissions = masque de bits.** Un rôle est la somme de permissions ; l'agrégation inter-rôles se fait en OU binaire.
 - **`/console/admin` (nom `console-admin`) donne l'administration globale.** C'est le seul groupe Keycloak d'admin plateforme ; `platform-admin` est une policy Vault interne de même périmètre.
-- **Développeur peut voir les secrets et rejouer le projet.** Contrairement à une lecture strictement passive, `developer` inclut la consultation des secrets et le rejeu de projet.
+- **Le développeur n'accède pas aux secrets.** Le rôle `developer` couvre la gestion des dépôts et la lecture des environnements ; ni `SEE_SECRETS` ni `REPLAY_HOOKS` ne lui sont accordés (contrairement à DevOps).
 - **DevOps sans déploiement applicatif.** Le déploiement applicatif n'est pas couvert par le rôle DevOps par défaut ; ses droits portent sur les environnements, dépôts, hooks et secrets.
 - **Groupe `everyonePerms`.** Un projet peut définir des permissions pour *Tout le monde*, appliquées au-delà des rôles nominatifs.
 

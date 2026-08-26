@@ -10,15 +10,14 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 
 | Rôle Console | Groupe Keycloak (ADR 014) | Accès obtenu dans Grafana |
 | --- | --- | --- |
-| Admin plateforme | `console-admin` | **Organization Admin** (globale) |
-| Admin plateforme | `platform-admin` | **Editor** (globale) |
+| Admin plateforme | `console-admin` (`/console/admin`) | **Organization Admin** (globale) |
 | Administrateur projet | `project-<name>-admin` | **Editor** (hors-prod + prod) |
 | DevOps | `project-<name>-devops` | **Editor** (hors-prod + prod) |
 | Développeur | `project-<name>-developer` | **Viewer** (hors-prod + prod) |
 | Lecture seule | `project-<name>-readonly` | **Viewer** (projet) |
-| Lecture seule | `platform-readonly` | **Viewer** (globale) |
+| Lecture seule | `/console/readonly` | **Viewer** (globale) |
 | Security | `project-<name>-security` | **Viewer** (projet) |
-| Security | `platform-security` | **Viewer** (globale) |
+| Security | `/console/security` | **Viewer** (globale) |
 | Guest | — | Aucun accès |
 
 > L'accès réel dépend de la capacité Console par bucket d'environnement : `MANAGE_ENVIRONMENTS` → Editor, `LIST_ENVIRONMENTS` → Viewer, séparément pour hors-prod (`hprod`) et prod.
@@ -36,9 +35,8 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 
 | Groupe Keycloak (ADR 014) | Rôle Grafana (mapping OIDC) | Portée |
 | --- | --- | --- |
-| `console-admin` | **Organization Admin** | Globale |
-| `platform-admin` | **Editor** | Globale |
-| `platform-security`, `platform-readonly` | **Viewer** | Globale (lecture) |
+| `console-admin` (`/console/admin`) | **Organization Admin** | Globale |
+| `/console/security`, `/console/readonly` | **Viewer** | Globale (lecture) |
 | `project-<name>-admin` | **Editor** | Projet `<name>` |
 | `project-<name>-devops` | **Editor** | Projet `<name>` |
 | `project-<name>-developer` | **Viewer** | Projet `<name>` |
@@ -55,7 +53,7 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 
 - **Scoping prod / hors-prod.** Un utilisateur avec droits sur un environnement `prod` est ajouté aux sous-groupes `prod-*` ; sinon aux `hprod-*` (hors-prod). Les deux peuvent coexister.
 - **RW vs RO.** `RW` ⇔ capacité `MANAGE_ENVIRONMENTS` (édition) ; `RO` ⇔ `LIST_ENVIRONMENTS` (visualisation). Le propriétaire du projet est toujours RW.
-- **`console-admin` ≠ `platform-admin` sur Grafana.** `console-admin` obtient le rôle **Organization Admin** (globale) ; `platform-admin` n'obtient que **Editor** (globale). Seul `console-admin` est administrateur de l'organisation Grafana.
+- **Un seul groupe admin plateforme.** `console-admin` (`/console/admin`) obtient le rôle **Organization Admin** (globale). `platform-admin` n'est pas un groupe Keycloak — c'est une *policy* Vault interne.
 - **Le rôle Grafana réel est défini par la config OIDC de Grafana**, pas par la Console. La Console se contente de maintenir l'arborescence de groupes Keycloak.
 
 ---

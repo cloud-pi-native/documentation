@@ -15,9 +15,9 @@ Ce que chaque rôle Console obtient réellement dans Vault. Les chemins `/consol
 | DevOps | `project-<name>-devops` | Lecture + écriture des secrets du projet (`kv/data/<name>/*`) |
 | Développeur | `project-<name>-developer` | Liste des secrets du projet uniquement (pas de lecture/écriture du contenu) |
 | Lecture seule | `project-<name>-readonly` | Liste des secrets du projet uniquement |
-| Lecture seule | `platform-readonly` | Lecture plateforme non-sensible : `sys/health`, `sys/mounts`, `sys/auth`, `sys/policies` |
+| Lecture seule | `/console/readonly` | Lecture plateforme non-sensible : `sys/health`, `sys/mounts`, `sys/auth`, `sys/policies` |
 | Security | `project-<name>-security` | Audit projet : `kv/metadata/<name>/*`, `transit/keys/<name>/*` |
-| Security | `platform-security` | Audit & posture plateforme : `sys/audit`, `sys/policies`, `kv/metadata`, jamais le contenu |
+| Security | `/console/security` | Audit & posture plateforme : `sys/audit`, `sys/policies`, `kv/metadata`, jamais le contenu |
 | Guest | — | Aucun accès Vault |
 
 ---
@@ -36,10 +36,9 @@ La Console génère, pour chaque projet, les groupes d'identité Vault suivants 
 
 | Groupe Keycloak (ADR 014) | *Policy* générée | Portée & capacités |
 | --- | --- | --- |
-| `console-admin` | `platform--admin` | **Admin plateforme** : `path "sys/*" { create, read, update, delete, list, sudo }`. |
-| `platform-admin` | `platform--admin` | **Admin plateforme** : identique à `console-admin` (`sys/*`). |
-| `platform-security` | `platform--security` | **Audit & posture** : lecture `sys/audit/*`, `sys/policies/*`, `sys/auth/*`. Pas de contenu de secrets. Métadonnées KV (`kv/metadata/*`). |
-| `platform-readonly` | `platform--readonly` | **Lecture plateforme non-sensible** : `sys/health`, `sys/mounts`, `sys/auth`, `sys/policies`. Pas `kv/data/*`. |
+| `/console/admin` (groupe d'identité Vault `console-admin`) | `platform--admin` | **Admin plateforme** : `path "sys/*" { create, read, update, delete, list, sudo }`. |
+| `/console/security` (groupe d'identité Vault `console-security`) | `platform--security` | **Audit & posture** : lecture `sys/audit/*`, `sys/policies/*`, `sys/auth/*`. Pas de contenu de secrets. |
+| `/console/readonly` (groupe d'identité Vault `console-readonly`) | `platform--readonly` | **Lecture plateforme non-sensible** : `sys/health`, `sys/mounts`, `sys/auth`, `sys/policies`. Pas `kv/data/*`. |
 | `project-<name>-admin` | `app--<name>--admin` | **Owner périmètre projet** : tout ce que `devops` + **gestion des rôles d'accès du projet** (policies préfixées projet, AppRole/JWT du projet, clés transit du projet). Pas d'accès hors projet. |
 | `project-<name>-devops` | `project--<name>--devops` | **RW secrets du projet** : `kv/data/<name>/*` {create,read,update,delete,list} ; `kv/metadata/*` {read,list} ; `kv/delete\|undelete\|destroy/*` {update} ; usage clés transit ; gestion AppRole CI (lecture `role-id`, génération `secret-id`). |
 | `project-<name>-developer` | `project--<name>--readonly` | **List strict projet** : `kv/data/<name>/*` {list}. Rien d'autre. |
@@ -54,7 +53,7 @@ La Console génère, pour chaque projet, les groupes d'identité Vault suivants 
 
 - **Développeur = liste seule.** Le rôle `developer` ne dispose que de la capacité `list` sur `kv/data/<name>/*` : il ne peut ni lire ni écrire le contenu d'un secret.
 - **Security = audit, pas données.** Les groupes `security` (plateforme et projet) n'ont accès qu'aux *métadonnées* et à la posture (`sys/audit`, `kv/metadata`, `transit/keys`) ; jamais au contenu (`kv/data`).
-- **Admin projet ≠ admin plateforme.** `project-<name>-admin` est confiné au mount `<name>/*` ; seul `console-admin`/`platform-admin` obtient `sys/*`.
+- **Admin projet ≠ admin plateforme.** `project-<name>-admin` est confiné au mount `<name>/*` ; seul le groupe `/console/admin` obtient `sys/*`.
 - **Groupe = matrice ADR 014.** Les noms ci-dessus sont canoniques (ADR 014) ; le chemin Keycloak réel créé par la Console dépend de la configuration déployée.
 
 ---

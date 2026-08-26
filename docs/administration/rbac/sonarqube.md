@@ -10,15 +10,14 @@ Ce que chaque rôle Console obtient réellement dans SonarQube. Les chemins `/co
 
 | Rôle Console | Groupe Keycloak (ADR 014) | Accès obtenu dans SonarQube |
 | --- | --- | --- |
-| Admin plateforme | `console-admin` | Administer System + profils/quality gates + **création de projets** (global) |
-| Admin plateforme | `platform-admin` | Administer System + profils/quality gates (global, **sans** création de projets) |
+| Admin plateforme | `console-admin` (`/console/admin`) | Administer System + profils/quality gates + **création de projets** (global) |
 | Administrateur projet | `project-<name>-admin` | Admin du projet + scan, codeviewer, issueadmin, securityhotspotadmin |
 | DevOps | `project-<name>-devops` | scan + user + codeviewer + issueadmin + securityhotspotadmin |
 | Développeur | `project-<name>-developer` | identique DevOps (mêmes permissions projet) |
 | Lecture seule | `project-<name>-readonly` | user + codeviewer (projet, visualisation) |
-| Lecture seule | `platform-readonly` | user + codeviewer (tous projets, visualisation) |
+| Lecture seule | `/console/readonly` | user + codeviewer (tous projets, visualisation) |
 | Security | `project-<name>-security` | identique DevOps (mêmes permissions projet) |
-| Security | `platform-security` | identique DevOps (tous projets) |
+| Security | `/console/security` | identique DevOps (tous projets) |
 | Guest | — | Aucun accès |
 
 ---
@@ -36,10 +35,8 @@ La Console mappe chaque groupe OIDC vers un ensemble de **permissions projet Son
 
 | Groupe Keycloak (ADR 014) | Permissions SonarQube (projet) |
 | --- | --- |
-| `console-admin` | **Administer System**, **Administer Quality Profiles**, **Administer Quality Gates**, **Create Projects** (admin global) |
-| `platform-admin` | **Administer System**, **Administer Quality Profiles**, **Administer Quality Gates** (admin global, sans Create Projects) |
-| `platform-security` | Applique le groupe `project-<name>-security` |
-| `platform-readonly` | Applique le groupe `project-<name>-readonly` |
+| `console-admin` (`/console/admin`) | **Administer System**, **Administer Quality Profiles**, **Administer Quality Gates**, **Create Projects** (admin global) |
+| `/console/security`, `/console/readonly` | Appliquent les groupes `project-<name>-security` / `project-<name>-readonly` sur chaque projet |
 | `project-<name>-admin` | `admin`, `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
 | `project-<name>-devops` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
 | `project-<name>-developer` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
@@ -53,7 +50,7 @@ La Console mappe chaque groupe OIDC vers un ensemble de **permissions projet Son
 ## 3. Points d'attention
 
 - **Developer et Security ne sont pas en lecture seule.** Contrairement à Vault, ils disposent de `scan` (exécution d'analyse) et de `issueadmin`/`securityhotspotadmin` (traitement des tickets de sécurité).
-- **Admin projet ≠ admin global.** `project-<name>-admin` administre **le projet Sonar**, pas l'instance. L'admin global (`Administer System`, profils, gates, création de projets) est réservé à `console-admin` ; `platform-admin` y est proche mais **sans** Create Projects.
+- **Admin projet ≠ admin global.** `project-<name>-admin` administre **le projet Sonar**, pas l'instance. L'admin global (`Administer System`, profils, gates, création de projets) est réservé à `console-admin` (`/console/admin`).
 
 ---
 

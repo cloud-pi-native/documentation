@@ -15,9 +15,9 @@ En tant qu'IdP, Keycloak ne « donne » pas d'écran de droits : il place chaque
 | DevOps | `project-<name>-devops` | RW projet (sauf admin) |
 | Développeur | `project-<name>-developer` | Lecture/projet (selon outil) |
 | Lecture seule | `project-<name>-readonly` | Lecture transverse du projet |
-| Lecture seule | `platform-readonly` | Lecture transverse plateforme |
+| Lecture seule | `/console/readonly` | Lecture transverse plateforme |
 | Security | `project-<name>-security` | Audit/lecture transverse du projet |
-| Security | `platform-security` | Audit/lecture transverse plateforme |
+| Security | `/console/security` | Audit/lecture transverse plateforme |
 | Guest | — | Aucun droit jusqu'à ajout manuel à un projet |
 
 ---
@@ -36,9 +36,8 @@ La Console crée et réconcilie automatiquement l'arborescence suivante (noms ca
 | Groupe Keycloak (ADR 014) | Nature | Propagé vers |
 | --- | --- | --- |
 | `console-admin` | Groupe plateforme **admin** | Tous les outils (Admin global) |
-| `platform-admin` | Groupe plateforme **admin** | Tous les outils (Admin global) |
-| `platform-security` | Groupe plateforme **sécurité** | Tous les outils (audit/security) |
-| `platform-readonly` | Groupe plateforme **lecture** | Tous les outils (lecture, `*RO`) |
+| `/console/security` | Groupe plateforme **sécurité** | Tous les outils (audit/security) |
+| `/console/readonly` | Groupe plateforme **lecture** | Tous les outils (lecture, `*RO`) |
 | `project-<name>-admin` | Groupe projet **admin** | Tous les outils (admin projet) |
 | `project-<name>-devops` | Groupe projet **devops** | Tous les outils (RW projet) |
 | `project-<name>-developer` | Groupe projet **developer** | Tous les outils (selon outil) |
@@ -54,7 +53,7 @@ La Console crée et réconcilie automatiquement l'arborescence suivante (noms ca
 
 ## 3. Points d'attention
 
-- **`console-admin` et `platform-admin` sont tous deux Admin global.** Les deux groupes mappent en Admin partout.
+- **`/console/admin` (nom `console-admin`) est le seul groupe plateforme admin.** `platform-admin`, `platform-security`, `platform-readonly` ne sont pas des groupes Keycloak : ce sont des *policies* internes Vault attachées aux groupes `/console/*`.
 - **Groupes environnement vs groupes projet.** ArgoCD et Grafana s'appuient sur des sous-groupes **environment-scoped** (`<env>/RO|RW`, `grafana/<hprod|prod>-RO|RW`). Les autres outils s'appuient sur les groupes **projet-role** (`project-<name>/{admin,devops,developer,readonly,security}`).
 - **Security / Readonly sont des portées de lecture/audit**, jamais d'écriture, sur la plupart des outils.
 - **Utilisateurs tiers (IDP externe).** Aucun groupe par défaut n'est attribué ; ils n'ont aucun droit tant qu'un membre les ajoute à un projet avec le niveau adéquat.
