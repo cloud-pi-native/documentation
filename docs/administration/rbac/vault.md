@@ -11,12 +11,12 @@ Ce que chaque rôle Console obtient réellement dans Vault. Les chemins `/consol
 | Rôle Console | Groupe Keycloak (ADR 014) | Accès obtenu dans Vault |
 | --- | --- | --- |
 | Admin plateforme | `console-admin` | Admin global : gestion complète `sys/*` (auth, mounts, policies, entities) |
-| Administrateur projet | `project-<name>-admin` | Owner du projet : tout `devops` + gestion des rôles/policies AppRole/transit du projet |
-| DevOps | `project-<name>-devops` | Lecture + écriture des secrets du projet (`kv/data/<name>/*`) |
-| Développeur | `project-<name>-developer` | Liste des secrets du projet uniquement (pas de lecture/écriture du contenu) |
-| Lecture seule | `project-<name>-readonly` | Liste des secrets du projet uniquement |
+| Administrateur projet | `/<slug>/console/admin` | Owner du projet : tout `devops` + gestion des rôles/policies AppRole/transit du projet |
+| DevOps | `/<slug>/console/devops` | Lecture + écriture des secrets du projet (`kv/data/<name>/*`) |
+| Développeur | `/<slug>/console/developer` | Liste des secrets du projet uniquement (pas de lecture/écriture du contenu) |
+| Lecture seule | `/<slug>/console/readonly` | Liste des secrets du projet uniquement |
 | Lecture seule | `/console/readonly` | Lecture plateforme non-sensible : `sys/health`, `sys/mounts`, `sys/auth`, `sys/policies` |
-| Security | `project-<name>-security` | Audit projet : `kv/metadata/<name>/*`, `transit/keys/<name>/*` |
+| Security | `/<slug>/console/security` | Audit projet : `kv/metadata/<name>/*`, `transit/keys/<name>/*` |
 | Security | `/console/security` | Audit & posture plateforme : `sys/audit`, `sys/policies`, `kv/metadata`, jamais le contenu |
 | Guest | — | Aucun accès Vault |
 
@@ -39,11 +39,11 @@ La Console génère, pour chaque projet, les groupes d'identité Vault suivants 
 | `/console/admin` (groupe d'identité Vault `console-admin`) | `platform--admin` | **Admin plateforme** : `path "sys/*" { create, read, update, delete, list, sudo }`. |
 | `/console/security` (groupe d'identité Vault `console-security`) | `platform--security` | **Audit & posture** : lecture `sys/audit/*`, `sys/policies/*`, `sys/auth/*`. Pas de contenu de secrets. |
 | `/console/readonly` (groupe d'identité Vault `console-readonly`) | `platform--readonly` | **Lecture plateforme non-sensible** : `sys/health`, `sys/mounts`, `sys/auth`, `sys/policies`. Pas `kv/data/*`. |
-| `project-<name>-admin` | `app--<name>--admin` | **Owner périmètre projet** : tout ce que `devops` + **gestion des rôles d'accès du projet** (policies préfixées projet, AppRole/JWT du projet, clés transit du projet). Pas d'accès hors projet. |
-| `project-<name>-devops` | `project--<name>--devops` | **RW secrets du projet** : `kv/data/<name>/*` {create,read,update,delete,list} ; `kv/metadata/*` {read,list} ; `kv/delete\|undelete\|destroy/*` {update} ; usage clés transit ; gestion AppRole CI (lecture `role-id`, génération `secret-id`). |
-| `project-<name>-developer` | `project--<name>--readonly` | **List strict projet** : `kv/data/<name>/*` {list}. Rien d'autre. |
-| `project-<name>-security` | `project--<name>--security` | **Audit projet** : `kv/metadata/<name>/*` {list} ; `transit/keys/<name>/*` {list}. Pas `kv/data/*`. |
-| `project-<name>-readonly` | `project--<name>--readonly` | **List strict projet** : `kv/data/<name>/*` {list}. Rien d'autre. |
+| `/<slug>/console/admin` | `app--<name>--admin` | **Owner périmètre projet** : tout ce que `devops` + **gestion des rôles d'accès du projet** (policies préfixées projet, AppRole/JWT du projet, clés transit du projet). Pas d'accès hors projet. |
+| `/<slug>/console/devops` | `project--<name>--devops` | **RW secrets du projet** : `kv/data/<name>/*` {create,read,update,delete,list} ; `kv/metadata/*` {read,list} ; `kv/delete\|undelete\|destroy/*` {update} ; usage clés transit ; gestion AppRole CI (lecture `role-id`, génération `secret-id`). |
+| `/<slug>/console/developer` | `project--<name>--readonly` | **List strict projet** : `kv/data/<name>/*` {list}. Rien d'autre. |
+| `/<slug>/console/security` | `project--<name>--security` | **Audit projet** : `kv/metadata/<name>/*` {list} ; `transit/keys/<name>/*` {list}. Pas `kv/data/*`. |
+| `/<slug>/console/readonly` | `project--<name>--readonly` | **List strict projet** : `kv/data/<name>/*` {list}. Rien d'autre. |
 
 > Un projet possède également un rôle AppRole technique (`<name>`) pour les robots CI, rattaché aux *policies* `tech--<name>--ro` (lecture d'un secret de registre dédié) et `app--<name>--admin`.
 
@@ -53,7 +53,7 @@ La Console génère, pour chaque projet, les groupes d'identité Vault suivants 
 
 - **Développeur = liste seule.** Le rôle `developer` ne dispose que de la capacité `list` sur `kv/data/<name>/*` : il ne peut ni lire ni écrire le contenu d'un secret.
 - **Security = audit, pas données.** Les groupes `security` (plateforme et projet) n'ont accès qu'aux *métadonnées* et à la posture (`sys/audit`, `kv/metadata`, `transit/keys`) ; jamais au contenu (`kv/data`).
-- **Admin projet ≠ admin plateforme.** `project-<name>-admin` est confiné au mount `<name>/*` ; seul le groupe `/console/admin` obtient `sys/*`.
+- **Admin projet ≠ admin plateforme.** `/<slug>/console/admin` est confiné au mount `<name>/*` ; seul le groupe `/console/admin` obtient `sys/*`.
 - **Groupe = matrice ADR 014.** Les noms ci-dessus sont canoniques (ADR 014) ; le chemin Keycloak réel créé par la Console dépend de la configuration déployée.
 
 ---

@@ -11,12 +11,12 @@ Ce que chaque rôle Console obtient réellement dans SonarQube. Les chemins `/co
 | Rôle Console | Groupe Keycloak (ADR 014) | Accès obtenu dans SonarQube |
 | --- | --- | --- |
 | Admin plateforme | `console-admin` (`/console/admin`) | Administer System + profils/quality gates + **création de projets** (global) |
-| Administrateur projet | `project-<name>-admin` | Admin du projet + scan, codeviewer, issueadmin, securityhotspotadmin |
-| DevOps | `project-<name>-devops` | scan + user + codeviewer + issueadmin + securityhotspotadmin |
-| Développeur | `project-<name>-developer` | identique DevOps (mêmes permissions projet) |
-| Lecture seule | `project-<name>-readonly` | user + codeviewer (projet, visualisation) |
+| Administrateur projet | `/<slug>/console/admin` | Admin du projet + scan, codeviewer, issueadmin, securityhotspotadmin |
+| DevOps | `/<slug>/console/devops` | scan + user + codeviewer + issueadmin + securityhotspotadmin |
+| Développeur | `/<slug>/console/developer` | identique DevOps (mêmes permissions projet) |
+| Lecture seule | `/<slug>/console/readonly` | user + codeviewer (projet, visualisation) |
 | Lecture seule | `/console/readonly` | user + codeviewer (tous projets, visualisation) |
-| Security | `project-<name>-security` | identique DevOps (mêmes permissions projet) |
+| Security | `/<slug>/console/security` | identique DevOps (mêmes permissions projet) |
 | Security | `/console/security` | identique DevOps (tous projets) |
 | Guest | — | Aucun accès |
 
@@ -36,12 +36,12 @@ La Console mappe chaque groupe OIDC vers un ensemble de **permissions projet Son
 | Groupe Keycloak (ADR 014) | Permissions SonarQube (projet) |
 | --- | --- |
 | `console-admin` (`/console/admin`) | **Administer System**, **Administer Quality Profiles**, **Administer Quality Gates**, **Create Projects** (admin global) |
-| `/console/security`, `/console/readonly` | Appliquent les groupes `project-<name>-security` / `project-<name>-readonly` sur chaque projet |
-| `project-<name>-admin` | `admin`, `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
-| `project-<name>-devops` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
-| `project-<name>-developer` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
-| `project-<name>-security` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
-| `project-<name>-readonly` | `user`, `codeviewer` |
+| `/console/security`, `/console/readonly` | Appliquent les groupes `/<slug>/console/security` / `/<slug>/console/readonly` sur chaque projet |
+| `/<slug>/console/admin` | `admin`, `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
+| `/<slug>/console/devops` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
+| `/<slug>/console/developer` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
+| `/<slug>/console/security` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
+| `/<slug>/console/readonly` | `user`, `codeviewer` |
 
 > **Égalité devops = developer = security.** Sur un projet, les trois rôles `devops`, `developer` et `security` reçoivent **exactement les mêmes permissions** (`scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`). Seul `admin` ajoute `admin`. `readonly` se limite à `user` + `codeviewer`.
 
@@ -50,7 +50,7 @@ La Console mappe chaque groupe OIDC vers un ensemble de **permissions projet Son
 ## 3. Points d'attention
 
 - **Developer et Security ne sont pas en lecture seule.** Contrairement à Vault, ils disposent de `scan` (exécution d'analyse) et de `issueadmin`/`securityhotspotadmin` (traitement des tickets de sécurité).
-- **Admin projet ≠ admin global.** `project-<name>-admin` administre **le projet Sonar**, pas l'instance. L'admin global (`Administer System`, profils, gates, création de projets) est réservé à `console-admin` (`/console/admin`).
+- **Admin projet ≠ admin global.** `/<slug>/console/admin` administre **le projet Sonar**, pas l'instance. L'admin global (`Administer System`, profils, gates, création de projets) est réservé à `console-admin` (`/console/admin`).
 
 ---
 

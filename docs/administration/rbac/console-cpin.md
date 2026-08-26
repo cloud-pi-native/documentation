@@ -11,12 +11,12 @@ Ce que chaque rôle peut réellement faire dans la Console CPiN. Les chemins `/c
 | Rôle Console | Groupe Keycloak | Ce que je peux faire |
 | --- | --- | --- |
 | Admin plateforme (administration) | `/console/admin` | Administration globale : tous les projets, utilisateurs, plugins |
-| Administrateur projet | `project-<name>-admin` | Gérer le projet : membres, environnements, dépôts, suppression |
-| DevOps | `project-<name>-devops` | Gérer environnements + dépôts, rejouer les hooks, voir les secrets. **Pas** de déploiement applicatif ni de gestion des membres |
-| Développeur | `project-<name>-developer` | Gérer et lister les dépôts, lister les environnements. **Pas** d'accès aux secrets ni de rejeu du projet |
-| Lecture seule (projet) | `project-<name>-readonly` | Lister environnements et dépôts uniquement |
+| Administrateur projet | `/<slug>/console/admin` | Gérer le projet : membres, environnements, dépôts, suppression |
+| DevOps | `/<slug>/console/devops` | Gérer environnements + dépôts, rejouer les hooks, voir les secrets. **Pas** de déploiement applicatif ni de gestion des membres |
+| Développeur | `/<slug>/console/developer` | Gérer et lister les dépôts, lister les environnements. **Pas** d'accès aux secrets ni de rejeu du projet |
+| Lecture seule (projet) | `/<slug>/console/readonly` | Lister environnements et dépôts uniquement |
 | Lecture seule (administration) | `/console/readonly` | Lecture transverse (tous projets) |
-| Security (projet) | `project-<name>-security` | Lecture transverse du projet (audit) |
+| Security (projet) | `/<slug>/console/security` | Lecture transverse du projet (audit) |
 | Security (administration) | `/console/security` | Lecture transverse (tous projets, audit) |
 | Guest (utilisateur externe sans groupe) | — | Aucun accès jusqu'à ajout à un projet |
 
@@ -31,14 +31,14 @@ Ce que chaque rôle peut réellement faire dans la Console CPiN. Les chemins `/c
 
 ## 2. Rôles projet et permissions
 
-Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `project-<name>/*`.
+Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/console/*`.
 
 | Rôle Console | Groupe Keycloak (ADR 014) | Permissions (bits `PROJECT_PERMS`) |
 | --- | --- | --- |
-| **Administrateur** | `project-<name>-admin` | `MANAGE` (gérer le projet) |
-| **DevOps** | `project-<name>-devops` | `SEE_SECRETS`, `REPLAY_HOOKS`, `MANAGE_ENVIRONMENTS`, `MANAGE_REPOSITORIES`, `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES` |
-| **Développeur** | `project-<name>-developer` | `SEE_SECRETS`, `REPLAY_HOOKS`, `MANAGE_REPOSITORIES`, `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES` |
-| **Lecture seule** | `project-<name>-readonly` | `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES` |
+| **Administrateur** | `/<slug>/console/admin` | `MANAGE` (gérer le projet) |
+| **DevOps** | `/<slug>/console/devops` | `SEE_SECRETS`, `REPLAY_HOOKS`, `MANAGE_ENVIRONMENTS`, `MANAGE_REPOSITORIES`, `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES` |
+| **Développeur** | `/<slug>/console/developer` | `SEE_SECRETS`, `REPLAY_HOOKS`, `MANAGE_REPOSITORIES`, `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES` |
+| **Lecture seule** | `/<slug>/console/readonly` | `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES` |
 
 ### Bits `PROJECT_PERMS` disponibles
 `GUEST(0)`, `MANAGE(1)`, `MANAGE_MEMBERS(2)`, `MANAGE_ENVIRONMENTS(3)`, `MANAGE_REPOSITORIES(4)`, `MANAGE_ROLES(5)`, `SEE_SECRETS(6)`, `REPLAY_HOOKS(7)`, `LIST_ENVIRONMENTS(8)`, `LIST_REPOSITORIES(9)`, `LIST_MEMBERS(10)`, `LIST_ROLES(11)`, `MANAGE_DEPLOYMENTS(12)`, `LIST_DEPLOYMENTS(13)`.
@@ -60,6 +60,8 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `project-
 
 > **Axe ABAC `userType`** : indépendamment des groupes, certains endpoints restreignent l'accès selon le type d'utilisateur (`human` / `bot` / `ghost`, colonne `User.type`). Cet axe s'ajoute au masque de bits admin/projet.
 
+> **Chemin Keycloak réel des rôles projet** : la Console crée `/<slug>/console/<rôle>` (ex. `/monprojet/console/admin`), sous le groupe racine `/<slug>`. Ce chemin est l'identité OIDC effective — il ne porte pas le nom `project-<name>-<rôle>` (qui n'existe pas côté Keycloak).
+>
 > **Seul un rôle admin peut être lié à un groupe Keycloak existant** via un groupe d'application externe (chemin commençant par `/`). Les rôles projet ont leur groupe d'application préfixé automatiquement par `/<slug>`.
 
 ---
@@ -76,7 +78,7 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `project-
 
 ## 5. Mise en cohérence automatique
 
-- À la création d'un projet, la Console initialise les rôles projet système liés aux groupes `project-<name>/*`.
+- À la création d'un projet, la Console initialise les rôles projet système liés aux groupes `/<slug>/console/*`.
 - À chaque mise à jour, la Console crée les groupes Keycloak correspondants et synchronise les membres selon leurs rôles.
 - Les rôles admin liés à un groupe d'application externe sont réconciliés vers des groupes Keycloak existants (créés si absents).
 

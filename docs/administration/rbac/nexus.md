@@ -11,12 +11,12 @@ Ce que chaque rôle Console obtient réellement dans Nexus. Les chemins `/consol
 | Rôle Console | Groupe Keycloak (ADR 014) | Accès obtenu dans Nexus |
 | --- | --- | --- |
 | Admin plateforme | `console-admin` | **Admin** : gestion de tous les dépôts |
-| Administrateur projet | `project-<name>-admin` | Gérer le dépôt CI/CD du projet (écriture) |
-| DevOps | `project-<name>-devops` | Déployer des artefacts (écriture, projet) |
-| Développeur | `project-<name>-developer` | Téléchargement de dépendances (lecture, projet) |
-| Lecture seule | `project-<name>-readonly` | Lecture des packages/dépôts du projet |
+| Administrateur projet | `/<slug>/console/admin` | Gérer le dépôt CI/CD du projet (écriture) |
+| DevOps | `/<slug>/console/devops` | Déployer des artefacts (écriture, projet) |
+| Développeur | `/<slug>/console/developer` | Téléchargement de dépendances (lecture, projet) |
+| Lecture seule | `/<slug>/console/readonly` | Lecture des packages/dépôts du projet |
 | Lecture seule | `/console/readonly` | Lecture de tous les dépôts (plateforme) |
-| Security | `project-<name>-security` | Lecture des dépôts du projet |
+| Security | `/<slug>/console/security` | Lecture des dépôts du projet |
 | Security | `/console/security` | Lecture de tous les dépôts (plateforme) |
 | Guest | — | Aucun accès |
 
@@ -38,11 +38,11 @@ La Console répartit les chemins de groupes OIDC en deux ensembles : **écriture
 | `console-admin` (`/console/admin`) | **Admin** + lecture tous projets | Tous les dépôts |
 | `/console/security` | **Lecture** | Tous les dépôts (repos) |
 | `/console/readonly` | **Lecture** | Tous les dépôts |
-| `project-<name>-admin` | **Écriture** | Dépôt CI/CD du projet `<name>` |
-| `project-<name>-devops` | **Écriture** (déployer artefacts) | Dépôt du projet `<name>` |
-| `project-<name>-developer` | **Lecture** (téléchargement dépendances) | Dépôt du projet `<name>` |
-| `project-<name>-security` | **Lecture** | Dépôt du projet `<name>` |
-| `project-<name>-readonly` | **Lecture** (packages) | Dépôt du projet `<name>` |
+| `/<slug>/console/admin` | **Écriture** | Dépôt CI/CD du projet `<name>` |
+| `/<slug>/console/devops` | **Écriture** (déployer artefacts) | Dépôt du projet `<name>` |
+| `/<slug>/console/developer` | **Lecture** (téléchargement dépendances) | Dépôt du projet `<name>` |
+| `/<slug>/console/security` | **Lecture** | Dépôt du projet `<name>` |
+| `/<slug>/console/readonly` | **Lecture** (packages) | Dépôt du projet `<name>` |
 
 ---
 
