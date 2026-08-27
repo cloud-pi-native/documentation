@@ -66,6 +66,50 @@ Suivant les principes *GitOps*, les déploiements sur l'orchestrateur du contene
 
 Ces dépôts sources sont utilisés par ArgoCD afin de déployer l'infrastructure applictive sur Kubernetes. Votre application est déployé dans un namespace dédié au projet et automatiquement provisionné par la console de la plateforme Cloud π Native.
 
+## Gestion des ressources GitLab par la Console
+
+La Console Cloud π Native pilote l'ensemble des ressources GitLab créées dans
+le groupe du projet (`<NOM_ORGANISATION>/<NOM_PROJET>`) lors de chaque
+**provisionnement** et **reprovisionnement**. Elle maintient un état de
+cohérence : les dépôts présents sur le GitLab interne sont comparés à ceux
+déclarés dans la Console, et les dépôts non conformes sont supprimés.
+
+### Dépôts gérés et marqueurs
+
+Chaque dépôt créé par la Console porte un **topic GitLab** (`plugin-managed`)
+qui le distingue des dépôts créés manuellement :
+
+- **Dépôts applicatifs et d'infrastructure** déclarés dans la Console : créés
+  dans le groupe du projet, marqués `plugin-managed`, et synchronisés avec le
+  dépôt externe via le dépôt `mirror`.
+- **Dépôts techniques** (dits *system managed*) : créés automatiquement par la
+  Console et porteurs du topic `system-managed`. Ils ne figurent jamais dans la
+  liste des dépôts déclarés du projet et sont **protégés** de toute suppression
+  lors de la réconciliation. On y trouve :
+  - le dépôt `mirror` : pilote la synchronisation des dépôts externes ;
+  - le dépôt `infra-apps` : dépôt d'infrastructure du projet ;
+  - les dépôts techniques associés aux plugins activés (par exemple le dépôt
+    d'observabilité).
+
+### Réconciliation et purge
+
+À chaque reprovisionnement, la Console :
+
+1. recrée ou met à jour les dépôts techniques (`system-managed`) ;
+2. crée ou met à jour les dépôts déclarés (`plugin-managed`) ;
+3. **supprime** les dépôts portant `plugin-managed` qui ne sont plus déclarés
+   dans le projet (dépôt supprimé dans la Console, par exemple).
+
+Un dépôt créé manuellement dans le GitLab interne **sans** marqueur de gestion
+n'est pas modifié par la Console, mais n'est pas non plus intégré aux chaînes
+de construction et de déploiement. Il est recommandé de toujours passer par la
+Console pour créer, modifier et supprimer les dépôts d'un projet.
+
+> La suppression d'un dépôt sur le GitLab interne est asynchrone. Si un
+> reprovisionnement est lancé alors qu'une suppression est déjà en cours, la
+> Console ignore l'erreur transitoire `already marked for deletion` et poursuit
+> la réconciliation.
+
 ## Schéma de fonctionnement
 Le schéma ci-dessous présente le fonctionnement général :
 
