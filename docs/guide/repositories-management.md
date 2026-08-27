@@ -26,6 +26,19 @@ Cliquer enfin sur le bouton `Ajouter le dépôt`.
 
 > Cette opération demande d'attendre jusqu'à quelques minutes.
 
+## Cohérence et nettoyage des dépôts (reprovisionnement)
+
+À chaque opération de **reprovisionnement du projet** (bouton *Reprovisionner le projet* de la [page projet](/guide/projects-management)), la console compare les dépôts présents sur le GitLab de la plateforme avec ceux déclarés dans le projet, puis supprime les dépôts non conformes. Ce comportement s'applique aux dépôts gérés par la plateforme (portant le marqueur `plugin-managed`).
+
+Pour l'utilisateur, cela signifie :
+
+- **Créer un dépôt via la console** est la seule voie sûre. Un dépôt créé manuellement dans le GitLab de la plateforme peut être supprimé lors du prochain reprovisionnement s'il est considéré comme non conforme (porteur du marqueur de gestion et absent de la liste des dépôts du projet).
+- **Supprimer un dépôt dans la console** supprime effectivement le dépôt correspondant dans le GitLab de la plateforme lors de la prochaine synchronisation. La suppression GitLab étant asynchrone, un reprovisionnement lancé juste après peut afficher un message transitoire de type `already marked for deletion` ; il est ignoré et n'interrompt plus l'opération.
+- **Certains dépôts techniques sont protégés** et ne sont jamais supprimés, même s'ils n'apparaissent pas dans la liste des dépôts du projet : le dépôt `mirror` (synchronisation des dépôts externes), le dépôt `infra-apps` (dépôt d'infrastructure) et, selon les plugins activés, les dépôts techniques associés (par exemple le dépôt d'observabilité). Ils sont recréés automatiquement si besoin.
+- Un dépôt créé manuellement dans le GitLab de la plateforme **sans** marqueur de gestion n'est pas modifié par la console, mais il n'est pas non plus intégré aux chaînes de construction et de déploiement du projet.
+
+> En cas de doute, créez, modifiez et supprimez vos dépôts uniquement depuis la console, et relancez un reprovisionnement si un dépôt apparaît manquant après une suppression.
+
 Lorsqu'un dépôt est créé dans la console en tant que `dépôt d'infrastructure`, la plateforme créée automatiquement l'application [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) associée qui permettra le déploiement.
 
 > Des exemples de dépôts sont disponibles dans la section [tutoriels](tutorials).
