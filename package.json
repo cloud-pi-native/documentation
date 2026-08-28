@@ -2,6 +2,10 @@
   "name": "@cloud-pi-native/docs",
   "type": "module",
   "version": "1.0.0",
+  "packageManager": "pnpm@11.24.0",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "vitepress build docs",
     "dev": "vitepress dev docs --port 8081",

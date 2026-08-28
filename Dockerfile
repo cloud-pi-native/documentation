@@ -2,9 +2,10 @@
 FROM docker.io/node:22-slim AS dev
 
 WORKDIR /app
-RUN npm install --location=global pnpm@10
-COPY --chown=node:root package.json pnpm-lock.yaml ./
-RUN pnpm install
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+COPY --chown=node:root package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN corepack enable && corepack install
+RUN pnpm install --frozen-lockfile
 COPY --chown=node:root docs ./docs
 ENTRYPOINT [ "pnpm", "run", "dev" ]
 

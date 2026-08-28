@@ -1,3 +1,4 @@
+
 include:
   - project: $CATALOG_PATH
     file:
@@ -13,7 +14,8 @@ variables:
   DOCKERFILE: Dockerfile
   REGISTRY_URL: "${IMAGE_REPOSITORY}"
   NODE_VERSION: "22"
-  PNPM_VERSION: "10"
+  PNPM_STORE: ".pnpm-store"
+  COREPACK_ENABLE_DOWNLOAD_PROMPT: "0"
 
 stages:
   - test
@@ -25,9 +27,9 @@ test-build:
   image: node:${NODE_VERSION}-alpine
   before_script:
     - corepack enable
-    - corepack prepare pnpm@${PNPM_VERSION} --activate
+    - corepack install
   script:
-    - pnpm install --frozen-lockfile
+    - pnpm install --frozen-lockfile --store-dir "${PNPM_STORE}"
     - pnpm run build
   cache:
     key:
