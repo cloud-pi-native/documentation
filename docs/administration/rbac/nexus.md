@@ -8,24 +8,24 @@ Ce document décrit le **modèle d'accès** mis en place dans Nexus pour chaque 
 
 Ce que chaque rôle Console obtient réellement dans Nexus. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
 
-| Rôle Console | Groupe Keycloak (ADR 014) | Accès obtenu dans Nexus |
-| --- | --- | --- |
-| Admin plateforme | `console-admin` | **Admin** : gestion de tous les dépôts |
-| Administrateur projet | `/<slug>/console/admin` | Gérer le dépôt CI/CD du projet (écriture) |
-| DevOps | `/<slug>/console/devops` | Déployer des artefacts (écriture, projet) |
-| Développeur | `/<slug>/console/developer` | Téléchargement de dépendances (lecture, projet) |
-| Lecture seule | `/<slug>/console/readonly` | Lecture des packages/dépôts du projet |
-| Lecture seule | `/console/readonly` | Lecture de tous les dépôts (plateforme) |
-| Security | `/<slug>/console/security` | Lecture des dépôts du projet |
-| Security | `/console/security` | Lecture de tous les dépôts (plateforme) |
-| Guest | — | Aucun accès |
+| Rôle Console          | Groupe Keycloak (ADR 014)   | Accès obtenu dans Nexus                         |
+| --------------------- | --------------------------- | ----------------------------------------------- |
+| Admin plateforme      | `console-admin`             | **Admin** : gestion de tous les dépôts          |
+| Administrateur projet | `/<slug>/console/admin`     | Gérer le dépôt CI/CD du projet (écriture)       |
+| DevOps                | `/<slug>/console/devops`    | Déployer des artefacts (écriture, projet)       |
+| Développeur           | `/<slug>/console/developer` | Téléchargement de dépendances (lecture, projet) |
+| Lecture seule         | `/<slug>/console/readonly`  | Lecture des packages/dépôts du projet           |
+| Lecture seule         | `/console/readonly`         | Lecture de tous les dépôts (plateforme)         |
+| Security              | `/<slug>/console/security`  | Lecture des dépôts du projet                    |
+| Security              | `/console/security`         | Lecture de tous les dépôts (plateforme)         |
+| Guest                 | —                           | Aucun accès                                     |
 
 ---
 
 ## 1. Authentification : Nexus via OIDC Keycloak
 
 - Les utilisateurs se connectent à Nexus via **OIDC** (Keycloak).
-- La Console approvisionne, pour chaque projet, un **rôle de sécurité** (`<name>-ID` / `<name>-role`) et y rattache les groupes OIDC comme membres avec des *privileges* de lecture ou d'écriture.
+- La Console approvisionne, pour chaque projet, un **rôle de sécurité** (`<name>-ID` / `<name>-role`) et y rattache les groupes OIDC comme membres avec des _privileges_ de lecture ou d'écriture.
 
 ---
 
@@ -33,16 +33,16 @@ Ce que chaque rôle Console obtient réellement dans Nexus. Les chemins `/consol
 
 La Console répartit les chemins de groupes OIDC en deux ensembles : **écriture** (publish/deploy) et **lecture** (download/browse).
 
-| Groupe Keycloak (ADR 014) | Type d'accès Nexus | Portée |
-| --- | --- | --- |
-| `console-admin` (`/console/admin`) | **Admin** + lecture tous projets | Tous les dépôts |
-| `/console/security` | **Lecture** | Tous les dépôts (repos) |
-| `/console/readonly` | **Lecture** | Tous les dépôts |
-| `/<slug>/console/admin` | **Écriture** | Dépôt CI/CD du projet `<name>` |
-| `/<slug>/console/devops` | **Écriture** (déployer artefacts) | Dépôt du projet `<name>` |
-| `/<slug>/console/developer` | **Lecture** (téléchargement dépendances) | Dépôt du projet `<name>` |
-| `/<slug>/console/security` | **Lecture** | Dépôt du projet `<name>` |
-| `/<slug>/console/readonly` | **Lecture** (packages) | Dépôt du projet `<name>` |
+| Groupe Keycloak (ADR 014)          | Type d'accès Nexus                       | Portée                         |
+| ---------------------------------- | ---------------------------------------- | ------------------------------ |
+| `console-admin` (`/console/admin`) | **Admin** + lecture tous projets         | Tous les dépôts                |
+| `/console/security`                | **Lecture**                              | Tous les dépôts (repos)        |
+| `/console/readonly`                | **Lecture**                              | Tous les dépôts                |
+| `/<slug>/console/admin`            | **Écriture**                             | Dépôt CI/CD du projet `<name>` |
+| `/<slug>/console/devops`           | **Écriture** (déployer artefacts)        | Dépôt du projet `<name>`       |
+| `/<slug>/console/developer`        | **Lecture** (téléchargement dépendances) | Dépôt du projet `<name>`       |
+| `/<slug>/console/security`         | **Lecture**                              | Dépôt du projet `<name>`       |
+| `/<slug>/console/readonly`         | **Lecture** (packages)                   | Dépôt du projet `<name>`       |
 
 ---
 
@@ -64,10 +64,10 @@ L'opération est **idempotente**.
 
 ## 5. Qui gère quoi ?
 
-| Élément | Géré par |
-| --- | --- |
-| Identité OIDC / groupes Keycloak | **Keycloak** |
-| Rôles & privilèges Nexus | **Console** (automatique) |
+| Élément                          | Géré par                  |
+| -------------------------------- | ------------------------- |
+| Identité OIDC / groupes Keycloak | **Keycloak**              |
+| Rôles & privilèges Nexus         | **Console** (automatique) |
 
 ---
 

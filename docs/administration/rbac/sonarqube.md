@@ -8,17 +8,17 @@ Ce document décrit le **modèle d'accès** mis en place dans SonarQube pour cha
 
 Ce que chaque rôle Console obtient réellement dans SonarQube. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
 
-| Rôle Console | Groupe Keycloak (ADR 014) | Accès obtenu dans SonarQube |
-| --- | --- | --- |
-| Admin plateforme | `console-admin` (`/console/admin`) | Administer System + profils/quality gates + **création de projets** (global) |
-| Administrateur projet | `/<slug>/console/admin` | Admin du projet + scan, codeviewer, issueadmin, securityhotspotadmin |
-| DevOps | `/<slug>/console/devops` | scan + user + codeviewer + issueadmin + securityhotspotadmin |
-| Développeur | `/<slug>/console/developer` | identique DevOps (mêmes permissions projet) |
-| Lecture seule | `/<slug>/console/readonly` | user + codeviewer (projet, visualisation) |
-| Lecture seule | `/console/readonly` | user + codeviewer (tous projets, visualisation) |
-| Security | `/<slug>/console/security` | identique DevOps (mêmes permissions projet) |
-| Security | `/console/security` | identique DevOps (tous projets) |
-| Guest | — | Aucun accès |
+| Rôle Console          | Groupe Keycloak (ADR 014)          | Accès obtenu dans SonarQube                                                  |
+| --------------------- | ---------------------------------- | ---------------------------------------------------------------------------- |
+| Admin plateforme      | `console-admin` (`/console/admin`) | Administer System + profils/quality gates + **création de projets** (global) |
+| Administrateur projet | `/<slug>/console/admin`            | Admin du projet + scan, codeviewer, issueadmin, securityhotspotadmin         |
+| DevOps                | `/<slug>/console/devops`           | scan + user + codeviewer + issueadmin + securityhotspotadmin                 |
+| Développeur           | `/<slug>/console/developer`        | identique DevOps (mêmes permissions projet)                                  |
+| Lecture seule         | `/<slug>/console/reader`           | user + codeviewer (projet, visualisation)                                    |
+| Lecture seule         | `/console/reader`                  | user + codeviewer (tous projets, visualisation)                              |
+| Security              | `/<slug>/console/security`         | identique DevOps (mêmes permissions projet)                                  |
+| Security              | `/console/security`                | identique DevOps (tous projets)                                              |
+| Guest                 | —                                  | Aucun accès                                                                  |
 
 ---
 
@@ -33,17 +33,17 @@ Ce que chaque rôle Console obtient réellement dans SonarQube. Les chemins `/co
 
 La Console mappe chaque groupe OIDC vers un ensemble de **permissions projet SonarQube**.
 
-| Groupe Keycloak (ADR 014) | Permissions SonarQube (projet) |
-| --- | --- |
-| `console-admin` (`/console/admin`) | **Administer System**, **Administer Quality Profiles**, **Administer Quality Gates**, **Create Projects** (admin global) |
-| `/console/security`, `/console/readonly` | Appliquent les groupes `/<slug>/console/security` / `/<slug>/console/readonly` sur chaque projet |
-| `/<slug>/console/admin` | `admin`, `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
-| `/<slug>/console/devops` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
-| `/<slug>/console/developer` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
-| `/<slug>/console/security` | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin` |
-| `/<slug>/console/readonly` | `user`, `codeviewer` |
+| Groupe Keycloak (ADR 014)              | Permissions SonarQube (projet)                                                                                           |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `console-admin` (`/console/admin`)     | **Administer System**, **Administer Quality Profiles**, **Administer Quality Gates**, **Create Projects** (admin global) |
+| `/console/security`, `/console/reader` | Appliquent les groupes `/<slug>/console/security` / `/<slug>/console/reader` sur chaque projet                           |
+| `/<slug>/console/admin`                | `admin`, `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`                                              |
+| `/<slug>/console/devops`               | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`                                                       |
+| `/<slug>/console/developer`            | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`                                                       |
+| `/<slug>/console/security`             | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`                                                       |
+| `/<slug>/console/reader`               | `user`, `codeviewer`                                                                                                     |
 
-> **Égalité devops = developer = security.** Sur un projet, les trois rôles `devops`, `developer` et `security` reçoivent **exactement les mêmes permissions** (`scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`). Seul `admin` ajoute `admin`. `readonly` se limite à `user` + `codeviewer`.
+> **Égalité devops = developer = security.** Sur un projet, les trois rôles `devops`, `developer` et `security` reçoivent **exactement les mêmes permissions** (`scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`). Seul `admin` ajoute `admin`. `reader` se limite à `user` + `codeviewer`.
 
 ---
 
@@ -64,11 +64,11 @@ L'opération est **idempotente**.
 
 ## 5. Qui gère quoi ?
 
-| Élément | Géré par |
-| --- | --- |
-| Identité OIDC / groupes Keycloak | **Keycloak** |
+| Élément                               | Géré par                  |
+| ------------------------------------- | ------------------------- |
+| Identité OIDC / groupes Keycloak      | **Keycloak**              |
 | Groupes Sonar, permissions, templates | **Console** (automatique) |
-| Application des droits | **SonarQube** |
+| Application des droits                | **SonarQube**             |
 
 ---
 
