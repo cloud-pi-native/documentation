@@ -14,8 +14,8 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 | Administrateur projet | `/<slug>/console/admin`            | **Editor** (hors-prod + prod)    |
 | DevOps                | `/<slug>/console/devops`           | **Editor** (hors-prod + prod)    |
 | Développeur           | `/<slug>/console/developer`        | **Viewer** (hors-prod + prod)    |
-| Lecture seule         | `/<slug>/console/reader`           | **Viewer** (projet)              |
-| Lecture seule         | `/console/reader`                  | **Viewer** (globale)             |
+| Lecture seule         | `/<slug>/console/readonly`           | **Viewer** (projet)              |
+| Lecture seule         | `/console/readonly`                  | **Viewer** (globale)             |
 | Security              | `/<slug>/console/security`         | **Viewer** (projet)              |
 | Security              | `/console/security`                | **Viewer** (globale)             |
 | Guest                 | —                                  | Aucun accès                      |
@@ -36,12 +36,12 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 | Groupe Keycloak (ADR 014)              | Rôle Grafana (mapping OIDC) | Portée                     |
 | -------------------------------------- | --------------------------- | -------------------------- |
 | `console-admin` (`/console/admin`)     | **Organization Admin**      | Globale                    |
-| `/console/security`, `/console/reader` | **Viewer**                  | Globale (lecture)          |
+| `/console/security`, `/console/readonly` | **Viewer**                  | Globale (lecture)          |
 | `/<slug>/console/admin`                | **Editor**                  | Projet `<name>`            |
 | `/<slug>/console/devops`               | **Editor**                  | Projet `<name>`            |
 | `/<slug>/console/developer`            | **Viewer**                  | Projet `<name>`            |
 | `/<slug>/console/security`             | **Viewer**                  | Projet `<name>`            |
-| `/<slug>/console/reader`               | **Viewer**                  | Projet `<name>`            |
+| `/<slug>/console/readonly`               | **Viewer**                  | Projet `<name>`            |
 | `/<slug>/grafana/hprod-RW`             | **Editor** (hors-prod)      | Projet `<slug>`, hors-prod |
 | `/<slug>/grafana/hprod-RO`             | **Viewer** (hors-prod)      | Projet `<slug>`, hors-prod |
 | `/<slug>/grafana/prod-RW`              | **Editor** (prod)           | Projet `<slug>`, prod      |
