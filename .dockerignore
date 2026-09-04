@@ -1,0 +1,22 @@
+# Le Dockerfile ne copie que package.json, pnpm-lock.yaml, pnpm-workspace.yaml,
+# docs/ et nginx.conf. Tout ce qui suit alourdit le contexte envoye au builder
+# (kaniko en CI) sans jamais servir -- .git a lui seul pese l'historique complet.
+
+.git
+.gitignore
+.idea
+.vscode
+
+node_modules
+**/node_modules
+
+# Sorties de build : regenerees dans l'image, jamais reprises du contexte.
+**/.vitepress/cache
+**/.vitepress/dist
+.pnpm-store
+
+# Chart Helm : consomme par ArgoCD depuis le depot, pas par l'image.
+helm
+
+*.log
+.DS_Store
