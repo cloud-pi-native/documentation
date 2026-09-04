@@ -30,7 +30,7 @@ Cliquez sur le bouton **+ Ajouter un nouvel environnement** puis compléter :
   ![type](/img/environnement/type-env.png)
   - Le cluster de destination
   ![cluster](/img/environnement/cluster-env.png)
-  - Les quotas de l'environnement pour la mémoire, CPU et GPU. Si un projet n'a pas besoin de GPU mettre 0 dans les GPU. 
+  - Les quotas de l'environnement pour la mémoire, CPU et GPU. Si un projet n'a pas besoin de GPU mettre 0 dans les GPU.
   ![quota](/img/environnement/quotas-new.png)
 
 > Les quotas associés à un environnement correspondent à la somme des valeurs définies dans "resources.limits" de l'ensemble des pods déployés sur le namespace de son projet.

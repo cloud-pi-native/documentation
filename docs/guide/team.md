@@ -6,7 +6,6 @@ Cette fonctionnalité se trouve dans l'onglet "Equipe" sur un projet.
 
 ![Menu](/img/team/menu.png)
 
-
 ## Membres du projet
 
 La page Equipe présente la liste des membres du projet :
