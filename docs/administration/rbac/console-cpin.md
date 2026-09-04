@@ -33,7 +33,7 @@ Ce que chaque rôle peut réellement faire dans la Console CPiN. Les chemins `/c
 
 Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/console/*`.
 
-| Rôle Console       | Groupe Keycloak (ADR 014)   | Permissions (bits `PROJECT_PERMS`)                                                                                    |
+| Rôle Console       | Groupe Keycloak   | Permissions (bits `PROJECT_PERMS`)                                                                                    |
 | ------------------ | --------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | **Administrateur** | `/<slug>/console/admin`     | `MANAGE` (gérer le projet)                                                                                            |
 | **DevOps**         | `/<slug>/console/devops`    | `SEE_SECRETS`, `REPLAY_HOOKS`, `MANAGE_ENVIRONMENTS`, `MANAGE_REPOSITORIES`, `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES` |
@@ -50,14 +50,11 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/
 
 | Rôle Console                                     | Groupe Keycloak (chemin) | Permissions (`ADMIN_PERMS`)                                                         |
 | ------------------------------------------------ | ------------------------ | ----------------------------------------------------------------------------------- |
-| Admin plateforme (`/console/admin`)              | `/console/admin`         | `MANAGE` + toutes les `MANAGE_*`, `LIST_*` (admin global)                           |
-| Admin plateforme (nom de groupe `console-admin`) | `console-admin`          | identique à `/console/admin` (même périmètre admin global) — nom utilisé côté Vault |
-| Security (`/console/security`)                   | `/console/security`      | lecture transverse (portée audit, `*RO`)                                            |
+| Admin plateforme (`/console/admin`) | `/console/admin` | `MANAGE` + toutes les `MANAGE_*`, `LIST_*` (admin global) |
+| Security (`/console/security`) | `/console/security` | lecture transverse (portée audit, `*RO`) |
 | Lecture seule (`/console/reader`)                | `/console/reader`        | lecture transverse (`*RO`)                                                          |
 
-> **Groupes Keycloak d'administration plateforme** : les seuls chemins Keycloak réels sont `/console/admin`, `/console/security` et `/console/reader` (nommage en sous-groupes conservé et étendu par rétro-compatibilité). Les noms `console-admin`, `console-security`, `console-reader` désignent le _nom_ de groupe (sans `/`) dans certains outils (ex. Vault), mais le chemin Keycloak effectif reste `/console/<rôle>`.
->
-> **`platform-admin` / `platform-security` / `platform-reader` ne sont PAS des groupes Keycloak.** Ce sont les _policies_ internes Vault (`platform--admin` / `platform--security` / `platform--reader`) couplées aux rôles `console-*`, représentant la portée transversale (tous projets).
+> **Groupes Keycloak d'administration plateforme** : le chemin plateforme d'administration est `/admin`, groupe d'amorçage géré en dehors de la Console ; `/console/admin` (admin), `/console/security` (audit) et `/console/reader` (lecture) sont les groupes plateforme réconciliés, propagés vers les outils.
 
 > **Axe ABAC `userType`** : indépendamment des groupes, certains endpoints restreignent l'accès selon le type d'utilisateur (`human` / `bot` / `ghost`, colonne `User.type`). Cet axe s'ajoute au masque de bits admin/projet.
 
@@ -70,22 +67,14 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/
 ## 4. Points d'attention
 
 - **Permissions = masque de bits.** Un rôle est la somme de permissions ; l'agrégation inter-rôles se fait en OU binaire.
-- **`/console/admin` (nom `console-admin`) donne l'administration globale.** C'est le seul groupe Keycloak d'admin plateforme ; `platform-admin` est une policy Vault interne de même périmètre.
+- **`/admin` donne l'administration globale.** Groupe d'amorçage géré en dehors de la Console.
 - **Le développeur n'accède pas aux secrets.** Le rôle `developer` couvre la gestion des dépôts et la lecture des environnements ; ni `SEE_SECRETS` ni `REPLAY_HOOKS` ne lui sont accordés (contrairement à DevOps).
 - **DevOps sans déploiement applicatif.** Le déploiement applicatif n'est pas couvert par le rôle DevOps par défaut ; ses droits portent sur les environnements, dépôts, hooks et secrets.
 - **Groupe `everyonePerms`.** Un projet peut définir des permissions pour _Tout le monde_, appliquées au-delà des rôles nominatifs.
 
 ---
 
-## 5. Mise en cohérence automatique
-
-- À la création d'un projet, la Console initialise les rôles projet système liés aux groupes `/<slug>/console/*`.
-- À chaque mise à jour, la Console crée les groupes Keycloak correspondants et synchronise les membres selon leurs rôles.
-- Les rôles admin liés à un groupe d'application externe sont réconciliés vers des groupes Keycloak existants (créés si absents).
-
----
-
-## 6. Qui gère quoi ?
+## 5. Qui gère quoi ?
 
 | Élément                           | Géré par                           |
 | --------------------------------- | ---------------------------------- |
@@ -95,9 +84,3 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/
 | Application des droits            | **Console** + outils consommateurs |
 
 ---
-
-## 7. Références
-
-- Fiche « Hooks transverses - membres, roles, zones, clusters » (ce dossier).
-- Fiche « Mécanisme des hooks et plugins ».
-- **Matrice RBAC** : ADR « Gestion des droits fins » (table Console, section _Decision_).

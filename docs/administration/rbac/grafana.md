@@ -8,9 +8,8 @@ Ce document décrit le **modèle d'accès** mis en place dans Grafana pour chaqu
 
 Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environnement). Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
 
-| Rôle Console          | Groupe Keycloak (ADR 014)          | Accès obtenu dans Grafana        |
+| Rôle Console          | Groupe Keycloak          | Accès obtenu dans Grafana        |
 | --------------------- | ---------------------------------- | -------------------------------- |
-| Admin plateforme      | `console-admin` (`/console/admin`) | **Organization Admin** (globale) |
 | Administrateur projet | `/<slug>/console/admin`            | **Editor** (hors-prod + prod)    |
 | DevOps                | `/<slug>/console/devops`           | **Editor** (hors-prod + prod)    |
 | Développeur           | `/<slug>/console/developer`        | **Viewer** (hors-prod + prod)    |
@@ -33,9 +32,8 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 
 ## 2. Groupes Keycloak et rôle Grafana résultant
 
-| Groupe Keycloak (ADR 014)              | Rôle Grafana (mapping OIDC) | Portée                     |
+| Groupe Keycloak              | Rôle Grafana (mapping OIDC) | Portée                     |
 | -------------------------------------- | --------------------------- | -------------------------- |
-| `console-admin` (`/console/admin`)     | **Organization Admin**      | Globale                    |
 | `/console/security`, `/console/reader` | **Viewer**                  | Globale (lecture)          |
 | `/<slug>/console/admin`                | **Editor**                  | Projet `<name>`            |
 | `/<slug>/console/devops`               | **Editor**                  | Projet `<name>`            |
@@ -53,20 +51,11 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 
 - **Scoping prod / hors-prod.** Un utilisateur avec droits sur un environnement `prod` est ajouté aux sous-groupes `prod-*` ; sinon aux `hprod-*` (hors-prod). Les deux peuvent coexister.
 - **RW vs RO.** `RW` ⇔ capacité `MANAGE_ENVIRONMENTS` (édition) ; `RO` ⇔ `LIST_ENVIRONMENTS` (visualisation). Le propriétaire du projet est toujours RW.
-- **Un seul groupe admin plateforme.** `console-admin` (`/console/admin`) obtient le rôle **Organization Admin** (globale). `platform-admin` n'est pas un groupe Keycloak — c'est une _policy_ Vault interne.
 - **Le rôle Grafana réel est défini par la config OIDC de Grafana**, pas par la Console. La Console se contente de maintenir l'arborescence de groupes Keycloak.
 
 ---
 
-## 4. Mise en cohérence automatique
-
-À chaque réconciliation de projet, la Console synchronise l'arborescence de groupes Grafana du projet.
-
-L'opération est **idempotente**.
-
----
-
-## 5. Qui gère quoi ?
+## 4. Qui gère quoi ?
 
 | Élément                              | Géré par                  |
 | ------------------------------------ | ------------------------- |
@@ -75,9 +64,3 @@ L'opération est **idempotente**.
 | Mapping groupe → rôle Grafana        | **Grafana** (config OIDC) |
 
 ---
-
-## 6. Références
-
-- Fiche « Provisionnement automatique par la Console » (ce dossier).
-- Fiche « Architecture GitOps de l'observabilité ».
-- **Matrice RBAC** : ADR « Gestion des droits fins ».

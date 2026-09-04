@@ -8,9 +8,9 @@ Ce document décrit le **modèle d'accès** mis en place dans SonarQube pour cha
 
 Ce que chaque rôle Console obtient réellement dans SonarQube. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
 
-| Rôle Console          | Groupe Keycloak (ADR 014)          | Accès obtenu dans SonarQube                                                  |
+| Rôle Console          | Groupe Keycloak          | Accès obtenu dans SonarQube                                                  |
 | --------------------- | ---------------------------------- | ---------------------------------------------------------------------------- |
-| Admin plateforme      | `console-admin` (`/console/admin`) | Administer System + profils/quality gates + **création de projets** (global) |
+| Admin plateforme      | `/console/admin`                   | Administer System + profils/gates + création de projets + scan (global)      |
 | Administrateur projet | `/<slug>/console/admin`            | Admin du projet + scan, codeviewer, issueadmin, securityhotspotadmin         |
 | DevOps                | `/<slug>/console/devops`           | scan + user + codeviewer + issueadmin + securityhotspotadmin                 |
 | Développeur           | `/<slug>/console/developer`        | identique DevOps (mêmes permissions projet)                                  |
@@ -33,9 +33,9 @@ Ce que chaque rôle Console obtient réellement dans SonarQube. Les chemins `/co
 
 La Console mappe chaque groupe OIDC vers un ensemble de **permissions projet SonarQube**.
 
-| Groupe Keycloak (ADR 014)              | Permissions SonarQube (projet)                                                                                           |
+| Groupe Keycloak              | Permissions SonarQube (projet)                                                                                           |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `console-admin` (`/console/admin`)     | **Administer System**, **Administer Quality Profiles**, **Administer Quality Gates**, **Create Projects** (admin global) |
+| `/console/admin`                       | `admin`, `profileadmin`, `gateadmin`, `scan`, `provisioning` (permissions globales)                                       |
 | `/console/security`, `/console/reader` | Appliquent les groupes `/<slug>/console/security` / `/<slug>/console/reader` sur chaque projet                           |
 | `/<slug>/console/admin`                | `admin`, `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`                                              |
 | `/<slug>/console/devops`               | `scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`                                                       |
@@ -50,19 +50,10 @@ La Console mappe chaque groupe OIDC vers un ensemble de **permissions projet Son
 ## 3. Points d'attention
 
 - **Developer et Security ne sont pas en lecture seule.** Contrairement à Vault, ils disposent de `scan` (exécution d'analyse) et de `issueadmin`/`securityhotspotadmin` (traitement des tickets de sécurité).
-- **Admin projet ≠ admin global.** `/<slug>/console/admin` administre **le projet Sonar**, pas l'instance. L'admin global (`Administer System`, profils, gates, création de projets) est réservé à `console-admin` (`/console/admin`).
 
 ---
 
-## 4. Mise en cohérence automatique
-
-À chaque réconciliation de projet, la Console synchronise les groupes et permissions SonarQube du projet.
-
-L'opération est **idempotente**.
-
----
-
-## 5. Qui gère quoi ?
+## 4. Qui gère quoi ?
 
 | Élément                               | Géré par                  |
 | ------------------------------------- | ------------------------- |
@@ -71,9 +62,3 @@ L'opération est **idempotente**.
 | Application des droits                | **SonarQube**             |
 
 ---
-
-## 6. Références
-
-- Fiche « Provisionnement automatique par la Console » (ce dossier).
-- Fiche « Secrets Vault et SonarQube ».
-- **Matrice RBAC** : ADR « Gestion des droits fins ».

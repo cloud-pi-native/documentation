@@ -8,9 +8,9 @@ Ce document décrit le **modèle d'accès** mis en place dans Nexus pour chaque 
 
 Ce que chaque rôle Console obtient réellement dans Nexus. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
 
-| Rôle Console          | Groupe Keycloak (ADR 014)   | Accès obtenu dans Nexus                         |
+| Rôle Console          | Groupe Keycloak   | Accès obtenu dans Nexus                         |
 | --------------------- | --------------------------- | ----------------------------------------------- |
-| Admin plateforme      | `console-admin`             | **Admin** : gestion de tous les dépôts          |
+| Admin plateforme      | `/console/admin`            | Écriture (admin) sur tous les dépôts            |
 | Administrateur projet | `/<slug>/console/admin`     | Gérer le dépôt CI/CD du projet (écriture)       |
 | DevOps                | `/<slug>/console/devops`    | Déployer des artefacts (écriture, projet)       |
 | Développeur           | `/<slug>/console/developer` | Téléchargement de dépendances (lecture, projet) |
@@ -33,9 +33,9 @@ Ce que chaque rôle Console obtient réellement dans Nexus. Les chemins `/consol
 
 La Console répartit les chemins de groupes OIDC en deux ensembles : **écriture** (publish/deploy) et **lecture** (download/browse).
 
-| Groupe Keycloak (ADR 014)          | Type d'accès Nexus                       | Portée                         |
+| Groupe Keycloak          | Type d'accès Nexus                       | Portée                         |
 | ---------------------------------- | ---------------------------------------- | ------------------------------ |
-| `console-admin` (`/console/admin`) | **Admin** + lecture tous projets         | Tous les dépôts                |
+| `/console/admin`                   | **Écriture** (admin)                     | Tous les dépôts                |
 | `/console/security`                | **Lecture**                              | Tous les dépôts (repos)        |
 | `/console/readonly`                | **Lecture**                              | Tous les dépôts                |
 | `/<slug>/console/admin`            | **Écriture**                             | Dépôt CI/CD du projet `<name>` |
@@ -49,20 +49,11 @@ La Console répartit les chemins de groupes OIDC en deux ensembles : **écriture
 ## 3. Points d'attention
 
 - **DevOps = déployer, Developer = télécharger.** Les groupes `admin`/`devops` projet écrivent (publish artefacts, deploy) ; `developer`/`security`/`readonly` ne font que lire/télécharger.
-- **Admin plateforme = Admin Nexus.** `console-admin` (`/console/admin`) obtient les privilèges Admin + lecture de tous les dépôts (rôles platform agrégés sur l'ensemble des projets).
 - **Rôles agrégés par projet Nexus.** Le rôle `<name>-ID` agrège les privilèges de tous les projets Nexus activés ; un groupe OIDC est rattaché à ce rôle avec le bon niveau (read/write).
 
 ---
 
-## 4. Mise en cohérence automatique
-
-À chaque réconciliation de projet, la Console synchronise les rôles et privilèges Nexus du projet.
-
-L'opération est **idempotente**.
-
----
-
-## 5. Qui gère quoi ?
+## 4. Qui gère quoi ?
 
 | Élément                          | Géré par                  |
 | -------------------------------- | ------------------------- |
@@ -70,9 +61,3 @@ L'opération est **idempotente**.
 | Rôles & privilèges Nexus         | **Console** (automatique) |
 
 ---
-
-## 6. Références
-
-- Fiche « Provisionnement automatique par la Console » (ce dossier).
-- Fiche « Secrets Vault et Nexus ».
-- **Matrice RBAC** : ADR « Gestion des droits fins ».

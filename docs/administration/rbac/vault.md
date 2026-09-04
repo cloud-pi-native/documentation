@@ -8,9 +8,9 @@ Ce document décrit le **modèle d'accès** mis en place dans Vault pour chaque 
 
 Ce que chaque rôle Console obtient réellement dans Vault. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
 
-| Rôle Console          | Groupe Keycloak (ADR 014)   | Accès obtenu dans Vault                                                                        |
+| Rôle Console          | Groupe Keycloak   | Accès obtenu dans Vault                                                                        |
 | --------------------- | --------------------------- | ---------------------------------------------------------------------------------------------- |
-| Admin plateforme      | `console-admin`             | Admin global : gestion complète `sys/*` (auth, mounts, policies, entities)                     |
+| Admin plateforme      | `/console/admin`            | Gestion complète `sys/*` (auth, mounts, policies, entities)                                    |
 | Administrateur projet | `/<slug>/console/admin`     | Owner du projet : tout `devops` + gestion des rôles/policies AppRole/transit du projet         |
 | DevOps                | `/<slug>/console/devops`    | Lecture + écriture des secrets du projet (`<name>/data/*`)                                     |
 | Développeur           | `/<slug>/console/developer` | Liste des secrets du projet uniquement (pas de lecture/écriture du contenu)                    |
@@ -34,7 +34,7 @@ Ce que chaque rôle Console obtient réellement dans Vault. Les chemins `/consol
 
 La Console génère, pour chaque projet, les groupes d'identité Vault suivants (nom canonique `project-<name>-<scope>`), chacun lié à une _policy_ et à un alias OIDC.
 
-| Groupe Keycloak (ADR 014)                                        | _Policy_ générée             | Portée & capacités                                                                                                                                                                                                                                    |
+| Groupe Keycloak                                        | _Policy_ générée             | Portée & capacités                                                                                                                                                                                                                                    |
 | ---------------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/console/admin` (groupe d'identité Vault `console-admin`)       | `platform--admin`            | **Admin plateforme** : `path "sys/*" { create, read, update, delete, list, sudo }`.                                                                                                                                                                   |
 | `/console/security` (groupe d'identité Vault `console-security`) | `platform--security`         | **Audit & posture** : lecture `sys/audit/*`, `sys/policies/*`, `sys/auth/*`. Pas de contenu de secrets.                                                                                                                                               |
@@ -54,20 +54,11 @@ La Console génère, pour chaque projet, les groupes d'identité Vault suivants 
 - **Développeur = liste seule.** Le rôle `developer` ne dispose que de la capacité `list` sur `<name>/data/*` : il ne peut ni lire ni écrire le contenu d'un secret.
 - **Security = audit, pas données.** Les groupes `security` (plateforme et projet) n'ont accès qu'aux _métadonnées_ et à la posture (`sys/audit`, `<name>/metadata`, `transit/keys`) ; jamais au contenu (`<name>/data`).
 - **Admin projet ≠ admin plateforme.** `/<slug>/console/admin` est confiné au mount `<name>/*` ; seul le groupe `/console/admin` obtient `sys/*`.
-- **Groupe = matrice ADR 014.** Les noms ci-dessus sont canoniques (ADR 014) ; le chemin Keycloak réel créé par la Console dépend de la configuration déployée.
+- **Noms canoniques.** le chemin Keycloak réel créé par la Console dépend de la configuration déployée.
 
 ---
 
-## 4. Mise en cohérence automatique
-
-À chaque création/mise à jour d'un projet, la Console synchronise automatiquement
-les policies et les groupes d'identité Vault du projet.
-
-L'opération est **idempotente**. La suppression de projet retire le mount et les groupes associés.
-
----
-
-## 5. Qui gère quoi ?
+## 4. Qui gère quoi ?
 
 | Élément                                         | Géré par                              |
 | ----------------------------------------------- | ------------------------------------- |
@@ -77,9 +68,3 @@ L'opération est **idempotente**. La suppression de projet retire le mount et le
 > Pour donner accès à un utilisateur, on l'ajoute au rôle/groupe adéquat côté Console / OIDC ; la Console répercute la _policy_ dans Vault.
 
 ---
-
-## 6. Références
-
-- Fiche « Provisionnement automatique par la Console » (ce dossier) — vue d'ensemble.
-- Fiche « Secrets Vault et … » (et équivalents) — tokens & miroir.
-- **Matrice RBAC** (groupes Keycloak ↔ droits par outil) : ADR « Gestion des droits fins ».
