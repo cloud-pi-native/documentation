@@ -114,6 +114,40 @@
         "link": "/guide/roles"
       },
       {
+        "text": "Droits fins (RBAC outils)",
+        "collapsed": true,
+        "items": [
+          {
+            "text": "Console CPiN",
+            "link": "/guide/rbac/console-cpin"
+          },
+          {
+            "text": "Vault",
+            "link": "/guide/rbac/vault"
+          },
+          {
+            "text": "Keycloak",
+            "link": "/guide/rbac/keycloak"
+          },
+          {
+            "text": "Harbor",
+            "link": "/guide/rbac/harbor"
+          },
+          {
+            "text": "Nexus",
+            "link": "/guide/rbac/nexus"
+          },
+          {
+            "text": "SonarQube",
+            "link": "/guide/rbac/sonarqube"
+          },
+          {
+            "text": "Grafana",
+            "link": "/guide/rbac/grafana"
+          }
+        ]
+      },
+      {
         "text": "Gestion des dépôts",
         "link": "/guide/repositories-management"
       },
@@ -282,40 +316,6 @@
       {
         "text": "Plugins",
         "link": "/administration/plugins"
-      },
-      {
-        "text": "Droits fins (RBAC outils)",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "Console CPiN",
-            "link": "/administration/rbac/console-cpin"
-          },
-          {
-            "text": "Vault",
-            "link": "/administration/rbac/vault"
-          },
-          {
-            "text": "Keycloak",
-            "link": "/administration/rbac/keycloak"
-          },
-          {
-            "text": "Harbor",
-            "link": "/administration/rbac/harbor"
-          },
-          {
-            "text": "Nexus",
-            "link": "/administration/rbac/nexus"
-          },
-          {
-            "text": "SonarQube",
-            "link": "/administration/rbac/sonarqube"
-          },
-          {
-            "text": "Grafana",
-            "link": "/administration/rbac/grafana"
-          }
-        ]
       }
     ]
   },
