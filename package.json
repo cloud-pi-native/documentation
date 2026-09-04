@@ -15,5 +15,10 @@
     "@antfu/eslint-config": "^4.1.0",
     "eslint": "^9.19.0",
     "vitepress": "^1.6.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
