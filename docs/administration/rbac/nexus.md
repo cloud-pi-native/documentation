@@ -1,0 +1,63 @@
+# Utilisateur et droits Nexus
+
+Ce document décrit le **modèle d'accès** mis en place dans Nexus pour chaque projet DSO : qui peut publier ou télécharger des artefacts, et comment les rôles sont synchronisés depuis les groupes Keycloak.
+
+---
+
+## Vue par rôle
+
+Ce que chaque rôle Console obtient réellement dans Nexus. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
+
+| Rôle Console          | Groupe Keycloak   | Accès obtenu dans Nexus                         |
+| --------------------- | --------------------------- | ----------------------------------------------- |
+| Admin plateforme      | `/console/admin`            | Écriture (admin) sur tous les dépôts            |
+| Administrateur projet | `/<slug>/console/admin`     | Gérer le dépôt CI/CD du projet (écriture)       |
+| DevOps                | `/<slug>/console/devops`    | Déployer des artefacts (écriture, projet)       |
+| Développeur           | `/<slug>/console/developer` | Téléchargement de dépendances (lecture, projet) |
+| Lecture seule         | `/<slug>/console/readonly`  | Lecture des packages/dépôts du projet           |
+| Lecture seule         | `/console/readonly`         | Lecture de tous les dépôts (plateforme)         |
+| Security              | `/<slug>/console/security`  | Lecture des dépôts du projet                    |
+| Security              | `/console/security`         | Lecture de tous les dépôts (plateforme)         |
+| Guest                 | —                           | Aucun accès                                     |
+
+---
+
+## 1. Authentification : Nexus via OIDC Keycloak
+
+- Les utilisateurs se connectent à Nexus via **OIDC** (Keycloak).
+- La Console approvisionne, pour chaque projet, un **rôle de sécurité** (`<name>-ID` / `<name>-role`) et y rattache les groupes OIDC comme membres avec des _privileges_ de lecture ou d'écriture.
+
+---
+
+## 2. Groupes Keycloak et portée Nexus
+
+La Console répartit les chemins de groupes OIDC en deux ensembles : **écriture** (publish/deploy) et **lecture** (download/browse).
+
+| Groupe Keycloak          | Type d'accès Nexus                       | Portée                         |
+| ---------------------------------- | ---------------------------------------- | ------------------------------ |
+| `/console/admin`                   | **Écriture** (admin)                     | Tous les dépôts                |
+| `/console/security`                | **Lecture**                              | Tous les dépôts (repos)        |
+| `/console/readonly`                | **Lecture**                              | Tous les dépôts                |
+| `/<slug>/console/admin`            | **Écriture**                             | Dépôt CI/CD du projet `<name>` |
+| `/<slug>/console/devops`           | **Écriture** (déployer artefacts)        | Dépôt du projet `<name>`       |
+| `/<slug>/console/developer`        | **Lecture** (téléchargement dépendances) | Dépôt du projet `<name>`       |
+| `/<slug>/console/security`         | **Lecture**                              | Dépôt du projet `<name>`       |
+| `/<slug>/console/readonly`         | **Lecture** (packages)                   | Dépôt du projet `<name>`       |
+
+---
+
+## 3. Points d'attention
+
+- **DevOps = déployer, Developer = télécharger.** Les groupes `admin`/`devops` projet écrivent (publish artefacts, deploy) ; `developer`/`security`/`readonly` ne font que lire/télécharger.
+- **Rôles agrégés par projet Nexus.** Le rôle `<name>-ID` agrège les privilèges de tous les projets Nexus activés ; un groupe OIDC est rattaché à ce rôle avec le bon niveau (read/write).
+
+---
+
+## 4. Qui gère quoi ?
+
+| Élément                          | Géré par                  |
+| -------------------------------- | ------------------------- |
+| Identité OIDC / groupes Keycloak | **Keycloak**              |
+| Rôles & privilèges Nexus         | **Console** (automatique) |
+
+---
