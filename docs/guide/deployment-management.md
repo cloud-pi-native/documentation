@@ -42,6 +42,17 @@ Dans la partie **Déploiements**, cliquer sur le bouton **+ Ajouter un nouveau d
 
 > Un déploiement est toujours rattaché à un seul environnement.
 
+:::warning
+Dès qu'au moins un déploiement existe, les déploiements deviennent la **seule** source de configuration applicative prise en compte par la console pour générer les fichiers de values ArgoCD.
+
+Concrètement :
+
+- pour l'environnement associé à un déploiement, la liste des dépôts déployés est entièrement réécrite à partir du déploiement. La configuration portée par les dépôts d'infrastructure du projet (révision, chemin, fichiers de values) est **écrasée** et n'est plus utilisée ;
+- les environnements de la même zone qui n'ont aucun déploiement conservent l'ancien fonctionnement, basé sur les dépôts d'infrastructure du projet. Leur configuration ArgoCD reste celle générée précédemment, mais la console ne la régénère plus : toute modification faite ensuite sur les dépôts d'infrastructure n'est plus répercutée tant qu'un déploiement n'a pas été créé pour ces environnements.
+
+Avant de créer un premier déploiement, il faut donc reporter dans celui-ci l'intégralité de la configuration existante des dépôts d'infrastructure, et prévoir de créer un déploiement pour chaque environnement du projet.
+:::
+
 ## Configurer les dépôts du déploiement
 
 Pour chaque dépôt inclus dans un déploiement, il est possible de configurer :
@@ -92,17 +103,6 @@ Elle demande les champs suivants :
 > Une seule source externe est autorisée par dépôt du déploiement. Une fois qu'une source externe est définie, le choix **Externe** est désactivé sur les autres lignes.
 
 La révision du dépôt de valeurs est indépendante de celle du dépôt déployé : un même chart peut ainsi être déployé avec des values issues d'une branche différente selon l'environnement.
-
-### Templating de l'environnement
-
-Dans le chemin d'un fichier de valeurs, le motif `<env>` est remplacé par le nom de l'environnement cible.
-
-Cela permet de conserver la même configuration pour plusieurs déploiements, par exemple :
-
-```text
-values-<env>.yaml
-values/<env>/values.yaml
-```
 
 ## Multi branches et target revision
 
