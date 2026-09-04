@@ -16,4 +16,5 @@ maintainers:
 deprecated: false
 annotations: {}
 version: 1.0.0
-appVersion: 6.0.0 # x-release-please-version
+# suivre la version de la console, ajouter une extension si besoin de mettre à jour sans upgrade de la console
+appVersion: 9.25.0

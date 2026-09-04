@@ -25,13 +25,18 @@ spec:
           ports:
             - containerPort: {{ .Values.docs.container.port }}
               protocol: TCP
+          {{- /*
+          /health est un endpoint dedie servi par nginx : 21 octets de JSON,
+          sans acces au disque ni journalisation, la ou / rapatriait 18 ko de
+          HTML a chaque sonde.
+          */}}
           livenessProbe:
             httpGet:
-              path: /
+              path: /health
               port: {{ .Values.docs.container.port }}
           readinessProbe:
             httpGet:
-              path: /
+              path: /health
               port: {{ .Values.docs.container.port }}
           resources:
             {{- toYaml .Values.docs.resources | nindent 12 }}

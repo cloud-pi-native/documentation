@@ -1,0 +1,70 @@
+name: Build tests
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+    branches:
+      - "**"
+  workflow_dispatch:
+    inputs:
+      NODE_VERSION:
+        description: Nodejs version used to run build tests
+        required: true
+        type: string
+        default: "22"
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  lint:
+    name: Test app build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checks-out repository
+        uses: actions/checkout@v4
+
+      # La version de pnpm provient de la cle packageManager de package.json.
+      # La redeclarer ici ferait echouer l'action des que les deux divergent
+      # (ERR_PNPM_BAD_PM_VERSION), ce qui etait le cas : le workflow demandait
+      # pnpm 10 alors que le projet est passe a pnpm 11.24.0.
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "${{ inputs.NODE_VERSION || env.NODE_VERSION }}"
+
+      - name: Get pnpm store directory
+        id: pnpm-store
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Cache node files
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ steps.pnpm-store.outputs.STORE_PATH }}
+          key: node-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            node-${{ runner.os }}-${{ runner.arch }}-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Formatage uniquement (tabulations, espaces en fin de ligne, lignes
+      # vides, guillemets YAML superflus) sur les .md, .yml, .json et .ts.
+      # Place avant le build : il est bien plus rapide et n'a pas besoin de lui.
+      - name: Lint sources
+        run: pnpm lint
+
+      - name: Test application build
+        run: pnpm run build
