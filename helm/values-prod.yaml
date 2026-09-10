@@ -1,0 +1,36 @@
+imagePullSecrets:
+  - name: registry-pull-secret
+
+docs:
+  replicaCount: 1
+  image:
+    repository: harbor.dso.cpin.numerique-interieur.fr/documentationcpin/dso-documentation
+    pullPolicy: Always
+    # tag volontairement vide : le tag retombe sur appVersion de helm/Chart.yaml,
+    # la meme valeur que celle utilisée par la CI pour construire l'image.
+    # Pensez à faire suivre le appversion sur la version de la console.
+    tag: ""
+  container:
+    port: 8080
+  service:
+    type: ClusterIP
+    port: 80
+  ingress:
+    enabled: true
+    hosts:
+      - host: documentation-prod.app.cpin.numerique-interieur.fr
+        paths:
+          - path: /
+            pathType: Prefix
+    # Surcharge explicite : sans elle, Helm conserve le bloc tls d'exemple de
+    # values.yaml (example.domain.com) et l'Ingress deploie reference un
+    # secret inexistant. La terminaison TLS est assuree en amont par la
+    # plateforme, le chart n'a pas a la declarer.
+    tls: []
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi

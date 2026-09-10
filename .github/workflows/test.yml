@@ -16,15 +16,9 @@ on:
         required: true
         type: string
         default: "22"
-      PNPM_VERSION:
-        description: Pnpm version used to run build tests
-        required: true
-        type: string
-        default: "10"
 
 env:
   NODE_VERSION: "22"
-  PNPM_VERSION: "10"
 
 jobs:
   lint:
@@ -38,7 +32,6 @@ jobs:
         uses: pnpm/action-setup@v4
         id: pnpm-install
         with:
-          version: "${{ inputs.PNPM_VERSION || env.PNPM_VERSION }}"
           run_install: false
 
       - name: Setup Node.js
@@ -62,6 +55,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Lint sources
+        run: pnpm lint
 
       - name: Test application build
         run: pnpm run build

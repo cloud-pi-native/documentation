@@ -1,0 +1,40 @@
+name: Mirror to GitLab
+
+# Le depot GitLab de la chaine secondaire est un miroir de celui-ci. Chaque
+# merge sur main declenche le pipeline GitLab qui va rapatrier le commit ;
+# c'est ensuite .gitlab-ci-dso.yml qui construit l'image et ArgoCD qui deploie.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Deux merges rapproches ne doivent pas lancer deux mirrorings concurrents.
+# Celui en cours n'est pas annule : il termine son travail.
+concurrency:
+  group: gitlab-mirror
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  trigger:
+    name: Trigger GitLab mirror pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger mirror pipeline
+        env:
+          TRIGGER_URL: ${{ secrets.GITLAB_MIRROR_TRIGGER_URL }}
+          TRIGGER_TOKEN: ${{ secrets.GITLAB_MIRROR_TRIGGER_TOKEN }}
+        run: |
+          : "${TRIGGER_URL:?secret GITLAB_MIRROR_TRIGGER_URL manquant}"
+          : "${TRIGGER_TOKEN:?secret GITLAB_MIRROR_TRIGGER_TOKEN manquant}"
+
+          curl --fail-with-body -sS \
+            --header "PRIVATE-TOKEN: ${TRIGGER_TOKEN}" \
+            -X POST \
+            -F token="${TRIGGER_TOKEN}" \
+            -F ref=main \
+            -F "variables[GIT_MIRROR_PROJECT_ID]=31" \
+            "${TRIGGER_URL}"

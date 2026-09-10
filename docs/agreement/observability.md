@@ -1,6 +1,5 @@
 # Observabilité
 
-
 Dans le cadre de l'offre Cloud-Pi Native, l'observabilité est disponible via plusieurs composants:
 - Prometheus pour les métriques et les dashboards de sécurité
 - Loki pour les logs
@@ -30,7 +29,6 @@ Des dashboards [Grafana](https://grafana.com/grafana/) pour consulter les métri
 ![dashboard par defaut](/img/agreement/dashboard-defaut.png)
 
 Pour consulter les dashboard de sécurité, [cliquer ici](/guide/dashboardsecurite.md)
-
 
 ## Dashboard as code
 
@@ -63,7 +61,6 @@ La synchronisation du repo de code gitlab *infra-observability* vers *Grafana* s
 Un objet de type Kubernetes *GrafanaDashboard* est créé pour chaque dashboard créé *as code*. En cas d'erreur sur le contenu du JSON, les erreurs seront visibles depuis cet objet via ArgoCD.
 
 > À noter que seule la branche **main** est synchronisée
-
 
 La video suivante illustre cette fonctionnalité
 

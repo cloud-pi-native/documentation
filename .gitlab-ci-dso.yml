@@ -9,13 +9,28 @@ default:
   image: alpine:latest
 
 variables:
-  TAG: "${CI_COMMIT_REF_SLUG}"
   DOCKERFILE: Dockerfile
   REGISTRY_URL: "${IMAGE_REPOSITORY}"
 
+# le build et install pnpm sont déjà faits dans le dockerfile, donc pas de stage de test.
 stages:
   - read-secret
   - docker-build
+
+# Le tag de l'image est la version de la console, declaree en appVersion dans
+# helm/Chart.yaml.
+set-version:
+  stage: .pre
+  image: alpine:latest
+  script:
+    - |
+      APP_VERSION=$(sed -n 's/^appVersion:[[:space:]]*\([^[:space:]#]*\).*/\1/p' helm/Chart.yaml | tr -d '"')
+      test -n "${APP_VERSION}"
+      echo "TAG=${APP_VERSION}" > version.env
+      cat version.env
+  artifacts:
+    reports:
+      dotenv: version.env
 
 read_secret:
   stage: read-secret
