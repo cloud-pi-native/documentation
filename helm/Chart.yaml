@@ -17,4 +17,4 @@ deprecated: false
 annotations: {}
 version: 1.0.0
 # suivre la version de la console, ajouter une extension si besoin de mettre à jour sans upgrade de la console
-appVersion: 9.25.0
+appVersion: 9.25.2
