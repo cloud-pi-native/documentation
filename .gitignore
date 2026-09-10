@@ -337,3 +337,36 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 .idea
+
+### Secrets ###
+# Le depot est public : ces motifs evitent qu'un `git add .` malheureux y
+# publie des identifiants. Aucun fichier suivi ne correspond a ces motifs.
+
+# Cles privees et certificats
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_ecdsa
+id_ed25519
+
+# Acces aux clusters et aux registres
+kubeconfig
+*.kubeconfig
+.kube/config
+.docker/config.json
+
+# Fichiers de secrets applicatifs
+secrets.yaml
+secrets.yml
+secrets.json
+*.secrets.yaml
+*.secrets.yml
+
+# Identifiants d'outils
+.netrc
+.npmrc
+.pypirc

@@ -9,38 +9,16 @@ default:
   image: alpine:latest
 
 variables:
-  # TAG n'est volontairement pas defini ici : il est produit par le job
-  # set-version, qui le lit dans helm/Chart.yaml (voir plus bas).
-  #
-  # Branches de deploiement dont le nom ne correspond pas a celui de leur
-  # environnement CPiN, separees par une espace. Les autres sont detectees
-  # toutes seules par set-version, via la presence de helm/values-<branche>.yaml :
-  # une branche integ avec un helm/values-integ.yaml n'a rien a declarer ici.
-  #
-  # main         alimente l'environnement prod (helm/values-prod.yaml)
-  # ci/cpin-hosting alimente dso (helm/values-dso.yaml), le temps de la
-  #              transition ; a retirer avec ce fichier une fois la branche mergee.
-  DEPLOY_BRANCHES: main ci/cpin-hosting
   DOCKERFILE: Dockerfile
   REGISTRY_URL: "${IMAGE_REPOSITORY}"
 
-# La compilation n'est plus verifiee ici : le Dockerfile execute deja
-# `pnpm install` puis `pnpm run build` dans docker-build, et les erreurs
-# (liens internes morts compris) y remontent a l'identique. Le controle en
-# amont est assure par le workflow GitHub .github/workflows/test.yml, qui
-# construit et lint chaque pull request avant le merge.
+# le build et install pnpm sont déjà faits dans le dockerfile, donc pas de stage de test.
 stages:
   - read-secret
   - docker-build
 
-# Le tag de l'image est la version applicative declaree dans helm/Chart.yaml.
-# Helm rend exactement la meme valeur dans le Deployment (docs.image.tag est
-# vide dans chaque values-<env>.yaml, donc le template retombe sur
-# .Chart.AppVersion) :
-# l'image construite et l'image deployee portent donc toujours le meme nom,
-# depuis une source unique. Bumper appVersion suffit a declencher le rollout,
-# sans qu'aucun commit ne soit ecrit depuis la CI (le depot GitLab est un
-# miroir du depot GitHub : y pousser le desynchroniserait).
+# Le tag de l'image est la version de la console, declaree en appVersion dans
+# helm/Chart.yaml.
 set-version:
   stage: .pre
   image: alpine:latest
@@ -48,24 +26,7 @@ set-version:
     - |
       APP_VERSION=$(sed -n 's/^appVersion:[[:space:]]*\([^[:space:]#]*\).*/\1/p' helm/Chart.yaml | tr -d '"')
       test -n "${APP_VERSION}"
-      # Une branche alimente un environnement des lors qu'un fichier de values
-      # porte son nom : creer l'environnement dans la console, ajouter
-      # helm/values-<branche>.yaml et pousser la branche suffit, sans toucher
-      # a ce fichier. DEPLOY_BRANCHES ne sert qu'aux cas ou le nom de la
-      # branche differe de celui de l'environnement CPiN.
-      #
-      # Partout ailleurs le tag est suffixe par le nom de la branche : toutes
-      # les branches partageant le meme appVersion, un build de branche
-      # ecraserait sinon l'image d'un environnement.
-      if [ -f "helm/values-${CI_COMMIT_REF_SLUG}.yaml" ]; then
-        TAG="${APP_VERSION}"
-      else
-        case " ${DEPLOY_BRANCHES} " in
-          *" ${CI_COMMIT_BRANCH} "*) TAG="${APP_VERSION}" ;;
-          *) TAG="${APP_VERSION}-${CI_COMMIT_REF_SLUG}" ;;
-        esac
-      fi
-      echo "TAG=${TAG}" > version.env
+      echo "TAG=${APP_VERSION}" > version.env
       cat version.env
   artifacts:
     reports:

@@ -6,10 +6,9 @@ imagePullSecrets: []
 docs:
   replicaCount: 1
   image:
-    repository: ghcr.io/cloud-pi-native/documentation
+    repository: harbor.dso.cpin.numerique-interieur.fr/documentationcpin/dso-documentation
     pullPolicy: Always
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: latest
+    tag: ""
   container:
     port: 8080
   service:
