@@ -19,6 +19,7 @@ docs:
     enabled: true
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod-http
+      nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     className: nginx
     hosts:
       - host: documentation-prod.app.cpin.numerique-interieur.fr
@@ -26,10 +27,6 @@ docs:
           - path: /
             pathType: Prefix
       - host: cloud-pi-native.fr
-        paths:
-          - path: /
-            pathType: Prefix
-      - host: www.cloud-pi-native.fr
         paths:
           - path: /
             pathType: Prefix
