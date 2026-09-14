@@ -27,14 +27,16 @@ jobs:
         env:
           TRIGGER_URL: ${{ secrets.GITLAB_MIRROR_TRIGGER_URL }}
           TRIGGER_TOKEN: ${{ secrets.GITLAB_MIRROR_TRIGGER_TOKEN }}
+          PROJECT_NAME: documentation
+          BRANCH_TO_SYNC: ${{ github.ref_name }}
         run: |
           : "${TRIGGER_URL:?secret GITLAB_MIRROR_TRIGGER_URL manquant}"
           : "${TRIGGER_TOKEN:?secret GITLAB_MIRROR_TRIGGER_TOKEN manquant}"
 
           curl --fail-with-body -sS \
-            --header "PRIVATE-TOKEN: ${TRIGGER_TOKEN}" \
             -X POST \
             -F token="${TRIGGER_TOKEN}" \
             -F ref=main \
-            -F "variables[GIT_MIRROR_PROJECT_ID]=31" \
+            -F "variables[PROJECT_NAME]=${PROJECT_NAME}" \
+            -F "variables[GIT_BRANCH_DEPLOY]=${BRANCH_TO_SYNC}" \
             "${TRIGGER_URL}"
