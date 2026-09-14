@@ -17,16 +17,27 @@ docs:
     port: 80
   ingress:
     enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod-http
+    className: nginx
     hosts:
       - host: documentation-prod.app.cpin.numerique-interieur.fr
         paths:
           - path: /
             pathType: Prefix
-    # Surcharge explicite : sans elle, Helm conserve le bloc tls d'exemple de
-    # values.yaml (example.domain.com) et l'Ingress deploie reference un
-    # secret inexistant. La terminaison TLS est assuree en amont par la
-    # plateforme, le chart n'a pas a la declarer.
-    tls: []
+      - host: cloud-pi-native.fr
+        paths:
+          - path: /
+            pathType: Prefix
+      - host: www.cloud-pi-native.fr
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - hosts:
+          - cloud-pi-native.fr
+          - www.cloud-pi-native.fr
+        secretName: cloud-pi-native-fr-tls
   resources:
     requests:
       cpu: 100m
