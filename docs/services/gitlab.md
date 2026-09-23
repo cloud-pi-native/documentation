@@ -27,6 +27,10 @@ Les dépôts externes, sont synchronisés par la pipeline gitlab-ci du projet *m
 
 Une fois le projet applicatif est synchronisé, une pipeline gitlab-ci est lancé afin de construire le projet applicatif sur l'offre Cloud π Native.
 
+### Synchronisation ciblée
+
+Lors d'une synchronisation ciblée ("Synchroniser une branche cible"), la branche sélectionnée est mémorisée pour chaque dépôt externe. Elle est proposée par défaut lors de la prochaine synchronisation ciblée de ce dépôt. La synchronisation complète d'un dépôt (Bouton "Synchroniser toutes les branches" enclenché) ne modifie pas cette branche mémorisée.
+
 ![Principe de synchronisation](/img/repo-sync-02.png)
 
 ## Types de dépôts externes à synchroniser
