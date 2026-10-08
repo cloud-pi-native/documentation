@@ -14,8 +14,8 @@ Ce que chaque rôle peut réellement faire dans la Console CPiN. Les chemins `/c
 | Administrateur projet                   | `/<slug>/console/admin`     | Gérer le projet : membres, environnements, dépôts, suppression                                                                  |
 | DevOps                                  | `/<slug>/console/devops`    | Gérer environnements + dépôts, rejouer les hooks, voir les secrets. **Pas** de déploiement applicatif ni de gestion des membres |
 | Développeur                             | `/<slug>/console/developer` | Gérer et lister les dépôts, lister les environnements. **Pas** d'accès aux secrets ni de rejeu du projet                        |
-| Lecture seule (projet)                  | `/<slug>/console/reader`    | Lister environnements et dépôts uniquement                                                                                      |
-| Lecture seule (administration)          | `/console/reader`           | Lecture transverse (tous projets)                                                                                               |
+| Lecture seule (projet)                  | `/<slug>/console/readonly`    | Lister environnements et dépôts uniquement                                                                                      |
+| Lecture seule (administration)          | `/console/readonly`           | Lecture transverse (tous projets)                                                                                               |
 | Security (projet)                       | `/<slug>/console/security`  | Lecture transverse du projet (audit). _Groupe non créé par défaut : alimenté par les outils qui le référencent_                 |
 | Security (administration)               | `/console/security`         | Lecture transverse (tous projets, audit)                                                                                        |
 | Guest (utilisateur externe sans groupe) | —                           | Aucun accès jusqu'à ajout à un projet                                                                                           |
@@ -38,7 +38,7 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/
 | **Administrateur** | `/<slug>/console/admin`     | `MANAGE` (gérer le projet)                                                                                            |
 | **DevOps**         | `/<slug>/console/devops`    | `SEE_SECRETS`, `REPLAY_HOOKS`, `MANAGE_ENVIRONMENTS`, `MANAGE_REPOSITORIES`, `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES` |
 | **Développeur**    | `/<slug>/console/developer` | `MANAGE_REPOSITORIES`, `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES`                                                       |
-| **Lecture seule**  | `/<slug>/console/reader`    | `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES`                                                                              |
+| **Lecture seule**  | `/<slug>/console/readonly`    | `LIST_ENVIRONMENTS`, `LIST_REPOSITORIES`                                                                              |
 
 ### Bits `PROJECT_PERMS` disponibles
 
@@ -52,9 +52,9 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/
 | ------------------------------------------------ | ------------------------ | ----------------------------------------------------------------------------------- |
 | Admin plateforme (`/console/admin`) | `/console/admin` | `MANAGE` + toutes les `MANAGE_*`, `LIST_*` (admin global) |
 | Security (`/console/security`) | `/console/security` | lecture transverse (portée audit, `*RO`) |
-| Lecture seule (`/console/reader`)                | `/console/reader`        | lecture transverse (`*RO`)                                                          |
+| Lecture seule (`/console/readonly`)                | `/console/readonly`        | lecture transverse (`*RO`)                                                          |
 
-> **Groupes Keycloak d'administration plateforme** : le chemin plateforme d'administration est `/admin`, groupe d'amorçage géré en dehors de la Console ; `/console/admin` (admin), `/console/security` (audit) et `/console/reader` (lecture) sont les groupes plateforme réconciliés, propagés vers les outils.
+> **Groupes Keycloak d'administration plateforme** : le chemin plateforme d'administration est `/admin`, groupe d'amorçage géré en dehors de la Console ; `/console/admin` (admin), `/console/security` (audit) et `/console/readonly` (lecture) sont les groupes plateforme réconciliés, propagés vers les outils.
 
 > **Axe ABAC `userType`** : indépendamment des groupes, certains endpoints restreignent l'accès selon le type d'utilisateur (`human` / `bot` / `ghost`, colonne `User.type`). Cet axe s'ajoute au masque de bits admin/projet.
 
