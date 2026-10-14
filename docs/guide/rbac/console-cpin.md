@@ -2,8 +2,6 @@
 
 Ce document décrit le **modèle d'accès** de la Console CPiN elle-même : comment ses rôles admin et projet se traduisent en permissions, et comment ils sont propagés vers Keycloak.
 
----
-
 ## Vue par rôle
 
 Ce que chaque rôle peut réellement faire dans la Console CPiN. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
@@ -20,14 +18,10 @@ Ce que chaque rôle peut réellement faire dans la Console CPiN. Les chemins `/c
 | Security (administration)               | `/console/security`         | Lecture transverse (tous projets, audit)                                                                                        |
 | Guest (utilisateur externe sans groupe) | —                           | Aucun accès jusqu'à ajout à un projet                                                                                           |
 
----
-
 ## 1. Authentification : OIDC via Keycloak
 
 - La Console authentifie ses utilisateurs via **OIDC Keycloak**.
 - Les permissions effectives d'un utilisateur = agrégation (OU binaire) des `permissions` de tous ses rôles (admin + projet).
-
----
 
 ## 2. Rôles projet et permissions
 
@@ -43,8 +37,6 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/
 ### Bits `PROJECT_PERMS` disponibles
 
 `GUEST(0)`, `MANAGE(1)`, `MANAGE_MEMBERS(2)`, `MANAGE_ENVIRONMENTS(3)`, `MANAGE_REPOSITORIES(4)`, `MANAGE_ROLES(5)`, `SEE_SECRETS(6)`, `REPLAY_HOOKS(7)`, `LIST_ENVIRONMENTS(8)`, `LIST_REPOSITORIES(9)`, `LIST_MEMBERS(10)`, `LIST_ROLES(11)`, `MANAGE_DEPLOYMENTS(12)`, `LIST_DEPLOYMENTS(13)`.
-
----
 
 ## 3. Rôles admin et permissions
 
@@ -62,8 +54,6 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/
 >
 > **Seul un rôle admin peut être lié à un groupe Keycloak existant** via un groupe d'application externe (chemin commençant par `/`). Les rôles projet ont leur groupe d'application préfixé automatiquement par `/<slug>`.
 
----
-
 ## 4. Points d'attention
 
 - **Permissions = masque de bits.** Un rôle est la somme de permissions ; l'agrégation inter-rôles se fait en OU binaire.
@@ -71,8 +61,6 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/
 - **Le développeur n'accède pas aux secrets.** Le rôle `developer` couvre la gestion des dépôts et la lecture des environnements ; ni `SEE_SECRETS` ni `REPLAY_HOOKS` ne lui sont accordés (contrairement à DevOps).
 - **DevOps sans déploiement applicatif.** Le déploiement applicatif n'est pas couvert par le rôle DevOps par défaut ; ses droits portent sur les environnements, dépôts, hooks et secrets.
 - **Groupe `everyonePerms`.** Un projet peut définir des permissions pour _Tout le monde_, appliquées au-delà des rôles nominatifs.
-
----
 
 ## 5. Qui gère quoi ?
 
@@ -82,5 +70,3 @@ Chaque projet reçoit 4 rôles système par défaut, liés aux groupes `/<slug>/
 | Rôles admin / projet, permissions | **Console** (base de données)      |
 | Groupes Keycloak dérivés          | **Console** (automatique)          |
 | Application des droits            | **Console** + outils consommateurs |
-
----

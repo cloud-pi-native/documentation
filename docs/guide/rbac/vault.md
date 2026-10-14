@@ -2,8 +2,6 @@
 
 Ce document décrit le **modèle d'accès** mis en place dans Vault pour chaque projet DSO : qui peut lire/écrire quels secrets, et comment ces droits sont synchronisés depuis les groupes Keycloak.
 
----
-
 ## Vue par rôle
 
 Ce que chaque rôle Console obtient réellement dans Vault. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
@@ -20,15 +18,11 @@ Ce que chaque rôle Console obtient réellement dans Vault. Les chemins `/consol
 | Security              | `/console/security`         | Audit & posture plateforme : `sys/audit`, `sys/policies`, `<name>/metadata`, jamais le contenu |
 | Guest                 | —                           | Aucun accès Vault                                                                              |
 
----
-
 ## 1. Authentification : Vault via OIDC Keycloak
 
 - Vault expose une méthode d'auth **OIDC** (`oidc/`) dont le fournisseur d'identité est Keycloak.
 - La Console crée, pour chaque projet, un **mount KV v2** nommé d'après le slug du projet (`<name>`), ainsi que les _policies_ et les **groupes d'identité externes** (type `external`) dont l'alias pointe vers le groupe OIDC Keycloak correspondant.
 - Les applications consomment leurs secrets via un **AppRole** projet (`role-id` / `secret-id`) rattaché aux _policies_ techniques (`tech--<name>--ro` + `app--<name>--admin`), jamais via OIDC.
-
----
 
 ## 2. Groupes Keycloak et _policies_ associées
 
@@ -47,16 +41,12 @@ La Console génère, pour chaque projet, les groupes d'identité Vault suivants 
 
 > Un projet possède également un rôle AppRole technique (`<name>`) pour les robots CI, rattaché aux _policies_ `tech--<name>--ro` (lecture d'un secret de registre dédié) et `app--<name>--admin`.
 
----
-
 ## 3. Points d'attention
 
 - **Développeur = liste seule.** Le rôle `developer` ne dispose que de la capacité `list` sur `<name>/data/*` : il ne peut ni lire ni écrire le contenu d'un secret.
 - **Security = audit, pas données.** Les groupes `security` (plateforme et projet) n'ont accès qu'aux _métadonnées_ et à la posture (`sys/audit`, `<name>/metadata`, `transit/keys`) ; jamais au contenu (`<name>/data`).
 - **Admin projet ≠ admin plateforme.** `/<slug>/console/admin` est confiné au mount `<name>/*` ; seul le groupe `/console/admin` obtient `sys/*`.
 - **Noms canoniques.** le chemin Keycloak réel créé par la Console dépend de la configuration déployée.
-
----
 
 ## 4. Qui gère quoi ?
 
@@ -66,5 +56,3 @@ La Console génère, pour chaque projet, les groupes d'identité Vault suivants 
 | Mounts, _policies_, groupes d'identité, AppRole | **Console** (automatique)             |
 
 > Pour donner accès à un utilisateur, on l'ajoute au rôle/groupe adéquat côté Console / OIDC ; la Console répercute la _policy_ dans Vault.
-
----

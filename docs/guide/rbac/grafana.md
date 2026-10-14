@@ -2,8 +2,6 @@
 
 Ce document décrit le **modèle d'accès** mis en place dans Grafana pour chaque projet DSO. Contrairement aux autres outils, l'accès Grafana est **scopé par environnement** (prod / hors-prod) et non par rôle projet.
 
----
-
 ## Vue par rôle
 
 Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environnement). Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
@@ -21,14 +19,10 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 
 > L'accès réel dépend de la capacité Console par bucket d'environnement : `MANAGE_ENVIRONMENTS` → Editor, `LIST_ENVIRONMENTS` → Viewer, séparément pour hors-prod (`hprod`) et prod.
 
----
-
 ## 1. Authentification : Grafana via OIDC Keycloak
 
 - Grafana est fédéré au fournisseur OIDC Keycloak. Le mapping **groupe Keycloak → rôle Grafana** est configuré côté Grafana (son fichier de configuration OIDC), pas par la Console.
 - La Console crée et maintient, **sous le groupe racine `/<slug>`**, le sous-groupe `grafana` et ses sous-groupes `hprod-RO/RW` et `prod-RO/RW`.
-
----
 
 ## 2. Groupes Keycloak et rôle Grafana résultant
 
@@ -45,15 +39,11 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 | `/<slug>/grafana/prod-RW`              | **Editor** (prod)           | Projet `<slug>`, prod      |
 | `/<slug>/grafana/prod-RO`              | **Viewer** (prod)           | Projet `<slug>`, prod      |
 
----
-
 ## 3. Points d'attention
 
 - **Scoping prod / hors-prod.** Un utilisateur avec droits sur un environnement `prod` est ajouté aux sous-groupes `prod-*` ; sinon aux `hprod-*` (hors-prod). Les deux peuvent coexister.
 - **RW vs RO.** `RW` ⇔ capacité `MANAGE_ENVIRONMENTS` (édition) ; `RO` ⇔ `LIST_ENVIRONMENTS` (visualisation). Le propriétaire du projet est toujours RW.
 - **Le rôle Grafana réel est défini par la config OIDC de Grafana**, pas par la Console. La Console se contente de maintenir l'arborescence de groupes Keycloak.
-
----
 
 ## 4. Qui gère quoi ?
 
@@ -62,5 +52,3 @@ Ce que chaque rôle Console obtient réellement dans Grafana (scopé par environ
 | Identité OIDC / groupes Keycloak     | **Keycloak**              |
 | Arborescence des groupes `grafana/*` | **Console** (automatique) |
 | Mapping groupe → rôle Grafana        | **Grafana** (config OIDC) |
-
----

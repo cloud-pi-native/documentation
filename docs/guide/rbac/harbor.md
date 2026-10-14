@@ -2,8 +2,6 @@
 
 Ce document décrit comment la Console propage les **groupes Keycloak** en **rôles Harbor** (membres d'un projet Harbor), et quels droits en résultent.
 
----
-
 ## Vue par rôle
 
 Ce que chaque rôle Console obtient réellement dans Harbor. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
@@ -20,14 +18,10 @@ Ce que chaque rôle Console obtient réellement dans Harbor. Les chemins `/conso
 | Security              | `/console/security`         | **Guest** sur **tous** les projets (lecture transverse) |
 | Guest                 | —                           | Aucun accès                                             |
 
----
-
 ## 1. Authentification : Harbor via OIDC Keycloak
 
 - Harbor est fédéré au fournisseur OIDC Keycloak ; les utilisateurs se connectent sans mot de passe local.
 - La Console approvisionne, pour chaque projet, le **projet Harbor** et y ajoute les groupes Keycloak comme **membres** avec un rôle (Admin / Developer / Guest).
-
----
 
 ## 2. Groupes Keycloak et rôle Harbor résultant
 
@@ -46,14 +40,10 @@ La Console mappe chaque groupe OIDC vers un **rôle Harbor** et une **portée** 
 
 > Le groupe racine du projet (`/<slug>`) est ajouté en tant que membre avec un niveau **Limited Guest** (lecture seule : pull d'images sans administration) pour l'ensemble de ses membres.
 
----
-
 ## 3. Points d'attention
 
 - **Seul `/<slug>/console/admin` pousse des images.** Tous les autres rôles projet (`devops`, `developer`, `security`, `reader`) sont en **Guest** (pull/lecture uniquement).
 - **Groupes `security`/`reader` = Guest transverse.** Ils sont ajoutés en Guest sur **tous** les projets Harbor (portée plateforme), ce qui donne une lecture globale des registres.
-
----
 
 ## 4. Qui gère quoi ?
 
@@ -62,5 +52,3 @@ La Console mappe chaque groupe OIDC vers un **rôle Harbor** et une **portée** 
 | Identité OIDC / groupes Keycloak | **Keycloak**              |
 | Projets Harbor, membres & rôles  | **Console** (automatique) |
 | Application des droits           | **Harbor**                |
-
----
