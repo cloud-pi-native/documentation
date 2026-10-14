@@ -31,58 +31,8 @@ L’onglet `Membres` permet d’ajouter ou retirer des utilisateurs.
 
 ![Membres d’un rôle plateforme](/img/iam/admin-role-members.png)
 
-## Effet sur les services intégrés (exemple GitLab)
-
-La Console est la source de vérité des rôles et permissions. Selon les intégrations actives et le niveau de synchronisation, ces droits peuvent être projetés vers des services externes.
-
-À ce jour, GitLab est le service intégré pour ce contrôle.
-
-Vérifier les points suivants :
-
-- l’intégration du service concerné est active ;
-- le mapping des groupes/rôles est configuré pour ce service ;
-- la synchronisation est terminée.
-
-### Correspondance Console → GitLab (par défaut)
-
-La correspondance ci-dessous reflète la configuration par défaut. Elle peut être adaptée via la configuration du plugin GitLab.
-
-Rôles plateforme (scope Console) :
-
-| Rôle Console (groupe OIDC) | Droits GitLab |
-| --- | --- |
-| `/console/admin` | Administrateur GitLab |
-| `/console/readonly` | Auditeur GitLab |
-
-Rôles projet (scope projet) :
-
-| Rôle Console (groupe OIDC) | Droits GitLab sur le groupe du projet |
-| --- | --- |
-| `/<projectSlug>/console/admin` | Maintainer |
-| `/<projectSlug>/console/devops` | Developer |
-| `/<projectSlug>/console/developer` | Developer |
-| `/<projectSlug>/console/readonly` | Reporter |
-| Propriétaire du projet (Console) | Owner |
-
-Paramètres de configuration utiles (plugin GitLab) :
-
-| Clé | Rôle |
-| --- | --- |
-| `adminGroupPath` | Groupe OIDC donnant les droits d’administrateur GitLab |
-| `auditorGroupPath` | Groupe OIDC donnant les droits d’auditeur GitLab |
-| `projectMaintainerGroupPathSuffix` | Suffixe OIDC donnant l’accès Maintainer |
-| `projectDeveloperGroupPathSuffix` | Suffixe OIDC donnant l’accès Developer |
-| `projectReporterGroupPathSuffix` | Suffixe OIDC donnant l'accès Reporter |
-
-:::warning
-**Phase de rétrocompatibilité (9.16.x)** — **GitLab** attribue toujours le rôle `Développeur` par défaut lors de l'ajout d'un membre. Le rôle `Lecture seule` de la Console (`/console/readonly`, normalement dédié aux personnes chargés de faire des rapports ou des audits) n'a donc aucun effet sur **Gitlab**. Ce comportement est conservé temporairement pour compatibilité ; Il évoluera vers le rôle **Gitlab** `Invité` dans une prochaine version.
-:::
-
-:::danger
-**Changement cassant** — Les rôles sont désormais provisionnés de manière autoritaire dans les services intégrés (GitLab). La Console prend le contrôle total de l'appartenance : tout membre non tracé par la Console sera **supprimé**, et seuls les membres assignés via les rôles Console seront **ajoutés**. Ce comportement empêche toute dérive entre la Console et les services externes. Les modifications manuelles de membership dans GitLab seront écrasées lors de la synchronisation.
-:::
-
 ## Voir aussi
 
+- [Groupes Keycloak et GitLab](/guide/rbac/gitlab)
 - [Gestion des rôles (projet)](/guide/roles)
 - [Utilisateurs](/administration/utilisateurs)
