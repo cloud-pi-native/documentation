@@ -2,8 +2,6 @@
 
 Ce document décrit le **modèle d'accès** mis en place dans SonarQube pour chaque projet DSO : qui accède à l'analyse, avec quelles permissions, et comment les rôles sont synchronisés depuis les groupes Keycloak.
 
----
-
 ## Vue par rôle
 
 Ce que chaque rôle Console obtient réellement dans SonarQube. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
@@ -20,14 +18,10 @@ Ce que chaque rôle Console obtient réellement dans SonarQube. Les chemins `/co
 | Security              | `/console/security`                | identique DevOps (tous projets)                                              |
 | Guest                 | —                                  | Aucun accès                                                                  |
 
----
-
 ## 1. Authentification : SonarQube via OIDC Keycloak
 
 - Les utilisateurs se connectent à SonarQube via **OIDC** (Keycloak). Aucun compte/mot de passe local à gérer.
 - La Console approvisionne, pour chaque projet, un **groupe Sonar** et lui applique un **modèle de permissions** (permission template) déduit des groupes OIDC.
-
----
 
 ## 2. Groupes Keycloak et permissions SonarQube
 
@@ -45,13 +39,9 @@ La Console mappe chaque groupe OIDC vers un ensemble de **permissions projet Son
 
 > **Égalité devops = developer = security.** Sur un projet, les trois rôles `devops`, `developer` et `security` reçoivent **exactement les mêmes permissions** (`scan`, `user`, `codeviewer`, `issueadmin`, `securityhotspotadmin`). Seul `admin` ajoute `admin`. `reader` se limite à `user` + `codeviewer`.
 
----
-
 ## 3. Points d'attention
 
 - **Developer et Security ne sont pas en lecture seule.** Contrairement à Vault, ils disposent de `scan` (exécution d'analyse) et de `issueadmin`/`securityhotspotadmin` (traitement des tickets de sécurité).
-
----
 
 ## 4. Qui gère quoi ?
 
@@ -60,5 +50,3 @@ La Console mappe chaque groupe OIDC vers un ensemble de **permissions projet Son
 | Identité OIDC / groupes Keycloak      | **Keycloak**              |
 | Groupes Sonar, permissions, templates | **Console** (automatique) |
 | Application des droits                | **SonarQube**             |
-
----

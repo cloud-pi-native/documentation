@@ -2,8 +2,6 @@
 
 Ce document décrit le **modèle d'accès** mis en place dans Nexus pour chaque projet DSO : qui peut publier ou télécharger des artefacts, et comment les rôles sont synchronisés depuis les groupes Keycloak.
 
----
-
 ## Vue par rôle
 
 Ce que chaque rôle Console obtient réellement dans Nexus. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
@@ -20,14 +18,10 @@ Ce que chaque rôle Console obtient réellement dans Nexus. Les chemins `/consol
 | Security              | `/console/security`         | Lecture de tous les dépôts (plateforme)         |
 | Guest                 | —                           | Aucun accès                                     |
 
----
-
 ## 1. Authentification : Nexus via OIDC Keycloak
 
 - Les utilisateurs se connectent à Nexus via **OIDC** (Keycloak).
 - La Console approvisionne, pour chaque projet, un **rôle de sécurité** (`<name>-ID` / `<name>-role`) et y rattache les groupes OIDC comme membres avec des _privileges_ de lecture ou d'écriture.
-
----
 
 ## 2. Groupes Keycloak et portée Nexus
 
@@ -44,14 +38,10 @@ La Console répartit les chemins de groupes OIDC en deux ensembles : **écriture
 | `/<slug>/console/security`         | **Lecture**                              | Dépôt du projet `<name>`       |
 | `/<slug>/console/readonly`         | **Lecture** (packages)                   | Dépôt du projet `<name>`       |
 
----
-
 ## 3. Points d'attention
 
 - **DevOps = déployer, Developer = télécharger.** Les groupes `admin`/`devops` projet écrivent (publish artefacts, deploy) ; `developer`/`security`/`readonly` ne font que lire/télécharger.
 - **Rôles agrégés par projet Nexus.** Le rôle `<name>-ID` agrège les privilèges de tous les projets Nexus activés ; un groupe OIDC est rattaché à ce rôle avec le bon niveau (read/write).
-
----
 
 ## 4. Qui gère quoi ?
 
@@ -59,5 +49,3 @@ La Console répartit les chemins de groupes OIDC en deux ensembles : **écriture
 | -------------------------------- | ------------------------- |
 | Identité OIDC / groupes Keycloak | **Keycloak**              |
 | Rôles & privilèges Nexus         | **Console** (automatique) |
-
----
