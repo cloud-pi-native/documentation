@@ -92,6 +92,8 @@ qui le distingue des dépôts créés manuellement :
   lors de la réconciliation. On y trouve :
   - le dépôt `mirror` : pilote la synchronisation des dépôts externes ;
   - le dépôt `infra-apps` : dépôt d'infrastructure du projet ;
+  - le dépôt `infra` de chaque zone : provisionné à la création de la zone et
+    supprimé avec elle, il porte les manifests Argo CD de la zone ;
   - les dépôts techniques associés aux plugins activés (par exemple le dépôt
     d'observabilité).
 
