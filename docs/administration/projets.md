@@ -18,3 +18,15 @@ En cliquant sur le projet concerné, une autre page s'ouvre sur laquelle les inf
 - La configuration des plugins pour ce projet en particulier
 
 ![projet détail](/img/console_admin/projet_detail.png)
+
+## Archivage d'un projet
+
+La suppression d'un projet déclenche d'abord le nettoyage de l'ensemble de ses ressources externes (dépôts, environnements...), puis son archivage en base.
+
+Le projet est verrouillé avant le nettoyage : toute modification est refusée pendant l'opération.
+
+- Si le nettoyage échoue sur un service, le projet passe au statut « échoué » et l'API renvoie une erreur 422. Les nettoyages étant idempotents, la suppression peut être rejouée telle quelle.
+- Si le projet est modifié pendant le nettoyage, l'API renvoie une erreur 409 et l'archivage est refusé ; rejouez la demande.
+- En cas de succès, les ressources externes sont supprimées, le slug est suffixé et le projet passe au statut « archivé ».
+
+Un projet « échoué » reste verrouillé : un administrateur peut le déverrouiller puis relancer la suppression.
