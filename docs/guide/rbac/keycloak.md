@@ -39,7 +39,6 @@ La Console crée et réconcilie automatiquement l'arborescence suivante, propag�
 | `/<slug>/console/developer`              | Groupe projet **developer**                                         | Tous les outils (selon outil)             |
 | `/<slug>/console/security`               | Groupe projet **security**                                          | Tous les outils (audit/lecture)           |
 | `/<slug>/console/reader`                 | Groupe projet **reader**                                            | Tous les outils (lecture)                 |
-| `/<slug>/console/<env>/<RO\|RW>`         | Sous-groupes **environnement** (membres en RO, propriétaires en RW) | ArgoCD (`/<slug>/console/<env>/<RO\|RW>`) |
 | `/<slug>/grafana/<hprod\|prod>-<RO\|RW>` | Sous-groupes **Grafana** (environnement-scoped)                     | Grafana                                   |
 | Groupes `AdminRole` liés via `oidcGroup` | Rôles admin Console                                                 | —                                         |
 
@@ -48,7 +47,7 @@ La Console crée et réconcilie automatiquement l'arborescence suivante, propag�
 ## 3. Points d'attention
 
 - **`/admin` est le seul groupe plateforme admin.** Groupe d'amorçage géré en dehors de la Console ; il ne porte des droits que sur la Console CPiN (aucune propagation vers les outils).
-- **Groupes environnement vs groupes projet.** ArgoCD et Grafana s'appuient sur des sous-groupes **environment-scoped** (`<env>/RO|RW`, `grafana/<hprod|prod>-RO|RW`). Les autres outils s'appuient sur les groupes **projet-role** (`/<slug>/console/{admin,devops,developer,reader,security}`).
+- **Groupes environnement vs groupes projet.** Seul Grafana s'appuie sur des sous-groupes **environment-scoped** (`grafana/<hprod|prod>-RO/RW`). Tous les autres outils, y compris ArgoCD, s'appuient sur les groupes **projet-role** (`/<slug>/console/{admin,devops,developer,reader,security}`).
 - **Security / Reader sont des portées de lecture/audit**, jamais d'écriture, sur la plupart des outils.
 - **Utilisateurs tiers (IDP externe).** Aucun groupe par défaut n'est attribué ; ils n'ont aucun droit tant qu'un membre les ajoute à un projet avec le niveau adéquat.
 
