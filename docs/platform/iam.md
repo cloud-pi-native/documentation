@@ -14,15 +14,12 @@ La Console reste la source de vérité des droits ; les services externes consom
 
 ## Groupes et rôles
 
-La Console maintient une hiérarchie de groupes Keycloak par projet pour matérialiser les rôles et la séparation RO/RW des environnements :
+La Console maintient une hiérarchie de groupes Keycloak par projet pour matérialiser les rôles :
 
 ```txt
 /<projectSlug>
   /console
     /<role-group-path...>
-    /<environmentName>
-      /RO
-      /RW
 ```
 
 La Console maintient ces groupes automatiquement (création des groupes manquants, mise à jour des appartenances et nettoyage des groupes orphelins).
