@@ -25,8 +25,8 @@ La suppression d'un projet déclenche d'abord le nettoyage de l'ensemble de ses 
 
 Le projet est verrouillé avant le nettoyage : toute modification est refusée pendant l'opération.
 
-- Si le nettoyage échoue sur un service, le projet passe au statut « échoué » et l'API renvoie une erreur 422. Une partie des ressources a pu être supprimée avant l'échec : examinez et corrigez l'erreur du service concerné avant de relancer, un rejeu identique n'est pas garanti suffisant (cf. cloud-pi-native/console#2785).
+- Si un service ne parvient pas à supprimer ses ressources, le projet passe au statut « échoué » (erreur API 422). Certaines ressources peuvent déjà avoir été supprimées. Consultez [les journaux](/administration/journaux) pour identifier le service en échec, corrigez le problème, puis relancez la suppression. Relancer sans corriger le problème peut échouer à nouveau (cf. [console#2785](https://github.com/cloud-pi-native/console/issues/2785)).
 - Si le projet est modifié pendant le nettoyage, l'API renvoie une erreur 409 et l'archivage est refusé ; rejouez la demande.
-- En cas de succès, les ressources externes sont supprimées, le slug est suffixé et le projet passe au statut « archivé ».
+- En cas de succès, les ressources du projet dans les services externes sont supprimées. La Console conserve un enregistrement du projet au statut « archivé » : son nom et son identifiant technique sont modifiés pour distinguer cette archive, qui ne permet pas de restaurer les ressources supprimées (cf. [documentation#119](https://github.com/cloud-pi-native/documentation/issues/119)).
 
 Un projet « échoué » reste verrouillé : un administrateur peut le déverrouiller puis relancer la suppression.
