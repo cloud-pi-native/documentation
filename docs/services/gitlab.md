@@ -92,10 +92,16 @@ qui le distingue des dépôts créés manuellement :
   lors de la réconciliation. On y trouve :
   - le dépôt `mirror` : pilote la synchronisation des dépôts externes ;
   - le dépôt `infra-apps` : dépôt d'infrastructure du projet ;
-  - le dépôt `infra` de chaque zone : provisionné à la création de la zone et
-    supprimé avec elle, il porte les manifests Argo CD de la zone ;
   - les dépôts techniques associés aux plugins activés (par exemple le dépôt
     d'observabilité).
+
+Chaque zone dispose en outre de son propre dépôt d'infrastructure, créé dans le
+groupe `infra` et non dans le groupe du projet : son chemin complet est
+`<PROJECTS_ROOT_DIR>/infra/<slug de la zone>` et il porte le nom de la zone
+(`slug`), pas `infra`. La Console le crée à la création de la zone et le met à
+jour via `zone.upsert` ; il est supprimé avec la zone via `zone.delete`, sans
+attendre un reprovisionnement du projet. Ce dépôt contient les fichiers de
+configuration qu'Argo CD utilise pour déployer les ressources de la zone.
 
 ### Réconciliation et purge
 
