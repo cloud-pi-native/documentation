@@ -25,7 +25,7 @@ La suppression d'un projet déclenche d'abord le nettoyage de l'ensemble de ses 
 
 Le projet est verrouillé avant le nettoyage : toute modification est refusée pendant l'opération.
 
-- Si le nettoyage échoue sur un service, le projet passe au statut « échoué » et l'API renvoie une erreur 422. Les nettoyages étant idempotents, la suppression peut être rejouée telle quelle.
+- Si le nettoyage échoue sur un service, le projet passe au statut « échoué » et l'API renvoie une erreur 422. Une partie des ressources a pu être supprimée avant l'échec : examinez et corrigez l'erreur du service concerné avant de relancer, un rejeu identique n'est pas garanti suffisant (cf. cloud-pi-native/console#2785).
 - Si le projet est modifié pendant le nettoyage, l'API renvoie une erreur 409 et l'archivage est refusé ; rejouez la demande.
 - En cas de succès, les ressources externes sont supprimées, le slug est suffixé et le projet passe au statut « archivé ».
 
