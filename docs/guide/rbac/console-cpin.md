@@ -2,6 +2,8 @@
 
 Ce document décrit le **modèle d'accès** de la Console CPiN elle-même : comment ses rôles admin et projet se traduisent en permissions, et comment ils sont propagés vers Keycloak.
 
+> ⚠️ Un utilisateur qui n'a pas de rôle console **obtient par défaut le rôle Guest** qui ne lui accorde aucun droit sur les services externes. S'il manque des droits à un utilisateur, vérifiez à quel rôle console il appartient.
+
 ## Vue par rôle
 
 Ce que chaque rôle peut réellement faire dans la Console CPiN. Les chemins `/console/<rôle>` sont **réservés à l'administration plateforme** et distincts des rôles projet `/<slug>/console/<rôle>` :
