@@ -6,7 +6,9 @@ Cette page présente l’IAM de la Console (Identity & Access Management) : auth
 
 L’IAM repose sur Keycloak pour l’identité (OIDC), une authentification backend via session ou jeton API, et une autorisation calculée côté serveur avec des bitmasks BigInt.
 
-L’authentification navigateur passe par `fastify-keycloak-adapter`, qui extrait l’identité (`sub`, `email`, `given_name`, `family_name`, `groups`) et la stocke en session. Un mode jeton API (`x-dso-token`) existe aussi pour des usages non interactifs.
+L’authentification navigateur s’appuie sur Keycloak (OIDC) : le client attache un jeton `Authorization: Bearer` émis par Keycloak et le backend résout l’identité du jeton (`sub`, `email`, `given_name`, `family_name`, groupes OIDC). Un mode jeton API (`x-dso-token`) existe aussi pour des usages non interactifs.
+
+L’API de la Console est désormais servie intégralement par le backend NestJS : les anciens endpoints V1 `/api/v1/environments` et `/api/v1/repositories` ne sont pas repris, utilisez leurs équivalents V2 sous `/api/v2/projects/:projectId/`. Le Swagger historique `/swagger-ui` n’est plus servi (404) ; la documentation d’API maintenue est disponible à `/swagger-ui-server-nestjs`. À la création d’un jeton d’API, une date d’expiration laissée vide est acceptée et équivaut à l’absence d’expiration.
 
 L’autorisation combine des permissions globales et projet par cumul : les droits attribués à l’utilisateur sont calculés à partir de l’ensemble de ses rôles.
 
