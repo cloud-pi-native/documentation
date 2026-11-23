@@ -26,9 +26,10 @@ L’onglet `Rôles` présente la liste des rôles du projet.
 
 Par défaut, le rôle `Tout le monde` regroupe tous les membres de l'équipe avec les permissions suivantes :
 
-- Reprovisionner le projet
 - Voir les environnements
 - Voir les dépôts
+
+> Historiquement, ce rôle incluait aussi « Reprovisionner le projet » : cette permission a été retirée du rôle par défaut (y compris sur les projets existants). Un membre qui doit pouvoir reprovisionner le projet doit désormais se voir attribuer un rôle dédié (par exemple `DevOps`) ou un rôle personnalisé incluant cette permission.
 
 ## Créer ou modifier un rôle
 
