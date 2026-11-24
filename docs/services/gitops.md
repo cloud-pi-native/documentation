@@ -13,7 +13,7 @@ ansi la reproductibilité et le versionning. Ceci implique :
 
 ## ArgoCD
 
-ArgoCD assure la mise en conformité de votre infrastructure avec le dépôt git d'infrastructure qui est la source de vérité.
+ArgoCD assure la mise en conformité de votre infrastructure avec le dépôt git d'infrastructure qui est la source de vérité. La répartition des droits d'accès est décrite dans la [fiche RBAC ArgoCD](/guide/rbac/argocd).
 
 Lors de l'ajout d'un dépôt de type infrastructure depuis la console de plateforme Cloud π Native, un projet ArgoCD est automatiquement créé avec les informations du projet et de l'organisation. Ces dépôts d'infrastructure peuvent être au format :
   - Manifests Kubernetes

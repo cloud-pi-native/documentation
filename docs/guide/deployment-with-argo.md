@@ -18,7 +18,7 @@ Pour l'activation des droits, la création et la configuration des déploiements
 
 ## Visualisation dans ArgoCD
 
-Le déploiement se fait automatiquement par ArgoCD. Une fois qu'un dépôt d'infrastructure est synchronisé, il convient de se rendre sur le service ArgoCD depuis la liste des services.
+Le déploiement se fait automatiquement par ArgoCD. Une fois qu'un dépôt d'infrastructure est synchronisé, il convient de se rendre sur le service ArgoCD depuis la liste des services. Les droits de consultation, de synchronisation et de modification sont détaillés dans la [fiche RBAC ArgoCD](/guide/rbac/argocd).
 Il est possible de forcer la synchronisation avec le dépôt sur gitlab Cloud π Native en cliquant sur les boutons :
 
 - *REFRESH* pour forcer la synchronisation depuis le dépôt gitlab de la plateforme Cloud π Native
